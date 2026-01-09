@@ -1,158 +1,104 @@
+# QUẢN LÝ PHÒNG TRỌ
 
-# PHÂN TÍCH THIẾT KẾ HỆ THỐNG QUẢN LÝ PHÒNG TRỌ
+**Quản lý Phòng và người thuê**
 
-## Phạm vi phân tích
+## 1. Mục tiêu chức năng
 
-Tài liệu này tập trung **phân tích – thiết kế chi tiết** cho  **2 phân hệ** :
+Chức năng Quản lý phòng & người thuê nhằm hỗ trợ Chủ trọ và Nhân viên quản lý trong việc theo dõi, cập nhật và quản lý thông tin phòng trọ và người thuê  ở mức nghiệp vụ .
 
-* **Quản lý hợp đồng thuê trọ**
-* **Quản lý hóa đơn (tiền phòng, điện, nước, dịch vụ)**
+Trong đó,  Chủ trọ có quyền giám sát toàn bộ các phòng trọ , bao gồm cả những phòng do Nhân viên quản lý phụ trách.
 
-Hệ thống áp dụng cho mô hình:
+## 2. Phạm vi chức năng
 
-* **01 Chủ trọ** : sở hữu toàn bộ các dãy trọ
-* **N Quản lý dãy trọ** : mỗi quản lý phụ trách 1 hoặc nhiều dãy trọ
+* Quản lý thông tin phòng trọ
+* Quản lý thông tin người thuê
+* Phân công nhân viên quản lý dãy trọ
+* Cho phép Chủ trọ xem toàn bộ phòng trọ , không phụ thuộc vào phạm vi quản lý của nhân viên
+* Không quản lý tài khoản đăng nhập
 
-## I. TÁC NHÂN (ACTOR)
+## 3. Các đối tượng nghiệp vụ
 
-### 1. Chủ trọ
+### 3.1. Chủ trọ
 
-* Quyền cao nhất trong hệ thống
-* Quản lý toàn bộ dãy trọ, hợp đồng và hóa đơn
-* Xem báo cáo tổng hợp
+* Là người sở hữu các dãy trọ
+* Có quyền xem toàn bộ phòng và người thuê
 
-### 2. Quản lý dãy trọ
+### 3.2. Nhân viên quản lý
 
-* Quản lý các phòng thuộc dãy trọ được phân công
-* Lập hợp đồng, lập hóa đơn
-* Không có quyền xem/sửa dữ liệu dãy trọ khác
+* Được phân công quản lý một hoặc nhiều dãy trọ
+* Cập nhật thông tin phòng và người thuê trong phạm vi được giao
 
-## II. PHÂN TÍCH NGHIỆP VỤ QUẢN LÝ HỢP ĐỒNG
+### 3.3. Dãy trọ
 
-### 1. Mục tiêu nghiệp vụ
+* Thuộc quyền sở hữu của Chủ trọ
+* Gồm nhiều phòng trọ
 
-* Quản lý vòng đời hợp đồng thuê phòng
-* Đảm bảo mỗi phòng chỉ có **1 hợp đồng hiệu lực tại 1 thời điểm**
-* Lưu trữ lịch sử hợp đồng
+### 3.4. Phòng trọ
 
----
+* Thuộc về một dãy trọ
+* Có trạng thái: Trống / Đang thuê
 
-### 2. Thông tin hợp đồng
+### 3.5. Người thuê
 
-| Thuộc tính     | Mô tả                       |
-| ---------------- | ----------------------------- |
-| Mã hợp đồng  | Định danh duy nhất         |
-| Phòng           | Phòng được thuê          |
-| Người thuê    | Thông tin khách thuê       |
-| Ngày bắt đầu | Ngày hiệu lực              |
-| Ngày kết thúc | Ngày hết hạn               |
-| Giá thuê       | Giá phòng / tháng          |
-| Tiền cọc       | Số tiền đặt cọc          |
-| Trạng thái     | Hiệu lực / Hết hạn / Hủy |
-| Người tạo     | Chủ trọ / Quản lý         |
+* Là đối tượng nghiệp vụ
+* Gắn với phòng thông qua hợp đồng thuê
 
-### 3. Use Case: Tạo hợp đồng
+## 4. Nội dung quản lý
 
-**Actor:** Quản lý dãy trọ / Chủ trọ
+### 4.1. Quản lý thông tin phòng
 
-**Luồng chính:**
+Thông tin phòng bao gồm:
 
-1. Actor chọn phòng trống
-2. Nhập thông tin người thuê
-3. Nhập thời hạn hợp đồng
-4. Nhập giá thuê, tiền cọc
-5. Lưu hợp đồng
-6. Hệ thống cập nhật trạng thái phòng = Đang thuê
+* Mã phòng
+* Giá thuê
+* Trạng thái phòng (Trống / Đang thuê)
 
-**Luồng thay thế:**
+Nghiệp vụ:
 
-* Phòng đang có hợp đồng hiệu lực → từ chối tạo
+* Thêm, cập nhật phòng
+* Theo dõi trạng thái phòng
+* Gán phòng vào dãy trọ
+* Phân công nhân viên quản lý dãy trọ
 
-### 4. Use Case: Gia hạn hợp đồng
+### 4.2. Quản lý thông tin người thuê
 
-* Áp dụng khi người thuê tiếp tục ở
-* Cập nhật ngày kết thúc mới
-* Lưu lịch sử gia hạn
+Thông tin người thuê:
 
-### 5. Use Case: Thanh lý hợp đồng
+* Họ tên
+* CCCD
+* Số điện thoại
 
-**Điều kiện:** Hợp đồng đang hiệu lực
+Nghiệp vụ:
 
-**Xử lý:**
+* Thêm, cập nhật người thuê
+* Gán người thuê vào phòng thông qua hợp đồng
 
-* Cập nhật trạng thái = Hết hạn
-* Trả phòng về trạng thái Trống
-* Kết thúc phát sinh hóa đơn
+## 5. Quan hệ nghiệp vụ
 
-## III. PHÂN TÍCH NGHIỆP VỤ QUẢN LÝ HÓA ĐƠN
+* Một Chủ trọ sở hữu nhiều dãy trọ
+* Một dãy trọ gồm nhiều phòng
+* Một dãy trọ có thể được một hoặc nhiều nhân viên quản lý
+* Một phòng có thể có nhiều người thuê
+* Chủ trọ có quyền  xem tất cả phòng , kể cả phòng do nhân viên quản lý
 
-### 1. Mục tiêu nghiệp vụ
+## 6. Quy trình nghiệp vụ trọng tâm
 
-* Tự động hóa việc tính tiền thuê trọ hàng tháng
-* Quản lý chi tiết điện, nước, dịch vụ
-* Theo dõi tình trạng thanh toán
+### Chủ trọ xem phòng do Nhân viên quản lý phụ trách
 
-### 2. Thông tin hóa đơn
+1. Chủ trọ chọn chức năng Quản lý phòng
+2. Hệ thống hiển thị danh sách dãy trọ
+3. Chủ trọ chọn một dãy trọ
+4. Hệ thống hiển thị:
+   * Danh sách phòng
+   * Trạng thái từng phòng
+   * Nhân viên quản lý phụ trách
+5. Chủ trọ xem chi tiết phòng và người thuê (nếu cần)
 
-| Thuộc tính             | Mô tả                 |
-| ------------------------ | ----------------------- |
-| Mã hóa đơn           | Định danh             |
-| Hợp đồng              | Hợp đồng liên quan  |
-| Tháng/Năm              | Kỳ thanh toán         |
-| Tiền phòng             | Theo hợp đồng        |
-| Chỉ số điện cũ/mới | Dùng tính tiền       |
-| Chỉ số nước cũ/mới | Dùng tính tiền       |
-| Phí dịch vụ           | Internet, rác, gửi xe |
-| Tổng tiền              | Tổng phải trả        |
-| Trạng thái             | Chưa thu / Đã thu    |
-| Ngày thu                | Ngày thanh toán       |
+## 7. Quy tắc nghiệp vụ
 
-### 3. Use Case: Lập hóa đơn tháng
-
-**Actor:** Quản lý dãy trọ / Chủ trọ
-
-**Luồng chính:**
-
-1. Chọn hợp đồng đang hiệu lực
-2. Nhập chỉ số điện, nước mới
-3. Hệ thống tính toán tiền điện, nước
-4. Cộng tiền phòng và phí dịch vụ
-5. Lưu hóa đơn
-
-### 4. Use Case: Thu tiền hóa đơn
-
-**Luồng chính:**
-
-1. Chọn hóa đơn chưa thu
-2. Xác nhận đã thanh toán
-3. Cập nhật trạng thái = Đã thu
-4. Lưu ngày thu
-
-### 5. Quy tắc nghiệp vụ
-
-* Mỗi hợp đồng → tối đa 1 hóa đơn / tháng
-* Không cho sửa hóa đơn đã thu
-* Không lập hóa đơn nếu hợp đồng đã hết hạn
-
-## IV. PHÂN QUYỀN HỆ THỐNG
-
-| Chức năng                      | Chủ trọ | Quản lý |
-| -------------------------------- | --------- | --------- |
-| Tạo / sửa hợp đồng          | ✔        | ✔        |
-| Thanh lý hợp đồng            | ✔        | ✔        |
-| Xem hợp đồng toàn hệ thống | ✔        | ✘        |
-| Lập hóa đơn                  | ✔        | ✔        |
-| Thu tiền                        | ✔        | ✔        |
-| Báo cáo doanh thu              | ✔        | ✘        |
-
-## V. MÔ HÌNH DỮ LIỆU KHÁI QUÁT
-
-**Quan hệ chính:**
-
-* Dãy trọ 1 — N Phòng
-* Phòng 1 — N Hợp đồng
-* Hợp đồng 1 — N Hóa đơn
-
-## VI. KẾT LUẬN
-
-Phân hệ **Quản lý hợp đồng và hóa đơn** là lõi của hệ thống quản lý phòng trọ. Việc tách rõ vai trò **Chủ trọ** và **Quản lý dãy trọ** giúp đảm bảo phân quyền, bảo mật và vận hành hiệu quả.
+* Phòng chỉ được cho thuê khi trạng thái là Trống
+* Một phòng có thể có nhiều người thuê
+* Người thuê bắt buộc gắn với phòng thông qua hợp đồng
+* Nhân viên quản lý chỉ thao tác trên dãy trọ được phân công
+* Chủ trọ luôn có quyền xem các phòng do nhân viên quản lý
+* Không tồn tại khái niệm tài khoản người thuê
