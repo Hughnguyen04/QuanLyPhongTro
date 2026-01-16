@@ -1223,3 +1223,17 @@ Dưới đây là phân tích chi tiết các liên kết khóa ngoại (Foreign
   * Cấu hình ngày chốt chỉ số điện nước hàng tháng
   * Cài đặt template thông báo
   * Cấu hình thông tin thông tin liên hệ của nhà trọ
+
+# BUỔI 3 (16/01/2026)
+
+Phân rã UC Đăng nhập
+
+<p align="center">
+  <img src="pttk_img/UC Đăng nhập.jpg" alt="UC Đăng nhập" width="700">
+</p>
+
+Phân rã UC Quản lý và nhận thông báo
+
+<p align="center">
+  <img src="pttk_img/UC Quản lý và nhận thông báo.jpg" alt="UC Quản lý và nhận thông báo" width="700">
+</p>
