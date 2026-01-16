@@ -165,71 +165,170 @@ Chức năng Quản lý phòng & người thuê bao gồm:
 
 ## CHỨC NĂNG: QUẢN LÝ HỢP ĐỒNG VÀ HÓA ĐƠN
 
-#### 1. Xác định tác nhân hệ thống (Actors)
+### 1. XÁC ĐỊNH TÁC NHÂN HỆ THỐNG (ACTORS)
 
-Hệ thống được thiết kế cho hai nhóm người dùng nội bộ với quyền hạn được phân định rõ ràng:
+Hệ thống quản lý hợp đồng và hóa đơn được thiết kế phục vụ ba nhóm tác nhân với vai trò, quyền hạn và mức độ can thiệp khác nhau nhằm đảm bảo tính  chặt chẽ về pháp lý , chính xác về tài chính và  an toàn dữ liệu .
 
-**a. Chủ trọ (Admin - Quản trị viên)**
+### a. Chủ trọ (Admin – Quản trị viên)
 
-* Là người sở hữu hệ thống.
-* Quyền hạn: Quản lý toàn bộ danh sách dãy trọ, phòng trọ, nhân viên. Xem báo cáo doanh thu tổng hợp toàn hệ thống. Thiết lập đơn giá điện, nước chung.
+* Là người sở hữu và chịu trách nhiệm cao nhất đối với toàn bộ hệ thống.
+* Có quyền giám sát, cấu hình và kiểm soát toàn bộ dữ liệu liên quan đến hợp đồng và hóa đơn.
 
-**b. Quản lý dãy trọ (Staff - Nhân viên)**
+Quyền hạn:
 
-* Là người được thuê để vận hành.
-* Quyền hạn: Chỉ được thao tác trên dữ liệu của khu vực được phân công. Thực hiện các nghiệp vụ: Lập hợp đồng, ghi chỉ số điện nước, thu tiền.
-* Hạn chế: Không được xóa dữ liệu lịch sử quan trọng, không được xem doanh thu của các chi nhánh khác.
+* Quản lý toàn bộ danh sách dãy trọ và phòng trọ
+* Xem, theo dõi tất cả hợp đồng thuê trong hệ thống
+* Xem báo cáo doanh thu tổng hợp từ hóa đơn
+* Thiết lập và điều chỉnh các đơn giá chung (điện, nước, dịch vụ)
+* Kiểm soát và xử lý các trường hợp đặc biệt (gia hạn, thanh lý, phạt cọc)
 
-**c. Người thuê (Customer – Khách hàng)**
+### b. Quản lý dãy trọ (Staff – Nhân viên)
 
-* Là người thuê phòng trọ và sử dụng dịch vụ.
-* Có tài khoản đăng nhập để theo dõi thông tin cá nhân và tình trạng thuê phòng.
-* Quyền hạn: Xem thông tin cá nhân, thông tin phòng, hợp đồng, nhận thông báo từ Chủ trọ
-* Hạn chế: Không được chỉnh sửa dữ liệu hệ thống cũng như thực hiện nghiệp vụ quản lý, chỉ được xem dữ liệu liên quan đến bản thân.
+* Là người trực tiếp vận hành hệ thống tại từng khu vực/dãy trọ.
+* Thực hiện các nghiệp vụ phát sinh hàng ngày liên quan đến hợp đồng và hóa đơn.
 
-#### 2. Phân tích nghiệp vụ Quản lý Hợp đồng
+**Quyền hạn:**
 
-Đây là chức năng xương sống của hệ thống, đảm bảo tính pháp lý và quy định chặt chẽ về việc cư trú.
+* Lập hợp đồng thuê phòng cho người thuê mới
+* Gia hạn hoặc thanh lý hợp đồng theo thực tế
+* Ghi nhận chỉ số điện, nước định kỳ
+* Lập hóa đơn và cập nhật trạng thái thu tiền
 
-**a. Quy trình vòng đời Hợp đồng (Contract Lifecycle)**
-Một hợp đồng sẽ trải qua 4 giai đoạn trạng thái:
+**Hạn chế:**
 
-* **Giai đoạn 1: Khởi tạo (New/Creation)**
-  * Nhân viên chọn phòng có trạng thái Trống.
-  * Nhập thông tin người thuê và các điều khoản (giá thuê, ngày bắt đầu, thời hạn, tiền cọc).
-  * Hệ thống kiểm tra ràng buộc logic: Phòng phải đang trống mới được tạo hợp đồng.
-  * Kết quả: Trạng thái hợp đồng là DANG_HIEU_LUC, trạng thái phòng chuyển sang DANG_THUE.
-* **Giai đoạn 2: Duy trì (Active/Maintenance)**
-  * Trong suốt quá trình khách ở, hợp đồng là căn cứ để truy xuất giá phòng khi lập hóa đơn.
-  * Ràng buộc: Giá thuê phòng được giữ cố định theo hợp đồng đã ký, không thay đổi theo biến động giá thị trường trừ khi có phụ lục điều chỉnh.
-* **Giai đoạn 3: Gia hạn (Extension)**
-  * Khi hợp đồng sắp hết hạn, nếu khách tiếp tục thuê, nhân viên thực hiện chức năng Gia hạn.
-  * Hệ thống cập nhật ngày kết thúc mới. Tại bước này, hệ thống cho phép cập nhật lại giá thuê mới (nếu có thỏa thuận tăng/giảm giá).
-* **Giai đoạn 4: Thanh lý (Liquidation/Termination)**
-  * Xảy ra khi hết hạn hoặc khách chuyển đi.
-  * Hệ thống hỗ trợ tính toán các khoản nợ tồn đọng.
-  * Kết quả: Trạng thái hợp đồng chuyển thành DA_KET_THUC, trạng thái phòng được trả về TRONG.
+* Không được xóa dữ liệu lịch sử (hợp đồng đã kết thúc, hóa đơn đã phát hành)
+* Không được xem báo cáo doanh thu của các dãy trọ khác
+* Không được thay đổi các đơn giá chung do Chủ trọ thiết lập
 
-**b. Các quy tắc nghiệp vụ quan trọng**
+### c. Người thuê (Customer – Khách hàng)
 
-* **Quy tắc Tiền cọc (Deposit):** Tiền cọc được ghi nhận trong hợp đồng nhưng không tính vào doanh thu tháng. Tiền cọc chỉ được xử lý khi thanh lý: Hoàn trả 100% nếu đúng hạn và không hư hại, hoặc bị khấu trừ nếu vi phạm.
-* **Quy tắc Chấm dứt trước hạn:** Nếu khách trả phòng trước ngày kết thúc đã ký, hệ thống cảnh báo vi phạm hợp đồng. Nhân viên có quyền xác nhận "Phạt cọc" (không hoàn lại tiền) hoặc "Hoàn cọc" tùy theo thỏa thuận thực tế.
+* Là người thuê phòng trọ và sử dụng các dịch vụ đi kèm.
+* Có tài khoản đăng nhập để theo dõi thông tin liên quan đến việc thuê phòng.
 
-#### 3. Phân tích nghiệp vụ Quản lý Hóa đơn
+**Quyền hạn:**
 
-**a. Quy trình lập hóa đơn hàng tháng**
+* Xem thông tin cá nhân
+* Xem thông tin phòng đang thuê
+* Xem hợp đồng thuê và thời hạn hợp đồng
+* Xem hóa đơn và trạng thái thanh toán
+* Nhận thông báo từ Chủ trọ
 
-* **Bước 1 - Chốt số:** Vào ngày quy định, nhân viên nhập chỉ số điện, nước mới cho từng phòng.
-* **Bước 2 - Tính toán:** Hệ thống tự động tính tiền dựa trên công thức:
-  * Tiền điện = (Số mới tru Số cũ) nhan Đơn giá.
-  * Tiền nước = (Số mới tru Số cũ) nhan Đơn giá.
-  * Tổng tiền = Tiền điện cong Tiền nước cong Tiền phòng (từ hợp đồng) cong Dịch vụ khác.
-* **Bước 3 - Phát hành:** Hóa đơn được tạo với trạng thái CHUA_THU.
+**Hạn chế:**
 
-**b. Ràng buộc dữ liệu**
+* Không được chỉnh sửa bất kỳ dữ liệu nào trong hệ thống
+* Không được thực hiện nghiệp vụ quản lý
+* Chỉ được xem dữ liệu liên quan trực tiếp đến bản thân
 
-* Mỗi hợp đồng chỉ phát sinh tối đa 01 hóa đơn tiền phòng trong một tháng kế toán.
-* Chỉ số mới của tháng này phải lớn hơn hoặc bằng chỉ số cũ (là chỉ số mới của tháng trước).
+### 2. PHÂN TÍCH NGHIỆP VỤ QUẢN LÝ HỢP ĐỒNG
+
+Chức năng Quản lý Hợp đồng đóng vai trò  xương sống của hệ thống , là cơ sở pháp lý để xác định quyền và nghĩa vụ của người thuê, đồng thời là căn cứ để tính toán các khoản chi phí phát sinh.
+
+### a. Quy trình vòng đời hợp đồng (Contract Lifecycle)
+
+Một hợp đồng thuê phòng trong hệ thống sẽ trải qua 4 giai đoạn trạng thái như sau:
+
+#### Giai đoạn 1: Khởi tạo hợp đồng (Creation)
+
+* Nhân viên lựa chọn phòng có trạng thái Trống
+* Nhập đầy đủ thông tin:
+  * Người thuê
+  * Giá thuê phòng
+  * Ngày bắt đầu thuê
+  * Thời hạn hợp đồng
+  * Tiền cọc
+* Hệ thống kiểm tra ràng buộc nghiệp vụ:
+  * Phòng phải đang ở trạng thái Trống
+  * Người thuê chưa có hợp đồng hiệu lực khác
+* Kết quả:
+  * Trạng thái hợp đồng: Đang hiệu lực
+  * Trạng thái phòng: Đang thuê
+
+#### Giai đoạn 2: Duy trì hợp đồng (Active)
+
+* Trong suốt thời gian thuê, hợp đồng được sử dụng làm:
+  * Căn cứ truy xuất giá phòng
+  * Căn cứ xác định thời hạn thuê
+* Ràng buộc quan trọng:
+  * Giá thuê phòng được cố định theo hợp đồng đã ký
+  * Không thay đổi theo biến động thị trường
+  * Chỉ được điều chỉnh nếu có gia hạn hoặc phụ lục hợp đồng
+
+#### Giai đoạn 3: Gia hạn hợp đồng (Extension)
+
+* Khi hợp đồng sắp hết hạn, nếu người thuê tiếp tục ở:
+  * Nhân viên thực hiện chức năng **Gia hạn hợp đồng**
+* Hệ thống cho phép:
+  * Cập nhật ngày kết thúc mới
+  * Điều chỉnh lại giá thuê (nếu có thỏa thuận)
+* Trạng thái hợp đồng vẫn là **Đang hiệu lực**
+
+#### Giai đoạn 4: Thanh lý hợp đồng (Termination)
+
+* Xảy ra khi:
+  * Hợp đồng hết hạn
+  * Người thuê trả phòng
+* Hệ thống hỗ trợ:
+  * Kiểm tra các khoản nợ tồn đọng
+  * Xác định xử lý tiền cọc
+* **Kết quả:**
+  * Trạng thái hợp đồng: **Đã kết thúc**
+  * Trạng thái phòng: **Trống**
+
+### b. Các quy tắc nghiệp vụ quan trọng
+
+**Quy tắc tiền cọc**
+
+* Tiền cọc được ghi nhận trong hợp đồng
+* Không tính vào doanh thu hàng tháng
+* Khi thanh lý:
+  * Hoàn trả 100% nếu không vi phạm
+  * Khấu trừ một phần hoặc toàn bộ nếu vi phạm
+
+**Quy tắc chấm dứt trước hạn**
+
+* Nếu người thuê trả phòng trước thời hạn:
+  * Hệ thống cảnh báo vi phạm hợp đồng
+  * Nhân viên xác nhận:
+    * Phạt cọc
+    * Hoặc hoàn cọc theo thỏa thuận thực tế
+
+## 3. PHÂN TÍCH NGHIỆP VỤ QUẢN LÝ HÓA ĐƠN
+
+Chức năng Quản lý Hóa đơn đảm bảo việc  tính toán chính xác , minh bạch chi phí và  theo dõi doanh thu .
+
+### a. Quy trình lập hóa đơn hàng tháng
+
+#### Bước 1: Chốt chỉ số
+
+* Vào ngày quy định, nhân viên nhập:
+  * Chỉ số điện mới
+  * Chỉ số nước mới
+* Hệ thống kiểm tra:
+  * Chỉ số mới ≥ chỉ số cũ
+
+#### Bước 2: Tính toán chi phí
+
+Hệ thống tự động tính toán theo công thức:
+
+* Tiền điện = (Chỉ số mới − Chỉ số cũ) × Đơn giá điện
+* Tiền nước = (Chỉ số mới − Chỉ số cũ) × Đơn giá nước
+* Tiền phòng = Lấy từ hợp đồng đang hiệu lực
+* Tổng tiền = Tiền phòng + Tiền điện + Tiền nước + Dịch vụ khác
+
+#### Bước 3: Phát hành hóa đơn
+
+* Hóa đơn được tạo với trạng thái Chưa thu
+* Hóa đơn được lưu vào hệ thống để:
+  * Nhân viên theo dõi
+  * Người thuê tra cứu
+
+### b. Các ràng buộc dữ liệu
+
+* Mỗi hợp đồng chỉ được phát sinh tối đa 01 hóa đơn tiền phòng trong một tháng
+* Không cho phép lập hóa đơn khi:
+  * Hợp đồng đã kết thúc
+  * Chưa có chỉ số điện, nước
+* Chỉ số điện, nước phải đảm bảo tính liên tục giữa các tháng
 
 ## CHỨC NĂNG: THỐNG KÊ & BÁO CÁO
 
@@ -1223,3 +1322,119 @@ Dưới đây là phân tích chi tiết các liên kết khóa ngoại (Foreign
   * Cấu hình ngày chốt chỉ số điện nước hàng tháng
   * Cài đặt template thông báo
   * Cấu hình thông tin thông tin liên hệ của nhà trọ
+
+# buổi 3: 16/1/2026
+
+#### Quản lý hóa đơn và chi phí
+<p align="center">
+  <img src="pttk_img/Quản lý hóa đơn và chi phí.jpg" alt="UC Tổng quát" width="700">
+</p>
+
+## UseCase Ghi chỉ số điện, nước
+
+| Mục                           | Nội dung                                                                                                                         |
+| ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------- |
+| **Tên Use Case**        | Ghi chỉ số điện, nước                                                                                                       |
+| **Actor**                | Chủ trọ, Nhân viên                                                                                                            |
+| **Mô tả**              | Ghi nhận chỉ số điện, nước định kỳ cho từng phòng                                                                     |
+| **Tiền điều kiện**   | Đã đăng nhập; phòng đang có hợp đồng hiệu lực                                                                        |
+| **Hậu điều kiện**    | Chỉ số điện, nước được lưu để làm cơ sở lập hóa đơn                                                            |
+| **Luồng chính**        | 1. Actor chọn phòng<br />2.Nhập chỉ số điện nước hiện tại<br />3. Hệ thống kiểm tra hợp lệ<br />4. Lưu dữ liệu |
+| **Luồng thay thế**     | 3a. Chỉ số nhỏ hơn kỳ trước → báo lỗi                                                                                   |
+| **Quy tắc nghiệp vụ** | Chỉ số mới ≥ chỉ số cũ                                                                                                     |
+| **Ghi chú**             | Mỗi phòng chỉ ghi 1 lần/kỳ                                                                                                   |
+
+## UseCase Tạo hóa đơn
+
+| Mục                              | Nội dung                                                                                                                                    |
+| --------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Tên Use Case**           | Tạo hóa đơn                                                                                                                              |
+| **Actor**                   | Chủ trọ, Nhân viên                                                                                                                       |
+| **Mô tả**                 | Lập hóa đơn thanh toán cho phòng thuê                                                                                                 |
+| **Tiền điều kiện**      | Có chỉ số điện nước; phòng có hợp đồng                                                                                           |
+| **Hậu điều kiện**       | Hóa đơn được tạo và lưu trong hệ thống                                                                                            |
+| **Luồng chính**           | 1. Chọn phòng<br /> 2.hệ thống lấy chỉ số điện nước<br />3. Tính tiền phòng, điện, nước, dịch vụ<br />4. Tạo hóa đơn |
+| **Luồng thay thế**        | 2a. Chưa có chỉ số → yêu cầu nhập                                                                                                    |
+| **Quy tắc nghiệp vụ**    | Công thức tính theo đơn giá cấu hình                                                                                                 |
+| **Thành phần hóa đơn** | Tiền phòng, điện, nước, dịch vụ                                                                                                      |
+| **Ghi chú**                | Hóa đơn mặc định trạng thái .*Chưa thanh toán*                                                                                   |
+
+## UseCase Cập nhật trạng thái thanh toán
+
+| Mục                           | Nội dung                                                   |
+| ------------------------------ | ----------------------------------------------------------- |
+| **Tên Use Case**        | Cập nhật trạng thái thanh toán                         |
+| **Actor**                | Chủ trọ, Nhân viên                                      |
+| **Mô tả**              | Xác nhận hóa đơn đã thanh toán                      |
+| **Tiền điều kiện**   | Hóa đơn tồn tại                                        |
+| **Hậu điều kiện**    | Trạng thái hóa đơn được cập nhật                  |
+| **Luồng chính**        | 1. Chọn hóa đơn<br /> 2.Chọn trạng thái<br />3. Lưu |
+| **Luồng thay thế**     | 2a. Hóa đơn đã khóa → không cho sửa                |
+| **Quy tắc nghiệp vụ** | Không sửa nội dung khi đã thanh toán                  |
+| **Ghi chú**             | Có thể dùng khi thu tiền trực tiếp                    |
+
+## UseCase Xem lịch sử hóa đơn
+
+| Mục                         | Nội dung                                                                 |
+| ---------------------------- | ------------------------------------------------------------------------- |
+| **Tên Use Case**      | Xem lịch sử hóa đơn                                                  |
+| **Actor**              | Chủ trọ, Nhân viên                                                    |
+| **Mô tả**            | Xem danh sách hóa đơn theo phòng/kỳ                                 |
+| **Tiền điều kiện** | Đã đăng nhập                                                         |
+| **Hậu điều kiện**  | Không thay đổi dữ liệu                                               |
+| **Luồng chính**      | 1. Chọn phòng hoặc thời gian<br />2. Hệ thống hiển thị danh sách |
+| **Ghi chú**           | Chỉ đọc dữ liệu                                                      |
+
+
+## XEM THÔNG TIN THUÊ PHÒNG (NGƯỜI THUÊ)
+<p align="center">
+  <img src="pttk_img/xem thông tin thuê phòng.jpg" alt="UC Tổng quát" width="700">
+</p>
+
+## UseCase Xem thông tin cá nhân
+
+| Mục                         | Nội dung                                            |
+| ---------------------------- | ---------------------------------------------------- |
+| **Tên Use Case**      | Xem thông tin cá nhân                             |
+| **Actor**              | Người thuê                                        |
+| **Mô tả**            | Xem thông tin cá nhân đã đăng ký             |
+| **Tiền điều kiện** | Đã đăng nhập                                    |
+| **Hậu điều kiện**  | Không thay đổi dữ liệu                          |
+| **Luồng chính**      | 1. Mở trang cá nhân<br />2. Hệ thống hiển thị |
+| **Hạn chế**          | Không chỉnh sửa                                   |
+
+## UseCase Xem thông tin phòng đang thuê
+
+| Mục                            | Nội dung                           |
+| ------------------------------- | ----------------------------------- |
+| **Tên Use Case**         | Xem thông tin phòng               |
+| **Actor**                 | Người thuê                       |
+| **Mô tả**               | Xem thông tin phòng đang ở      |
+| **Tiền điều kiện**    | Có hợp đồng hiệu lực          |
+| **Hậu điều kiện**     | Không thay đổi dữ liệu         |
+| **Thông tin hiển thị** | Giá phòng, diện tích, dịch vụ |
+
+## UseCase Xem hợp đồng thuê
+
+| Mục                         | Nội dung                   |
+| ---------------------------- | --------------------------- |
+| **Tên Use Case**      | Xem hợp đồng thuê       |
+| **Actor**              | Người thuê               |
+| **Mô tả**            | Xem nội dung hợp đồng   |
+| **Tiền điều kiện** | Có hợp đồng             |
+| **Hậu điều kiện**  | Không thay đổi dữ liệu |
+| **Hạn chế**          | Chỉ đọc                  |
+
+## UseCase Xem hóa đơn & trạng thái thanh toán
+
+| Mục                         | Nội dung                                     |
+| ---------------------------- | --------------------------------------------- |
+| **Tên Use Case**      | Xem hóa đơn                                |
+| **Actor**              | Người thuê                                 |
+| **Mô tả**            | Xem hóa đơn và trạng thái               |
+| **Tiền điều kiện** | Đã đăng nhập                             |
+| **Hậu điều kiện**  | Không thay đổi dữ liệu                   |
+| **Luồng chính**      | 1. Chọn kỳ hóa đơn<br />2. Xem chi tiết |
+| **Hạn chế**          | Không thanh toán online                     |
+
+
