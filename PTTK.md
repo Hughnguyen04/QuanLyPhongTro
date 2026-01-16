@@ -1223,3 +1223,121 @@ Dưới đây là phân tích chi tiết các liên kết khóa ngoại (Foreign
   * Cấu hình ngày chốt chỉ số điện nước hàng tháng
   * Cài đặt template thông báo
   * Cấu hình thông tin thông tin liên hệ của nhà trọ
+
+# Buổi 3: Vẽ Biểu đồ Usecase phân rã
+
+## UC-04: QUẢN LÝ NGƯỜI THUÊ
+
+<p align="center">
+  <img src="pttk_img/Quản lý người thuê.jpg" alt="Sơ đồ CSDL" width="700">
+</p>
+
+### UC-04.1: Thêm người thuê
+
+| **Mục**                      | **Nội dung**                                                                                                                                                      |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Tên Use Case**             | Thêm người thuê                                                                                                                                                      |
+| **Mô tả**                   | Cho phép thêm mới thông tin người thuê vào hệ thống.                                                                                                           |
+| **Actor chính**              | Chủ trọ, Nhân viên                                                                                                                                                   |
+| **Actor phụ**                | Hệ thống                                                                                                                                                               |
+| **Điều kiện tiên quyết** | Actor đã đăng nhập hệ thống.                                                                                                                                      |
+| **Luồng chính**             | 1. Actor chọn “Thêm người thuê”.<br />2. Nhập thông tin cá nhân người thuê.<br />3. Hệ thống kiểm tra dữ liệu.<br />4. Lưu thông tin người thuê. |
+| **Luồng phụ / Ngoại lệ**  | 3a. Thông tin thiếu hoặc sai định dạng → Thông báo lỗi.                                                                                                        |
+| **Kết quả**                 | Người thuê mới được thêm vào hệ thống.                                                                                                                        |
+
+### UC-04.2: Cập nhật thông tin người thuê
+
+| **Mục**                      | **Nội dung**                                                                                                                                 |
+| ----------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Tên Use Case**             | Cập nhật thông tin người thuê                                                                                                                 |
+| **Mô tả**                   | Cho phép chỉnh sửa thông tin của người thuê.                                                                                                |
+| **Actor chính**              | Chủ trọ, Nhân viên                                                                                                                              |
+| **Actor phụ**                | Hệ thống                                                                                                                                          |
+| **Điều kiện tiên quyết** | Người thuê đã tồn tại trong hệ thống.                                                                                                      |
+| **Luồng chính**             | 1. Actor chọn người thuê cần cập nhật.<br />2. Chỉnh sửa thông tin.<br />3. Hệ thống kiểm tra dữ liệu.<br />4. Lưu thông tin mới. |
+| **Luồng phụ / Ngoại lệ**  | 3a. Dữ liệu không hợp lệ → Thông báo lỗi.                                                                                                  |
+| **Kết quả**                 | Thông tin người thuê được cập nhật thành công.                                                                                           |
+
+### UC-04.3: Gán người thuê vào phòng
+
+| **Mục**                      | **Nội dung**                                                                                                                                  |
+| ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Tên Use Case**             | Gán người thuê vào phòng                                                                                                                       |
+| **Mô tả**                   | Gán người thuê vào một phòng trọ cụ thể.                                                                                                   |
+| **Actor chính**              | Chủ trọ, Nhân viên                                                                                                                               |
+| **Actor phụ**                | Hệ thống                                                                                                                                           |
+| **Điều kiện tiên quyết** | Phòng đang ở trạng thái trống.                                                                                                                 |
+| **Luồng chính**             | 1. Actor chọn người thuê.<br />2. Chọn phòng trống.<br />3. Hệ thống kiểm tra trạng thái phòng.<br />4. Gán người thuê vào phòng. |
+| **Luồng phụ / Ngoại lệ**  | 3a. Phòng đã có người thuê → Thông báo lỗi.                                                                                               |
+| **Kết quả**                 | Người thuê được gán vào phòng thành công.                                                                                                 |
+
+### UC-04.4: Kết thúc thuê / ngừng thuê
+
+| **Mục**                      | **Nội dung**                                                                                                                         |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Tên Use Case**             | Kết thúc thuê / ngừng thuê                                                                                                             |
+| **Mô tả**                   | Kết thúc quá trình thuê phòng của người thuê.                                                                                     |
+| **Actor chính**              | Chủ trọ, Nhân viên                                                                                                                      |
+| **Actor phụ**                | Hệ thống                                                                                                                                  |
+| **Điều kiện tiên quyết** | Người thuê đang thuê phòng.                                                                                                           |
+| **Luồng chính**             | 1. Actor chọn người thuê cần kết thúc thuê.<br />2. Xác nhận kết thúc thuê.<br />3. Hệ thống cập nhật trạng thái phòng. |
+| **Luồng phụ / Ngoại lệ**  | 2a. Người thuê không tồn tại → Thông báo lỗi.                                                                                     |
+| **Kết quả**                 | Việc thuê phòng được kết thúc, phòng trở về trạng thái trống.                                                                 |
+
+## UC-05: QUẢN LÝ HỢP ĐỒNG THUÊ
+
+<p align="center">
+  <img src="pttk_img/Quản lý hợp đồng thuê.jpg" alt="Sơ đồ CSDL" width="700">
+</p>
+
+### 🔸 UC-05.1: Lập hợp đồng thuê
+
+| **Mục**                      | **Nội dung**                                                                                                                                                                        |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Tên Use Case**             | Lập hợp đồng thuê                                                                                                                                                                     |
+| **Mô tả**                   | Tạo mới hợp đồng thuê phòng cho người thuê.                                                                                                                                      |
+| **Actor chính**              | Chủ trọ, Nhân viên                                                                                                                                                                     |
+| **Actor phụ**                | Hệ thống                                                                                                                                                                                 |
+| **Điều kiện tiên quyết** | Người thuê và phòng trọ đã tồn tại.                                                                                                                                              |
+| **Luồng chính**             | 1. Actor chọn “Lập hợp đồng thuê”.<br />2. Nhập ngày bắt đầu, ngày kết thúc, giá thuê, điều khoản.<br />3. Hệ thống kiểm tra thông tin.<br />4. Lưu hợp đồng. |
+| **Luồng phụ / Ngoại lệ**  | 3a. Ngày kết thúc nhỏ hơn ngày bắt đầu → Thông báo lỗi.                                                                                                                       |
+| **Kết quả**                 | Hợp đồng thuê được tạo và có hiệu lực.                                                                                                                                         |
+
+### UC-05.2: Xem danh sách hợp đồng
+
+| **Mục**                      | **Nội dung**                                                                                  |
+| ----------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| **Tên Use Case**             | Xem danh sách hợp đồng                                                                           |
+| **Mô tả**                   | Hiển thị danh sách các hợp đồng thuê phòng.                                                 |
+| **Actor chính**              | Chủ trọ, Nhân viên                                                                               |
+| **Actor phụ**                | Hệ thống                                                                                           |
+| **Điều kiện tiên quyết** | Actor đã đăng nhập hệ thống.                                                                  |
+| **Luồng chính**             | 1. Actor chọn “Xem danh sách hợp đồng”.<br />2. Hệ thống hiển thị danh sách hợp đồng. |
+| **Luồng phụ / Ngoại lệ**  | Không có                                                                                           |
+| **Kết quả**                 | Danh sách hợp đồng được hiển thị.                                                           |
+
+### UC-05.3: Gia hạn hợp đồng
+
+| **Mục**                      | **Nội dung**                                                                                                                             |
+| ----------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Tên Use Case**             | Gia hạn hợp đồng                                                                                                                            |
+| **Mô tả**                   | Gia hạn thời gian thuê của hợp đồng.                                                                                                     |
+| **Actor chính**              | Chủ trọ, Nhân viên                                                                                                                          |
+| **Actor phụ**                | Hệ thống                                                                                                                                      |
+| **Điều kiện tiên quyết** | Hợp đồng còn hiệu lực.                                                                                                                    |
+| **Luồng chính**             | 1. Actor chọn hợp đồng cần gia hạn.<br />2. Nhập ngày kết thúc mới.<br />3. Hệ thống kiểm tra dữ liệu.<br />4. Lưu thay đổi. |
+| **Luồng phụ / Ngoại lệ**  | 3a. Hợp đồng đã hết hạn → Không cho phép gia hạn.                                                                                    |
+| **Kết quả**                 | Hợp đồng được gia hạn thành công.                                                                                                      |
+
+### UC-05.4: Kết thúc hợp đồng
+
+| **Mục**                      | **Nội dung**                                                                                                                            |
+| ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Tên Use Case**             | Kết thúc hợp đồng                                                                                                                         |
+| **Mô tả**                   | Chấm dứt hợp đồng thuê phòng.                                                                                                           |
+| **Actor chính**              | Chủ trọ, Nhân viên                                                                                                                         |
+| **Actor phụ**                | Hệ thống                                                                                                                                     |
+| **Điều kiện tiên quyết** | Hợp đồng đang còn hiệu lực.                                                                                                             |
+| **Luồng chính**             | 1. Actor chọn hợp đồng cần kết thúc.<br />2. Xác nhận kết thúc hợp đồng.<br />3. Hệ thống cập nhật trạng thái hợp đồng. |
+| **Luồng phụ / Ngoại lệ**  | 2a. Hợp đồng không tồn tại → Thông báo lỗi.                                                                                          |
+| **Kết quả**                 | Hợp đồng được kết thúc thành công.                                                                                                   |
