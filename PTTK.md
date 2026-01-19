@@ -1323,17 +1323,6 @@ Dưới đây là phân tích chi tiết các liên kết khóa ngoại (Foreign
   * Cài đặt template thông báo
   * Cấu hình thông tin thông tin liên hệ của nhà trọ
 
-<<<<<<< HEAD
-# Buổi 3: Vẽ Biểu đồ Usecase phân rã
-
-## UC-04: QUẢN LÝ NGƯỜI THUÊ
-
-<p align="center">
-  <img src="pttk_img/Quản lý tài khoản.jpg" alt="Sơ đồ CSDL" width="700">
-</p>
-
-### UC-04.1: Thêm người thuê
-=======
 # BUỔI 3 (16/01/2026)
 
 ## 1. Phân rã UC Đăng nhập
@@ -1551,11 +1540,18 @@ Dưới đây là phân tích chi tiết các liên kết khóa ngoại (Foreign
 ## 5. Phân rã UC Quản lý người thuê
 
 <p align="center">
-  <img src="pttk_img/Quản lý người thuê.jpg" alt="QLNT" width="700">
+  <img src="pttk_img/Quản lý tài khoản.jpg" alt="QLNT" width="700">
 </p>
 
 ### 5.1. Thêm người thuê
+
 >>>>>>> 6f945d837080993615855e922f6e6d2c01145f42
+>>>>>>>
+>>>>>>
+>>>>>
+>>>>
+>>>
+>>
 
 | **Mục**                      | **Nội dung**                                                                                                                                                      |
 | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -1568,11 +1564,7 @@ Dưới đây là phân tích chi tiết các liên kết khóa ngoại (Foreign
 | **Luồng phụ / Ngoại lệ**  | 3a. Thông tin thiếu hoặc sai định dạng → Thông báo lỗi.                                                                                                        |
 | **Kết quả**                 | Người thuê mới được thêm vào hệ thống.                                                                                                                        |
 
-<<<<<<< HEAD
-### UC-04.2: Cập nhật thông tin người thuê
-=======
 ### 5.2. Cập nhật thông tin người thuê
->>>>>>> 6f945d837080993615855e922f6e6d2c01145f42
 
 | **Mục**                      | **Nội dung**                                                                                                                                 |
 | ----------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1585,11 +1577,7 @@ Dưới đây là phân tích chi tiết các liên kết khóa ngoại (Foreign
 | **Luồng phụ / Ngoại lệ**  | 3a. Dữ liệu không hợp lệ → Thông báo lỗi.                                                                                                  |
 | **Kết quả**                 | Thông tin người thuê được cập nhật thành công.                                                                                           |
 
-<<<<<<< HEAD
-### UC-04.3: Gán người thuê vào phòng
-=======
 ### 5.3. Gán người thuê vào phòng
->>>>>>> 6f945d837080993615855e922f6e6d2c01145f42
 
 | **Mục**                      | **Nội dung**                                                                                                                                  |
 | ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1602,11 +1590,7 @@ Dưới đây là phân tích chi tiết các liên kết khóa ngoại (Foreign
 | **Luồng phụ / Ngoại lệ**  | 3a. Phòng đã có người thuê → Thông báo lỗi.                                                                                               |
 | **Kết quả**                 | Người thuê được gán vào phòng thành công.                                                                                                 |
 
-<<<<<<< HEAD
-### UC-04.4: Kết thúc thuê / ngừng thuê
-=======
 ### 5.4. Kết thúc thuê / ngừng thuê
->>>>>>> 6f945d837080993615855e922f6e6d2c01145f42
 
 | **Mục**                      | **Nội dung**                                                                                                                         |
 | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1619,15 +1603,6 @@ Dưới đây là phân tích chi tiết các liên kết khóa ngoại (Foreign
 | **Luồng phụ / Ngoại lệ**  | 2a. Người thuê không tồn tại → Thông báo lỗi.                                                                                     |
 | **Kết quả**                 | Việc thuê phòng được kết thúc, phòng trở về trạng thái trống.                                                                 |
 
-<<<<<<< HEAD
-## UC-05: QUẢN LÝ HỢP ĐỒNG THUÊ
-
-<p align="center">
-  <img src="pttk_img/Quản lý tài khoản.jpg" alt="Sơ đồ CSDL" width="700">
-</p>
-
-### 🔸 UC-05.1: Lập hợp đồng thuê
-=======
 ## 6. Phân rã UC Quẩn lý hợp đồng thuê
 
 <p align="center">
@@ -1635,7 +1610,6 @@ Dưới đây là phân tích chi tiết các liên kết khóa ngoại (Foreign
 </p>
 
 ### 6.1. Lập hợp đồng thuê
->>>>>>> 6f945d837080993615855e922f6e6d2c01145f42
 
 | **Mục**                      | **Nội dung**                                                                                                                                                                        |
 | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -1648,11 +1622,7 @@ Dưới đây là phân tích chi tiết các liên kết khóa ngoại (Foreign
 | **Luồng phụ / Ngoại lệ**  | 3a. Ngày kết thúc nhỏ hơn ngày bắt đầu → Thông báo lỗi.                                                                                                                       |
 | **Kết quả**                 | Hợp đồng thuê được tạo và có hiệu lực.                                                                                                                                         |
 
-<<<<<<< HEAD
-### UC-05.2: Xem danh sách hợp đồng
-=======
 ### 6.2. Xem danh sách hợp đồng
->>>>>>> 6f945d837080993615855e922f6e6d2c01145f42
 
 | **Mục**                      | **Nội dung**                                                                                  |
 | ----------------------------------- | ---------------------------------------------------------------------------------------------------- |
@@ -1665,11 +1635,7 @@ Dưới đây là phân tích chi tiết các liên kết khóa ngoại (Foreign
 | **Luồng phụ / Ngoại lệ**  | Không có                                                                                           |
 | **Kết quả**                 | Danh sách hợp đồng được hiển thị.                                                           |
 
-<<<<<<< HEAD
-### UC-05.3: Gia hạn hợp đồng
-=======
 ### 6.3. Gia hạn hợp đồng
->>>>>>> 6f945d837080993615855e922f6e6d2c01145f42
 
 | **Mục**                      | **Nội dung**                                                                                                                             |
 | ----------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1682,11 +1648,7 @@ Dưới đây là phân tích chi tiết các liên kết khóa ngoại (Foreign
 | **Luồng phụ / Ngoại lệ**  | 3a. Hợp đồng đã hết hạn → Không cho phép gia hạn.                                                                                    |
 | **Kết quả**                 | Hợp đồng được gia hạn thành công.                                                                                                      |
 
-<<<<<<< HEAD
-### UC-05.4: Kết thúc hợp đồng
-=======
 ### 6.4. Kết thúc hợp đồng
->>>>>>> 6f945d837080993615855e922f6e6d2c01145f42
 
 | **Mục**                      | **Nội dung**                                                                                                                            |
 | ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1698,7 +1660,8 @@ Dưới đây là phân tích chi tiết các liên kết khóa ngoại (Foreign
 | **Luồng chính**             | 1. Actor chọn hợp đồng cần kết thúc.<br />2. Xác nhận kết thúc hợp đồng.<br />3. Hệ thống cập nhật trạng thái hợp đồng. |
 | **Luồng phụ / Ngoại lệ**  | 2a. Hợp đồng không tồn tại → Thông báo lỗi.                                                                                          |
 | **Kết quả**                 | Hợp đồng được kết thúc thành công.                                                                                                   |
-<<<<<<< HEAD
+| <<<<<<< HEAD                        |                                                                                                                                                |
+
 =======
 
 ## 7. Phân rã UC Quản lý hóa đơn và chi phí
@@ -1813,4 +1776,43 @@ Dưới đây là phân tích chi tiết các liên kết khóa ngoại (Foreign
 | **Hậu điều kiện**  | Không thay đổi dữ liệu                   |
 | **Luồng chính**      | 1. Chọn kỳ hóa đơn<br />2. Xem chi tiết |
 | **Hạn chế**          | Không thanh toán online                     |
+
 >>>>>>> 6f945d837080993615855e922f6e6d2c01145f42
+>>>>>>>
+>>>>>>
+>>>>>
+>>>>
+>>>
+>>
+
+# Buổi 4: Vẽ biểu đồ tuần tự và biểu đồ hoạt động (19/1/2026)
+
+## 1.Biểu đồ tuần tự
+
+### 1.1.Thêm người thuê
+
+<p align="center">
+  <img src="pttk_img/Thêm người thuê.jpg" alt="UC Tổng quát" width="700">
+</p>
+
+### 1.2.Cập nhật thông tin người thuê
+
+<p align="center">
+  <img src="pttk_img/Cập nhật thông tin người thuê.jpg" alt="UC Tổng quát" width="700">
+</p>
+
+### 1.3.Gán người thuê vào phòng
+
+<p align="center">
+  <img src="pttk_img/Gán người thuê vào phòng.jpg" alt="UC Tổng quát" width="700">
+</p>
+
+### 1.4.Kết thúc thuê / Ngừng thuê
+
+<p align="center">
+  <img src="pttk_img/Kết thúc thuê_ngừng thuê.jpg" alt="UC Tổng quát" width="700">
+</p>
+
+1.5.
+
+## 2.Biểu đồ hoạt động
