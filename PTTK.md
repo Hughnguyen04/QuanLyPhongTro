@@ -169,7 +169,11 @@ Chức năng Quản lý phòng & người thuê bao gồm:
 
 Hệ thống quản lý hợp đồng và hóa đơn được thiết kế phục vụ ba nhóm tác nhân với vai trò, quyền hạn và mức độ can thiệp khác nhau nhằm đảm bảo tính  chặt chẽ về pháp lý , chính xác về tài chính và  an toàn dữ liệu .
 
+<<<<<<< HEAD
 ### a. Chủ trọ (Admin – Quản trị viên)
+=======
+#### a. Chủ trọ (Admin – Quản trị viên)
+>>>>>>> 6f945d837080993615855e922f6e6d2c01145f42
 
 * Là người sở hữu và chịu trách nhiệm cao nhất đối với toàn bộ hệ thống.
 * Có quyền giám sát, cấu hình và kiểm soát toàn bộ dữ liệu liên quan đến hợp đồng và hóa đơn.
@@ -182,7 +186,11 @@ Quyền hạn:
 * Thiết lập và điều chỉnh các đơn giá chung (điện, nước, dịch vụ)
 * Kiểm soát và xử lý các trường hợp đặc biệt (gia hạn, thanh lý, phạt cọc)
 
+<<<<<<< HEAD
 ### b. Quản lý dãy trọ (Staff – Nhân viên)
+=======
+#### b. Quản lý dãy trọ (Staff – Nhân viên)
+>>>>>>> 6f945d837080993615855e922f6e6d2c01145f42
 
 * Là người trực tiếp vận hành hệ thống tại từng khu vực/dãy trọ.
 * Thực hiện các nghiệp vụ phát sinh hàng ngày liên quan đến hợp đồng và hóa đơn.
@@ -200,7 +208,11 @@ Quyền hạn:
 * Không được xem báo cáo doanh thu của các dãy trọ khác
 * Không được thay đổi các đơn giá chung do Chủ trọ thiết lập
 
+<<<<<<< HEAD
 ### c. Người thuê (Customer – Khách hàng)
+=======
+#### c. Người thuê (Customer – Khách hàng)
+>>>>>>> 6f945d837080993615855e922f6e6d2c01145f42
 
 * Là người thuê phòng trọ và sử dụng các dịch vụ đi kèm.
 * Có tài khoản đăng nhập để theo dõi thông tin liên quan đến việc thuê phòng.
@@ -223,11 +235,19 @@ Quyền hạn:
 
 Chức năng Quản lý Hợp đồng đóng vai trò  xương sống của hệ thống , là cơ sở pháp lý để xác định quyền và nghĩa vụ của người thuê, đồng thời là căn cứ để tính toán các khoản chi phí phát sinh.
 
+<<<<<<< HEAD
 ### a. Quy trình vòng đời hợp đồng (Contract Lifecycle)
 
 Một hợp đồng thuê phòng trong hệ thống sẽ trải qua 4 giai đoạn trạng thái như sau:
 
 #### Giai đoạn 1: Khởi tạo hợp đồng (Creation)
+=======
+#### a. Quy trình vòng đời hợp đồng (Contract Lifecycle)
+
+Một hợp đồng thuê phòng trong hệ thống sẽ trải qua 4 giai đoạn trạng thái như sau:
+
+**Giai đoạn 1: Khởi tạo hợp đồng (Creation)**
+>>>>>>> 6f945d837080993615855e922f6e6d2c01145f42
 
 * Nhân viên lựa chọn phòng có trạng thái Trống
 * Nhập đầy đủ thông tin:
@@ -243,7 +263,11 @@ Một hợp đồng thuê phòng trong hệ thống sẽ trải qua 4 giai đo�
   * Trạng thái hợp đồng: Đang hiệu lực
   * Trạng thái phòng: Đang thuê
 
+<<<<<<< HEAD
 #### Giai đoạn 2: Duy trì hợp đồng (Active)
+=======
+**Giai đoạn 2: Duy trì hợp đồng (Active)**
+>>>>>>> 6f945d837080993615855e922f6e6d2c01145f42
 
 * Trong suốt thời gian thuê, hợp đồng được sử dụng làm:
   * Căn cứ truy xuất giá phòng
@@ -253,7 +277,11 @@ Một hợp đồng thuê phòng trong hệ thống sẽ trải qua 4 giai đo�
   * Không thay đổi theo biến động thị trường
   * Chỉ được điều chỉnh nếu có gia hạn hoặc phụ lục hợp đồng
 
+<<<<<<< HEAD
 #### Giai đoạn 3: Gia hạn hợp đồng (Extension)
+=======
+**Giai đoạn 3: Gia hạn hợp đồng (Extension)**
+>>>>>>> 6f945d837080993615855e922f6e6d2c01145f42
 
 * Khi hợp đồng sắp hết hạn, nếu người thuê tiếp tục ở:
   * Nhân viên thực hiện chức năng **Gia hạn hợp đồng**
@@ -262,7 +290,11 @@ Một hợp đồng thuê phòng trong hệ thống sẽ trải qua 4 giai đo�
   * Điều chỉnh lại giá thuê (nếu có thỏa thuận)
 * Trạng thái hợp đồng vẫn là **Đang hiệu lực**
 
+<<<<<<< HEAD
 #### Giai đoạn 4: Thanh lý hợp đồng (Termination)
+=======
+**Giai đoạn 4: Thanh lý hợp đồng (Termination)**
+>>>>>>> 6f945d837080993615855e922f6e6d2c01145f42
 
 * Xảy ra khi:
   * Hợp đồng hết hạn
@@ -274,7 +306,11 @@ Một hợp đồng thuê phòng trong hệ thống sẽ trải qua 4 giai đo�
   * Trạng thái hợp đồng: **Đã kết thúc**
   * Trạng thái phòng: **Trống**
 
+<<<<<<< HEAD
 ### b. Các quy tắc nghiệp vụ quan trọng
+=======
+#### b. Các quy tắc nghiệp vụ quan trọng
+>>>>>>> 6f945d837080993615855e922f6e6d2c01145f42
 
 **Quy tắc tiền cọc**
 
@@ -292,6 +328,7 @@ Một hợp đồng thuê phòng trong hệ thống sẽ trải qua 4 giai đo�
     * Phạt cọc
     * Hoặc hoàn cọc theo thỏa thuận thực tế
 
+<<<<<<< HEAD
 ## 3. PHÂN TÍCH NGHIỆP VỤ QUẢN LÝ HÓA ĐƠN
 
 Chức năng Quản lý Hóa đơn đảm bảo việc  tính toán chính xác , minh bạch chi phí và  theo dõi doanh thu .
@@ -299,6 +336,15 @@ Chức năng Quản lý Hóa đơn đảm bảo việc  tính toán chính xác 
 ### a. Quy trình lập hóa đơn hàng tháng
 
 #### Bước 1: Chốt chỉ số
+=======
+### 3. PHÂN TÍCH NGHIỆP VỤ QUẢN LÝ HÓA ĐƠN
+
+Chức năng Quản lý Hóa đơn đảm bảo việc  tính toán chính xác , minh bạch chi phí và  theo dõi doanh thu .
+
+#### a. Quy trình lập hóa đơn hàng tháng
+
+**Bước 1: Chốt chỉ số**
+>>>>>>> 6f945d837080993615855e922f6e6d2c01145f42
 
 * Vào ngày quy định, nhân viên nhập:
   * Chỉ số điện mới
@@ -306,7 +352,11 @@ Chức năng Quản lý Hóa đơn đảm bảo việc  tính toán chính xác 
 * Hệ thống kiểm tra:
   * Chỉ số mới ≥ chỉ số cũ
 
+<<<<<<< HEAD
 #### Bước 2: Tính toán chi phí
+=======
+**Bước 2: Tính toán chi phí**
+>>>>>>> 6f945d837080993615855e922f6e6d2c01145f42
 
 Hệ thống tự động tính toán theo công thức:
 
@@ -315,14 +365,22 @@ Hệ thống tự động tính toán theo công thức:
 * Tiền phòng = Lấy từ hợp đồng đang hiệu lực
 * Tổng tiền = Tiền phòng + Tiền điện + Tiền nước + Dịch vụ khác
 
+<<<<<<< HEAD
 #### Bước 3: Phát hành hóa đơn
+=======
+**Bước 3: Phát hành hóa đơn**
+>>>>>>> 6f945d837080993615855e922f6e6d2c01145f42
 
 * Hóa đơn được tạo với trạng thái Chưa thu
 * Hóa đơn được lưu vào hệ thống để:
   * Nhân viên theo dõi
   * Người thuê tra cứu
 
+<<<<<<< HEAD
 ### b. Các ràng buộc dữ liệu
+=======
+#### b. Các ràng buộc dữ liệu
+>>>>>>> 6f945d837080993615855e922f6e6d2c01145f42
 
 * Mỗi hợp đồng chỉ được phát sinh tối đa 01 hóa đơn tiền phòng trong một tháng
 * Không cho phép lập hóa đơn khi:
@@ -1323,14 +1381,353 @@ Dưới đây là phân tích chi tiết các liên kết khóa ngoại (Foreign
   * Cài đặt template thông báo
   * Cấu hình thông tin thông tin liên hệ của nhà trọ
 
+<<<<<<< HEAD
 # buổi 3: 16/1/2026
 
 #### Quản lý hóa đơn và chi phí
+=======
+# BUỔI 3 (16/01/2026)
+
+## 1. Phân rã UC Đăng nhập
+
+<p align="center">
+  <img src="pttk_img/UC Đăng nhập.jpg" alt="UC Đăng nhập" width="700">
+</p>
+
+### 1.1. Đặc tả use case: Đăng nhập
+
+| **Mục**                      | **Nội dung**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| ----------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Tên Use Case**             | Đăng nhập                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| **Mô tả**                   | Cho phép người dùng (Chủ trọ, Nhân viên, Người thuê) đăng nhập vào hệ thống bằng tài khoản hợp lệ. Hệ thống thực hiện kiểm tra thông tin đăng nhập, trạng thái tài khoản và phân quyền truy cập theo vai trò.                                                                                                                                                                                                                                                                         |
+| **Actor chính**              | - Chủ trọ<br />- Nhân viên<br />- Người thuê                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| **Actor phụ**                | Hệ thống                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| **Điều kiện tiên quyết** | - Người dùng đã được tạo tài khoản trong hệ thống<br />- Tài khoản chưa bị khóa<br />- Người dùng chưa đăng nhập tại thời điểm thực hiện<br />- Hệ thống đang hoạt động bình thường                                                                                                                                                                                                                                                                                                   |
+| **Luồng chính**             | 1. Người dùng truy cập trang đăng nhập.<br />2. Nhập tên đăng nhập và mật khẩu hợp lệ (mật khẩu gồm tối thiểu 8 ký tự bao gồm chữ hoa, chữ thường, số, ký tự đặc biệt).<br />3. Nhấn nút **Đăng nhập**.<br />4. Hệ thống kiểm tra thông tin đăng nhập.<br />5. Hệ thống kiểm tra trạng thái tài khoản.<br />6. Hệ thống xác định vai trò và phân quyền truy cập.<br />7. Hệ thống chuyển đến giao diện tương ứng với vai trò người dùng. |
+| **Luồng phụ / Ngoại lệ**  | 2a. Thiếu tên đăng nhập hoặc mật khẩu → Thông báo yêu cầu nhập đầy đủ.<br />4a. Sai thông tin đăng nhập → Thông báo lỗi, kết thúc Use Case.<br />5a. Tài khoản bị khóa → Thông báo liên hệ Chủ trọ, kết thúc Use Case.<br />6a. Vai trò không hợp lệ → Từ chối đăng nhập và ghi nhận lỗi phân quyền.                                                                                                                                                                 |
+| Ràng buộc nghiệp vụ             | - Mỗi tài khoản chỉ có một vai trò duy nhất.<br /> - Chỉ tài khoản ở trạng thái **Hoạt động** mới được đăng nhập. <br /> - Người dùng chỉ được truy cập chức năng đúng với quyền được phân.                                                                                                                                                                                                                                                                                   |
+| **Kết quả**                 | Người dùng đăng nhập thành công, hệ thống tạo phiên làm việc và cấp quyền truy cập phù hợp với vai trò.                                                                                                                                                                                                                                                                                                                                                                                                 |
+
+## 2. Phân rã UC Quản lý và nhận thông báo
+
+<p align="center">
+  <img src="pttk_img/UC Quản lý và nhận thông báo.jpg" alt="UC Quản lý và nhận thông báo" width="700">
+</p>
+
+### 2.1. Đặc tả use case: Quản lý và Nhận thông báo
+
+| **Mục**                      | **Nội dung**                                                                                                                                                                                                                                                            |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Tên Use Case**             | Quản lý và nhận thông báo                                                                                                                                                                                                                                                |
+| **Mô tả**                   | Cho phép Chủ trọ tạo và gửi thông báo đến các đối tượng trong hệ thống. Nhân viên và Người thuê có thể xem danh sách thông báo và đánh dấu đã đọc.                                                                                         |
+| **Actor chính**              | Chủ trọ                                                                                                                                                                                                                                                                      |
+| **Actor phụ**                | Nhân viên<br />Người thuê<br />Hệ thống                                                                                                                                                                                                                                 |
+| **Điều kiện tiên quyết** | - Người dùng đã đăng nhập hệ thống<br />- Tài khoản đang ở trạng thái hoạt động                                                                                                                                                                             |
+| **Luồng chính**             | 1. Chủ trọ truy cập chức năng Quản lý và nhận thông báo.<br />2. Hệ thống hiển thị danh sách thông báo hiện có.<br />3. Chủ trọ chọn tạo thông báo mới hoặc xem danh sách thông báo.<br />4. Hệ thống xử lý theo chức năng được chọn. |
+| **Luồng phụ / Mở rộng**   | *Use Case này được mở rộng bởi các UC con (extend).*                                                                                                                                                                                                                 |
+| **Kết quả**                 | Thông báo được tạo, gửi và hiển thị đúng cho các đối tượng liên quan.                                                                                                                                                                                        |
+
+### 2.2. Đặc tả use case: Tạo thông báo
+
+| **Mục**                      | **Nội dung**                                                                                                                                                                   |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Tên Use Case**             | Tạo thông báo                                                                                                                                                                      |
+| **Actor chính**              | Chủ trọ                                                                                                                                                                             |
+| **Actor phụ**                | Hệ thống                                                                                                                                                                            |
+| **Điều kiện tiên quyết** | Chủ trọ đã đăng nhập                                                                                                                                                           |
+| **Luồng chính**             | 1. Chủ trọ chọn chức năng Tạo thông báo.<br />2. Nhập tiêu đề và nội dung thông báo.<br />3. Nhấn nút Lưu / Tạo thông báo.<br />4. Hệ thống lưu thông báo. |
+| **Luồng phụ**               | 2a. Nội dung trống → Hệ thống yêu cầu nhập đầy đủ thông tin.                                                                                                             |
+| **Kết quả**                 | Thông báo mới được tạo trong hệ thống.                                                                                                                                       |
+
+### 2.3. Đặc tả use case: Gửi thông báo theo đối tượng
+
+| **Mục**                      | **Nội dung**                                                                                                                                                                                                               |
+| ----------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Tên Use Case**             | Gửi thông báo theo đối tượng                                                                                                                                                                                               |
+| **Actor chính**              | Chủ trọ                                                                                                                                                                                                                         |
+| **Actor phụ**                | Hệ thống                                                                                                                                                                                                                        |
+| **Điều kiện tiên quyết** | Đã có thông báo được tạo                                                                                                                                                                                                 |
+| **Luồng chính**             | 1. Chủ trọ chọn thông báo cần gửi.<br />2. Chọn đối tượng nhận (Nhân viên / Người thuê / Tất cả).<br />3. Xác nhận gửi thông báo.<br />4. Hệ thống phân phối thông báo đến đúng đối tượng. |
+| **Luồng phụ**               | 2a. Không chọn đối tượng → Hệ thống yêu cầu chọn đối tượng nhận.                                                                                                                                                 |
+| **Kết quả**                 | Thông báo được gửi và hiển thị cho người nhận.                                                                                                                                                                        |
+
+### 2.4. Đặc tả use case: Xem danh sách thông báo
+
+| **Mục**                      | **Nội dung**                                                                                                                                                                                                                                                                                                                         |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Tên Use Case**             | Xem danh sách thông báo                                                                                                                                                                                                                                                                                                                  |
+| **Actor chính**              | Chủ trọ<br />Nhân viên<br />Người thuê                                                                                                                                                                                                                                                                                               |
+| **Actor phụ**                | Hệ thống                                                                                                                                                                                                                                                                                                                                  |
+| **Điều kiện tiên quyết** | Người dùng đã đăng nhập hệ thống                                                                                                                                                                                                                                                                                                  |
+| **Luồng chính**             | 1. Người dùng truy cập mục Thông báo.<br />2. Hệ thống tải danh sách thông báo tương ứng với vai trò người dùng.<br />3. Hệ thống hiển thị danh sách thông báo (mới / đã đọc).<br />4. Người dùng chọn một thông báo để xem chi tiết.                                                            |
+| **Luồng phụ / Ngoại lệ**  | **2a.** Không có thông báo nào → Hệ thống hiển thị thông báo “Chưa có thông báo”.<br />**2b.** Người dùng không có quyền xem thông báo đó → Hệ thống ẩn thông báo khỏi danh sách.<br />**3a.** Lỗi tải dữ liệu → Hệ thống hiển thị thông báo lỗi và cho phép tải lại. |
+| **Kết quả**                 | Người dùng xem được danh sách và nội dung các thông báo hợp lệ.                                                                                                                                                                                                                                                               |
+
+### 2.5. Đặc tả use case: Đánh dấu đã đọc
+
+| **Mục**                      | **Nội dung**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| ----------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Tên Use Case**             | Đánh dấu đã đọc                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| **Actor chính**              | Nhân viên<br />Người thuê                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| **Actor phụ**                | Hệ thống                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| **Điều kiện tiên quyết** | - Người dùng đã đăng nhập hệ thống<br />- Tồn tại ít nhất một thông báo chưa đọc                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| **Luồng chính**             | **Cách 1 – Đánh dấu khi mở thông báo**<br />1. Người dùng mở một thông báo chưa đọc.<br />2. Hệ thống ghi nhận hành động xem thông báo.<br />3. Hệ thống cập nhật trạng thái thông báo sang “Đã đọc”.<br />4. Biểu tượng thông báo (chuông) được cập nhật số lượng chưa đọc.<br /><br />**Cách 2 – Đánh dấu mà không cần đọc nội dung**<br />1’. Người dùng chọn một hoặc nhiều thông báo chưa đọc trong danh sách.<br />2’. Người dùng nhấn nút **“Đánh dấu đã đọc”**.<br />3’. Hệ thống cập nhật trạng thái các thông báo được chọn sang “Đã đọc”.<br />4’. Biểu tượng thông báo được cập nhật. |
+| **Luồng phụ / Ngoại lệ**  | **1a.** Thông báo đã ở trạng thái “Đã đọc” → Hệ thống không thay đổi trạng thái.<br />**2’a.** Người dùng không chọn thông báo nào → Hệ thống hiển thị thông báo yêu cầu chọn thông báo.<br />**3a.** Lỗi cập nhật trạng thái → Hệ thống giữ nguyên trạng thái cũ và ghi log lỗi.<br />**3b.** Người dùng không còn quyền truy cập thông báo → Hệ thống hủy thao tác.                                                                                                                                                                                                                                                                                |
+| **Kết quả**                 | Trạng thái thông báo được cập nhật chính xác trong hệ thống.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+
+## 3. Phân rã UC Quản lý tài khoản
+
+![QLTK](pttk_img/QLTKhoan.jpg)
+
+### 3.1 Xem danh sách tài khoản
+
+| Mục                                | Nội dung                                                                                                                                                                                   |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Tên Use Case**             | Xem danh sách tài khoản                                                                                                                                                                  |
+| **Mô tả**                   | Cho phép Chủ trọ xem toàn bộ các tài khoản trong hệ thống                                                                                                                         |
+| **Actor chính**              | Chủ trọ                                                                                                                                                                                   |
+| **Actor phụ**                | Hệ thống                                                                                                                                                                                  |
+| **Điều kiện tiên quyết** | Chủ trọ đã đăng nhập                                                                                                                                                                 |
+| **Luồng chính**             | 1. Chủ trọ chọn chức năng “Quản lý tài khoản”.<br />2. Chọn “Xem danh sách tài khoản”.<br />3. Hệ thống truy xuất dữ liệu.<br />4. Hiển thị danh sách tài khoản. |
+| **Luồng phụ / Ngoại lệ**  | 3a. Không có tài khoản → Hiển thị danh sách rỗng.                                                                                                                                  |
+| **Kết quả**                 | Danh sách tài khoản được hiển thị                                                                                                                                                   |
+
+### 3.2 Tạo tài khoản nhân viên
+
+| Mục                                | Nội dung                                                                                                                                                                              |
+| ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Tên Use Case**             | Tạo tài khoản Nhân viên                                                                                                                                                           |
+| **Mô tả**                   | Cho phép Chủ trọ tạo tài khoản mới cho Nhân viên                                                                                                                              |
+| **Actor chính**              | Chủ trọ                                                                                                                                                                              |
+| **Actor phụ**                | Hệ thống                                                                                                                                                                             |
+| **Điều kiện tiên quyết** | Chủ trọ đã đăng nhập                                                                                                                                                            |
+| **Luồng chính**             | 1. Chọn “Tạo tài khoản”.<br />2. Chọn loại tài khoản “Nhân viên”.<br />3. Nhập thông tin nhân viên.<br />4. Hệ thống kiểm tra hợp lệ.<br />5. Lưu tài khoản. |
+| **Luồng phụ / Ngoại lệ**  | 4a. Thông tin không hợp lệ → Thông báo lỗi.                                                                                                                                    |
+| **Kết quả**                 | Tài khoản Nhân viên được tạo                                                                                                                                                   |
+
+### 3.3 Tạo tài khoản người thuê
+
+| Mục                                | Nội dung                                                                                                                                                     |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Tên Use Case**             | Tạo tài khoản Người thuê                                                                                                                                |
+| **Mô tả**                   | Cho phép Chủ trọ tạo tài khoản cho Người thuê                                                                                                        |
+| **Actor chính**              | Chủ trọ                                                                                                                                                     |
+| **Actor phụ**                | Hệ thống                                                                                                                                                    |
+| **Điều kiện tiên quyết** | Chủ trọ đã đăng nhập                                                                                                                                   |
+| **Luồng chính**             | 1. Chọn “Tạo tài khoản”.<br />2. Chọn loại “Người thuê”.<br />3. Nhập thông tin người thuê.4. Hệ thống tạo tài khoản và phân quyền. |
+| **Luồng phụ / Ngoại lệ**  | 3a. Thiếu thông tin → Yêu cầu nhập lại.                                                                                                                |
+| **Kết quả**                 | Tài khoản Người thuê được tạo                                                                                                                        |
+
+### 3.4 Cập nhật thông tin tài khoản
+
+| Mục                                | Nội dung                                                                                                 |
+| ----------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| **Tên Use Case**             | Cập nhật thông tin tài khoản                                                                         |
+| **Mô tả**                   | Cho phép chỉnh sửa thông tin tài khoản                                                              |
+| **Actor chính**              | Chủ trọ                                                                                                 |
+| **Actor phụ**                | Hệ thống                                                                                                |
+| **Điều kiện tiên quyết** | Tài khoản tồn tại                                                                                     |
+| **Luồng chính**             | 1. Chọn tài khoản cần chỉnh sửa.<br />2. Thay đổi thông tin.<br />3. Hệ thống lưu cập nhật. |
+| **Luồng phụ / Ngoại lệ**  | 2a. Dữ liệu không hợp lệ → Báo lỗi.                                                               |
+| **Kết quả**                 | Thông tin tài khoản được cập nhật                                                                 |
+
+### 3.5 Khóa/ Mở khóa tài khoản
+
+| Mục                                | Nội dung                                                                                                      |
+| ----------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| **Tên Use Case**             | Khóa / Mở khóa tài khoản                                                                                  |
+| **Mô tả**                   | Quản lý trạng thái hoạt động của tài khoản                                                           |
+| **Actor chính**              | Chủ trọ                                                                                                      |
+| **Actor phụ**                | Hệ thống                                                                                                     |
+| **Điều kiện tiên quyết** | Tài khoản tồn tại                                                                                          |
+| **Luồng chính**             | 1. Chọn tài khoản.<br />2. Chọn “Khóa” hoặc “Mở khóa”.<br />3. Hệ thống cập nhật trạng thái. |
+| **Luồng phụ / Ngoại lệ**  | 2a. Tài khoản đang hoạt động hệ thống → Không cho khóa.                                             |
+| **Kết quả**                 | Trạng thái tài khoản được thay đổi                                                                    |
+
+## 4. Phân rã UC Quản lý phòng trọ
+
+![demo](pttk_img/QLPtro.jpg)
+
+### 4.1 Thêm phòng trọ
+
+| Mục                                | Nội dung                                                                                   |
+| ----------------------------------- | ------------------------------------------------------------------------------------------- |
+| **Tên Use Case**             | Thêm phòng trọ                                                                           |
+| **Mô tả**                   | Thêm phòng trọ mới vào hệ thống                                                      |
+| **Actor chính**              | Chủ trọ                                                                                   |
+| **Actor phụ**                | Hệ thống                                                                                  |
+| **Điều kiện tiên quyết** | Chủ trọ đã đăng nhập                                                                 |
+| **Luồng chính**             | 1. Chọn “Thêm phòng”.<br />2. Nhập thông tin phòng.<br />3. Hệ thống lưu phòng. |
+| **Luồng phụ / Ngoại lệ**  | 2a. Thông tin thiếu → Báo lỗi.                                                         |
+| **Kết quả**                 | Phòng mới được tạo                                                                    |
+
+### 4.2 Cập nhật thông tin phòng
+
+| Mục                                | Nội dung                                                                           |
+| ----------------------------------- | ----------------------------------------------------------------------------------- |
+| **Tên Use Case**             | Cập nhật thông tin phòng                                                        |
+| **Mô tả**                   | Cập nhật diện tích, giá, dịch vụ phòng                                      |
+| **Actor chính**              | Chủ trọ                                                                           |
+| **Actor phụ**                | Hệ thống                                                                          |
+| **Điều kiện tiên quyết** | Phòng tồn tại                                                                    |
+| **Luồng chính**             | 1. Chọn phòng.<br />2. Cập nhật thông tin.<br />3. Hệ thống lưu thay đổi. |
+| **Luồng phụ / Ngoại lệ**  | 2a. Giá phòng không hợp lệ → Thông báo lỗi.                                |
+| **Kết quả**                 | Thông tin phòng được cập nhật                                                |
+
+### 4.3 Xóa phòng trọ
+
+| Mục                                | Nội dung                                                                           |
+| ----------------------------------- | ----------------------------------------------------------------------------------- |
+| **Tên Use Case**             | Xóa phòng trọ                                                                    |
+| **Mô tả**                   | Xóa phòng chưa phát sinh hợp đồng                                            |
+| **Actor chính**              | Chủ trọ                                                                           |
+| **Actor phụ**                | Hệ thống                                                                          |
+| **Điều kiện tiên quyết** | Phòng chưa có hợp đồng                                                        |
+| **Luồng chính**             | 1. Chọn phòng cần xóa.<br />2. Xác nhận xóa.<br />3. Hệ thống xóa phòng. |
+| **Luồng phụ / Ngoại lệ**  | 1a. Phòng có hợp đồng → Không cho xóa.                                      |
+| **Kết quả**                 | Phòng bị xóa khỏi hệ thống                                                    |
+
+### 4.4 Xem trạng thái phòng
+
+| Mục                                | Nội dung                                                               |
+| ----------------------------------- | ----------------------------------------------------------------------- |
+| **Tên Use Case**             | Xem trạng thái phòng                                                 |
+| **Mô tả**                   | Xem phòng đang trống hoặc đang thuê                               |
+| **Actor chính**              | Chủ trọ, Nhân viên                                                  |
+| **Actor phụ**                | Hệ thống                                                              |
+| **Điều kiện tiên quyết** | Đã đăng nhập                                                       |
+| **Luồng chính**             | 1. Chọn danh sách phòng.<br />2. Hệ thống hiển thị trạng thái. |
+| **Luồng phụ / Ngoại lệ**  | Không có                                                              |
+| **Kết quả**                 | Trạng thái phòng được hiển thị                                  |
+
+## 5. Phân rã UC Quản lý người thuê
+
+<p align="center">
+  <img src="pttk_img/Quản lý người thuê.jpg" alt="QLNT" width="700">
+</p>
+
+### 5.1. Thêm người thuê
+
+| **Mục**                      | **Nội dung**                                                                                                                                                      |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Tên Use Case**             | Thêm người thuê                                                                                                                                                      |
+| **Mô tả**                   | Cho phép thêm mới thông tin người thuê vào hệ thống.                                                                                                           |
+| **Actor chính**              | Chủ trọ, Nhân viên                                                                                                                                                   |
+| **Actor phụ**                | Hệ thống                                                                                                                                                               |
+| **Điều kiện tiên quyết** | Actor đã đăng nhập hệ thống.                                                                                                                                      |
+| **Luồng chính**             | 1. Actor chọn “Thêm người thuê”.<br />2. Nhập thông tin cá nhân người thuê.<br />3. Hệ thống kiểm tra dữ liệu.<br />4. Lưu thông tin người thuê. |
+| **Luồng phụ / Ngoại lệ**  | 3a. Thông tin thiếu hoặc sai định dạng → Thông báo lỗi.                                                                                                        |
+| **Kết quả**                 | Người thuê mới được thêm vào hệ thống.                                                                                                                        |
+
+### 5.2. Cập nhật thông tin người thuê
+
+| **Mục**                      | **Nội dung**                                                                                                                                 |
+| ----------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Tên Use Case**             | Cập nhật thông tin người thuê                                                                                                                 |
+| **Mô tả**                   | Cho phép chỉnh sửa thông tin của người thuê.                                                                                                |
+| **Actor chính**              | Chủ trọ, Nhân viên                                                                                                                              |
+| **Actor phụ**                | Hệ thống                                                                                                                                          |
+| **Điều kiện tiên quyết** | Người thuê đã tồn tại trong hệ thống.                                                                                                      |
+| **Luồng chính**             | 1. Actor chọn người thuê cần cập nhật.<br />2. Chỉnh sửa thông tin.<br />3. Hệ thống kiểm tra dữ liệu.<br />4. Lưu thông tin mới. |
+| **Luồng phụ / Ngoại lệ**  | 3a. Dữ liệu không hợp lệ → Thông báo lỗi.                                                                                                  |
+| **Kết quả**                 | Thông tin người thuê được cập nhật thành công.                                                                                           |
+
+### 5.3. Gán người thuê vào phòng
+
+| **Mục**                      | **Nội dung**                                                                                                                                  |
+| ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Tên Use Case**             | Gán người thuê vào phòng                                                                                                                       |
+| **Mô tả**                   | Gán người thuê vào một phòng trọ cụ thể.                                                                                                   |
+| **Actor chính**              | Chủ trọ, Nhân viên                                                                                                                               |
+| **Actor phụ**                | Hệ thống                                                                                                                                           |
+| **Điều kiện tiên quyết** | Phòng đang ở trạng thái trống.                                                                                                                 |
+| **Luồng chính**             | 1. Actor chọn người thuê.<br />2. Chọn phòng trống.<br />3. Hệ thống kiểm tra trạng thái phòng.<br />4. Gán người thuê vào phòng. |
+| **Luồng phụ / Ngoại lệ**  | 3a. Phòng đã có người thuê → Thông báo lỗi.                                                                                               |
+| **Kết quả**                 | Người thuê được gán vào phòng thành công.                                                                                                 |
+
+### 5.4. Kết thúc thuê / ngừng thuê
+
+| **Mục**                      | **Nội dung**                                                                                                                         |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Tên Use Case**             | Kết thúc thuê / ngừng thuê                                                                                                             |
+| **Mô tả**                   | Kết thúc quá trình thuê phòng của người thuê.                                                                                     |
+| **Actor chính**              | Chủ trọ, Nhân viên                                                                                                                      |
+| **Actor phụ**                | Hệ thống                                                                                                                                  |
+| **Điều kiện tiên quyết** | Người thuê đang thuê phòng.                                                                                                           |
+| **Luồng chính**             | 1. Actor chọn người thuê cần kết thúc thuê.<br />2. Xác nhận kết thúc thuê.<br />3. Hệ thống cập nhật trạng thái phòng. |
+| **Luồng phụ / Ngoại lệ**  | 2a. Người thuê không tồn tại → Thông báo lỗi.                                                                                     |
+| **Kết quả**                 | Việc thuê phòng được kết thúc, phòng trở về trạng thái trống.                                                                 |
+
+## 6. Phân rã UC Quẩn lý hợp đồng thuê
+
+<p align="center">
+  <img src="pttk_img/Quản lý hợp đồng thuê.jpg" alt="QLHD" width="700">
+</p>
+
+### 6.1. Lập hợp đồng thuê
+
+| **Mục**                      | **Nội dung**                                                                                                                                                                        |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Tên Use Case**             | Lập hợp đồng thuê                                                                                                                                                                     |
+| **Mô tả**                   | Tạo mới hợp đồng thuê phòng cho người thuê.                                                                                                                                      |
+| **Actor chính**              | Chủ trọ, Nhân viên                                                                                                                                                                     |
+| **Actor phụ**                | Hệ thống                                                                                                                                                                                 |
+| **Điều kiện tiên quyết** | Người thuê và phòng trọ đã tồn tại.                                                                                                                                              |
+| **Luồng chính**             | 1. Actor chọn “Lập hợp đồng thuê”.<br />2. Nhập ngày bắt đầu, ngày kết thúc, giá thuê, điều khoản.<br />3. Hệ thống kiểm tra thông tin.<br />4. Lưu hợp đồng. |
+| **Luồng phụ / Ngoại lệ**  | 3a. Ngày kết thúc nhỏ hơn ngày bắt đầu → Thông báo lỗi.                                                                                                                       |
+| **Kết quả**                 | Hợp đồng thuê được tạo và có hiệu lực.                                                                                                                                         |
+
+### 6.2. Xem danh sách hợp đồng
+
+| **Mục**                      | **Nội dung**                                                                                  |
+| ----------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| **Tên Use Case**             | Xem danh sách hợp đồng                                                                           |
+| **Mô tả**                   | Hiển thị danh sách các hợp đồng thuê phòng.                                                 |
+| **Actor chính**              | Chủ trọ, Nhân viên                                                                               |
+| **Actor phụ**                | Hệ thống                                                                                           |
+| **Điều kiện tiên quyết** | Actor đã đăng nhập hệ thống.                                                                  |
+| **Luồng chính**             | 1. Actor chọn “Xem danh sách hợp đồng”.<br />2. Hệ thống hiển thị danh sách hợp đồng. |
+| **Luồng phụ / Ngoại lệ**  | Không có                                                                                           |
+| **Kết quả**                 | Danh sách hợp đồng được hiển thị.                                                           |
+
+### 6.3. Gia hạn hợp đồng
+
+| **Mục**                      | **Nội dung**                                                                                                                             |
+| ----------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Tên Use Case**             | Gia hạn hợp đồng                                                                                                                            |
+| **Mô tả**                   | Gia hạn thời gian thuê của hợp đồng.                                                                                                     |
+| **Actor chính**              | Chủ trọ, Nhân viên                                                                                                                          |
+| **Actor phụ**                | Hệ thống                                                                                                                                      |
+| **Điều kiện tiên quyết** | Hợp đồng còn hiệu lực.                                                                                                                    |
+| **Luồng chính**             | 1. Actor chọn hợp đồng cần gia hạn.<br />2. Nhập ngày kết thúc mới.<br />3. Hệ thống kiểm tra dữ liệu.<br />4. Lưu thay đổi. |
+| **Luồng phụ / Ngoại lệ**  | 3a. Hợp đồng đã hết hạn → Không cho phép gia hạn.                                                                                    |
+| **Kết quả**                 | Hợp đồng được gia hạn thành công.                                                                                                      |
+
+### 6.4. Kết thúc hợp đồng
+
+| **Mục**                      | **Nội dung**                                                                                                                            |
+| ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Tên Use Case**             | Kết thúc hợp đồng                                                                                                                         |
+| **Mô tả**                   | Chấm dứt hợp đồng thuê phòng.                                                                                                           |
+| **Actor chính**              | Chủ trọ, Nhân viên                                                                                                                         |
+| **Actor phụ**                | Hệ thống                                                                                                                                     |
+| **Điều kiện tiên quyết** | Hợp đồng đang còn hiệu lực.                                                                                                             |
+| **Luồng chính**             | 1. Actor chọn hợp đồng cần kết thúc.<br />2. Xác nhận kết thúc hợp đồng.<br />3. Hệ thống cập nhật trạng thái hợp đồng. |
+| **Luồng phụ / Ngoại lệ**  | 2a. Hợp đồng không tồn tại → Thông báo lỗi.                                                                                          |
+| **Kết quả**                 | Hợp đồng được kết thúc thành công.                                                                                                   |
+
+## 7. Phân rã UC Quản lý hóa đơn và chi phí
+
+>>>>>>> 6f945d837080993615855e922f6e6d2c01145f42
 <p align="center">
   <img src="pttk_img/Quản lý hóa đơn và chi phí.jpg" alt="UC Tổng quát" width="700">
 </p>
 
+<<<<<<< HEAD
 ## UseCase Ghi chỉ số điện, nước
+=======
+### 7.1. UseCase Ghi chỉ số điện, nước
+>>>>>>> 6f945d837080993615855e922f6e6d2c01145f42
 
 | Mục                           | Nội dung                                                                                                                         |
 | ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------- |
@@ -1344,7 +1741,11 @@ Dưới đây là phân tích chi tiết các liên kết khóa ngoại (Foreign
 | **Quy tắc nghiệp vụ** | Chỉ số mới ≥ chỉ số cũ                                                                                                     |
 | **Ghi chú**             | Mỗi phòng chỉ ghi 1 lần/kỳ                                                                                                   |
 
+<<<<<<< HEAD
 ## UseCase Tạo hóa đơn
+=======
+### 7.2. UseCase Tạo hóa đơn
+>>>>>>> 6f945d837080993615855e922f6e6d2c01145f42
 
 | Mục                              | Nội dung                                                                                                                                    |
 | --------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1359,7 +1760,11 @@ Dưới đây là phân tích chi tiết các liên kết khóa ngoại (Foreign
 | **Thành phần hóa đơn** | Tiền phòng, điện, nước, dịch vụ                                                                                                      |
 | **Ghi chú**                | Hóa đơn mặc định trạng thái .*Chưa thanh toán*                                                                                   |
 
+<<<<<<< HEAD
 ## UseCase Cập nhật trạng thái thanh toán
+=======
+### 7.3. UseCase Cập nhật trạng thái thanh toán
+>>>>>>> 6f945d837080993615855e922f6e6d2c01145f42
 
 | Mục                           | Nội dung                                                   |
 | ------------------------------ | ----------------------------------------------------------- |
@@ -1373,7 +1778,11 @@ Dưới đây là phân tích chi tiết các liên kết khóa ngoại (Foreign
 | **Quy tắc nghiệp vụ** | Không sửa nội dung khi đã thanh toán                  |
 | **Ghi chú**             | Có thể dùng khi thu tiền trực tiếp                    |
 
+<<<<<<< HEAD
 ## UseCase Xem lịch sử hóa đơn
+=======
+### 7.4. UseCase Xem lịch sử hóa đơn
+>>>>>>> 6f945d837080993615855e922f6e6d2c01145f42
 
 | Mục                         | Nội dung                                                                 |
 | ---------------------------- | ------------------------------------------------------------------------- |
@@ -1385,13 +1794,22 @@ Dưới đây là phân tích chi tiết các liên kết khóa ngoại (Foreign
 | **Luồng chính**      | 1. Chọn phòng hoặc thời gian<br />2. Hệ thống hiển thị danh sách |
 | **Ghi chú**           | Chỉ đọc dữ liệu                                                      |
 
+<<<<<<< HEAD
 
 ## XEM THÔNG TIN THUÊ PHÒNG (NGƯỜI THUÊ)
+=======
+## 8. XEM THÔNG TIN THUÊ PHÒNG
+
+>>>>>>> 6f945d837080993615855e922f6e6d2c01145f42
 <p align="center">
   <img src="pttk_img/xem thông tin thuê phòng.jpg" alt="UC Tổng quát" width="700">
 </p>
 
+<<<<<<< HEAD
 ## UseCase Xem thông tin cá nhân
+=======
+### 8.1. UseCase Xem thông tin cá nhân
+>>>>>>> 6f945d837080993615855e922f6e6d2c01145f42
 
 | Mục                         | Nội dung                                            |
 | ---------------------------- | ---------------------------------------------------- |
@@ -1403,7 +1821,11 @@ Dưới đây là phân tích chi tiết các liên kết khóa ngoại (Foreign
 | **Luồng chính**      | 1. Mở trang cá nhân<br />2. Hệ thống hiển thị |
 | **Hạn chế**          | Không chỉnh sửa                                   |
 
+<<<<<<< HEAD
 ## UseCase Xem thông tin phòng đang thuê
+=======
+### 8.2. UseCase Xem thông tin phòng đang thuê
+>>>>>>> 6f945d837080993615855e922f6e6d2c01145f42
 
 | Mục                            | Nội dung                           |
 | ------------------------------- | ----------------------------------- |
@@ -1414,7 +1836,11 @@ Dưới đây là phân tích chi tiết các liên kết khóa ngoại (Foreign
 | **Hậu điều kiện**     | Không thay đổi dữ liệu         |
 | **Thông tin hiển thị** | Giá phòng, diện tích, dịch vụ |
 
+<<<<<<< HEAD
 ## UseCase Xem hợp đồng thuê
+=======
+### 8.3. UseCase Xem hợp đồng thuê
+>>>>>>> 6f945d837080993615855e922f6e6d2c01145f42
 
 | Mục                         | Nội dung                   |
 | ---------------------------- | --------------------------- |
@@ -1425,7 +1851,11 @@ Dưới đây là phân tích chi tiết các liên kết khóa ngoại (Foreign
 | **Hậu điều kiện**  | Không thay đổi dữ liệu |
 | **Hạn chế**          | Chỉ đọc                  |
 
+<<<<<<< HEAD
 ## UseCase Xem hóa đơn & trạng thái thanh toán
+=======
+### 8.4. UseCase Xem hóa đơn & trạng thái thanh toán
+>>>>>>> 6f945d837080993615855e922f6e6d2c01145f42
 
 | Mục                         | Nội dung                                     |
 | ---------------------------- | --------------------------------------------- |
@@ -1436,5 +1866,8 @@ Dưới đây là phân tích chi tiết các liên kết khóa ngoại (Foreign
 | **Hậu điều kiện**  | Không thay đổi dữ liệu                   |
 | **Luồng chính**      | 1. Chọn kỳ hóa đơn<br />2. Xem chi tiết |
 | **Hạn chế**          | Không thanh toán online                     |
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 6f945d837080993615855e922f6e6d2c01145f42
