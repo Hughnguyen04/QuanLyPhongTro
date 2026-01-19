@@ -1229,7 +1229,7 @@ Dưới đây là phân tích chi tiết các liên kết khóa ngoại (Foreign
 ## UC-04: QUẢN LÝ NGƯỜI THUÊ
 
 <p align="center">
-  <img src="pttk_img/Quản lý người thuê.jpg" alt="Sơ đồ CSDL" width="700">
+  <img src="pttk_img/Quản lý tài khoản.jpg" alt="Sơ đồ CSDL" width="700">
 </p>
 
 ### UC-04.1: Thêm người thuê
@@ -1287,7 +1287,7 @@ Dưới đây là phân tích chi tiết các liên kết khóa ngoại (Foreign
 ## UC-05: QUẢN LÝ HỢP ĐỒNG THUÊ
 
 <p align="center">
-  <img src="pttk_img/Quản lý hợp đồng thuê.jpg" alt="Sơ đồ CSDL" width="700">
+  <img src="pttk_img/Quản lý tài khoản.jpg" alt="Sơ đồ CSDL" width="700">
 </p>
 
 ### 🔸 UC-05.1: Lập hợp đồng thuê
