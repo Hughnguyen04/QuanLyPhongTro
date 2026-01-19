@@ -169,11 +169,7 @@ Chức năng Quản lý phòng & người thuê bao gồm:
 
 Hệ thống quản lý hợp đồng và hóa đơn được thiết kế phục vụ ba nhóm tác nhân với vai trò, quyền hạn và mức độ can thiệp khác nhau nhằm đảm bảo tính  chặt chẽ về pháp lý , chính xác về tài chính và  an toàn dữ liệu .
 
-<<<<<<< HEAD
-### a. Chủ trọ (Admin – Quản trị viên)
-=======
 #### a. Chủ trọ (Admin – Quản trị viên)
->>>>>>> 6f945d837080993615855e922f6e6d2c01145f42
 
 * Là người sở hữu và chịu trách nhiệm cao nhất đối với toàn bộ hệ thống.
 * Có quyền giám sát, cấu hình và kiểm soát toàn bộ dữ liệu liên quan đến hợp đồng và hóa đơn.
@@ -186,11 +182,7 @@ Quyền hạn:
 * Thiết lập và điều chỉnh các đơn giá chung (điện, nước, dịch vụ)
 * Kiểm soát và xử lý các trường hợp đặc biệt (gia hạn, thanh lý, phạt cọc)
 
-<<<<<<< HEAD
-### b. Quản lý dãy trọ (Staff – Nhân viên)
-=======
 #### b. Quản lý dãy trọ (Staff – Nhân viên)
->>>>>>> 6f945d837080993615855e922f6e6d2c01145f42
 
 * Là người trực tiếp vận hành hệ thống tại từng khu vực/dãy trọ.
 * Thực hiện các nghiệp vụ phát sinh hàng ngày liên quan đến hợp đồng và hóa đơn.
@@ -208,11 +200,7 @@ Quyền hạn:
 * Không được xem báo cáo doanh thu của các dãy trọ khác
 * Không được thay đổi các đơn giá chung do Chủ trọ thiết lập
 
-<<<<<<< HEAD
-### c. Người thuê (Customer – Khách hàng)
-=======
 #### c. Người thuê (Customer – Khách hàng)
->>>>>>> 6f945d837080993615855e922f6e6d2c01145f42
 
 * Là người thuê phòng trọ và sử dụng các dịch vụ đi kèm.
 * Có tài khoản đăng nhập để theo dõi thông tin liên quan đến việc thuê phòng.
@@ -235,19 +223,11 @@ Quyền hạn:
 
 Chức năng Quản lý Hợp đồng đóng vai trò  xương sống của hệ thống , là cơ sở pháp lý để xác định quyền và nghĩa vụ của người thuê, đồng thời là căn cứ để tính toán các khoản chi phí phát sinh.
 
-<<<<<<< HEAD
-### a. Quy trình vòng đời hợp đồng (Contract Lifecycle)
-
-Một hợp đồng thuê phòng trong hệ thống sẽ trải qua 4 giai đoạn trạng thái như sau:
-
-#### Giai đoạn 1: Khởi tạo hợp đồng (Creation)
-=======
 #### a. Quy trình vòng đời hợp đồng (Contract Lifecycle)
 
 Một hợp đồng thuê phòng trong hệ thống sẽ trải qua 4 giai đoạn trạng thái như sau:
 
 **Giai đoạn 1: Khởi tạo hợp đồng (Creation)**
->>>>>>> 6f945d837080993615855e922f6e6d2c01145f42
 
 * Nhân viên lựa chọn phòng có trạng thái Trống
 * Nhập đầy đủ thông tin:
@@ -263,11 +243,7 @@ Một hợp đồng thuê phòng trong hệ thống sẽ trải qua 4 giai đo�
   * Trạng thái hợp đồng: Đang hiệu lực
   * Trạng thái phòng: Đang thuê
 
-<<<<<<< HEAD
-#### Giai đoạn 2: Duy trì hợp đồng (Active)
-=======
 **Giai đoạn 2: Duy trì hợp đồng (Active)**
->>>>>>> 6f945d837080993615855e922f6e6d2c01145f42
 
 * Trong suốt thời gian thuê, hợp đồng được sử dụng làm:
   * Căn cứ truy xuất giá phòng
@@ -277,11 +253,7 @@ Một hợp đồng thuê phòng trong hệ thống sẽ trải qua 4 giai đo�
   * Không thay đổi theo biến động thị trường
   * Chỉ được điều chỉnh nếu có gia hạn hoặc phụ lục hợp đồng
 
-<<<<<<< HEAD
-#### Giai đoạn 3: Gia hạn hợp đồng (Extension)
-=======
 **Giai đoạn 3: Gia hạn hợp đồng (Extension)**
->>>>>>> 6f945d837080993615855e922f6e6d2c01145f42
 
 * Khi hợp đồng sắp hết hạn, nếu người thuê tiếp tục ở:
   * Nhân viên thực hiện chức năng **Gia hạn hợp đồng**
@@ -290,11 +262,7 @@ Một hợp đồng thuê phòng trong hệ thống sẽ trải qua 4 giai đo�
   * Điều chỉnh lại giá thuê (nếu có thỏa thuận)
 * Trạng thái hợp đồng vẫn là **Đang hiệu lực**
 
-<<<<<<< HEAD
-#### Giai đoạn 4: Thanh lý hợp đồng (Termination)
-=======
 **Giai đoạn 4: Thanh lý hợp đồng (Termination)**
->>>>>>> 6f945d837080993615855e922f6e6d2c01145f42
 
 * Xảy ra khi:
   * Hợp đồng hết hạn
@@ -306,11 +274,7 @@ Một hợp đồng thuê phòng trong hệ thống sẽ trải qua 4 giai đo�
   * Trạng thái hợp đồng: **Đã kết thúc**
   * Trạng thái phòng: **Trống**
 
-<<<<<<< HEAD
-### b. Các quy tắc nghiệp vụ quan trọng
-=======
 #### b. Các quy tắc nghiệp vụ quan trọng
->>>>>>> 6f945d837080993615855e922f6e6d2c01145f42
 
 **Quy tắc tiền cọc**
 
@@ -328,15 +292,6 @@ Một hợp đồng thuê phòng trong hệ thống sẽ trải qua 4 giai đo�
     * Phạt cọc
     * Hoặc hoàn cọc theo thỏa thuận thực tế
 
-<<<<<<< HEAD
-## 3. PHÂN TÍCH NGHIỆP VỤ QUẢN LÝ HÓA ĐƠN
-
-Chức năng Quản lý Hóa đơn đảm bảo việc  tính toán chính xác , minh bạch chi phí và  theo dõi doanh thu .
-
-### a. Quy trình lập hóa đơn hàng tháng
-
-#### Bước 1: Chốt chỉ số
-=======
 ### 3. PHÂN TÍCH NGHIỆP VỤ QUẢN LÝ HÓA ĐƠN
 
 Chức năng Quản lý Hóa đơn đảm bảo việc  tính toán chính xác , minh bạch chi phí và  theo dõi doanh thu .
@@ -344,7 +299,6 @@ Chức năng Quản lý Hóa đơn đảm bảo việc  tính toán chính xác 
 #### a. Quy trình lập hóa đơn hàng tháng
 
 **Bước 1: Chốt chỉ số**
->>>>>>> 6f945d837080993615855e922f6e6d2c01145f42
 
 * Vào ngày quy định, nhân viên nhập:
   * Chỉ số điện mới
@@ -352,11 +306,7 @@ Chức năng Quản lý Hóa đơn đảm bảo việc  tính toán chính xác 
 * Hệ thống kiểm tra:
   * Chỉ số mới ≥ chỉ số cũ
 
-<<<<<<< HEAD
-#### Bước 2: Tính toán chi phí
-=======
 **Bước 2: Tính toán chi phí**
->>>>>>> 6f945d837080993615855e922f6e6d2c01145f42
 
 Hệ thống tự động tính toán theo công thức:
 
@@ -365,22 +315,14 @@ Hệ thống tự động tính toán theo công thức:
 * Tiền phòng = Lấy từ hợp đồng đang hiệu lực
 * Tổng tiền = Tiền phòng + Tiền điện + Tiền nước + Dịch vụ khác
 
-<<<<<<< HEAD
-#### Bước 3: Phát hành hóa đơn
-=======
 **Bước 3: Phát hành hóa đơn**
->>>>>>> 6f945d837080993615855e922f6e6d2c01145f42
 
 * Hóa đơn được tạo với trạng thái Chưa thu
 * Hóa đơn được lưu vào hệ thống để:
   * Nhân viên theo dõi
   * Người thuê tra cứu
 
-<<<<<<< HEAD
-### b. Các ràng buộc dữ liệu
-=======
 #### b. Các ràng buộc dữ liệu
->>>>>>> 6f945d837080993615855e922f6e6d2c01145f42
 
 * Mỗi hợp đồng chỉ được phát sinh tối đa 01 hóa đơn tiền phòng trong một tháng
 * Không cho phép lập hóa đơn khi:
@@ -1381,11 +1323,6 @@ Dưới đây là phân tích chi tiết các liên kết khóa ngoại (Foreign
   * Cài đặt template thông báo
   * Cấu hình thông tin thông tin liên hệ của nhà trọ
 
-<<<<<<< HEAD
-# buổi 3: 16/1/2026
-
-#### Quản lý hóa đơn và chi phí
-=======
 # BUỔI 3 (16/01/2026)
 
 ## 1. Phân rã UC Đăng nhập
@@ -1718,16 +1655,11 @@ Dưới đây là phân tích chi tiết các liên kết khóa ngoại (Foreign
 
 ## 7. Phân rã UC Quản lý hóa đơn và chi phí
 
->>>>>>> 6f945d837080993615855e922f6e6d2c01145f42
 <p align="center">
   <img src="pttk_img/Quản lý hóa đơn và chi phí.jpg" alt="UC Tổng quát" width="700">
 </p>
 
-<<<<<<< HEAD
-## UseCase Ghi chỉ số điện, nước
-=======
 ### 7.1. UseCase Ghi chỉ số điện, nước
->>>>>>> 6f945d837080993615855e922f6e6d2c01145f42
 
 | Mục                           | Nội dung                                                                                                                         |
 | ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------- |
@@ -1741,11 +1673,7 @@ Dưới đây là phân tích chi tiết các liên kết khóa ngoại (Foreign
 | **Quy tắc nghiệp vụ** | Chỉ số mới ≥ chỉ số cũ                                                                                                     |
 | **Ghi chú**             | Mỗi phòng chỉ ghi 1 lần/kỳ                                                                                                   |
 
-<<<<<<< HEAD
-## UseCase Tạo hóa đơn
-=======
 ### 7.2. UseCase Tạo hóa đơn
->>>>>>> 6f945d837080993615855e922f6e6d2c01145f42
 
 | Mục                              | Nội dung                                                                                                                                    |
 | --------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1760,11 +1688,7 @@ Dưới đây là phân tích chi tiết các liên kết khóa ngoại (Foreign
 | **Thành phần hóa đơn** | Tiền phòng, điện, nước, dịch vụ                                                                                                      |
 | **Ghi chú**                | Hóa đơn mặc định trạng thái .*Chưa thanh toán*                                                                                   |
 
-<<<<<<< HEAD
-## UseCase Cập nhật trạng thái thanh toán
-=======
 ### 7.3. UseCase Cập nhật trạng thái thanh toán
->>>>>>> 6f945d837080993615855e922f6e6d2c01145f42
 
 | Mục                           | Nội dung                                                   |
 | ------------------------------ | ----------------------------------------------------------- |
@@ -1778,11 +1702,7 @@ Dưới đây là phân tích chi tiết các liên kết khóa ngoại (Foreign
 | **Quy tắc nghiệp vụ** | Không sửa nội dung khi đã thanh toán                  |
 | **Ghi chú**             | Có thể dùng khi thu tiền trực tiếp                    |
 
-<<<<<<< HEAD
-## UseCase Xem lịch sử hóa đơn
-=======
 ### 7.4. UseCase Xem lịch sử hóa đơn
->>>>>>> 6f945d837080993615855e922f6e6d2c01145f42
 
 | Mục                         | Nội dung                                                                 |
 | ---------------------------- | ------------------------------------------------------------------------- |
@@ -1794,22 +1714,13 @@ Dưới đây là phân tích chi tiết các liên kết khóa ngoại (Foreign
 | **Luồng chính**      | 1. Chọn phòng hoặc thời gian<br />2. Hệ thống hiển thị danh sách |
 | **Ghi chú**           | Chỉ đọc dữ liệu                                                      |
 
-<<<<<<< HEAD
-
-## XEM THÔNG TIN THUÊ PHÒNG (NGƯỜI THUÊ)
-=======
 ## 8. XEM THÔNG TIN THUÊ PHÒNG
 
->>>>>>> 6f945d837080993615855e922f6e6d2c01145f42
 <p align="center">
   <img src="pttk_img/xem thông tin thuê phòng.jpg" alt="UC Tổng quát" width="700">
 </p>
 
-<<<<<<< HEAD
-## UseCase Xem thông tin cá nhân
-=======
 ### 8.1. UseCase Xem thông tin cá nhân
->>>>>>> 6f945d837080993615855e922f6e6d2c01145f42
 
 | Mục                         | Nội dung                                            |
 | ---------------------------- | ---------------------------------------------------- |
@@ -1821,11 +1732,7 @@ Dưới đây là phân tích chi tiết các liên kết khóa ngoại (Foreign
 | **Luồng chính**      | 1. Mở trang cá nhân<br />2. Hệ thống hiển thị |
 | **Hạn chế**          | Không chỉnh sửa                                   |
 
-<<<<<<< HEAD
-## UseCase Xem thông tin phòng đang thuê
-=======
 ### 8.2. UseCase Xem thông tin phòng đang thuê
->>>>>>> 6f945d837080993615855e922f6e6d2c01145f42
 
 | Mục                            | Nội dung                           |
 | ------------------------------- | ----------------------------------- |
@@ -1836,11 +1743,7 @@ Dưới đây là phân tích chi tiết các liên kết khóa ngoại (Foreign
 | **Hậu điều kiện**     | Không thay đổi dữ liệu         |
 | **Thông tin hiển thị** | Giá phòng, diện tích, dịch vụ |
 
-<<<<<<< HEAD
-## UseCase Xem hợp đồng thuê
-=======
 ### 8.3. UseCase Xem hợp đồng thuê
->>>>>>> 6f945d837080993615855e922f6e6d2c01145f42
 
 | Mục                         | Nội dung                   |
 | ---------------------------- | --------------------------- |
@@ -1851,11 +1754,7 @@ Dưới đây là phân tích chi tiết các liên kết khóa ngoại (Foreign
 | **Hậu điều kiện**  | Không thay đổi dữ liệu |
 | **Hạn chế**          | Chỉ đọc                  |
 
-<<<<<<< HEAD
-## UseCase Xem hóa đơn & trạng thái thanh toán
-=======
 ### 8.4. UseCase Xem hóa đơn & trạng thái thanh toán
->>>>>>> 6f945d837080993615855e922f6e6d2c01145f42
 
 | Mục                         | Nội dung                                     |
 | ---------------------------- | --------------------------------------------- |
@@ -1866,8 +1765,29 @@ Dưới đây là phân tích chi tiết các liên kết khóa ngoại (Foreign
 | **Hậu điều kiện**  | Không thay đổi dữ liệu                   |
 | **Luồng chính**      | 1. Chọn kỳ hóa đơn<br />2. Xem chi tiết |
 | **Hạn chế**          | Không thanh toán online                     |
-<<<<<<< HEAD
 
+# Buổi 4 : vẽ biểu đồ tuần tự và hoạt động (19/01/2026)
 
-=======
->>>>>>> 6f945d837080993615855e922f6e6d2c01145f42
+## 1.Biểu đồ tuần tự 
+
+### 1.1 Ghi chỉ số điện nước
+<p align="center">
+  <img src="img_huy/ghi chỉ số điện nước SQ.jpg" alt="UC Tổng quát" width="700">
+</p>
+
+### 1.2 Tạo hóa đơn
+<p align="center">
+  <img src="img_huy/tạo hóa đơn SQ.jpg" alt="UC Tổng quát" width="700">
+</p>
+
+## 2.Biểu đồ hoạt động
+
+### 2.1 Ghi chỉ số điện nước
+<p align="center">
+  <img src="pttk_img/xem thông tin thuê phòng.jpg" alt="UC Tổng quát" width="700">
+</p>
+
+### 2.2 Tạo hóa đơn
+<p align="center">
+  <img src="pttk_img/xem thông tin thuê phòng.jpg" alt="UC Tổng quát" width="700">
+</p>
