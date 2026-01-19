@@ -1772,22 +1772,22 @@ Dưới đây là phân tích chi tiết các liên kết khóa ngoại (Foreign
 
 ### 1.1 Ghi chỉ số điện nước
 <p align="center">
-  <img src="img_huy/ghi chỉ số điện nước SQ.jpg" alt="UC Tổng quát" width="700">
+  <img src="pttk_img/ghi chỉ số điện nước SQ.jpg" alt="UC Tổng quát" width="700">
 </p>
 
 ### 1.2 Tạo hóa đơn
 <p align="center">
-  <img src="img_huy/tạo hóa đơn SQ.jpg" alt="UC Tổng quát" width="700">
+  <img src="pttk_img/tạo hóa đơn SQ.jpg" alt="UC Tổng quát" width="700">
 </p>
 
 ## 2.Biểu đồ hoạt động
 
 ### 2.1 Ghi chỉ số điện nước
 <p align="center">
-  <img src="pttk_img/xem thông tin thuê phòng.jpg" alt="UC Tổng quát" width="700">
+  <img src="pttk_img/ghi chỉ số điện nước ACT.jpg" alt="UC Tổng quát" width="700">
 </p>
 
 ### 2.2 Tạo hóa đơn
 <p align="center">
-  <img src="pttk_img/xem thông tin thuê phòng.jpg" alt="UC Tổng quát" width="700">
+  <img src="pttk_img/tạo hóa đơn ACT.jpg" alt="UC Tổng quát" width="700">
 </p>
