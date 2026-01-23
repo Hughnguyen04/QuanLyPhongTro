@@ -1777,21 +1777,96 @@ Dưới đây là phân tích chi tiết các liên kết khóa ngoại (Foreign
 | **Luồng chính**      | 1. Chọn kỳ hóa đơn<br />2. Xem chi tiết |
 | **Hạn chế**          | Không thanh toán online                     |
 
-# BUỔI 4 (19/1/2026)
+# BUỔI 4 (19/1/2026) + BUỔI 5 (23/01/202)
 
-## 3. Biểu đồ hoạt động Quản lý tài khoản
+## 3. Biểu đồ tuần tự
+### 3.1  Xem danh sách tài khoản
+<p align="center">
+  <img src="pttk_img/Xem danh sách tài khoản.jpg" alt="Sequence" width="700">
+</p>
 
-### 3.1 Xem danh sách tài khoản
-![  ](pttk_img/Xem%20danh%20sách%20tài%20khoản.jpg)
-### 3.2 Tạo tài khoản nhân viên
-![](pttk_img/Tạo%20tài%20khoản%20nhân%20viên%20.jpg)
+### 3.2 tạo tài khoản nhân viên
+<p align="center">
+  <img src="pttk_img/Tạo tài khoản nhân viên.jpg" alt="Sequence" width="700">
+</p>
+
 ### 3.3 Tạo tài khoản người thuê
-![](pttk_img/Tạo%20tài%20khoản%20người%20thuê.jpg)
+<p align="center">
+  <img src="pttk_img/Tạo tài khoản người thuê.jpg.jpg" alt="Sequence" width="700">
+</p>
+
 ### 3.4 Cập nhật thông tin tài khoản
-![](pttk_img/Cập%20nhật%20thông%20tin%20tài%20khoản.jpg)
-### 3.5 Khóa /Mở tài khoản
-![](pttk_img/Khóa%20_Mở%20tài%20khoản.jpg)
-### 3.6 Thêm phòng trọ
-![](pttk_img/Thêm%20phòng%20trọ.jpg)
-### 3.7 Cập nhật thông tin phòng
-![](pttk_img/Cập%20nhật%20thôn%20tin%20phòng.jpg)
+<p align="center">
+  <img src="pttk_img/Cập nhật thông tin tài khoản.jpg" alt="Sequence" width="700">
+</p>
+
+### 3.5 Khóa /Mở khóa tài khoản
+<p align="center">
+  <img src="pttk_img/Khóa _Mở khóa tài khoản.jpg" alt="Sequence" width="700">
+</p>
+
+### 3.6 Thêm phòng trọ 
+<p align="center">
+  <img src="pttk_img/Thêm phòng trọ.jpg" alt="Sequence" width="700">
+</p>
+
+### 3.7 Xóa phòng trọ
+<p align="center">
+  <img src="pttk_img/Xóa phòng.jpg" alt="Sequence" width="700">
+</p>
+
+### 3.8 Cập nhật thông tin phòng
+<p align="center">
+  <img src="pttk_img/Cập nhật thông tin phòng.jpg" alt="Sequence" width="700">
+</p> 
+
+## 4. Biểu đồ hoạt động
+
+### 4.1 Xem danh sách tài khoản
+
+<p align="center">
+  <img src="pttk_img/A_Xem danh sách tài khoản.jpg" alt="Activity" width="700">
+</p>
+
+
+### 4.2 Tạo tài khoản nhân viên
+
+<p align="center">
+  <img src="pttk_img/A_Tạo tài khoản nhân viên.jpg" alt="Activity" width="700">
+</p>
+
+### 34.3 Tạo tài khoản người thuê
+
+<p align="center">
+  <img src="pttk_img/A_Tạo tài khoản người thuê.jpg" alt="Activity" width="700">
+</p>
+
+### 4.4 Cập nhật thông tin tài khoản
+
+<p align="center">
+  <img src="pttk_img/A_Cập nhật thông tin tài khoản.jpg" alt="Activity" width="700">
+</p>
+
+### 4.5 Khóa /Mở tài khoản
+
+<p align="center">
+  <img src="pttk_img/A_Khóa _Mở tài khoản.jpg" alt="Activity" width="700">
+</p>
+
+### 4.6 Thêm phòng trọ
+
+<p align="center">
+  <img src="pttk_img/A_Thêm phòng trọ.jpg" alt="Activity" width="700">
+</p>
+
+### 4.7 Xóa phòng trọ
+<p align="center">
+  <img src="pttk_img/A_Xóa phòng.jpg" alt="Activity" width="700">
+</p>
+
+### 4.8 Cập nhật thông tin phòng
+
+<p align="center">
+  <img src="pttk_img/A_Cập nhật thôn tin phòng.jpg" alt="Activity" width="700">
+</p>
+ 
