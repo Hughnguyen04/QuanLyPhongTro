@@ -1813,6 +1813,69 @@ Dưới đây là phân tích chi tiết các liên kết khóa ngoại (Foreign
   <img src="pttk_img/Kết thúc thuê_ngừng thuê.jpg" alt="UC Tổng quát" width="700">
 </p>
 
-1.5.
+### 1.5.Lập hợp đồng thuê
+
+<p align="center">
+  <img src="pttk_img/Lập hợp đồng thuê.jpg" alt="UC Tổng quát" width="700">
+</p>
+
+### 1.6.Xem danh sách hợp đồng
+
+<p align="center">
+  <img src="pttk_img/Xem danh sách hợp đồng.jpg" alt="UC Tổng quát" width="700">
+</p>
+
+### 1.7.Gia hạn hợp đồng
+
+<p align="center">
+  <img src="pttk_img/Gia hạn hợp đồng.jpg" alt="UC Tổng quát" width="700">
+</p>
+
+### 1.8.Kết thúc hợp đồng
+
+<p align="center">
+  <img src="pttk_img/Kết thúc hợp đồng.jpg" alt="UC Tổng quát" width="700">
+</p>
 
 ## 2.Biểu đồ hoạt động
+
+### 1.1.Thêm người thuê
+
+<p align="center">
+  <img src="pttk_img/Thêm người thuê1 (2).jpg" alt="UC Tổng quát" width="700">
+</p>
+
+### 1.2.Cập nhật thông tin người thuê
+<p align="center">
+  <img src="pttk_img/cập nhật thông tin người thuê 1.jpg" alt="UC Tổng quát" width="700">
+</p>
+
+### 1.3.Gán người thuê vào phòng
+<p align="center">
+  <img src="pttk_img/Gán người thuê vào phòng 1.jpg" alt="UC Tổng quát" width="700">
+</p>
+
+### 1.4.Kết thúc thuê/ngừng thuê
+<p align="center">
+  <img src="pttk_img/kết thúc thuê_ngừng thuê 1.jpg" alt="UC Tổng quát" width="700">
+</p>
+
+### 1.5.Lập hợp đồng thuê
+<p align="center">
+  <img src="pttk_img/Lập hợp đồng thuê 1.jpg" alt="UC Tổng quát" width="700">
+</p>
+
+### 1.6.Xem danh sách sách hợp đồng
+<p align="center">
+  <img src="pttk_img/Xem danh sách hợp đồng 1.jpg" alt="UC Tổng quát" width="700">
+</p>
+
+### 1.7.Gia hạn hợp đồng
+<p align="center">
+  <img src="pttk_img/Gia hạn hợp đồng 1.jpg" alt="UC Tổng quát" width="700">
+</p>
+
+### 1.8.Kết thúc hợp đồng
+<p align="center">
+  <img src="pttk_img/Kết thúc hợp đông 1.jpg" alt="UC Tổng quát" width="700">
+</p>
