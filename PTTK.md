@@ -1780,6 +1780,35 @@ Dưới đây là phân tích chi tiết các liên kết khóa ngoại (Foreign
   <img src="pttk_img/tạo hóa đơn SQ.jpg" alt="UC Tổng quát" width="700">
 </p>
 
+### 1.3 Xem thông lịch sử hóa đơn
+<p align="center">
+  <img src="pttk_img/23.1 huy/xem lịch sử hóa đơn SQ.jpg" alt="UC Tổng quát" width="700">
+</p>
+
+### 1.4 Cập nhật trạng thái thanh toán
+<p align="center">
+  <img src="pttk_img/23.1 huy/cập nhật trạng thái thanh toán SQ.jpg" alt="UC Tổng quát" width="700">
+</p>
+
+### 1.5 Xem thông tin cá nhân
+<p align="center">
+  <img src="pttk_img/23.1 huy/xem thông tin cá nhân SQ.jpg" alt="UC Tổng quát" width="700">
+</p>
+
+### 1.6 Xem thông tin phòng đang thuê
+<p align="center">
+  <img src="pttk_img/23.1 huy/xem thông tin phòng đang thuê SQ.jpg" alt="UC Tổng quát" width="700">
+</p>
+
+### 1.7 Xem hợp đồng thuê
+<p align="center">
+  <img src="pttk_img/23.1 huy/xem hợp đồng thuê SQ.jpg" alt="UC Tổng quát" width="700">
+</p>
+
+### 1.8 Xem hóa đơn & trạng thái thanh toán
+<p align="center">
+  <img src="pttk_img/23.1 huy/xem hóa đơn & trạng thái thanh toán SQ.jpg" alt="UC Tổng quát" width="700">
+</p>
 ## 2.Biểu đồ hoạt động
 
 ### 2.1 Ghi chỉ số điện nước
@@ -1791,3 +1820,34 @@ Dưới đây là phân tích chi tiết các liên kết khóa ngoại (Foreign
 <p align="center">
   <img src="pttk_img/tạo hóa đơn ACT.jpg" alt="UC Tổng quát" width="700">
 </p>
+
+### 2.3 Xem lịch sử hóa đơn
+<p align="center">
+  <img src="pttk_img/23.1 huy/xem lịch sử hóa đơn ACT.jpg" alt="UC Tổng quát" width="700">
+</p>
+
+### 2.4 cập nhật trạng thái thanh toán
+<p align="center">
+  <img src="pttk_img/23.1 huy/cập nhật trạng thái thanh toán ACT.jpg" alt="UC Tổng quát" width="700">
+</p>
+
+### 2.5 xem thông tin cá nhân
+<p align="center">
+  <img src="pttk_img/23.1 huy/xem thông tin người thuê ACT.jpg" alt="UC Tổng quát" width="700">
+</p>
+
+### 2.6 xem thông tin phòng đang thuê
+<p align="center">
+  <img src="pttk_img/23.1 huy/xem thông tin phòng đang thuê ACT.jpg" alt="UC Tổng quát" width="700">
+</p>
+
+### 2.7 xem hợp đồng thuê
+<p align="center">
+  <img src="pttk_img/23.1 huy/xem hợp đồng thuê ACT.jpg" alt="UC Tổng quát" width="700">
+</p>
+
+### 2.8 xem hóa đơn & trạng thái thanh toán
+<p align="center">
+  <img src="pttk_img/23.1 huy/Xem hóa đơn & trạng thái thanh toán ACT .jpg" alt="UC Tổng quát" width="700">
+</p>
+
