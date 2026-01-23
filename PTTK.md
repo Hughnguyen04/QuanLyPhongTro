@@ -1766,10 +1766,85 @@ Dưới đây là phân tích chi tiết các liên kết khóa ngoại (Foreign
 | **Luồng chính**      | 1. Chọn kỳ hóa đơn<br />2. Xem chi tiết |
 | **Hạn chế**          | Không thanh toán online                     |
 
-Buổi 4 (19/01/2026)
-Biểu đồ tuần tự Đăng nhập
+# Buổi 4 + 5 (19/01/2026 + 23/01/2026)
+
+## 1. Biểu đồ tuần tự
+
+### Biểu đồ tuần tự Đăng nhập
 
 <p align="center">
   <img src="pttk_img/SQ Đăng nhập.jpg
   " alt"SQ Đăng nhập" width="700">
+</p>
+
+### Biểu đồ tuần tự Gửi thông báo
+
+<p align="center">
+  <img src="pttk_img/SQ Gửi thông báo.jpg
+  " alt"SQ Gửi thông báo" width="700">
+</p>
+
+### Biểu đồ tuần tự Tạo thông báo
+
+<p align="center">
+  <img src="pttk_img/SQ Tạo thông báo.jpg
+  " alt"SQ Tạo thông báo" width="700">
+</p>
+
+### Biểu đồ tuần tự Xem danh sách thông báo
+
+<p align="center">
+  <img src="pttk_img/SQ Xem danh sách thông báo.jpg
+  " alt"SQ Xem danh sách thông báo" width="700">
+</p>
+
+### Biểu đồ tuần tự Đánh dấu đã đọc (Cách 1)
+
+<p align="center">
+  <img src="pttk_img/SQ Đánh dấu đã đọc (Cách 1).jpg
+  " alt"SQ Đánh dấu đã đọc (Cách 1)" width="700">
+</p>
+
+### Biểu đồ tuần tự Đánh dấu đã đọc (Cách 1)
+
+<p align="center">
+  <img src="pttk_img/SQ Đánh dấu đã đọc (Cách 2).jpg
+  " alt"SQ Đánh dấu đã đọc (Cách 2)" width="700">
+</p>
+
+## 2. Biểu đồ hoạt động
+
+### Biểu đồ hoạt động Đăng nhập
+
+<p align="center">
+  <img src="pttk_img/ACT Đăng nhập.jpg
+  " alt"ACT Đăng nhập" width="700">
+</p>
+
+### Biểu đồ hoạt động Gửi thông báo
+
+<p align="center">
+  <img src="pttk_img/ACT Gửi thông báo.jpg
+  " alt"ACT Gửi thông báo" width="700">
+</p>
+
+### Biểu đồ hoạt động Tạo thông báo
+
+<p align="center">
+  <img src="pttk_img/ACT Tạo thông báo.jpg
+  " alt"ACT Tạo thông báo" width="700">
+</p>
+
+### Biểu đồ hoạt động Xem danh sách thông báo
+
+<p align="center">
+  <img src="pttk_img/ACT Xem danh sách thông báo.jpg
+  " alt"ACT Xem danh sách thông báo" width="700">
+</p>
+
+### Biểu đồ hoạt động Đánh dấu đã đọc
+
+<p align="center">
+  <img src="pttk_img/ACT Đánh dấu đã đọc.jpg
+  " alt"ACT Đánh dấu đã đọc" width="700">
 </p>
