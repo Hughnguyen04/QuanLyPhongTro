@@ -1766,9 +1766,9 @@ Dưới đây là phân tích chi tiết các liên kết khóa ngoại (Foreign
 | **Luồng chính**      | 1. Chọn kỳ hóa đơn<br />2. Xem chi tiết |
 | **Hạn chế**          | Không thanh toán online                     |
 
-
 Buổi 4 (19/01/2026)
 Biểu đồ tuần tự Đăng nhập
+
 <p align="center">
   <img src="pttk_img/SQ Đăng nhập.jpg
   " alt"SQ Đăng nhập" width="700">
