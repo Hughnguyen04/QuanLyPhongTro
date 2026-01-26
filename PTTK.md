@@ -1870,10 +1870,6 @@ Dưới đây là phân tích chi tiết các liên kết khóa ngoại (Foreign
   <img src="pttk_img/A_Cập nhật thôn tin phòng.jpg" alt="Activity" width="700">
 </p>
 
-### 4.8 Cập nhật thông tin phòng
 
-<p align="center">
-  <img src="pttk_img/A_Cập nhật thôn tin phòng.jpg" alt="Activity" width="700">
-</p>
 
  
