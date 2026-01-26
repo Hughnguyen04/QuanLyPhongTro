@@ -1777,193 +1777,103 @@ Dưới đây là phân tích chi tiết các liên kết khóa ngoại (Foreign
 | **Luồng chính**      | 1. Chọn kỳ hóa đơn<br />2. Xem chi tiết |
 | **Hạn chế**          | Không thanh toán online                     |
 
-<<<<<<< HEAD
 # Buổi 4 : vẽ biểu đồ tuần tự và hoạt động (19/01/2026)
 
-## 1.Biểu đồ tuần tự 
+## 1.Biểu đồ tuần tự
 
 ### 1.1 Ghi chỉ số điện nước
+
 <p align="center">
   <img src="pttk_img/ghi chỉ số điện nước SQ.jpg" alt="UC Tổng quát" width="700">
 </p>
 
 ### 1.2 Tạo hóa đơn
+
 <p align="center">
   <img src="pttk_img/tạo hóa đơn SQ.jpg" alt="UC Tổng quát" width="700">
 </p>
 
 ### 1.3 Xem thông lịch sử hóa đơn
+
 <p align="center">
   <img src="pttk_img/23.1 huy/xem lịch sử hóa đơn SQ.jpg" alt="UC Tổng quát" width="700">
 </p>
 
 ### 1.4 Cập nhật trạng thái thanh toán
+
 <p align="center">
   <img src="pttk_img/23.1 huy/cập nhật trạng thái thanh toán SQ.jpg" alt="UC Tổng quát" width="700">
 </p>
 
 ### 1.5 Xem thông tin cá nhân
+
 <p align="center">
   <img src="pttk_img/23.1 huy/xem thông tin cá nhân SQ.jpg" alt="UC Tổng quát" width="700">
 </p>
 
 ### 1.6 Xem thông tin phòng đang thuê
+
 <p align="center">
   <img src="pttk_img/23.1 huy/xem thông tin phòng đang thuê SQ.jpg" alt="UC Tổng quát" width="700">
 </p>
 
 ### 1.7 Xem hợp đồng thuê
+
 <p align="center">
   <img src="pttk_img/23.1 huy/xem hợp đồng thuê SQ.jpg" alt="UC Tổng quát" width="700">
 </p>
 
 ### 1.8 Xem hóa đơn & trạng thái thanh toán
+
 <p align="center">
   <img src="pttk_img/23.1 huy/xem hóa đơn & trạng thái thanh toán SQ.jpg" alt="UC Tổng quát" width="700">
 </p>
 ## 2.Biểu đồ hoạt động
 
 ### 2.1 Ghi chỉ số điện nước
+
 <p align="center">
   <img src="pttk_img/ghi chỉ số điện nước ACT.jpg" alt="UC Tổng quát" width="700">
 </p>
 
 ### 2.2 Tạo hóa đơn
+
 <p align="center">
   <img src="pttk_img/tạo hóa đơn ACT.jpg" alt="UC Tổng quát" width="700">
 </p>
 
 ### 2.3 Xem lịch sử hóa đơn
+
 <p align="center">
   <img src="pttk_img/23.1 huy/xem lịch sử hóa đơn ACT.jpg" alt="UC Tổng quát" width="700">
 </p>
 
 ### 2.4 cập nhật trạng thái thanh toán
+
 <p align="center">
   <img src="pttk_img/23.1 huy/cập nhật trạng thái thanh toán ACT.jpg" alt="UC Tổng quát" width="700">
 </p>
 
 ### 2.5 xem thông tin cá nhân
+
 <p align="center">
   <img src="pttk_img/23.1 huy/xem thông tin người thuê ACT.jpg" alt="UC Tổng quát" width="700">
 </p>
 
 ### 2.6 xem thông tin phòng đang thuê
+
 <p align="center">
   <img src="pttk_img/23.1 huy/xem thông tin phòng đang thuê ACT.jpg" alt="UC Tổng quát" width="700">
 </p>
 
 ### 2.7 xem hợp đồng thuê
+
 <p align="center">
   <img src="pttk_img/23.1 huy/xem hợp đồng thuê ACT.jpg" alt="UC Tổng quát" width="700">
 </p>
 
 ### 2.8 xem hóa đơn & trạng thái thanh toán
+
 <p align="center">
   <img src="pttk_img/23.1 huy/Xem hóa đơn & trạng thái thanh toán ACT .jpg" alt="UC Tổng quát" width="700">
 </p>
-
-=======
->>>>>>> 6f945d837080993615855e922f6e6d2c01145f42
->>>>>>>
->>>>>>
->>>>>
->>>>
->>>
->>
-
-# Buổi 4: Vẽ biểu đồ tuần tự và biểu đồ hoạt động (19/1/2026)
-
-## 1.Biểu đồ tuần tự
-
-### 1.1.Thêm người thuê
-
-<p align="center">
-  <img src="pttk_img/Thêm người thuê.jpg" alt="UC Tổng quát" width="700">
-</p>
-
-### 1.2.Cập nhật thông tin người thuê
-
-<p align="center">
-  <img src="pttk_img/Cập nhật thông tin người thuê.jpg" alt="UC Tổng quát" width="700">
-</p>
-
-### 1.3.Gán người thuê vào phòng
-
-<p align="center">
-  <img src="pttk_img/Gán người thuê vào phòng.jpg" alt="UC Tổng quát" width="700">
-</p>
-
-### 1.4.Kết thúc thuê / Ngừng thuê
-
-<p align="center">
-  <img src="pttk_img/Kết thúc thuê_ngừng thuê.jpg" alt="UC Tổng quát" width="700">
-</p>
-
-### 1.5.Lập hợp đồng thuê
-
-<p align="center">
-  <img src="pttk_img/Lập hợp đồng thuê.jpg" alt="UC Tổng quát" width="700">
-</p>
-
-### 1.6.Xem danh sách hợp đồng
-
-<p align="center">
-  <img src="pttk_img/Xem danh sách hợp đồng.jpg" alt="UC Tổng quát" width="700">
-</p>
-
-### 1.7.Gia hạn hợp đồng
-
-<p align="center">
-  <img src="pttk_img/Gia hạn hợp đồng.jpg" alt="UC Tổng quát" width="700">
-</p>
-
-### 1.8.Kết thúc hợp đồng
-
-<p align="center">
-  <img src="pttk_img/Kết thúc hợp đồng.jpg" alt="UC Tổng quát" width="700">
-</p>
-
-## 2.Biểu đồ hoạt động
-
-### 1.1.Thêm người thuê
-
-<p align="center">
-  <img src="pttk_img/Thêm người thuê1 (2).jpg" alt="UC Tổng quát" width="700">
-</p>
-
-### 1.2.Cập nhật thông tin người thuê
-<p align="center">
-  <img src="pttk_img/cập nhật thông tin người thuê 1.jpg" alt="UC Tổng quát" width="700">
-</p>
-
-### 1.3.Gán người thuê vào phòng
-<p align="center">
-  <img src="pttk_img/Gán người thuê vào phòng 1.jpg" alt="UC Tổng quát" width="700">
-</p>
-
-### 1.4.Kết thúc thuê/ngừng thuê
-<p align="center">
-  <img src="pttk_img/kết thúc thuê_ngừng thuê 1.jpg" alt="UC Tổng quát" width="700">
-</p>
-
-### 1.5.Lập hợp đồng thuê
-<p align="center">
-  <img src="pttk_img/Lập hợp đồng thuê 1.jpg" alt="UC Tổng quát" width="700">
-</p>
-
-### 1.6.Xem danh sách sách hợp đồng
-<p align="center">
-  <img src="pttk_img/Xem danh sách hợp đồng 1.jpg" alt="UC Tổng quát" width="700">
-</p>
-
-### 1.7.Gia hạn hợp đồng
-<p align="center">
-  <img src="pttk_img/Gia hạn hợp đồng 1.jpg" alt="UC Tổng quát" width="700">
-</p>
-
-### 1.8.Kết thúc hợp đồng
-<p align="center">
-  <img src="pttk_img/Kết thúc hợp đông 1.jpg" alt="UC Tổng quát" width="700">
-</p>
->>>>>>> a79e011625141798d8b57b70de2209817a7d4ab9
