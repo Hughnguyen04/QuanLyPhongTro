@@ -1877,3 +1877,10 @@ Dưới đây là phân tích chi tiết các liên kết khóa ngoại (Foreign
 <p align="center">
   <img src="pttk_img/23.1 huy/Xem hóa đơn & trạng thái thanh toán ACT .jpg" alt="UC Tổng quát" width="700">
 </p>
+
+# Buổi 6 Tổng hợp báo cáo và thiết kế giao diện (26/1/2026)
+## giao diện HomePage 
+<p align="center">
+  <img src="pttk_img/23.1 huy/HomePage.jpg" alt="UC Tổng quát" width="700">
+</p>
+
