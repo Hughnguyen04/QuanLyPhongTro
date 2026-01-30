@@ -1418,6 +1418,14 @@ Dưới đây là phân tích chi tiết các liên kết khóa ngoại (Foreign
 
 ### 3.1 Xem danh sách tài khoản
 
+>>>>>>> 6f945d837080993615855e922f6e6d2c01145f42
+>>>>>>>
+>>>>>>
+>>>>>
+>>>>
+>>>
+>>
+
 | Mục                                | Nội dung                                                                                                                                                                                   |
 | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Tên Use Case**             | Xem danh sách tài khoản                                                                                                                                                                  |
@@ -1536,6 +1544,9 @@ Dưới đây là phân tích chi tiết các liên kết khóa ngoại (Foreign
 | **Luồng chính**             | 1. Chọn danh sách phòng.<br />2. Hệ thống hiển thị trạng thái. |
 | **Luồng phụ / Ngoại lệ**  | Không có                                                              |
 | **Kết quả**                 | Trạng thái phòng được hiển thị                                  |
+| <<<<<<< HEAD                        |                                                                         |
+
+=======
 
 ## 5. Phân rã UC Quản lý người thuê
 
@@ -1778,6 +1789,7 @@ Dưới đây là phân tích chi tiết các liên kết khóa ngoại (Foreign
 | **Hạn chế**          | Không thanh toán online                     |
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 # Buổi 4 : vẽ biểu đồ tuần tự và hoạt động (19/01/2026)
 
@@ -1992,3 +2004,114 @@ Dưới đây là phân tích chi tiết các liên kết khóa ngoại (Foreign
   <img src="pttk_img/Kết thúc hợp đông 1.jpg" alt="UC Tổng quát" width="700">
 </p>
 >>>>>>> a79e011625141798d8b57b70de2209817a7d4ab9
+=======
+# BUỔI 4 (19/1/2026) + BUỔI 5 (23/01/202)
+
+## 3. Biểu đồ tuần tự
+
+### 3.1  Xem danh sách tài khoản
+
+<p align="center">
+  <img src="pttk_img/Xem danh sách tài khoản.jpg" alt="Sequence" width="700">
+</p>
+
+### 3.2 tạo tài khoản nhân viên
+
+<p align="center">
+  <img src="pttk_img/Tạo tài khoản nhân viên.jpg" alt="Sequence" width="700">
+</p>
+
+### 3.3 Tạo tài khoản người thuê
+
+<p align="center">
+  <img src="pttk_img/Tạo tài khoản người thuê.jpg.jpg" alt="Sequence" width="700">
+</p>
+
+### 3.4 Cập nhật thông tin tài khoản
+
+<p align="center">
+  <img src="pttk_img/Cập nhật thông tin tài khoản.jpg" alt="Sequence" width="700">
+</p>
+
+### 3.5 Khóa /Mở khóa tài khoản
+
+<p align="center">
+  <img src="pttk_img/Khóa _Mở khóa tài khoản.jpg" alt="Sequence" width="700">
+</p>
+
+### 3.6 Thêm phòng trọ
+
+<p align="center">
+  <img src="pttk_img/Thêm phòng trọ.jpg" alt="Sequence" width="700">
+</p>
+
+### 3.7 Xóa phòng trọ
+
+<p align="center">
+  <img src="pttk_img/Xóa phòng.jpg" alt="Sequence" width="700">
+</p>
+
+### 3.8 Cập nhật thông tin phòng
+
+<p align="center">
+  <img src="pttk_img/Cập nhật thông tin phòng.jpg" alt="Sequence" width="700">
+</p>
+
+## 4. Biểu đồ hoạt động
+
+### 4.1 Xem danh sách tài khoản
+
+<p align="center">
+  <img src="pttk_img/A_Xem danh sách tài khoản.jpg" alt="Activity" width="700">
+</p>
+
+### 4.2 Tạo tài khoản nhân viên
+
+<p align="center">
+  <img src="pttk_img/A_Tạo tài khoản nhân viên.jpg" alt="Activity" width="700">
+</p>
+
+### 34.3 Tạo tài khoản người thuê
+
+<p align="center">
+  <img src="pttk_img/A_Tạo tài khoản người thuê.jpg" alt="Activity" width="700">
+</p>
+
+### 4.4 Cập nhật thông tin tài khoản
+
+<p align="center">
+  <img src="pttk_img/A_Cập nhật thông tin tài khoản.jpg" alt="Activity" width="700">
+</p>
+
+### 4.5 Khóa /Mở tài khoản
+
+<p align="center">
+  <img src="pttk_img/A_Khóa _Mở tài khoản.jpg" alt="Activity" width="700">
+</p>
+
+### 4.6 Thêm phòng trọ
+
+<p align="center">
+  <img src="pttk_img/A_Thêm phòng trọ.jpg" alt="Activity" width="700">
+</p>
+
+### 4.7 Xóa phòng trọ
+
+<p align="center">
+  <img src="pttk_img/A_Xóa phòng.jpg" alt="Activity" width="700">
+</p>
+
+### 4.8 Cập nhật thông tin phòng
+
+<p align="center">
+  <img src="pttk_img/A_Cập nhật thôn tin phòng.jpg" alt="Activity" width="700">
+</p>
+
+# BUỔI 6+7 (26/01/2026) + 30/01/2026
+
+## Giao diện login
+
+<p align="center">
+  <img src="pttk_img/login.png" alt="Giao diện" width="700">
+</p>
+>>>>>>> ea21d5e99cbb8ab07382bd68b77913cb3b248380
