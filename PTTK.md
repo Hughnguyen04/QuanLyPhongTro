@@ -1780,45 +1780,54 @@ Dưới đây là phân tích chi tiết các liên kết khóa ngoại (Foreign
 # BUỔI 4 (19/1/2026) + BUỔI 5 (23/01/202)
 
 ## 3. Biểu đồ tuần tự
+
 ### 3.1  Xem danh sách tài khoản
+
 <p align="center">
   <img src="pttk_img/Xem danh sách tài khoản.jpg" alt="Sequence" width="700">
 </p>
 
 ### 3.2 tạo tài khoản nhân viên
+
 <p align="center">
   <img src="pttk_img/Tạo tài khoản nhân viên.jpg" alt="Sequence" width="700">
 </p>
 
 ### 3.3 Tạo tài khoản người thuê
+
 <p align="center">
   <img src="pttk_img/Tạo tài khoản người thuê.jpg.jpg" alt="Sequence" width="700">
 </p>
 
 ### 3.4 Cập nhật thông tin tài khoản
+
 <p align="center">
   <img src="pttk_img/Cập nhật thông tin tài khoản.jpg" alt="Sequence" width="700">
 </p>
 
 ### 3.5 Khóa /Mở khóa tài khoản
+
 <p align="center">
   <img src="pttk_img/Khóa _Mở khóa tài khoản.jpg" alt="Sequence" width="700">
 </p>
 
-### 3.6 Thêm phòng trọ 
+### 3.6 Thêm phòng trọ
+
 <p align="center">
   <img src="pttk_img/Thêm phòng trọ.jpg" alt="Sequence" width="700">
 </p>
 
 ### 3.7 Xóa phòng trọ
+
 <p align="center">
   <img src="pttk_img/Xóa phòng.jpg" alt="Sequence" width="700">
 </p>
 
 ### 3.8 Cập nhật thông tin phòng
+
 <p align="center">
   <img src="pttk_img/Cập nhật thông tin phòng.jpg" alt="Sequence" width="700">
-</p> 
+</p>
 
 ## 4. Biểu đồ hoạt động
 
@@ -1827,7 +1836,6 @@ Dưới đây là phân tích chi tiết các liên kết khóa ngoại (Foreign
 <p align="center">
   <img src="pttk_img/A_Xem danh sách tài khoản.jpg" alt="Activity" width="700">
 </p>
-
 
 ### 4.2 Tạo tài khoản nhân viên
 
@@ -1860,6 +1868,7 @@ Dưới đây là phân tích chi tiết các liên kết khóa ngoại (Foreign
 </p>
 
 ### 4.7 Xóa phòng trọ
+
 <p align="center">
   <img src="pttk_img/A_Xóa phòng.jpg" alt="Activity" width="700">
 </p>
@@ -1870,6 +1879,10 @@ Dưới đây là phân tích chi tiết các liên kết khóa ngoại (Foreign
   <img src="pttk_img/A_Cập nhật thôn tin phòng.jpg" alt="Activity" width="700">
 </p>
 
+# BUỔI 6+7 (26/01/2026) + 30/01/2026
 
+## Giao diện login
 
- 
+<p align="center">
+  <img src="pttk_img/login.png" alt="Giao diện" width="700">
+</p>
