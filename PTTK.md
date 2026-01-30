@@ -1545,14 +1545,6 @@ Dưới đây là phân tích chi tiết các liên kết khóa ngoại (Foreign
 
 ### 5.1. Thêm người thuê
 
->>>>>>> 6f945d837080993615855e922f6e6d2c01145f42
->>>>>>>
->>>>>>
->>>>>
->>>>
->>>
->>
-
 | **Mục**                      | **Nội dung**                                                                                                                                                      |
 | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **Tên Use Case**             | Thêm người thuê                                                                                                                                                      |
@@ -1660,9 +1652,8 @@ Dưới đây là phân tích chi tiết các liên kết khóa ngoại (Foreign
 | **Luồng chính**             | 1. Actor chọn hợp đồng cần kết thúc.<br />2. Xác nhận kết thúc hợp đồng.<br />3. Hệ thống cập nhật trạng thái hợp đồng. |
 | **Luồng phụ / Ngoại lệ**  | 2a. Hợp đồng không tồn tại → Thông báo lỗi.                                                                                          |
 | **Kết quả**                 | Hợp đồng được kết thúc thành công.                                                                                                   |
-| <<<<<<< HEAD                        |                                                                                                                                                |
+                                                                                                                                                |
 
-=======
 
 ## 7. Phân rã UC Quản lý hóa đơn và chi phí
 
@@ -1777,7 +1768,88 @@ Dưới đây là phân tích chi tiết các liên kết khóa ngoại (Foreign
 | **Luồng chính**      | 1. Chọn kỳ hóa đơn<br />2. Xem chi tiết |
 | **Hạn chế**          | Không thanh toán online                     |
 
-<<<<<<< HEAD
+# Buổi 4 + 5 (19/01/2026 + 23/01/2026)
+
+## 1. Biểu đồ tuần tự
+
+### Biểu đồ tuần tự Đăng nhập
+
+<p align="center">
+  <img src="pttk_img/SQ Đăng nhập.jpg
+  " alt"SQ Đăng nhập" width="700">
+</p>
+
+### Biểu đồ tuần tự Gửi thông báo
+
+<p align="center">
+  <img src="pttk_img/SQ Gửi thông báo.jpg
+  " alt"SQ Gửi thông báo" width="700">
+</p>
+
+### Biểu đồ tuần tự Tạo thông báo
+
+<p align="center">
+  <img src="pttk_img/SQ Tạo thông báo.jpg
+  " alt"SQ Tạo thông báo" width="700">
+</p>
+
+### Biểu đồ tuần tự Xem danh sách thông báo
+
+<p align="center">
+  <img src="pttk_img/SQ Xem danh sách thông báo.jpg
+  " alt"SQ Xem danh sách thông báo" width="700">
+</p>
+
+### Biểu đồ tuần tự Đánh dấu đã đọc (Cách 1)
+
+<p align="center">
+  <img src="pttk_img/SQ Đánh dấu đã đọc (Cách 1).jpg
+  " alt"SQ Đánh dấu đã đọc (Cách 1)" width="700">
+</p>
+
+### Biểu đồ tuần tự Đánh dấu đã đọc (Cách 1)
+
+<p align="center">
+  <img src="pttk_img/SQ Đánh dấu đã đọc (Cách 2).jpg
+  " alt"SQ Đánh dấu đã đọc (Cách 2)" width="700">
+</p>
+
+## 2. Biểu đồ hoạt động
+
+### Biểu đồ hoạt động Đăng nhập
+
+<p align="center">
+  <img src="pttk_img/ACT Đăng nhập.jpg
+  " alt"ACT Đăng nhập" width="700">
+</p>
+
+### Biểu đồ hoạt động Gửi thông báo
+
+<p align="center">
+  <img src="pttk_img/ACT Gửi thông báo.jpg
+  " alt"ACT Gửi thông báo" width="700">
+</p>
+
+### Biểu đồ hoạt động Tạo thông báo
+
+<p align="center">
+  <img src="pttk_img/ACT Tạo thông báo.jpg
+  " alt"ACT Tạo thông báo" width="700">
+</p>
+
+### Biểu đồ hoạt động Xem danh sách thông báo
+
+<p align="center">
+  <img src="pttk_img/ACT Xem danh sách thông báo.jpg
+  " alt"ACT Xem danh sách thông báo" width="700">
+</p>
+
+### Biểu đồ hoạt động Đánh dấu đã đọc
+
+<p align="center">
+  <img src="pttk_img/ACT Đánh dấu đã đọc.jpg
+  " alt"ACT Đánh dấu đã đọc" width="700">
+</p>
 # Buổi 4 : vẽ biểu đồ tuần tự và hoạt động (19/01/2026)
 
 ## 1.Biểu đồ tuần tự 
@@ -1863,107 +1935,3 @@ Dưới đây là phân tích chi tiết các liên kết khóa ngoại (Foreign
   <img src="pttk_img/23.1 huy/Xem hóa đơn & trạng thái thanh toán ACT .jpg" alt="UC Tổng quát" width="700">
 </p>
 
-=======
->>>>>>> 6f945d837080993615855e922f6e6d2c01145f42
->>>>>>>
->>>>>>
->>>>>
->>>>
->>>
->>
-
-# Buổi 4: Vẽ biểu đồ tuần tự và biểu đồ hoạt động (19/1/2026)
-
-## 1.Biểu đồ tuần tự
-
-### 1.1.Thêm người thuê
-
-<p align="center">
-  <img src="pttk_img/Thêm người thuê.jpg" alt="UC Tổng quát" width="700">
-</p>
-
-### 1.2.Cập nhật thông tin người thuê
-
-<p align="center">
-  <img src="pttk_img/Cập nhật thông tin người thuê.jpg" alt="UC Tổng quát" width="700">
-</p>
-
-### 1.3.Gán người thuê vào phòng
-
-<p align="center">
-  <img src="pttk_img/Gán người thuê vào phòng.jpg" alt="UC Tổng quát" width="700">
-</p>
-
-### 1.4.Kết thúc thuê / Ngừng thuê
-
-<p align="center">
-  <img src="pttk_img/Kết thúc thuê_ngừng thuê.jpg" alt="UC Tổng quát" width="700">
-</p>
-
-### 1.5.Lập hợp đồng thuê
-
-<p align="center">
-  <img src="pttk_img/Lập hợp đồng thuê.jpg" alt="UC Tổng quát" width="700">
-</p>
-
-### 1.6.Xem danh sách hợp đồng
-
-<p align="center">
-  <img src="pttk_img/Xem danh sách hợp đồng.jpg" alt="UC Tổng quát" width="700">
-</p>
-
-### 1.7.Gia hạn hợp đồng
-
-<p align="center">
-  <img src="pttk_img/Gia hạn hợp đồng.jpg" alt="UC Tổng quát" width="700">
-</p>
-
-### 1.8.Kết thúc hợp đồng
-
-<p align="center">
-  <img src="pttk_img/Kết thúc hợp đồng.jpg" alt="UC Tổng quát" width="700">
-</p>
-
-## 2.Biểu đồ hoạt động
-
-### 1.1.Thêm người thuê
-
-<p align="center">
-  <img src="pttk_img/Thêm người thuê1 (2).jpg" alt="UC Tổng quát" width="700">
-</p>
-
-### 1.2.Cập nhật thông tin người thuê
-<p align="center">
-  <img src="pttk_img/cập nhật thông tin người thuê 1.jpg" alt="UC Tổng quát" width="700">
-</p>
-
-### 1.3.Gán người thuê vào phòng
-<p align="center">
-  <img src="pttk_img/Gán người thuê vào phòng 1.jpg" alt="UC Tổng quát" width="700">
-</p>
-
-### 1.4.Kết thúc thuê/ngừng thuê
-<p align="center">
-  <img src="pttk_img/kết thúc thuê_ngừng thuê 1.jpg" alt="UC Tổng quát" width="700">
-</p>
-
-### 1.5.Lập hợp đồng thuê
-<p align="center">
-  <img src="pttk_img/Lập hợp đồng thuê 1.jpg" alt="UC Tổng quát" width="700">
-</p>
-
-### 1.6.Xem danh sách sách hợp đồng
-<p align="center">
-  <img src="pttk_img/Xem danh sách hợp đồng 1.jpg" alt="UC Tổng quát" width="700">
-</p>
-
-### 1.7.Gia hạn hợp đồng
-<p align="center">
-  <img src="pttk_img/Gia hạn hợp đồng 1.jpg" alt="UC Tổng quát" width="700">
-</p>
-
-### 1.8.Kết thúc hợp đồng
-<p align="center">
-  <img src="pttk_img/Kết thúc hợp đông 1.jpg" alt="UC Tổng quát" width="700">
-</p>
->>>>>>> a79e011625141798d8b57b70de2209817a7d4ab9
