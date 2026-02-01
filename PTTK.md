@@ -1537,6 +1537,7 @@ Dưới đây là phân tích chi tiết các liên kết khóa ngoại (Foreign
 | **Luồng phụ / Ngoại lệ**  | Không có                                                              |
 | **Kết quả**                 | Trạng thái phòng được hiển thị                                  |
 
+
 ## 5. Phân rã UC Quản lý người thuê
 
 <p align="center">
@@ -1767,6 +1768,7 @@ Dưới đây là phân tích chi tiết các liên kết khóa ngoại (Foreign
 | **Hậu điều kiện**  | Không thay đổi dữ liệu                   |
 | **Luồng chính**      | 1. Chọn kỳ hóa đơn<br />2. Xem chi tiết |
 | **Hạn chế**          | Không thanh toán online                     |
+
 
 # Buổi 4 + 5 (19/01/2026 + 23/01/2026)
 
