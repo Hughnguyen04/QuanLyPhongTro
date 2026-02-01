@@ -8,7 +8,7 @@
 
 Chức năng Quản lý phòng & người thuê nhằm hỗ trợ Chủ trọ và Nhân viên quản lý trong việc theo dõi, cập nhật và quản lý đầy đủ thông tin nghiệp vụ liên quan đến phòng trọ và người thuê, bao gồm đặc điểm phòng, tình trạng sử dụng, lịch sử thuê và tình trạng hợp đồng .
 
-Bên cạnh đó, chức năng này cũng hỗ trợ Người thuê phòng trong việc  tra cứu thông tin liên quan đến phòng đang thuê, hợp đồng thuê và tình trạng thanh toán .
+Bên cạnh đó, chức năng này cũng hỗ trợ Người thuê phòng trong việc  tra cứu thông tin liên quan đến phòng đang thuê, hợDAp đồng thuê và tình trạng thanh toán .
 
 Trong đó, Chủ trọ có quyền giám sát toàn bộ hệ thống phòng trọ, bao gồm cả những phòng và dãy trọ do  Nhân viên quản lý phụ trách , nhằm đảm bảo việc quản lý được thống nhất và minh bạch.
 
