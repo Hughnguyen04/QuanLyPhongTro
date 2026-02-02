@@ -1,49 +1,42 @@
 <!DOCTYPE html>
 <html lang="vi">
-
 <head>
     <meta charset="UTF-8">
     <title>Dashboard</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="dashboard.css">
 </head>
 
 <body>
 
-    <div class="topbar">
-        <h2 id="title"></h2>
-        <button class="logout" onclick="logout()">Đăng xuất</button>
+<div class="topbar">
+    <h2 id="title"></h2>
+    <button class="logout" onclick="logout()">Đăng xuất</button>
+</div>
+
+<div class="wrapper">
+
+    <div class="sidebar">
+        <h3>📌 MENU</h3>
+
+        <button data-page="dashboard.html" onclick="go('dashboard.html')">🏠 Dashboard</button>
+
+        <!-- CHỦ + NHÂN VIÊN -->
+        <button class="staff owner" onclick="go('../Rooms/rooms.html')">🏘 Quản lý phòng</button>
+        <button class="staff owner" onclick="go('../Accounts/tenants.html')">👤 Người thuê</button>
+        <button class="staff owner" onclick="go('contracts.html')">📄 Hợp đồng</button>
+        <button class="staff owner" onclick="go('bills.html')">💵 Hóa đơn</button>
+        <button class="staff owner" onclick="go('meters.html')">⚡ Điện nước</button>
+        <button class="staff owner" onclick="go('reports.html')">📊 Thống kê</button>
+
+        <!-- CHỈ CHỦ TRỌ -->
+        <button class="owner" onclick="go('../Accounts/staff.html')">
+            🔑 Quản lý tài khoản nhân viên
+        </button>
+
+        <!-- NGƯỜI THUÊ -->
+        <button class="tenant" onclick="go('my-bills.html')">🧾 Hóa đơn của tôi</button>
+        <button class="tenant" onclick="go('notifications.html')">🔔 Thông báo</button>
     </div>
-
-    <div class="wrapper">
-
-        <div class="sidebar">
-            <h3>📌 MENU</h3>
-
-            <button data-page="dashboard.html" onclick="go('dashboard.html')">🏠 Dashboard</button>
-
-            <button class="staff" data-page="rooms.html" onclick="go('rooms.html')">🏘 Quản lý phòng</button>
-            <button class="staff" data-page="tenants.html" onclick="go('tenants.html')">👤 Người thuê</button>
-            <button class="staff" data-page="contracts.html" onclick="go('contracts.html')">📄 Hợp đồng</button>
-            <button class="staff" data-page="bills.html" onclick="go('bills.html')">💵 Hóa đơn</button>
-            <button class="staff" data-page="meters.html" onclick="go('meters.html')">⚡ Điện nước</button>
-            <button class="staff" data-page="reports.html" onclick="go('reports.html')">📊 Thống kê</button>
-
-            <button class="owner" data-page="accounts.html" onclick="go('accounts.html')">
-                🔑 Quản lý tài khoản
-            </button>
-
-            <button class="owner" data-page="settings.html" onclick="go('settings.html')">
-                ⚙️ Cài đặt hệ thống
-            </button>
-
-            <button class="tenant" data-page="my-bills.html" onclick="go('my-bills.html')">
-                🧾 Hóa đơn của tôi
-            </button>
-            <button class="tenant" data-page="notifications.html" onclick="go('notifications.html')">
-                🔔 Thông báo
-            </button>
-        </div>
-
         <div class="main">
 
             <div id="chutro" style="display:none">

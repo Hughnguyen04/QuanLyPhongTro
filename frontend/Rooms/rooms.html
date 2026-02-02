@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Quản lý phòng</title>
+<link rel="stylesheet" href="rooms.css">
+</head>
+
+<body>
+
+<div class="topbar">
+    <h2>🏘 Quản lý phòng trọ</h2>
+    <button class="logout" onclick="logout()">Đăng xuất</button>
+</div>
+
+<div class="wrapper">
+
+<!-- MENU -->
+<div class="sidebar">
+<h3>📌 MENU</h3>
+
+<button onclick="go('../Dashboard/dashboard.html')">🏠 Dashboard</button>
+<button class="staff" onclick="go('rooms.html')">🏘 Quản lý phòng</button>
+<button class="staff" onclick="go('../Tenants/tenants.html')">👤 Người thuê</button>
+<button class="staff" onclick="go('../Contracts/contracts.html')">📄 Hợp đồng</button>
+<button class="staff" onclick="go('../Bills/bills.html')">💵 Hóa đơn</button>
+<button class="staff" onclick="go('../Meters/meters.html')">⚡ Điện nước</button>
+<button class="staff" onclick="go('../Reports/reports.html')">📊 Thống kê</button>
+
+<button class="owner">🔑 Quản lý tài khoản</button>
+<button class="owner">⚙️ Cài đặt</button>
+</div>
+
+<div class="main">
+
+<!-- STATS -->
+<div class="card stats">
+<div class="stat"><h2 id="total">0</h2><p>Tổng phòng</p></div>
+<div class="stat"><h2 id="trong">0</h2><p>Phòng trống</p></div>
+<div class="stat"><h2 id="thue">0</h2><p>Đang thuê</p></div>
+<div class="stat"><h2 id="sua">0</h2><p>Đang sửa</p></div>
+</div>
+
+<!-- FILTER -->
+<div class="card filter">
+<input id="key" placeholder="Tên phòng">
+<select id="status">
+<option value="">Tất cả trạng thái</option>
+<option>Trống</option>
+<option>Đang thuê</option>
+<option>Đang sửa</option>
+</select>
+
+<button onclick="render()">Lọc</button>
+
+<button id="btnAdd" class="addBtn owner" onclick="openModal()">
+➕ Thêm phòng
+</button>
+</div>
+
+<!-- TABLE -->
+<div class="card">
+<table>
+<thead>
+<tr>
+<th>Mã</th>
+<th>Tên</th>
+<th>Giá</th>
+<th>Người thuê</th>
+<th>SĐT</th>
+<th>HĐ</th>
+<th>Trạng thái</th>
+<th>Thao tác</th>
+</tr>
+</thead>
+<tbody id="tbody"></tbody>
+</table>
+</div>
+
+</div>
+</div>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+<div class="box">
+<h3>Thông tin phòng</h3>
+
+<input id="id" placeholder="Mã phòng">
+<input id="name" placeholder="Tên phòng">
+<input id="price" type="number" placeholder="Giá">
+
+<select id="st">
+<option>Trống</option>
+<option>Đang thuê</option>
+<option>Đang sửa</option>
+</select>
+
+<div class="modal-actions">
+<button onclick="save()">Lưu</button>
+<button onclick="closeModal()">Hủy</button>
+</div>
+</div>
+</div>
+
+<script src="rooms.js"></script>
+</body>
+</html>
