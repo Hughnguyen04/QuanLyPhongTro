@@ -1,0 +1,182 @@
+body {
+    margin: 0;
+    font-family: Segoe UI;
+    background: #f4f6fa
+}
+
+.topbar {
+    background: #6c63ff;
+    color: #fff;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center
+}
+
+.wrapper {
+    display: flex
+}
+
+.sidebar {
+    width: 240px;
+    background: #fff;
+    height: calc(100vh - 60px);
+    box-shadow: 2px 0 10px rgba(0, 0, 0, .1);
+    padding: 15px
+}
+
+.sidebar h3 {
+    margin-top: 0
+}
+
+.sidebar button {
+    width: 100%;
+    padding: 10px;
+    margin: 6px 0;
+    border: none;
+    border-radius: 6px;
+    background: #f0f1ff;
+    color: #333;
+    text-align: left;
+    cursor: pointer
+}
+
+.sidebar button:hover {
+    background: #dcdcff
+}
+
+.sidebar button.active {
+    background: #6c63ff;
+    color: #fff
+}
+
+.main {
+    flex: 1;
+    padding: 25px
+}
+
+.card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, .08);
+    margin-bottom: 20px
+}
+
+/* STATS */
+.stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px
+}
+
+.stat {
+    padding: 18px;
+    border-radius: 10px;
+    background: #f8f9ff;
+    text-align: center
+}
+
+.stat h2 {
+    margin: 0;
+    color: #6c63ff
+}
+
+.stat p {
+    margin: 6px 0 0;
+    color: #555
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse
+}
+
+th,
+td {
+    padding: 12px;
+    border-bottom: 1px solid #eee
+}
+
+th {
+    background: #fafafa;
+    text-align: left
+}
+
+input,
+select {
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc
+}
+
+.filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center
+}
+
+.addBtn {
+    background: #4caf50;
+    color: #fff;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 8px
+}
+
+.action {
+    border: none;
+    background: none;
+    font-size: 16px;
+    cursor: pointer
+}
+
+.logout {
+    background: #ff5252;
+    color: #fff;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer
+}
+
+.badge {
+    padding: 4px 10px;
+    border-radius: 14px;
+    color: #fff;
+    font-size: 13px
+}
+
+.green {
+    background: #4caf50
+}
+
+.yellow {
+    background: #ff9800
+}
+
+.red {
+    background: #f44336
+}
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, .4);
+    display: none;
+    align-items: center;
+    justify-content: center
+}
+
+.modal .box {
+    background: #fff;
+    width: 420px;
+    padding: 20px;
+    border-radius: 12px
+}
+
+.modal input {
+    width: 100%;
+    margin: 6px 0
+}

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Quản lý người thuê</title>
+    <link rel="stylesheet" href="tenants.css">
+</head>
+
+<body>
+    <div class="topbar">
+        <h2>👤 Quản lý người thuê</h2>
+        <button class="logout" onclick="dangXuat()">Đăng xuất</button>
+    </div>
+
+    <div class="wrapper">
+
+        <div class="sidebar">
+            <h3> MENU</h3>
+
+            <button onclick="chuyenTrang('dashboard.html')"> Dashboard</button>
+            <button class="staff" onclick="chuyenTrang('rooms.html')"> Quản lý phòng</button>
+            <button class="staff" onclick="chuyenTrang('tenants.html')"> Người thuê</button>
+            <button class="staff" onclick="chuyenTrang('contracts.html')"> Hợp
+                đồng</button>
+            <button class="staff" onclick="chuyenTrang('bills.html')"> Hóa đơn</button>
+            <button class="staff" onclick="chuyenTrang('meters.html')"> Điện nước</button>
+            <button class="staff" onclick="chuyenTrang('reports.html')">Thống kê</button>
+
+            <button class="owner" onclick="chuyenTrang('accounts.html')"> Quản lý tài
+                khoản</button>
+            <button class="owner" onclick="chuyenTrang('settings.html')"> Cài đặt hệ
+                thống</button>
+
+            <button class="tenant" onclick="chuyenTrang('my-bills.html')"> Hóa đơn của
+                tôi</button>
+            <button class="tenant" onclick="chuyenTrang('notifications.html')"> Thông
+                báo</button>
+        </div>
+
+        <div class="main">
+
+
+            <div class="card stats">
+                <div class="stat">
+                    <h2 id="tongNguoiThue">0</h2>
+                    <p>Tổng người thuê</p>
+                </div>
+                <div class="stat">
+                    <h2 id="dangThue">0</h2>
+                    <p>Đang thuê</p>
+                </div>
+                <div class="stat">
+                    <h2 id="sapHetHan">0</h2>
+                    <p>Sắp hết hạn</p>
+                </div>
+                <div class="stat">
+                    <h2 id="daTraPhong">0</h2>
+                    <p>Đã trả phòng</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tên</th>
+                            <th>SĐT</th>
+                            <th>Phòng</th>
+                            <th>Ngày vào</th>
+                            <th>Hết hạn</th>
+                            <th>Trạng thái</th>
+                        </tr>
+                    </thead>
+                    <tbody id="danhSachNguoiThue"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const vaiTro = localStorage.getItem("role");
+        if (!vaiTro) location.href = "login.html";
+
+        if (vaiTro === "chutro") {
+            document.querySelectorAll(".tenant").forEach(e => e.style.display = "none");
+        } else if (vaiTro === "nhanvien") {
+            document.querySelectorAll(".tenant,.owner[data-page='settings.html']").forEach(e => e.style.display = "none");
+        } else if (vaiTro === "nguoithue") {
+            document.querySelectorAll(".staff,.owner").forEach(e => e.style.display = "none");
+        }
+
+
+        const tenTrang = location.pathname.split("/").pop();
+        document.querySelectorAll(".sidebar button").forEach(btn => {
+            if (btn.dataset.page === tenTrang) btn.classList.add("active");
+        });
+
+        let danhSach = [
+            { ten: "Nguyễn Như Thành Danh", sdt: "0123456767", phong: "P101", vao: "2025-01-01", hetHan: "2026-06-01", daTra: false },
+            { ten: "Đỗ Duy Tiến", sdt: "09023434", phong: "P102", vao: "2025-03-01", hetHan: "2026-02-15", daTra: false },
+            { ten: "Nguyễn Quang Huy", sdt: "0903234523", phong: "P103", vao: "2024-01-01", hetHan: "2025-01-01", daTra: true },
+        ];
+
+        const tbody = document.getElementById("danhSachNguoiThue");
+        const tong = document.getElementById("tongNguoiThue");
+        const dangThue = document.getElementById("dangThue");
+        const sapHetHan = document.getElementById("sapHetHan");
+        const daTra = document.getElementById("daTraPhong");
+
+        function conLai(ngay) {
+            return Math.ceil((new Date(ngay) - new Date()));
+        }
+
+        function hienThiDanhSach() {
+            tbody.innerHTML = "";
+            danhSach.forEach(x => {
+                let tt = "Đang thuê", mau = "green";
+                if (x.daTra) { tt = "Đã trả phòng"; mau = "red"; }
+                else if (conLai(x.hetHan) <= 30) { tt = "Sắp hết hạn"; mau = "yellow"; }
+
+                tbody.innerHTML += `
+          <tr>
+            <td>${x.ten}</td>
+            <td>${x.sdt}</td>
+            <td>${x.phong}</td>
+            <td>${x.vao}</td>
+            <td>${x.hetHan}</td>
+            <td><span class="badge ${mau}">${tt}</span></td>
+          </tr>`;
+            });
+            capNhatThongKe();
+        }
+
+        hienThiDanhSach();
+        function chuyenTrang(p) { location.href = p; }
+        function dangXuat() {
+            localStorage.clear();
+            location.href = "login.html";
+        }
+    </script>
+
+</body>
+
+</html>
