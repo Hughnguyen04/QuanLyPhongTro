@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Quản lý phòng trọ - Đăng nhập</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="login-box">
+    <h2>Đăng nhập hệ thống</h2>
+
+    <div class="input-group">
+        <label>Tên đăng nhập</label>
+        <input type="text" id="username">
+    </div>
+
+    <div class="input-group">
+        <label>Mật khẩu</label>
+        <input type="password" id="password">
+    </div>
+
+    <button onclick="login()">Đăng nhập</button>
+
+    <div class="actions">
+        <a onclick="openModal('forgot')">Quên mật khẩu?</a>
+    </div>
+
+    <div class="result" id="result"></div>
+</div>
+
+<div class="modal" id="forgot">
+    <div class="modal-box">
+        <div class="close" onclick="closeModal('forgot')">✖</div>
+        <h3>Quên mật khẩu</h3>
+
+        <div class="input-group">
+            <label>Email</label>
+            <input type="email" placeholder="Nhập email đã đăng ký">
+        </div>
+
+        <button onclick="alert('Đã gửi email khôi phục (demo)')">
+            Gửi yêu cầu
+        </button>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

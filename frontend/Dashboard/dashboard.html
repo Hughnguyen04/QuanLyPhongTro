@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="topbar">
+        <h2 id="title"></h2>
+        <button class="logout" onclick="logout()">Đăng xuất</button>
+    </div>
+
+    <div class="wrapper">
+
+        <div class="sidebar">
+            <h3>📌 MENU</h3>
+
+            <button data-page="dashboard.html" onclick="go('dashboard.html')">🏠 Dashboard</button>
+
+            <button class="staff" data-page="rooms.html" onclick="go('rooms.html')">🏘 Quản lý phòng</button>
+            <button class="staff" data-page="tenants.html" onclick="go('tenants.html')">👤 Người thuê</button>
+            <button class="staff" data-page="contracts.html" onclick="go('contracts.html')">📄 Hợp đồng</button>
+            <button class="staff" data-page="bills.html" onclick="go('bills.html')">💵 Hóa đơn</button>
+            <button class="staff" data-page="meters.html" onclick="go('meters.html')">⚡ Điện nước</button>
+            <button class="staff" data-page="reports.html" onclick="go('reports.html')">📊 Thống kê</button>
+
+            <button class="owner" data-page="accounts.html" onclick="go('accounts.html')">
+                🔑 Quản lý tài khoản
+            </button>
+
+            <button class="owner" data-page="settings.html" onclick="go('settings.html')">
+                ⚙️ Cài đặt hệ thống
+            </button>
+
+            <button class="tenant" data-page="my-bills.html" onclick="go('my-bills.html')">
+                🧾 Hóa đơn của tôi
+            </button>
+            <button class="tenant" data-page="notifications.html" onclick="go('notifications.html')">
+                🔔 Thông báo
+            </button>
+        </div>
+
+        <div class="main">
+
+            <div id="chutro" style="display:none">
+                <div class="cards">
+                    <div class="card">
+                        <h4>Tổng số phòng</h4>
+                        <p>20</p>
+                    </div>
+                    <div class="card">
+                        <h4>Phòng đang thuê</h4>
+                        <p>15</p>
+                    </div>
+                    <div class="card">
+                        <h4>Phòng trống</h4>
+                        <p>5</p>
+                    </div>
+                    <div class="card">
+                        <h4>Doanh thu tháng</h4>
+                        <p>45.000.000đ</p>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3>📌 Nhắc việc</h3>
+                    <ul>
+                        <li>Hợp đồng P101 sắp hết hạn</li>
+                        <li>Hóa đơn P203 chưa thanh toán</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="nhanvien" style="display:none">
+                <div class="cards">
+                    <div class="card">
+                        <h4>Phòng quản lý</h4>
+                        <p>8</p>
+                    </div>
+                    <div class="card">
+                        <h4>Hóa đơn chưa thu</h4>
+                        <p>3</p>
+                    </div>
+                    <div class="card">
+                        <h4>Công việc hôm nay</h4>
+                        <p>5</p>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3>🔔 Thông báo công việc</h3>
+                    <p class="small">✔ 4 hoàn thành / 1 đang xử lý</p>
+                </div>
+            </div>
+
+            <div id="nguoithue" style="display:none">
+                <div class="cards">
+                    <div class="card">
+                        <h4>Phòng đang thuê</h4>
+                        <p>P101</p>
+                    </div>
+                    <div class="card">
+                        <h4>Hóa đơn tháng này</h4>
+                        <p>3.450.000đ</p>
+                    </div>
+                    <div class="card">
+                        <h4>Trạng thái</h4>
+                        <p>Chưa thanh toán</p>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3>🔔 Thông báo</h3>
+                    <ul>
+                        <li>Nhắc thanh toán tháng 10</li>
+                        <li>Bảo trì nước ngày 25</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="dashboard.js"></script>
+
+</body>
+
+</html>
