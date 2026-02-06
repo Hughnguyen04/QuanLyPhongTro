@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    font-family: "Segoe UI", sans-serif;
+    font-family: Segoe UI, sans-serif;
     background: #f4f6fa;
 }
 
@@ -13,12 +13,6 @@ body {
     align-items: center;
 }
 
-.topbar .left {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
 .menu-btn {
     font-size: 22px;
     background: none;
@@ -28,23 +22,21 @@ body {
 }
 
 .user-box {
-    position: relative;
     display: flex;
     align-items: center;
     gap: 8px;
+    position: relative;
     cursor: pointer;
 }
 
 .avatar-text {
     width: 36px;
     height: 36px;
-    background: rgba(255,255,255,0.25);
-    color: #fff;
     border-radius: 50%;
+    background: rgba(255,255,255,.3);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 18px;
 }
 
 .user-menu {
@@ -52,58 +44,40 @@ body {
     top: 48px;
     right: 0;
     background: white;
-    width: 180px;
     border-radius: 10px;
-    box-shadow: 0 10px 30px rgba(0,0,0,.15);
+    width: 180px;
     display: none;
-    overflow: hidden;
-    color: #333;
+    box-shadow: 0 10px 30px rgba(0,0,0,.15);
 }
 
 .user-menu div {
     padding: 12px;
-    cursor: pointer;
 }
+.user-menu div:hover { background: #f0f1ff }
 
-.user-menu div:hover {
-    background: #f0f1ff;
-}
-
-.wrapper {
-    display: flex;
-}
+.wrapper { display: flex }
 
 .sidebar {
     width: 240px;
-    background: #fff;
-    height: calc(100vh - 60px);
-    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    background: white;
     padding: 15px;
-
     position: fixed;
     left: -260px;
     top: 60px;
-    transition: left .25s;
-    z-index: 100;
+    height: calc(100vh - 60px);
+    transition: .25s;
 }
 
-.sidebar.show {
-    left: 0;
-}
+.sidebar.show { left: 0 }
 
 .sidebar button {
     width: 100%;
     padding: 10px;
-    margin: 6px 0;
     border: none;
+    margin-bottom: 6px;
     border-radius: 6px;
     background: #f0f1ff;
     text-align: left;
-    cursor: pointer;
-}
-
-.sidebar button:hover {
-    background: #dcdcff;
 }
 
 .main {
@@ -111,25 +85,32 @@ body {
     padding: 25px;
 }
 
-.cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 20px;
+.toolbar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
 }
 
-.card {
-    background: #fff;
+.add {
+    background: #6c63ff;
+    color: white;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 6px;
+}
+
+.section {
+    background: white;
     padding: 20px;
     border-radius: 12px;
-    box-shadow: 0 6px 20px rgba(0,0,0,.08);
 }
 
-.card h4 {
-    margin: 0;
-    color: #555;
+table {
+    width: 100%;
+    border-collapse: collapse;
 }
 
-.card p {
-    font-size: 26px;
-    margin-top: 10px;
+th, td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
 }

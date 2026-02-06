@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Hợp đồng nhân viên</title>
+    <link rel="stylesheet" href="contracts.css">
+</head>
+<body>
+
+<div class="topbar">
+    <div class="left">
+        <button class="menu-btn" onclick="toggleMenu()">☰</button>
+        <h2>Hợp đồng nhân viên</h2>
+    </div>
+
+    <div class="user-box" onclick="toggleUserMenu()">
+        <div class="avatar-text">👤</div>
+        <span id="username"></span>
+        <div class="user-menu" id="userMenu">
+            <div>👤 Thông tin của tôi</div>
+            <div>🔒 Đổi mật khẩu</div>
+            <div onclick="logout()">🚪 Đăng xuất</div>
+        </div>
+    </div>
+</div>
+
+<div class="wrapper">
+    <div class="sidebar" id="sidebar"></div>
+
+    <div class="main">
+        <div class="toolbar">
+            <input placeholder="🔍 Tìm nhân viên...">
+            <button class="add">➕ Thêm hợp đồng</button>
+        </div>
+
+        <div class="section">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Mã HĐ</th>
+                        <th>Nhân viên</th>
+                        <th>Vị trí</th>
+                        <th>Ngày ký</th>
+                        <th>Hành động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>NV01</td>
+                        <td>Nguyễn Văn A</td>
+                        <td>Quản lý</td>
+                        <td>01/01/2025</td>
+                        <td>Xem | Sửa</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="contracts-staff.js"></script>
+</body>
+</html>

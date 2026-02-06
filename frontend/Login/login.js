@@ -1,26 +1,36 @@
 function login() {
-    const u = username.value;
-    const p = password.value;
+    const u = document.getElementById("username").value.trim();
+    const p = document.getElementById("password").value.trim();
     const r = document.getElementById("result");
 
     localStorage.clear();
 
+    if (!u || !p) {
+        r.style.color = "red";
+        r.innerHTML = "Vui lòng nhập đầy đủ thông tin";
+        return;
+    }
+
     if (u === "chutro" && p === "123") {
-        localStorage.setItem("role", "chutro");
-        window.location.href = "../Dashboard/dashboard.html";
+        saveLogin("chutro", u);
     }
     else if (u === "nhanvien" && p === "123") {
-        localStorage.setItem("role", "nhanvien");
-        window.location.href = "../Dashboard/dashboard.html";
+        saveLogin("nhanvien", u);
     }
     else if (u === "nguoithue" && p === "123") {
-        localStorage.setItem("role", "nguoithue");
-        window.location.href = "../Dashboard/dashboard.html";
+        saveLogin("nguoithue", u);
     }
     else {
         r.style.color = "red";
         r.innerHTML = "Sai thông tin đăng nhập";
     }
+}
+
+function saveLogin(role, username) {
+    localStorage.setItem("role", role);
+    localStorage.setItem("username", username);
+
+    window.location.href = "../Dashboard/dashboard.html";
 }
 
 function openModal(id) {

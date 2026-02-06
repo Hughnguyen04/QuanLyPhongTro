@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Hợp đồng người thuê</title>
+    <link rel="stylesheet" href="contracts.css">
+</head>
+<body>
+
+<div class="topbar">
+    <div class="left">
+        <button class="menu-btn" onclick="toggleMenu()">☰</button>
+        <h2>Hợp đồng người thuê</h2>
+    </div>
+
+    <div class="user-box" onclick="toggleUserMenu()">
+        <div class="avatar-text">👤</div>
+        <span id="username"></span>
+        <div class="user-menu" id="userMenu">
+            <div>👤 Thông tin của tôi</div>
+            <div>🔒 Đổi mật khẩu</div>
+            <div onclick="logout()">🚪 Đăng xuất</div>
+        </div>
+    </div>
+</div>
+
+<div class="wrapper">
+    <div class="sidebar" id="sidebar"></div>
+
+    <div class="main">
+        <div class="toolbar">
+            <input id="key" placeholder="🔍 Tìm hợp đồng..." oninput="render()">
+            <button class="add owner" onclick="alert('Demo')">➕ Thêm hợp đồng</button>
+        </div>
+
+        <div class="section">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Mã HĐ</th>
+                        <th>Người thuê</th>
+                        <th>Phòng</th>
+                        <th>Ngày bắt đầu</th>
+                        <th>Hành động</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="contracts-tenant.js"></script>
+</body>
+</html>

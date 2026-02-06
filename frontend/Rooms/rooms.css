@@ -1,15 +1,69 @@
 body {
     margin: 0;
-    font-family: Segoe UI;
+    font-family: "Segoe UI", sans-serif;
     background: #f4f6fa;
 }
 
 .topbar {
     background: #6c63ff;
-    color: white;
-    padding: 15px 30px;
+    color: #fff;
+    padding: 15px 25px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+}
+
+.left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.menu-btn {
+    font-size: 22px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+.user-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.avatar-text {
+    width: 36px;
+    height: 36px;
+    background: rgba(255,255,255,.25);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-menu {
+    position: absolute;
+    top: 48px;
+    right: 0;
+    background: white;
+    width: 180px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.15);
+    display: none;
+    overflow: hidden;
+    color: #333;
+}
+
+.user-menu div {
+    padding: 12px;
+    cursor: pointer;
+}
+.user-menu div:hover {
+    background: #f0f1ff;
 }
 
 .wrapper {
@@ -18,9 +72,18 @@ body {
 
 .sidebar {
     width: 240px;
-    background: white;
+    background: #fff;
+    height: calc(100vh - 60px);
     padding: 15px;
+    position: fixed;
+    left: -260px;
+    top: 60px;
+    transition: left .25s;
     box-shadow: 2px 0 10px rgba(0,0,0,.1);
+}
+
+.sidebar.show {
+    left: 0;
 }
 
 .sidebar button {
@@ -30,6 +93,7 @@ body {
     border: none;
     border-radius: 6px;
     background: #f0f1ff;
+    text-align: left;
     cursor: pointer;
 }
 
@@ -42,22 +106,49 @@ body {
     padding: 25px;
 }
 
+.toolbar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.toolbar input,
+.toolbar select {
+    padding: 10px;
+}
+
+.add {
+    background: #6c63ff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 14px;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
 .card {
-    background: white;
+    background: #fff;
     padding: 20px;
     border-radius: 12px;
-    margin-bottom: 20px;
     box-shadow: 0 6px 20px rgba(0,0,0,.08);
 }
 
-.stats {
-    display: grid;
-    grid-template-columns: repeat(4,1fr);
-    gap: 15px;
+.card p {
+    font-size: 26px;
+    margin-top: 10px;
 }
 
-.stat h2 {
-    margin: 0;
+/* TABLE */
+.section {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    margin-top: 25px;
 }
 
 table {
@@ -95,13 +186,4 @@ th, td {
 .modal-actions {
     display: flex;
     gap: 10px;
-}
-
-.logout {
-    background: #ff5252;
-    color: white;
-    border: none;
-    padding: 8px 14px;
-    border-radius: 6px;
-    cursor: pointer;
 }
