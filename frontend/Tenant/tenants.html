@@ -89,11 +89,9 @@
         } else if (vaiTro === "nguoithue") {
             document.querySelectorAll(".staff,.owner").forEach(e => e.style.display = "none");
         }
-
-
         const tenTrang = location.pathname.split("/").pop();
         document.querySelectorAll(".sidebar button").forEach(btn => {
-            if (btn.dataset.page === tenTrang) btn.classList.add("active");
+            if (btn.textContent.includes("Người thuê")) btn.classList.add("active");
         });
 
         let danhSach = [
@@ -109,7 +107,14 @@
         const daTra = document.getElementById("daTraPhong");
 
         function conLai(ngay) {
-            return Math.ceil((new Date(ngay) - new Date()));
+            return Math.ceil((new Date(ngay) - new Date()) / 86400000);
+        }
+
+        function capNhatThongKe() {
+            tong.innerText = danhSach.length;
+            dangThue.innerText = danhSach.filter(x => !x.daTra && conLai(x.hetHan) > 30).length;
+            sapHetHan.innerText = danhSach.filter(x => !x.daTra && conLai(x.hetHan) <= 30).length;
+            daTra.innerText = danhSach.filter(x => x.daTra).length;
         }
 
         function hienThiDanhSach() {
@@ -120,25 +125,33 @@
                 else if (conLai(x.hetHan) <= 30) { tt = "Sắp hết hạn"; mau = "yellow"; }
 
                 tbody.innerHTML += `
-          <tr>
-            <td>${x.ten}</td>
-            <td>${x.sdt}</td>
-            <td>${x.phong}</td>
-            <td>${x.vao}</td>
-            <td>${x.hetHan}</td>
-            <td><span class="badge ${mau}">${tt}</span></td>
-          </tr>`;
+                    <tr>
+                        <td>${x.ten}</td>
+                        <td>${x.sdt}</td>
+                        <td>${x.phong}</td>
+                        <td>${x.vao}</td>
+                        <td>${x.hetHan}</td>
+                        <td><span class="badge ${mau}">${tt}</span></td>
+                    </tr>`;
             });
             capNhatThongKe();
         }
 
         hienThiDanhSach();
-        function chuyenTrang(p) { location.href = p; }
+
+        function chuyenTrang(p) {
+            if (p === 'dashboard.html') location.href = '../Dashboard/dashboard.html';
+            else if (p === 'tenants.html') location.href = '../Tenant/tenants.html';
+            else if (p === 'bills.html') location.href = '../Bill/bills.html';
+            else location.href = p;
+        }
+
         function dangXuat() {
             localStorage.clear();
-            location.href = "login.html";
+            location.href = "../Login/login.html";
         }
     </script>
+
 
 </body>
 

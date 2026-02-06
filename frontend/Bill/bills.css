@@ -1,0 +1,177 @@
+body {
+    margin: 0;
+    font-family: "Segoe UI", sans-serif;
+    background-color: #f4f6fb;
+}
+
+
+.topbar {
+    background-color: #6c63ff;
+    color: white;
+    padding: 15px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.topbar h2 {
+    margin: 0;
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logout {
+    background-color: #ff4b4b;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: 0.2s;
+}
+
+.logout:hover {
+    background-color: #ff2e2e;
+}
+
+.wrapper {
+    display: flex;
+    height: calc(100vh - 60px);
+}
+
+.sidebar {
+    width: 240px;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar h3 {
+    margin-top: 0;
+    color: #6c63ff;
+    text-align: center;
+    font-size: 18px;
+}
+
+.sidebar button {
+    width: 100%;
+    text-align: left;
+    background: #f4f4ff;
+    border: none;
+    padding: 10px 15px;
+    margin: 6px 0;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: 0.2s;
+    color: #333;
+}
+
+.sidebar button:hover {
+    background-color: #6c63ff;
+    color: white;
+}
+
+.sidebar .active {
+    background-color: #6c63ff;
+    color: white;
+}
+
+.main {
+    flex: 1;
+    padding: 25px 40px;
+    overflow-y: auto;
+}
+
+.card.stats {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+    gap: 20px;
+}
+
+.stat {
+    flex: 1;
+    background-color: #fff;
+    padding: 15px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
+}
+
+.stat h2 {
+    margin: 0;
+    color: #6c63ff;
+    font-size: 26px;
+}
+
+.stat p {
+    color: #555;
+    margin: 5px 0 0;
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th {
+    background-color: #6c63ff;
+    color: white;
+    padding: 12px;
+    text-align: left;
+}
+
+td {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+tr:hover {
+    background-color: #f9f9ff;
+}
+
+.badge {
+    padding: 5px 12px;
+    border-radius: 6px;
+    color: white;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.green {
+    background-color: #00c851;
+}
+
+.red {
+    background-color: #ff4444;
+}
+
+.yellow {
+    background-color: #ffbb33;
+}
+
+@media (max-width: 768px) {
+    .wrapper {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+    }
+
+    .card.stats {
+        flex-direction: column;
+    }
+}

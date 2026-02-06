@@ -27,7 +27,10 @@ document.querySelectorAll(".sidebar button").forEach(b => {
 });
 
 function go(p) {
-    location.href = p;
+    if (p === 'tenants.html') location.href = '../Tenant/tenants.html';
+    else if (p === 'bills.html') location.href = '../Bill/bills.html';
+    else if (p === 'dashboard.html') location.href = 'dashboard.html';
+    else location.href = p;
 }
 
 // Đăng xuất

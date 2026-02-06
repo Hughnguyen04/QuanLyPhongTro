@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hóa đơn</title>
+    <link rel="stylesheet" href="bills.css">
+</head>
+<div class="topbar">
+    <h2> Quản lý hóa đơn</h2>
+    <button class="logout" onclick="dangXuat()">Đăng xuất</button>
+</div>
+
+<div class="wrapper">
+
+    <div class="sidebar">
+        <h3>📌 MENU</h3>
+
+        <button onclick="chuyenTrang('dashboard.html')"> Dashboard</button>
+        <button class="staff" onclick="chuyenTrang('rooms.html')"> Quản lý phòng</button>
+        <button class="staff" onclick="chuyenTrang('tenants.html')"> Người thuê</button>
+        <button class="staff" onclick="chuyenTrang('contracts.html')"> Hợp đồng</button>
+        <button class="staff" onclick="chuyenTrang('bills.html')"> Hóa đơn</button>
+        <button class="staff" onclick="chuyenTrang('meters.html')"> Điện nước</button>
+        <button class="staff" onclick="chuyenTrang('reports.html')"> Thống kê</button>
+
+        <button class="owner" onclick="chuyenTrang('accounts.html')"> Quản lý tài
+            khoản</button>
+        <button class="owner" onclick="chuyenTrang('settings.html')"> Cài đặt hệ
+            thống</button>
+
+        <button class="tenant" onclick="chuyenTrang('my-bills.html')"> Hóa đơn của
+            tôi</button>
+        <button class="tenant" onclick="chuyenTrang('notifications.html')"> Thông
+            báo</button>
+    </div>
+
+    <div class="main">
+
+        <div class="card stats">
+            <div class="stat">
+                <h2 id="tongHoaDon">0</h2>
+                <p>Tổng hóa đơn</p>
+            </div>
+            <div class="stat">
+                <h2 id="daThanhToan">0</h2>
+                <p>Đã thanh toán</p>
+            </div>
+            <div class="stat">
+                <h2 id="chuaThanhToan">0</h2>
+                <p>Chưa thanh toán</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Mã hóa đơn</th>
+                        <th>Phòng</th>
+                        <th>Tháng</th>
+                        <th>Tổng tiền (VNĐ)</th>
+                        <th>Ngày tạo</th>
+                        <th>Trạng thái</th>
+                    </tr>
+                </thead>
+                <tbody id="danhSachHoaDon"></tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    const vaiTro = localStorage.getItem("role");
+    if (!vaiTro) location.href = "login.html";
+
+    if (vaiTro === "chutro") {
+        document.querySelectorAll(".tenant").forEach(e => e.style.display = "none");
+    } else if (vaiTro === "nhanvien") {
+        document.querySelectorAll(".tenant,.owner[data-page='settings.html']").forEach(e => e.style.display = "none");
+    } else if (vaiTro === "nguoithue") {
+        document.querySelectorAll(".staff,.owner").forEach(e => e.style.display = "none");
+    }
+    document.querySelectorAll(".sidebar button").forEach(btn => {
+        if (btn.textContent.includes("Hóa đơn")) btn.classList.add("active");
+    });
+
+    let hoaDon = [
+        { ma: "HD001", phong: "P101", thang: "01/2026", tong: 3500000, ngay: "2026-02-01", trangThai: "Đã thanh toán" },
+        { ma: "HD002", phong: "P102", thang: "01/2026", tong: 3200000, ngay: "2026-02-01", trangThai: "Chưa thanh toán" },
+        { ma: "HD003", phong: "P103", thang: "12/2025", tong: 3000000, ngay: "2026-01-01", trangThai: "Đã thanh toán" },
+    ];
+
+    const tbody = document.getElementById("danhSachHoaDon");
+    const tong = document.getElementById("tongHoaDon");
+    const daTT = document.getElementById("daThanhToan");
+    const chuaTT = document.getElementById("chuaThanhToan");
+
+    function capNhatThongKe() {
+        tong.innerText = hoaDon.length;
+        daTT.innerText = hoaDon.filter(x => x.trangThai === "Đã thanh toán").length;
+        chuaTT.innerText = hoaDon.filter(x => x.trangThai === "Chưa thanh toán").length;
+    }
+
+    function hienThiDanhSach() {
+        tbody.innerHTML = "";
+        hoaDon.forEach(x => {
+            const mau = x.trangThai === "Đã thanh toán" ? "green" : "red";
+            tbody.innerHTML += `
+                <tr>
+                    <td>${x.ma}</td>
+                    <td>${x.phong}</td>
+                    <td>${x.thang}</td>
+                    <td>${x.tong.toLocaleString()}</td>
+                    <td>${x.ngay}</td>
+                    <td><span class="badge ${mau}">${x.trangThai}</span></td>
+                </tr>`;
+        });
+        capNhatThongKe();
+    }
+
+    hienThiDanhSach();
+
+    function chuyenTrang(p) {
+        if (p === 'dashboard.html') location.href = '../Dashboard/dashboard.html';
+        else if (p === 'tenants.html') location.href = '../Tenant/tenants.html';
+        else if (p === 'bills.html') location.href = '../Bill/bills.html';
+        else location.href = p;
+    }
+
+    function dangXuat() {
+        localStorage.clear();
+        location.href = "../Login/login.html";
+    }
+</script>
+
+
+<body>
+
+</body>
+
+</html>
