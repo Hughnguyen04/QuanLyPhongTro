@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Thông báo</title>
+    <link rel="stylesheet" href="notifications.css">
+</head>
+
+<body>
+
+    <div class="topbar">
+        <div class="left">
+            <button class="menu-btn" onclick="toggleMenu()">☰</button>
+            <h2>Thông báo</h2>
+        </div>
+
+        <div class="user-box" onclick="toggleUserMenu()">
+            <div class="avatar-text">👤</div>
+            <span id="username"></span>
+
+            <div class="user-menu" id="userMenu">
+                <div onclick="location.href='../Infor/infor.html'">👤 Thông tin</div>
+                <div onclick="location.href='../ChangePass/changepass.html'">🔒 Đổi mật khẩu</div>
+                <div onclick="logout()">🚪 Đăng xuất</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="wrapper">
+        <div class="sidebar" id="sidebar"></div>
+
+        <div class="main">
+
+            <div class="noti-header">
+                <h3 id="roleTitle"></h3>
+                <div class="filter">
+                    <button class="active" onclick="filterNoti('all')">Tất cả</button>
+                    <button onclick="filterNoti('system')">Hệ thống</button>
+                    <button onclick="filterNoti('bill')">Hóa đơn</button>
+                    <button onclick="filterNoti('task')">Công việc</button>
+                </div>
+            </div>
+
+            <div class="noti-list" id="notiList"></div>
+
+        </div>
+    </div>
+
+    <script src="../Common/menu.js"></script>
+    <script src="notifications.js"></script>
+</body>
+
+</html>
