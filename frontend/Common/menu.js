@@ -1,43 +1,39 @@
 /* ================== MENU CONFIG ================== */
 const menus = {
     chutro: [
-        { text: "🏠 Dashboard", link: "dashboard.html" },
+        { text: "🏠 Dashboard", link: "../Dashboard/dashboard.html" },
         { text: "🏘 Quản lý phòng", link: "../Rooms/rooms.html" },
         { text: "👤 Quản lý người thuê", link: "../Accounts/tenants.html" },
         { text: "🧑‍💼 Quản lý nhân viên", link: "../Accounts/staff.html" },
 
-        { text: "📄 Hợp đồng (người thuê)", link: "contracts-tenant.html" },
-        { text: "📄 Hợp đồng (nhân viên)", link: "contracts-staff.html" },
+        { text: "📄 Hợp đồng (người thuê)", link: "../Contracts/contracts-tenant.html" },
+        { text: "📄 Hợp đồng (nhân viên)", link: "../Contracts/contracts-staff.html" },
 
-        { text: "💵 Hóa đơn", link: "bills.html" },
-        { text: "⚡ Điện nước", link: "meters.html" },
-        { text: "📊 Thống kê", link: "reports.html" },
+        { text: "💵 Hóa đơn", link: "../Bills/bills.html" },
+        { text: "⚡ Điện nước", link: "../Meters/meters.html" },
+        { text: "📊 Thống kê", link: "../Reports/reports.html" },
 
-        { text: "🔑 Tài khoản nhân viên", link: "../Accounts/staff.html" },
-        { text: "🔑 Tài khoản người thuê", link: "../Accounts/tenants.html" },
-
-        { text: "⚙ Cài đặt hệ thống", link: "settings.html" }
+        { text: "⚙ Cài đặt hệ thống", link: "../Settings/settings.html" }
     ],
 
     nhanvien: [
-        { text: "🏠 Dashboard", link: "dashboard.html" },
+        { text: "🏠 Dashboard", link: "../Dashboard/dashboard.html" },
         { text: "🏘 Quản lý phòng", link: "../Rooms/rooms.html" },
         { text: "👤 Quản lý người thuê", link: "../Accounts/tenants.html" },
 
-        { text: "📄 Hợp đồng (người thuê)", link: "contracts-tenant.html" },
+        { text: "📄 Hợp đồng (người thuê)", link: "../Contracts/contracts-tenant.html" },
 
-        { text: "💵 Hóa đơn", link: "bills.html" },
-        { text: "⚡ Điện nước", link: "meters.html" },
-        { text: "📊 Thống kê", link: "reports.html" },
+        { text: "💵 Hóa đơn", link: "../Bills/bills.html" },
+        { text: "⚡ Điện nước", link: "../Meters/meters.html" },
+        { text: "📊 Thống kê", link: "../Reports/reports.html" },
 
-        { text: "🔑 Tài khoản người thuê", link: "../Accounts/tenants.html" },
-        { text: "🔔 Thông báo", link: "notifications.html" }
+        { text: "🔔 Thông báo", link: "../Notifications/notifications.html" }
     ],
 
     nguoithue: [
-        { text: "🏠 Dashboard", link: "dashboard.html" },
-        { text: "🧾 Hóa đơn của tôi", link: "my-bills.html" },
-        { text: "🔔 Thông báo", link: "notifications.html" }
+        { text: "🏠 Dashboard", link: "../Dashboard/dashboard.html" },
+        { text: "🧾 Hóa đơn của tôi", link: "../Bills/my-bills.html" },
+        { text: "🔔 Thông báo", link: "../Notifications/notifications.html" }
     ]
 };
 
@@ -48,12 +44,12 @@ function renderMenu(role) {
 
     sidebar.innerHTML = "";
 
+    const currentPage = location.pathname.split("/").pop();
+
     menus[role].forEach(m => {
         const btn = document.createElement("button");
         btn.innerText = m.text;
 
-        // active menu
-        const currentPage = location.pathname.split("/").pop();
         if (currentPage === m.link.split("/").pop()) {
             btn.classList.add("active");
         }
