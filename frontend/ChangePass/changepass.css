@@ -1,0 +1,225 @@
+body {
+    margin: 0;
+    font-family: "Segoe UI", sans-serif;
+    background: linear-gradient(180deg, #f4f6fa, #eef1ff);
+}
+
+/* ===== TOPBAR ===== */
+.topbar {
+    background: #6c63ff;
+    color: #fff;
+    padding: 0 25px;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 200;
+}
+
+.left {
+    display: flex;
+    align-items: center;
+    gap: 12px
+}
+
+.menu-btn {
+    font-size: 22px;
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+}
+
+/* ===== USER ===== */
+.user-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.avatar-text {
+    width: 36px;
+    height: 36px;
+    background: rgba(255, 255, 255, .25);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-menu {
+    position: absolute;
+    top: 52px;
+    right: 0;
+    background: #fff;
+    width: 190px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .15);
+    display: none;
+    overflow: hidden;
+    color: #333;
+}
+
+.user-menu div {
+    padding: 12px;
+    cursor: pointer;
+}
+
+.user-menu div:hover {
+    background: #f0f1ff;
+}
+
+/* ===== LAYOUT ===== */
+.wrapper {
+    display: flex
+}
+
+/* ===== SIDEBAR (GIỐNG DASHBOARD) ===== */
+.sidebar {
+    width: 240px;
+    background: #fff;
+    height: calc(100vh - 60px);
+    padding: 15px;
+    position: fixed;
+    left: -260px;
+    top: 60px;
+    transition: .25s;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, .08);
+    z-index: 150;
+    overflow-y: auto;
+}
+
+.sidebar.show {
+    left: 0
+}
+
+/* SCROLLBAR GIỐNG DASHBOARD */
+.sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background: #dcdfff;
+    border-radius: 10px;
+}
+
+/* ===== MAIN ===== */
+.main {
+    flex: 1;
+    padding: 25px;
+    margin-top: 60px;
+    width: 100%;
+    transition: margin-left .25s;
+}
+
+.sidebar.show~.main {
+    margin-left: 240px
+}
+
+/* ===== MENU ITEM (GIỐNG DASHBOARD) ===== */
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    margin: 10px 0;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 15px;
+    color: #444;
+    background: #f3f4ff;
+    transition: .15s;
+}
+
+.menu-item:hover {
+    background: #e7e9ff;
+}
+
+.menu-item.active {
+    background: #6c63ff;
+    color: #fff;
+}
+
+.menu-item .icon {
+    width: 22px;
+    text-align: center;
+    font-size: 18px;
+}
+
+.menu-item .text {
+    flex: 1;
+}
+
+/* ===== PAGE HEAD ===== */
+.page-head {
+    margin-bottom: 20px;
+}
+
+.page-head h2 {
+    margin: 0;
+}
+
+/* ===== SECTION ===== */
+.section {
+    background: #fff;
+    border-radius: 14px;
+    padding: 24px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, .08);
+    max-width: 520px;
+}
+
+/* ===== FORM ===== */
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    font-weight: 600;
+    font-size: 14px;
+    color: #444;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+/* ===== BUTTON ===== */
+.btn-save {
+    margin-top: 10px;
+    background: #6c63ff;
+    color: #fff;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.btn-save:hover {
+    background: #5a52e0;
+}
+
+/* ===== MESSAGE ===== */
+#msg {
+    margin-top: 10px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:768px) {
+    .sidebar.show~.main {
+        margin-left: 0;
+    }
+}
