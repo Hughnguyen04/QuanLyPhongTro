@@ -1,73 +1,126 @@
 /* ================== MENU CONFIG ================== */
+const ROOT = ""; 
+// nếu project có thư mục gốc ví dụ /QLTro thì đổi thành:
+// const ROOT = "/QLTro";
+
 const menus = {
     chutro: [
-        { text: "🏠 Dashboard", link: "../Dashboard/dashboard.html" },
-        { text: "🏘 Quản lý phòng", link: "../Rooms/rooms.html" },
-        { text: "👤 Quản lý người thuê", link: "../Accounts/tenants.html" },
-        { text: "🧑‍💼 Quản lý nhân viên", link: "../Accounts/staff.html" },
+        { icon:"🏠", text:"Dashboard", link:"/Dashboard/dashboard.html" },
 
-        { text: "📄 Hợp đồng (người thuê)", link: "../Contracts/contracts-tenant.html" },
-        { text: "📄 Hợp đồng (nhân viên)", link: "../Contracts/contracts-staff.html" },
+        { icon:"🏘️", text:"Quản lý phòng", link:"/Rooms/rooms.html" },
+        { icon:"👥", text:"Quản lý người thuê", link:"/Tenants/tenants.html" },
+        { icon:"🧑‍💼", text:"Quản lý nhân viên", link:"/Staff/staff.html" },
 
-        { text: "💵 Hóa đơn", link: "../Bills/bills.html" },
-        { text: "⚡ Điện nước", link: "../Meters/meters.html" },
-        { text: "📊 Thống kê", link: "../Reports/reports.html" },
+        { icon:"📄", text:"Hợp đồng", link:"/Contracts/contracts.html" },
+        { icon:"🔑", text:"Tài khoản", link:"/Accounts/accounts.html" },
 
-        { text: "⚙ Cài đặt hệ thống", link: "../Settings/settings.html" }
+        { icon:"💵", text:"Hóa đơn", link:"/Bills/bills.html" },
+        { icon:"⚡", text:"Điện nước", link:"/Meter/meter.html" },
+        { icon:"📊", text:"Thống kê", link:"/Stats/stats.html" },
+
+        { icon:"⚙️", text:"Cài đặt hệ thống", link:"/Settings/settings.html" }
     ],
 
     nhanvien: [
-        { text: "🏠 Dashboard", link: "../Dashboard/dashboard.html" },
-        { text: "🏘 Quản lý phòng", link: "../Rooms/rooms.html" },
-        { text: "👤 Quản lý người thuê", link: "../Accounts/tenants.html" },
+        { icon:"🏠", text:"Dashboard", link:"/Dashboard/dashboard.html" },
+        { icon:"🏘️", text:"Quản lý phòng", link:"/Rooms/rooms.html" },
+        { icon:"👥", text:"Quản lý người thuê", link:"/Tenants/tenants.html" },
 
-        { text: "📄 Hợp đồng (người thuê)", link: "../Contracts/contracts-tenant.html" },
+        { icon:"📄", text:"Hợp đồng", link:"/Contracts/contracts.html" },
+        { icon:"🔑", text:"Tài khoản", link:"/Accounts/accounts.html" },
 
-        { text: "💵 Hóa đơn", link: "../Bills/bills.html" },
-        { text: "⚡ Điện nước", link: "../Meters/meters.html" },
-        { text: "📊 Thống kê", link: "../Reports/reports.html" },
+        { icon:"💵", text:"Hóa đơn", link:"/Bills/bills.html" },
+        { icon:"⚡", text:"Điện nước", link:"/Meter/meter.html" },
+        { icon:"📊", text:"Thống kê", link:"/Stats/stats.html" },
 
-        { text: "🔔 Thông báo", link: "../Notifications/notifications.html" }
+        { icon:"🔔", text:"Thông báo", link:"/Notifications/notifications.html" }
     ],
 
     nguoithue: [
-        { text: "🏠 Dashboard", link: "../Dashboard/dashboard.html" },
-        { text: "🧾 Hóa đơn của tôi", link: "../Bills/my-bills.html" },
-        { text: "🔔 Thông báo", link: "../Notifications/notifications.html" }
+        { icon:"🏠", text:"Dashboard", link:"/Dashboard/dashboard.html" },
+        { icon:"💵", text:"Hóa đơn của tôi", link:"/Bills/mybills.html" },
+        { icon:"🔔", text:"Thông báo", link:"/Notifications/notifications.html" }
     ]
 };
 
+
 /* ================== RENDER MENU ================== */
-function renderMenu(role) {
+function renderMenu(role){
+
     const sidebar = document.getElementById("sidebar");
     if (!sidebar || !menus[role]) return;
 
     sidebar.innerHTML = "";
 
-    const currentPage = location.pathname.split("/").pop();
+    const currentPage = location.pathname.split("/").pop().toLowerCase();
 
     menus[role].forEach(m => {
-        const btn = document.createElement("button");
-        btn.innerText = m.text;
 
-        if (currentPage === m.link.split("/").pop()) {
-            btn.classList.add("active");
-        }
+        const item = document.createElement("div");
+        item.className = "menu-item";
 
-        btn.onclick = () => location.href = m.link;
-        sidebar.appendChild(btn);
+        const page = m.link.split("/").pop().toLowerCase();
+        if (page === currentPage) item.classList.add("active");
+
+        item.innerHTML = `
+            <span class="icon">${m.icon}</span>
+            <span class="text">${m.text}</span>
+        `;
+
+        item.onclick = ()=> location.href = ROOT + m.link;
+
+        sidebar.appendChild(item);
     });
 }
 
-/* ================== AUTO INIT ================== */
-document.addEventListener("DOMContentLoaded", () => {
+
+/* ================== USER NAV ================== */
+function openMyInfo() {
+    location.href = ROOT + "/Infor/infor.html";
+}
+
+function openChangePass() {
+    location.href = ROOT + "/ChangePass/changepass.html";
+}
+
+
+/* ================== USER DISPLAY ================== */
+function loadUserDisplay(){
+
     const role = localStorage.getItem("role");
-    if (!role) {
-        location.href = "../Login/login.html";
+
+    const name =
+        localStorage.getItem("name") ||
+        localStorage.getItem("username") ||
+        localStorage.getItem("user") ||
+        "";
+
+    const u = document.getElementById("username");
+    if (!u) return;
+
+    if(!name){
+        u.innerText = "Chưa đăng nhập";
         return;
     }
+
+    u.innerText = name;
+}
+
+
+/* ================== INIT ================== */
+document.addEventListener("DOMContentLoaded", () => {
+
+    const role = localStorage.getItem("role");
+
+    if (!role) {
+        location.href = ROOT + "/Login/login.html";
+        return;
+    }
+
     renderMenu(role);
+    loadUserDisplay();
 });
+
 
 /* ================== TOGGLE ================== */
 function toggleMenu() {
@@ -76,22 +129,27 @@ function toggleMenu() {
 
 function toggleUserMenu() {
     const m = document.getElementById("userMenu");
-    if (m) m.style.display = m.style.display === "block" ? "none" : "block";
+    if (!m) return;
+    m.style.display = m.style.display === "block" ? "none" : "block";
 }
+
 
 /* ================== CLICK OUTSIDE ================== */
 document.addEventListener("click", e => {
+
     if (!e.target.closest(".sidebar") && !e.target.closest(".menu-btn")) {
         document.getElementById("sidebar")?.classList.remove("show");
     }
+
     if (!e.target.closest(".user-box")) {
         const um = document.getElementById("userMenu");
         if (um) um.style.display = "none";
     }
 });
 
+
 /* ================== LOGOUT ================== */
 function logout() {
     localStorage.clear();
-    location.href = "../Login/login.html";
+    location.href = ROOT + "/Login/login.html";
 }
