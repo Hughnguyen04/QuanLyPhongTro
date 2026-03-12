@@ -72,4 +72,66 @@
 
 </body>
 
+<!-- TOPBAR -->
+<div class="topbar">
+    <div class="left">
+        <button class="menu-btn" onclick="toggleMenu()">☰</button>
+        <h2>Đổi mật khẩu</h2>
+    </div>
+
+    <div class="user-box" onclick="toggleUserMenu()">
+        <div class="avatar-text">👤</div>
+        <span id="username"></span>
+
+        <div class="user-menu" id="userMenu">
+            <div onclick="openMyInfo()">👤 Thông tin của tôi</div>
+            <div onclick="openChangePass()">🔒 Đổi mật khẩu</div>
+            <div onclick="logout()">🚪 Đăng xuất</div>
+        </div>
+    </div>
+</div>
+
+<div class="wrapper">
+
+    <div class="sidebar" id="sidebar"></div>
+
+    <div class="main">
+
+        <div class="page-head">
+            <h2>Đổi mật khẩu</h2>
+        </div>
+
+        <div class="section">
+
+            <div class="form-group">
+                <label>Mật khẩu hiện tại</label>
+                <input type="password" id="oldPass">
+            </div>
+
+            <div class="form-group">
+                <label>Mật khẩu mới</label>
+                <input type="password" id="newPass">
+            </div>
+
+            <div class="form-group">
+                <label>Nhập lại mật khẩu mới</label>
+                <input type="password" id="rePass">
+            </div>
+
+            <button class="btn-save" onclick="changePassword()">
+                Cập nhật mật khẩu
+            </button>
+
+            <div id="msg"></div>
+
+        </div>
+
+    </div>
+</div>
+
+<script src="../Common/menu.js"></script>
+<script src="../Common/data.js"></script>
+<script src="changepass.js"></script>
+
+</body>
 </html>

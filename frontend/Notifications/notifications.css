@@ -1,0 +1,118 @@
+body{
+    margin:0;
+    font-family:"Segoe UI",sans-serif;
+    background:#f4f6fa;
+}
+
+/* TOPBAR */
+.topbar{
+    background:#6c63ff;
+    color:#fff;
+    padding:15px 25px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+.left{display:flex;align-items:center;gap:12px}
+.menu-btn{font-size:22px;background:none;border:none;color:#fff;cursor:pointer}
+
+.user-box{position:relative;display:flex;align-items:center;gap:8px;cursor:pointer}
+.avatar-text{
+    width:36px;height:36px;border-radius:50%;
+    background:rgba(255,255,255,.25);
+    display:flex;align-items:center;justify-content:center
+}
+.user-menu{
+    position:absolute;top:48px;right:0;
+    background:#fff;width:180px;
+    border-radius:10px;
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
+    display:none;overflow:hidden;color:#333
+}
+.user-menu div{padding:12px;cursor:pointer}
+.user-menu div:hover{background:#f0f1ff}
+
+/* LAYOUT */
+.wrapper{display:flex}
+
+.sidebar{
+    width:240px;background:#fff;
+    height:calc(100vh - 60px);
+    padding:15px;
+    position:fixed;left:-260px;top:60px;
+    transition:left .25s;
+    box-shadow:2px 0 10px rgba(0,0,0,.1)
+}
+.sidebar.show{left:0}
+
+.main{
+    flex:1;
+    padding:25px;
+}
+
+/* HEADER */
+.noti-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+.filter button{
+    border:none;
+    padding:8px 12px;
+    margin-left:6px;
+    border-radius:8px;
+    background:#eef0ff;
+    cursor:pointer;
+    font-weight:600;
+}
+.filter button.active{
+    background:#6c63ff;
+    color:#fff;
+}
+
+/* LIST */
+.noti-list{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+/* ITEM */
+.noti{
+    background:#fff;
+    border-radius:12px;
+    padding:16px 18px;
+    box-shadow:0 6px 20px rgba(0,0,0,.08);
+    display:flex;
+    gap:14px;
+    align-items:flex-start;
+    transition:.2s;
+}
+.noti:hover{
+    transform:translateY(-2px);
+}
+
+.noti-icon{
+    width:42px;height:42px;
+    border-radius:10px;
+    background:#eef0ff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:20px;
+}
+
+.noti-title{
+    font-weight:600;
+    margin-bottom:4px;
+}
+.noti-time{
+    font-size:13px;
+    color:#777;
+}
+
+.noti.unread{
+    border-left:4px solid #6c63ff;
+    background:#f7f8ff;
+}
