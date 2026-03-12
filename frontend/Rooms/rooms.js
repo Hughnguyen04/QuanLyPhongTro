@@ -1,35 +1,43 @@
 /* ================== AUTH ================== */
 const role = localStorage.getItem("role");
 const username = localStorage.getItem("username");
+const userBuildings = JSON.parse(localStorage.getItem("buildings") || "[]");
 
 if (!role) location.href = "../Login/login.html";
 
 /* ================== USER ================== */
 document.getElementById("username").innerText = username || "";
 
-/* ================== MENU (TỪ Common/menu.js) ================== */
+/* ================== MENU ================== */
 renderMenu(role);
 
 /* =========================================================
-   =============== NỘI DUNG QUẢN LÝ PHÒNG ===================
+   =============== DATA (LẤY TỪ data.js) ====================
    ========================================================= */
 
-let rooms = [
-    { id: "P101", name: "Phòng 101", price: 2500000, status: "Đang thuê" },
-    { id: "P102", name: "Phòng 102", price: 2300000, status: "Trống" },
-    { id: "P103", name: "Phòng 103", price: 2800000, status: "Đang sửa" },
-    { id: "P104", name: "Phòng 104", price: 2000000, status: "Trống" }
-];
+// rooms lấy từ data.js (không khai báo lại)
+let listRooms = [...rooms];
+
+/* =========================================================
+   =============== RENDER ===================
+   ========================================================= */
 
 function render() {
     const key = document.getElementById("key").value.toLowerCase();
     const st = document.getElementById("status").value;
     const tbody = document.getElementById("tbody");
 
+    let list = listRooms;
+
+    /* ⭐ NHÂN VIÊN CHỈ THẤY TÒA CỦA MÌNH */
+    if (role === "nhanvien" && userBuildings.length) {
+        list = listRooms.filter(r => userBuildings.includes(r.building));
+    }
+
     let total = 0, thue = 0, trong = 0, sua = 0;
     tbody.innerHTML = "";
 
-    rooms
+    list
         .filter(r =>
             r.name.toLowerCase().includes(key) &&
             (st === "" || r.status === st)
@@ -44,6 +52,7 @@ function render() {
                 <tr>
                     <td>${r.id}</td>
                     <td>${r.name}</td>
+                    <td>${r.building}</td>
                     <td>${r.price.toLocaleString()} đ</td>
                     <td>${r.status}</td>
                     <td>
@@ -60,13 +69,19 @@ function render() {
     document.getElementById("sua").innerText = sua;
 }
 
+/* ================== ACTION ================== */
+
 function editRoom(id) {
     alert("Sửa phòng " + id);
 }
 
 function deleteRoom(id) {
     if (confirm("Xóa phòng " + id + "?")) {
+        listRooms = listRooms.filter(r => r.id !== id);
+
+        // cập nhật lại data.js runtime
         rooms = rooms.filter(r => r.id !== id);
+
         render();
     }
 }

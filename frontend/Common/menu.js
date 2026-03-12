@@ -5,41 +5,41 @@ const ROOT = "";
 
 const menus = {
     chutro: [
-        { icon:"🏠", text:"Dashboard", link:"/Dashboard/dashboard.html" },
+        { icon:"🏠", text:"Dashboard", link:"../Dashboard/dashboard.html" },
 
-        { icon:"🏘️", text:"Quản lý phòng", link:"/Rooms/rooms.html" },
-        { icon:"👥", text:"Quản lý người thuê", link:"/Tenants/tenants.html" },
-        { icon:"🧑‍💼", text:"Quản lý nhân viên", link:"/Staff/staff.html" },
+        { icon:"🏘️", text:"Quản lý phòng", link:"../Rooms/rooms.html" },
+        { icon:"👥", text:"Quản lý người thuê", link:"../Tenants/tenants.html" },
+        { icon:"🧑‍💼", text:"Quản lý nhân viên", link:"../Staff/staff.html" },
 
-        { icon:"📄", text:"Hợp đồng", link:"/Contracts/contracts.html" },
-        { icon:"🔑", text:"Tài khoản", link:"/Accounts/accounts.html" },
+        { icon:"📄", text:"Hợp đồng", link:"../Contracts/contracts.html" },
+        { icon:"🔑", text:"Tài khoản", link:"../Accounts/accounts.html" },
 
-        { icon:"💵", text:"Hóa đơn", link:"/Bills/bills.html" },
-        { icon:"⚡", text:"Điện nước", link:"/Meter/meter.html" },
-        { icon:"📊", text:"Thống kê", link:"/Stats/stats.html" },
+        { icon:"💵", text:"Hóa đơn", link:"../Bills/bills.html" },
+        { icon:"⚡", text:"Điện nước", link:"../Meter/meter.html" },
+        { icon:"📊", text:"Thống kê", link:"../Stats/stats.html" },
 
-        { icon:"⚙️", text:"Cài đặt hệ thống", link:"/Settings/settings.html" }
+        { icon:"⚙️", text:"Cài đặt hệ thống", link:"../Settings/settings.html" }
     ],
 
     nhanvien: [
-        { icon:"🏠", text:"Dashboard", link:"/Dashboard/dashboard.html" },
-        { icon:"🏘️", text:"Quản lý phòng", link:"/Rooms/rooms.html" },
-        { icon:"👥", text:"Quản lý người thuê", link:"/Tenants/tenants.html" },
+        { icon:"🏠", text:"Dashboard", link:"../Dashboard/dashboard.html" },
+        { icon:"🏘️", text:"Quản lý phòng", link:"../Rooms/rooms.html" },
+        { icon:"👥", text:"Quản lý người thuê", link:"../Tenants/tenants.html" },
 
-        { icon:"📄", text:"Hợp đồng", link:"/Contracts/contracts.html" },
-        { icon:"🔑", text:"Tài khoản", link:"/Accounts/accounts.html" },
+        { icon:"📄", text:"Hợp đồng", link:"../Contracts/contracts.html" },
+        { icon:"🔑", text:"Tài khoản", link:"../Accounts/accounts.html" },
 
-        { icon:"💵", text:"Hóa đơn", link:"/Bills/bills.html" },
-        { icon:"⚡", text:"Điện nước", link:"/Meter/meter.html" },
-        { icon:"📊", text:"Thống kê", link:"/Stats/stats.html" },
+        { icon:"💵", text:"Hóa đơn", link:"../Bills/bills.html" },
+        { icon:"⚡", text:"Điện nước", link:"../Meter/meter.html" },
+        { icon:"📊", text:"Thống kê", link:"../Stats/stats.html" },
 
-        { icon:"🔔", text:"Thông báo", link:"/Notifications/notifications.html" }
+        { icon:"🔔", text:"Thông báo", link:"../Notifications/notifications.html" }
     ],
 
     nguoithue: [
-        { icon:"🏠", text:"Dashboard", link:"/Dashboard/dashboard.html" },
-        { icon:"💵", text:"Hóa đơn của tôi", link:"/Bills/mybills.html" },
-        { icon:"🔔", text:"Thông báo", link:"/Notifications/notifications.html" }
+        { icon:"🏠", text:"Dashboard", link:"../Dashboard/dashboard.html" },
+        { icon:"💵", text:"Hóa đơn của tôi", link:"../Bills/mybills.html" },
+        { icon:"🔔", text:"Thông báo", link:"../Notifications/notifications.html" }
     ]
 };
 

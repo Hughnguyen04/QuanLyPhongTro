@@ -31,6 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+/* ROLE TEXT */
 function roleText(r){
     if(r==="chutro") return "Chủ trọ";
     if(r==="nhanvien") return "Nhân viên";

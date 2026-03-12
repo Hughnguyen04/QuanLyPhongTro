@@ -1,42 +1,80 @@
+/* ================= LOGIN SYSTEM ================= */
+
 function login() {
-    const u = document.getElementById("username").value.trim();
-    const p = document.getElementById("password").value.trim();
-    const r = document.getElementById("result");
+    const usernameInput = document.getElementById("username");
+    const passwordInput = document.getElementById("password");
+    const result = document.getElementById("result");
+
+    if (!usernameInput || !passwordInput || !result) return;
+
+    const u = usernameInput.value.trim();
+    const p = passwordInput.value.trim();
 
     localStorage.clear();
 
     if (!u || !p) {
-        r.style.color = "red";
-        r.innerHTML = "Vui lòng nhập đầy đủ thông tin";
+        showError("Vui lòng nhập đầy đủ thông tin");
         return;
     }
 
-    if (u === "chutro" && p === "123") {
-        saveLogin("chutro", u);
+    /* ===== KIỂM TRA DATA ===== */
+    if (!window.DATA || !window.DATA.accounts) {
+        showError("Không tải được dữ liệu hệ thống");
+        console.error("DATA not loaded");
+        return;
     }
-    else if (u === "nhanvien" && p === "123") {
-        saveLogin("nhanvien", u);
-    }
-    else if (u === "nguoithue" && p === "123") {
-        saveLogin("nguoithue", u);
-    }
-    else {
-        r.style.color = "red";
-        r.innerHTML = "Sai thông tin đăng nhập";
-    }
-}
 
-function saveLogin(role, username) {
-    localStorage.setItem("role", role);
-    localStorage.setItem("username", username);
+    /* ===== TÌM ACCOUNT ===== */
+    const acc = window.DATA.accounts.find(
+        a => a.username === u && a.password === p
+    );
 
+    if (!acc) {
+        showError("Sai thông tin đăng nhập");
+        return;
+    }
+
+    /* ===== LƯU SESSION ===== */
+    localStorage.setItem("role", acc.role);
+    localStorage.setItem("username", acc.username);
+    localStorage.setItem("name", acc.name);
+
+    if (acc.role === "nhanvien") {
+        localStorage.setItem(
+            "buildings",
+            JSON.stringify(acc.buildings || [])
+        );
+    }
+
+    if (acc.role === "nguoithue") {
+        localStorage.setItem("building", acc.building || "");
+        localStorage.setItem("room", acc.room || "");
+        localStorage.setItem("tenantId", acc.tenantId || "");
+    }
+
+    /* ===== CHUYỂN TRANG ===== */
     window.location.href = "../Dashboard/dashboard.html";
 }
 
+
+/* ================= HELPERS ================= */
+
+function showError(msg) {
+    const r = document.getElementById("result");
+    if (!r) return;
+    r.style.color = "red";
+    r.innerHTML = msg;
+}
+
+
+/* ================= MODAL (FORGOT) ================= */
+
 function openModal(id) {
-    document.getElementById(id).style.display = "flex";
+    const m = document.getElementById(id);
+    if (m) m.style.display = "flex";
 }
 
 function closeModal(id) {
-    document.getElementById(id).style.display = "none";
+    const m = document.getElementById(id);
+    if (m) m.style.display = "none";
 }

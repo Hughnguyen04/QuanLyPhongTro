@@ -2,17 +2,16 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Quản lý phòng</title>
-    <link rel="stylesheet" href="rooms.css">
+    <title>Quản lý nhân viên</title>
+    <link rel="stylesheet" href="staff.css">
 </head>
 
 <body>
 
-<!-- TOPBAR -->
 <div class="topbar">
     <div class="left">
         <button class="menu-btn" onclick="toggleMenu()">☰</button>
-        <h2 id="title">Quản lý phòng</h2>
+        <h2>Quản lý nhân viên</h2>
     </div>
 
     <div class="user-box" onclick="toggleUserMenu()">
@@ -29,30 +28,23 @@
 
 <div class="wrapper">
 
-    <!-- SIDEBAR -->
     <div class="sidebar" id="sidebar"></div>
 
-    <!-- MAIN -->
     <div class="main">
 
         <div class="toolbar">
-            <input id="key" placeholder="🔍 Tìm theo tên phòng..." oninput="render()">
+            <input id="key" placeholder="🔍 Tìm theo tên nhân viên..." oninput="render()">
 
-            <select id="status" onchange="render()">
-                <option value="">Tất cả trạng thái</option>
-                <option>Trống</option>
-                <option>Đang thuê</option>
-                <option>Đang sửa</option>
+            <select id="buildingFilter" onchange="render()">
+                <option value="">Tất cả tòa</option>
             </select>
 
-            <button class="add owner">➕ Thêm phòng</button>
+            <button class="add" onclick="addStaff()">➕ Thêm nhân viên</button>
         </div>
 
         <div class="cards">
-            <div class="card"><h4>Tổng phòng</h4><p id="total">0</p></div>
-            <div class="card"><h4>Đang thuê</h4><p id="thue">0</p></div>
-            <div class="card"><h4>Phòng trống</h4><p id="trong">0</p></div>
-            <div class="card"><h4>Đang sửa</h4><p id="sua">0</p></div>
+            <div class="card"><h4>Tổng nhân viên</h4><p id="total">0</p></div>
+            <div class="card"><h4>Tổng tòa quản lý</h4><p id="buildCount">0</p></div>
         </div>
 
         <div class="section">
@@ -60,9 +52,10 @@
                 <thead>
                     <tr>
                         <th>Mã</th>
-                        <th>Tên phòng</th>
-                        <th>Giá</th>
-                        <th>Trạng thái</th>
+                        <th>Tên</th>
+                        <th>Tài khoản</th>
+                        <th>Tòa quản lý</th>
+                        <th>Số tòa</th>
                         <th>Hành động</th>
                     </tr>
                 </thead>
@@ -73,10 +66,8 @@
     </div>
 </div>
 
-<!-- 🔥 LOAD MENU TRƯỚC -->
 <script src="../Common/menu.js"></script>
 <script src="../Common/data.js"></script>
-<script src="rooms.js"></script>
-
+<script src="staff.js"></script>
 </body>
 </html>

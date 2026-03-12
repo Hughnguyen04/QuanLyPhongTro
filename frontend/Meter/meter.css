@@ -76,20 +76,22 @@ body{
     transition:.25s;
     box-shadow:2px 0 10px rgba(0,0,0,.08);
     z-index:150;
-    overflow-y:auto;
 }
 .sidebar.show{left:0}
 
+/* ===== MAIN ===== */
 .main{
     flex:1;
-    padding:25px;
+    padding:25px 30px;
     margin-top:60px;
     width:100%;
-    transition:margin-left .25s;
+    transition:.25s;
 }
-.sidebar.show ~ .main{margin-left:240px}
+.sidebar.show ~ .main{
+    width:calc(100% - 240px);
+}
 
-/* ===== MENU ITEM ===== */
+/* ===== MENU ITEM (CHUẨN) ===== */
 .menu-item{
     display:flex;
     align-items:center;
@@ -103,27 +105,12 @@ body{
     background:#f3f4ff;
     transition:.15s;
 }
+.menu-item:hover{background:#e7e9ff}
+.menu-item.active{background:#6c63ff;color:#fff}
+.menu-item .icon{width:22px;text-align:center;font-size:18px}
+.menu-item .text{flex:1}
 
-.menu-item:hover{
-    background:#e7e9ff;
-}
-
-.menu-item.active{
-    background:#6c63ff;
-    color:#fff;
-}
-
-.menu-item .icon{
-    width:22px;
-    text-align:center;
-    font-size:18px;
-}
-
-.menu-item .text{
-    flex:1;
-}
-
-/* ===== TOOLBAR (rooms) ===== */
+/* ===== TOOLBAR ===== */
 .toolbar{
     display:flex;
     gap:10px;
@@ -131,12 +118,12 @@ body{
 }
 .toolbar input,
 .toolbar select{
-    padding:10px 12px;
+    padding:10px;
     border:1px solid #ddd;
-    border-radius:8px;
-    background:#fff;
+    border-radius:6px;
 }
 
+/* ===== BUTTON ===== */
 .add{
     background:#6c63ff;
     color:#fff;
@@ -144,7 +131,9 @@ body{
     border-radius:8px;
     padding:10px 14px;
     cursor:pointer;
+    font-weight:600;
 }
+.add:hover{background:#5a52e0}
 
 /* ===== CARDS ===== */
 .cards{
@@ -159,25 +148,20 @@ body{
     border-radius:14px;
     box-shadow:0 6px 20px rgba(0,0,0,.08);
 }
-.card h4{
-    margin:0;
-    color:#666;
-    font-weight:500;
-}
+.card h4{margin:0;color:#666;font-weight:500}
 .card p{
     font-size:26px;
     margin:12px 0 0;
     font-weight:600;
 }
 
-/* ===== PANEL / TABLE ===== */
+/* ===== TABLE ===== */
 .section{
     background:#fff;
-    border-radius:14px;
     padding:20px;
+    border-radius:14px;
     box-shadow:0 6px 20px rgba(0,0,0,.08);
 }
-
 table{
     width:100%;
     border-collapse:collapse;
@@ -193,35 +177,9 @@ td{
     padding:10px;
     border-bottom:1px solid #f0f0f0;
 }
-tr:hover{
-    background:#f8f9ff;
-}
+tr:hover{background:#f8f9ff}
 
-/* ===== MODAL ===== */
-.modal{
-    display:none;
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.6);
-    justify-content:center;
-    align-items:center;
-}
-.box{
-    background:#fff;
-    padding:25px;
-    width:360px;
-    border-radius:14px;
-}
-.box input,.box select{
-    width:100%;
-    padding:10px;
-    margin:8px 0;
-}
-.modal-actions{display:flex;gap:10px}
-
-/* ===== RESPONSIVE ===== */
+/* ===== MOBILE ===== */
 @media(max-width:768px){
-    .sidebar.show ~ .main{
-        margin-left:0;
-    }
+    .sidebar.show ~ .main{width:100%}
 }

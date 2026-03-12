@@ -1,12 +1,10 @@
-/* ===== AUTH ===== */
+
 const role = localStorage.getItem("role");
 const username = localStorage.getItem("username");
 
 if (!role) location.href = "../Login/login.html";
 
-const userEl = document.getElementById("username");
-if (userEl) userEl.innerText = username;
-
+document.getElementById("username").innerText = username;
 renderMenu(role);
 
 let listContracts = [...contracts];
@@ -14,26 +12,20 @@ let listContracts = [...contracts];
 if (role === "nhanvien") {
     const acc = accounts.find(a => a.username === username);
     if (acc && acc.buildings) {
-        listContracts = listContracts.filter(c =>
-            acc.buildings.includes(c.building)
-        );
+        listContracts = listContracts.filter(c => acc.buildings.includes(c.building));
     }
 }
 
-
 function initBuildings() {
     const select = document.getElementById("buildingFilter");
-    if (!select) return;
 
-    const buildings = [...new Set(listContracts.map(c => c.building))];
+    const all = new Set(listContracts.map(c => c.building));
 
     select.innerHTML = `<option value="">Tất cả tòa</option>`;
-
-    buildings.forEach(b => {
+    [...all].forEach(b => {
         select.innerHTML += `<option value="${b}">${b}</option>`;
     });
 }
-
 
 function getStatus(c) {
     const today = new Date();
@@ -41,18 +33,13 @@ function getStatus(c) {
     return end >= today ? "Đang hiệu lực" : "Hết hạn";
 }
 
-
 function render() {
-    const key = document.getElementById("key")?.value.toLowerCase() || "";
-    const building = document.getElementById("buildingFilter")?.value || "";
+    const key = document.getElementById("key").value.toLowerCase();
+    const building = document.getElementById("buildingFilter").value;
     const tbody = document.getElementById("tbody");
 
-    if (!tbody) return;
-
-    let total = 0;
-    let active = 0;
-    let expired = 0;
-    let html = "";
+    tbody.innerHTML = "";
+    let total = 0, active = 0, expired = 0;
 
     listContracts
         .filter(c =>
@@ -60,15 +47,13 @@ function render() {
             (building === "" || c.building === building)
         )
         .forEach(c => {
-
             total++;
 
             const status = getStatus(c);
-
             if (status === "Đang hiệu lực") active++;
             else expired++;
 
-            html += `
+            tbody.innerHTML += `
             <tr>
                 <td>${c.id}</td>
                 <td>${c.tenantName}</td>
@@ -86,16 +71,12 @@ function render() {
             `;
         });
 
-    tbody.innerHTML = html;
-
     document.getElementById("total").innerText = total;
     document.getElementById("active").innerText = active;
     document.getElementById("expired").innerText = expired;
 }
 
-
 function addContract() {
-
     const tenant = prompt("Tên người thuê:");
     if (!tenant) return;
 
@@ -111,8 +92,9 @@ function addContract() {
 
     const id = "C" + Math.floor(Math.random() * 10000);
 
-    const contract = {
+    const c = {
         id,
+        tenantId: "",
         tenantName: tenant,
         room,
         building,
@@ -121,16 +103,14 @@ function addContract() {
         deposit
     };
 
-    contracts.push(contract);
-    listContracts.push(contract);
+    contracts.push(c);
+    listContracts.push(c);
 
     initBuildings();
     render();
 }
 
-
 function editContract(id) {
-
     const c = contracts.find(x => x.id === id);
     if (!c) return;
 
@@ -140,14 +120,11 @@ function editContract(id) {
     render();
 }
 
-
 function deleteContract(id) {
-
     if (role !== "chutro") return;
     if (!confirm("Xóa hợp đồng?")) return;
 
     const idx = contracts.findIndex(c => c.id === id);
-
     if (idx > -1) contracts.splice(idx, 1);
 
     listContracts = listContracts.filter(c => c.id !== id);
@@ -155,8 +132,8 @@ function deleteContract(id) {
     render();
 }
 
-document.getElementById("key")?.addEventListener("input", render);
-document.getElementById("buildingFilter")?.addEventListener("change", render);
+document.getElementById("key").addEventListener("input", render);
+document.getElementById("buildingFilter").addEventListener("change", render);
 
 initBuildings();
 render();

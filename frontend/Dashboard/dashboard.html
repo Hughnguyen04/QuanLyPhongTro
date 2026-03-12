@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <title>Dashboard</title>
-    <link rel="stylesheet" href="dashboard.css">
+<meta charset="UTF-8">
+<title>Dashboard</title>
+<link rel="stylesheet" href="dashboard.css">
 </head>
 
 <body>
 
-<!-- TOPBAR -->
 <div class="topbar">
     <div class="left">
         <button class="menu-btn" onclick="toggleMenu()">☰</button>
-        <h2 id="title"></h2>
+        <h2 id="title">Dashboard</h2>
     </div>
 
     <div class="user-box" onclick="toggleUserMenu()">
@@ -20,8 +19,8 @@
         <span id="username"></span>
 
         <div class="user-menu" id="userMenu">
-            <div>👤 Thông tin của tôi</div>
-            <div>🔒 Đổi mật khẩu</div>
+            <div onclick="openMyInfo()">👤 Thông tin của tôi</div>
+            <div onclick="openChangePass()">🔒 Đổi mật khẩu</div>
             <div onclick="logout()">🚪 Đăng xuất</div>
         </div>
     </div>
@@ -29,47 +28,66 @@
 
 <div class="wrapper">
 
-    <!-- SIDEBAR -->
-    <div class="sidebar" id="sidebar"></div>
+<div class="sidebar" id="sidebar"></div>
 
-    <!-- MAIN -->
-    <div class="main">
+<div class="main">
 
-        <!-- CHỦ TRỌ -->
-        <div id="chutro" style="display:none">
-            <div class="cards">
-                <div class="card"><h4>Tổng số phòng</h4><p>20</p></div>
-                <div class="card"><h4>Phòng đang thuê</h4><p>15</p></div>
-                <div class="card"><h4>Phòng trống</h4><p>5</p></div>
-                <div class="card"><h4>Doanh thu tháng</h4><p>45.000.000đ</p></div>
-            </div>
-        </div>
-
-        <!-- NHÂN VIÊN -->
-        <div id="nhanvien" style="display:none">
-            <div class="cards">
-                <div class="card"><h4>Phòng quản lý</h4><p>8</p></div>
-                <div class="card"><h4>Hóa đơn chưa thu</h4><p>3</p></div>
-                <div class="card"><h4>Công việc hôm nay</h4><p>5</p></div>
-            </div>
-        </div>
-
-        <!-- NGƯỜI THUÊ -->
-        <div id="nguoithue" style="display:none">
-            <div class="cards">
-                <div class="card"><h4>Phòng đang thuê</h4><p>P101</p></div>
-                <div class="card"><h4>Hóa đơn tháng này</h4><p>3.450.000đ</p></div>
-                <div class="card"><h4>Trạng thái</h4><p>Chưa thanh toán</p></div>
-            </div>
-        </div>
-
+    <div class="welcome">
+        <h2 id="welcomeName">👋 Chào</h2>
+        <div id="today"></div>
     </div>
+
+    <div class="cards">
+        <div class="card"><h4>Tổng phòng</h4><p id="tongPhong">0</p></div>
+        <div class="card"><h4>Đang thuê</h4><p id="phongThue">0</p></div>
+        <div class="card"><h4>Phòng trống</h4><p id="phongTrong">0</p></div>
+        <div class="card"><h4>Người thuê</h4><p id="soNguoi">0</p></div>
+        <div class="card"><h4>Hóa đơn chưa thu</h4><p id="hoaDonNo">0</p></div>
+    </div>
+
+    <div class="panel">
+        <h3>📋 Việc cần làm</h3>
+        <ul id="todoList"></ul>
+    </div>
+
+    <div class="panel" id="phongTrongPanel">
+        <h3>🏠 Phòng trống</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Phòng</th>
+                    <th>Tòa</th>
+                    <th>Giá</th>
+                </tr>
+            </thead>
+            <tbody id="phongTrongTable"></tbody>
+        </table>
+    </div>
+
+    <div class="panel" id="noPanel">
+        <h3>💰 Hóa đơn chưa thu</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Phòng</th>
+                    <th>Tòa</th>
+                    <th>Số tiền</th>
+                </tr>
+            </thead>
+            <tbody id="noTable"></tbody>
+        </table>
+    </div>
+
+    <div class="panel">
+        <h3>🕒 Hoạt động gần đây</h3>
+        <ul id="activity"></ul>
+    </div>
+
+</div>
 </div>
 
-<!-- ✅ LOAD MENU CHUNG -->
 <script src="../Common/menu.js"></script>
-
-<!-- ✅ JS RIÊNG DASHBOARD -->
+<script src="../Common/data.js"></script>
 <script src="dashboard.js"></script>
 
 </body>
