@@ -2,11 +2,11 @@ package com.example.quanlyphongtro.dto.response;
 
 public class LoginResponse {
     private String message;
-    private String token;
+//    private String token;
 
-    public LoginResponse(String message, String token) {
+    public LoginResponse(String message) {
         this.message = message;
-        this.token = token;
+//        this.token = token;
     }
 
     public String getMessage() {
@@ -17,11 +17,11 @@ public class LoginResponse {
         this.message = message;
     }
 
-    public String getToken() {
-        return token;
-    }
+//    public String getToken() {
+//        return token;
+//    }
 
-    public void setToken(String token) {
-        this.token = token;
-    }
+//    public void setToken(String token) {
+//        this.token = token;
+//    }
 }

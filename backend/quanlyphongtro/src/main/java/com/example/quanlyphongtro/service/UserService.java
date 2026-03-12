@@ -1,11 +1,15 @@
 package com.example.quanlyphongtro.service;
 
 import com.example.quanlyphongtro.dto.UserDTO;
+import com.example.quanlyphongtro.dto.request.RegisterRequest;
 import com.example.quanlyphongtro.model.User;
 import com.example.quanlyphongtro.repository.UserRepository;
-import org.hibernate.mapping.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,7 +26,7 @@ public class UserService {
     }
 
     public UserDTO getUserById(Integer id) {
-        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found!"));
+        User user = userRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"User not found!"));
         return new UserDTO(user.getUserId(), user.getUsername(), user.getRole(), user.getIsActive());
     }
 
@@ -32,7 +36,7 @@ public class UserService {
     }
 
     public UserDTO updateUser(Integer id, User userUpdate) {
-        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found!"));
+        User user = userRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found!"));
 
         user.setUsername(userUpdate.getUsername());
         user.setPassword(userUpdate.getPassword());
@@ -44,7 +48,7 @@ public class UserService {
     }
 
     public UserDTO deleteUser(Integer id){
-        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
+        User user = userRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found!"));
         userRepository.deleteById(id);
         return new UserDTO(user.getUserId(), user.getUsername(), user.getRole(), user.getIsActive());
     }

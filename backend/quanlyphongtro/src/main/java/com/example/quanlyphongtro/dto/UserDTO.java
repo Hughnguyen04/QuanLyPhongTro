@@ -46,4 +46,16 @@ public class UserDTO {
     public void setIsActive(Boolean isActive) {
         this.isActive = isActive;
     }
+
+    @Override
+    public String toString() {
+        return "userId: " + userId +
+                "\nusername: " + username + '\'' +
+                "\nrole: " + role +
+                "\nisActive: " + isActive;
+    }
+
+    public static String notFoundString(){
+        return "User not found!";
+    }
 }
