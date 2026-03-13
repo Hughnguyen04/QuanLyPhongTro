@@ -225,3 +225,33 @@ tr:hover{
         margin-left:0;
     }
 }
+.modal{
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.6);
+justify-content:center;
+align-items:center;
+}
+
+.box{
+background:#fff;
+padding:25px;
+width:360px;
+border-radius:14px;
+}
+
+.box input,
+.box select{
+width:100%;
+padding:10px;
+margin:8px 0;
+border:1px solid #ddd;
+border-radius:8px;
+}
+
+.modal-actions{
+display:flex;
+gap:10px;
+margin-top:10px;
+}

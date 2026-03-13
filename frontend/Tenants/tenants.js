@@ -1,104 +1,183 @@
-/* ================== AUTH ================== */
 const role = localStorage.getItem("role");
 const username = localStorage.getItem("username");
-const userBuildings = JSON.parse(localStorage.getItem("buildings") || "[]");
 
 if (!role) location.href = "../Login/login.html";
 
 document.getElementById("username").innerText = username || "";
+
 renderMenu(role);
 
-/* ================== DATA ================== */
-let listTenants = [...tenants]; // từ data.js
+let editingId = null;
 
-/* ================== INIT FILTER PHÒNG ================== */
-function initRooms() {
-    const select = document.getElementById("roomFilter");
 
-    let list = listTenants;
+/* ================= LOAD FILTER ================= */
 
-    // nhân viên chỉ thấy tòa mình
-    if (role === "nhanvien" && userBuildings.length) {
-        list = listTenants.filter(t => userBuildings.includes(t.building));
-    }
+function loadBuildingFilter(){
 
-    const rooms = [...new Set(list.map(t => t.room))];
+const select=document.getElementById("buildingFilter");
 
-    select.innerHTML = `<option value="">Tất cả phòng</option>`;
-    rooms.forEach(r => {
-        select.innerHTML += `<option value="${r}">${r}</option>`;
-    });
+select.innerHTML=`<option value="">Tất cả tòa</option>`;
+
+buildings.forEach(b=>{
+select.innerHTML+=`<option value="${b.BuildingID}">${b.BuildingName}</option>`;
+});
+
 }
 
-/* ================== RENDER ================== */
-function render() {
-    const key = document.getElementById("key").value.toLowerCase();
-    const room = document.getElementById("roomFilter").value;
-    const status = document.getElementById("statusFilter").value;
-    const tbody = document.getElementById("tbody");
 
-    let list = listTenants;
+function loadRoomFilter(){
 
-    // nhân viên chỉ thấy tòa mình
-    if (role === "nhanvien" && userBuildings.length) {
-        list = listTenants.filter(t => userBuildings.includes(t.building));
-    }
+const building=document.getElementById("buildingFilter").value;
+const select=document.getElementById("roomFilter");
 
-    tbody.innerHTML = "";
+select.innerHTML=`<option value="">Tất cả phòng</option>`;
 
-    let total = 0, dang = 0, roi = 0;
+rooms
+.filter(r => !building || r.BuildingID===building)
+.forEach(r=>{
 
-    list
-        .filter(t =>
-            t.name.toLowerCase().includes(key) &&
-            (room === "" || t.room === room) &&
-            (status === "" || t.status === status)
-        )
-        .forEach(t => {
-            total++;
-            if (t.status === "Đang thuê") dang++;
-            if (t.status === "Đã rời") roi++;
+select.innerHTML+=`<option value="${r.RoomID}">${r.RoomName}</option>`;
 
-            tbody.innerHTML += `
-                <tr>
-                    <td>${t.id}</td>
-                    <td>${t.name}</td>
-                    <td>${t.room}</td>
-                    <td>${t.building}</td>
-                    <td>${t.phone}</td>
-                    <td>${t.status}</td>
-                    <td>
-                        <button onclick="editTenant('${t.id}')">✏️</button>
-                        ${role==="chutro" ? `<button onclick="deleteTenant('${t.id}')">🗑</button>` : ""}
-                    </td>
-                </tr>
-            `;
-        });
+});
 
-    document.getElementById("total").innerText = total;
-    document.getElementById("dang").innerText = dang;
-    document.getElementById("roi").innerText = roi;
 }
 
-/* ================== ACTION ================== */
-function editTenant(id) {
-    alert("Sửa người thuê " + id);
+
+function loadRoomModal(){
+
+const select=document.getElementById("mRoom");
+
+select.innerHTML=`<option value="">Chọn phòng</option>`;
+
+rooms.forEach(r=>{
+
+select.innerHTML+=`<option value="${r.RoomID}">
+${r.RoomName}
+</option>`;
+
+});
+
 }
 
-function deleteTenant(id) {
-    if (role !== "chutro") return;
 
-    if (confirm("Xóa người thuê " + id + "?")) {
-        listTenants = listTenants.filter(t => t.id !== id);
+/* ================= RENDER ================= */
 
-        // cập nhật data gốc
-        tenants = tenants.filter(t => t.id !== id);
+function render(){
 
-        initRooms();
-        render();
-    }
+const key=document.getElementById("key").value.toLowerCase();
+const building=document.getElementById("buildingFilter").value;
+const room=document.getElementById("roomFilter").value;
+const status=document.getElementById("statusFilter").value;
+
+const tbody=document.getElementById("tbody");
+
+tbody.innerHTML="";
+
+let total=0,dang=0,roi=0;
+
+listTenants
+.filter(t =>
+
+t.FullName.toLowerCase().includes(key) &&
+
+(!building || t.BuildingID===building) &&
+
+(!room || t.RoomID===room) &&
+
+(!status || t.Status===status)
+
+)
+
+.forEach(t=>{
+
+total++;
+
+const statusText = t.Status==="DA_ROI" ? "Đã rời" : "Đang thuê";
+
+if(statusText==="Đang thuê") dang++;
+else roi++;
+
+tbody.innerHTML+=`
+<tr>
+<td>${t.TenantID}</td>
+<td>${t.FullName}</td>
+<td>${t.CCCD||""}</td>
+<td>${t.Address||""}</td>
+<td>${t.RoomName||"-"}</td>
+<td>${t.BuildingName||"-"}</td>
+<td>${t.Phone||""}</td>
+<td>${statusText}</td>
+<td>
+<button onclick="openEditTenant('${t.TenantID}')">✏️</button>
+${role==="chutro" ? `<button onclick="deleteTenant('${t.TenantID}')">🗑</button>` : ""}
+</td>
+</tr>
+`;
+
+});
+
+document.getElementById("total").innerText=total;
+document.getElementById("dang").innerText=dang;
+document.getElementById("roi").innerText=roi;
+
 }
 
-/* ================== INIT ================== */
-initRooms();
+
+/* ================= MODAL ================= */
+
+function openAddTenant(){
+
+editingId=null;
+
+modalTitle.innerText="Thêm người thuê";
+
+mName.value="";
+mCCCD.value="";
+mPhone.value="";
+mAddress.value="";
+mRoom.value="";
+mStatus.value="DANG_O";
+
+modal.style.display="flex";
+
+}
+
+
+function openEditTenant(id){
+
+const t=listTenants.find(x=>x.TenantID===id);
+
+editingId=id;
+
+modalTitle.innerText="Sửa người thuê";
+
+mName.value=t.FullName;
+mCCCD.value=t.CCCD||"";
+mPhone.value=t.Phone||"";
+mAddress.value=t.Address||"";
+mRoom.value=t.RoomID||"";
+mStatus.value=t.Status||"DANG_O";
+
+modal.style.display="flex";
+
+}
+
+
+function closeModal(){
+
+modal.style.display="none";
+
+}
+
+
+/* ================= INIT ================= */
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+loadBuildingFilter();
+loadRoomFilter();
+loadRoomModal();
+
 render();
+
+});

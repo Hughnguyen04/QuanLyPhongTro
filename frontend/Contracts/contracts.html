@@ -18,11 +18,11 @@
         <div class="avatar-text">👤</div>
         <span id="username"></span>
 
-    <div class="user-menu" id="userMenu">
-        <div onclick="openMyInfo()">👤 Thông tin của tôi</div>
-        <div onclick="openChangePass()">🔒 Đổi mật khẩu</div>
-        <div onclick="logout()">🚪 Đăng xuất</div>
-    </div>
+        <div class="user-menu" id="userMenu">
+            <div onclick="openMyInfo()">👤 Thông tin của tôi</div>
+            <div onclick="openChangePass()">🔒 Đổi mật khẩu</div>
+            <div onclick="logout()">🚪 Đăng xuất</div>
+        </div>
     </div>
 </div>
 
@@ -32,46 +32,78 @@
 
 <div class="main">
 
-    <div class="toolbar">
-        <input id="key" placeholder="🔍 Tìm người thuê..." oninput="render()">
+<div class="toolbar">
+<input id="key" placeholder="🔍 Tìm người thuê..." oninput="render()">
 
-        <select id="buildingFilter" onchange="render()">
-            <option value="">Tất cả tòa</option>
-        </select>
+<select id="buildingFilter" onchange="render()">
+<option value="">Tất cả tòa</option>
+</select>
 
-        <button class="add" onclick="addContract()">➕ Thêm hợp đồng</button>
-    </div>
+<button class="add" onclick="openAdd()">➕ Thêm hợp đồng</button>
+</div>
 
-    <div class="cards">
-        <div class="card"><h4>Tổng hợp đồng</h4><p id="total">0</p></div>
-        <div class="card"><h4>Đang hiệu lực</h4><p id="active">0</p></div>
-        <div class="card"><h4>Hết hạn</h4><p id="expired">0</p></div>
-    </div>
+<div class="cards">
+<div class="card"><h4>Tổng hợp đồng</h4><p id="total">0</p></div>
+<div class="card"><h4>Đang hiệu lực</h4><p id="active">0</p></div>
+<div class="card"><h4>Hết hạn</h4><p id="expired">0</p></div>
+</div>
 
-    <div class="section">
-        <table>
-            <thead>
-                <tr>
-                    <th>Mã</th>
-                    <th>Người thuê</th>
-                    <th>Phòng</th>
-                    <th>Tòa</th>
-                    <th>Bắt đầu</th>
-                    <th>Kết thúc</th>
-                    <th>Cọc</th>
-                    <th>Trạng thái</th>
-                    <th>Hành động</th>
-                </tr>
-            </thead>
-            <tbody id="tbody"></tbody>
-        </table>
-    </div>
+<div class="section">
+<table>
+<thead>
+<tr>
+<th>Mã</th>
+<th>Người thuê</th>
+<th>Phòng</th>
+<th>Tòa</th>
+<th>Bắt đầu</th>
+<th>Kết thúc</th>
+<th>Giá thuê</th>
+<th>Cọc</th>
+<th>Trạng thái</th>
+<th>Hành động</th>
+</tr>
+</thead>
+
+<tbody id="tbody"></tbody>
+
+</table>
+</div>
 
 </div>
 </div>
+
+
+<!-- MODAL -->
+
+<div class="modal" id="modal">
+
+<div class="box">
+
+<h3 id="modalTitle">Thêm hợp đồng</h3>
+
+<input id="mTenant" placeholder="Người thuê">
+<input id="mRoom" placeholder="Phòng">
+<input id="mBuilding" placeholder="Tòa">
+
+<input id="mStart" type="date">
+<input id="mEnd" type="date">
+
+<input id="mRent" placeholder="Giá thuê">
+<input id="mDeposit" placeholder="Tiền cọc">
+
+<div class="modal-actions">
+<button onclick="saveContract()">💾 Lưu</button>
+<button onclick="closeModal()">❌ Hủy</button>
+</div>
+
+</div>
+</div>
+
 
 <script src="../Common/menu.js"></script>
-<script src="../Common/data.js"></script>
+<script src="api.js"></script>
 <script src="contracts.js"></script>
+
 </body>
 </html>

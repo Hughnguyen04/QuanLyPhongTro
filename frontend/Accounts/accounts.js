@@ -27,7 +27,7 @@ function getRoleFiltered(list){
     const myBuildings = acc?.buildings || [];
 
     return list.filter(a => myBuildings.includes(a.building));
-}
+} 
 
 /* ===== INIT BUILDING ===== */
 function initBuildings(){

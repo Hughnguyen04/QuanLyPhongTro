@@ -23,7 +23,7 @@ setText("title",
     "Dashboard Người thuê"
 );
 
-setText("welcomeName","👋 Chào mừng " + (acc?.name || username));
+setText("welcomeName"," Chào mừng " + (acc?.name || username));
 
 renderDate();
 

@@ -1,89 +1,146 @@
-/* ================== AUTH ================== */
 const role = localStorage.getItem("role");
 const username = localStorage.getItem("username");
-const userBuildings = JSON.parse(localStorage.getItem("buildings") || "[]");
 
 if (!role) location.href = "../Login/login.html";
 
-/* ================== USER ================== */
 document.getElementById("username").innerText = username || "";
 
-/* ================== MENU ================== */
 renderMenu(role);
 
-/* =========================================================
-   =============== DATA (LẤY TỪ data.js) ====================
-   ========================================================= */
+let editingId = null;
 
-// rooms lấy từ data.js (không khai báo lại)
-let listRooms = [...rooms];
 
-/* =========================================================
-   =============== RENDER ===================
-   ========================================================= */
+/* ================= RENDER ================= */
 
-function render() {
-    const key = document.getElementById("key").value.toLowerCase();
-    const st = document.getElementById("status").value;
-    const tbody = document.getElementById("tbody");
+function render(){
 
-    let list = listRooms;
+const key = document.getElementById("key").value.toLowerCase();
+const st = document.getElementById("status").value;
+const building = document.getElementById("buildingFilter").value;
 
-    /* ⭐ NHÂN VIÊN CHỈ THẤY TÒA CỦA MÌNH */
-    if (role === "nhanvien" && userBuildings.length) {
-        list = listRooms.filter(r => userBuildings.includes(r.building));
-    }
+const tbody = document.getElementById("tbody");
 
-    let total = 0, thue = 0, trong = 0, sua = 0;
-    tbody.innerHTML = "";
+let total=0,thue=0,trong=0,sua=0;
 
-    list
-        .filter(r =>
-            r.name.toLowerCase().includes(key) &&
-            (st === "" || r.status === st)
-        )
-        .forEach(r => {
-            total++;
-            if (r.status === "Đang thuê") thue++;
-            if (r.status === "Trống") trong++;
-            if (r.status === "Đang sửa") sua++;
+tbody.innerHTML="";
 
-            tbody.innerHTML += `
-                <tr>
-                    <td>${r.id}</td>
-                    <td>${r.name}</td>
-                    <td>${r.building}</td>
-                    <td>${r.price.toLocaleString()} đ</td>
-                    <td>${r.status}</td>
-                    <td>
-                        <button onclick="editRoom('${r.id}')">✏️</button>
-                        <button onclick="deleteRoom('${r.id}')">🗑</button>
-                    </td>
-                </tr>
-            `;
-        });
+listRooms
+.filter(r =>
 
-    document.getElementById("total").innerText = total;
-    document.getElementById("thue").innerText = thue;
-    document.getElementById("trong").innerText = trong;
-    document.getElementById("sua").innerText = sua;
+r.RoomName.toLowerCase().includes(key)
+
+&& (st==="" || mapStatus(r.Status)===st)
+
+&& (building==="" || r.BuildingID===building)
+
+)
+
+.forEach(r=>{
+
+const statusText = mapStatus(r.Status);
+
+total++;
+
+if(statusText==="Đang thuê") thue++;
+if(statusText==="Trống") trong++;
+if(statusText==="Đang sửa") sua++;
+
+tbody.innerHTML += `
+<tr>
+<td>${r.RoomID}</td>
+<td>${r.RoomName}</td>
+<td>${r.BuildingID}</td>
+<td>${Number(r.BasePrice).toLocaleString()} đ</td>
+<td>${statusText}</td>
+<td>
+<button onclick="openEditRoom('${r.RoomID}')">✏️</button>
+<button onclick="deleteRoom('${r.RoomID}')">🗑</button>
+</td>
+</tr>
+`;
+
+});
+
+document.getElementById("total").innerText = total;
+document.getElementById("thue").innerText = thue;
+document.getElementById("trong").innerText = trong;
+document.getElementById("sua").innerText = sua;
+
 }
 
-/* ================== ACTION ================== */
 
-function editRoom(id) {
-    alert("Sửa phòng " + id);
+/* ================= CARD ================= */
+
+function renderCards(){
+
+let total=listRooms.length;
+let thue=0,trong=0,sua=0;
+
+listRooms.forEach(r=>{
+
+if(r.Status==="DANG_THUE") thue++;
+if(r.Status==="TRONG") trong++;
+if(r.Status==="DANG_SUA") sua++;
+
+});
+
+document.getElementById("total").innerText=total;
+document.getElementById("thue").innerText=thue;
+document.getElementById("trong").innerText=trong;
+document.getElementById("sua").innerText=sua;
+
 }
 
-function deleteRoom(id) {
-    if (confirm("Xóa phòng " + id + "?")) {
-        listRooms = listRooms.filter(r => r.id !== id);
 
-        // cập nhật lại data.js runtime
-        rooms = rooms.filter(r => r.id !== id);
+/* ================= STATUS ================= */
 
-        render();
-    }
+function mapStatus(status){
+
+if(status==="TRONG") return "Trống";
+if(status==="DANG_THUE") return "Đang thuê";
+if(status==="DANG_SUA") return "Đang sửa";
+
+return status;
+
 }
 
-render();
+
+/* ================= MODAL ================= */
+
+function openAddRoom(){
+
+editingId=null;
+
+modalTitle.innerText="Thêm phòng";
+
+mRoomName.value="";
+mPrice.value="";
+mStatus.value="TRONG";
+mBuilding.value="B1";
+
+modal.style.display="flex";
+
+}
+
+
+function openEditRoom(id){
+
+const r=listRooms.find(x=>x.RoomID===id);
+
+editingId=id;
+
+modalTitle.innerText="Sửa phòng";
+
+mRoomName.value=r.RoomName;
+mPrice.value=r.BasePrice;
+mStatus.value=r.Status;
+mBuilding.value=r.BuildingID;
+
+modal.style.display="flex";
+
+}
+
+
+function closeModal(){
+modal.style.display="none";
+}
