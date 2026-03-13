@@ -1,6 +1,3 @@
-/* ================= CONTRACT MANAGEMENT (ROLE-BASED) ================= */
-
-/* ===== AUTH ===== */
 const role = localStorage.getItem("role");
 const username = localStorage.getItem("username");
 
@@ -9,11 +6,8 @@ if (!role) location.href = "../Login/login.html";
 document.getElementById("username").innerText = username;
 renderMenu(role);
 
-/* ===== DATA ===== */
-// contracts từ data.js
 let listContracts = [...contracts];
 
-// Nếu là nhân viên → chỉ thấy tòa mình quản lý
 if (role === "nhanvien") {
     const acc = accounts.find(a => a.username === username);
     if (acc && acc.buildings) {
@@ -21,7 +15,6 @@ if (role === "nhanvien") {
     }
 }
 
-/* ===== INIT BUILDING FILTER ===== */
 function initBuildings() {
     const select = document.getElementById("buildingFilter");
 
@@ -33,14 +26,12 @@ function initBuildings() {
     });
 }
 
-/* ===== STATUS ===== */
 function getStatus(c) {
     const today = new Date();
     const end = new Date(c.end);
     return end >= today ? "Đang hiệu lực" : "Hết hạn";
 }
 
-/* ===== RENDER ===== */
 function render() {
     const key = document.getElementById("key").value.toLowerCase();
     const building = document.getElementById("buildingFilter").value;
@@ -84,7 +75,6 @@ function render() {
     document.getElementById("expired").innerText = expired;
 }
 
-/* ===== ADD ===== */
 function addContract() {
     const tenant = prompt("Tên người thuê:");
     if (!tenant) return;
@@ -119,7 +109,6 @@ function addContract() {
     render();
 }
 
-/* ===== EDIT ===== */
 function editContract(id) {
     const c = contracts.find(x => x.id === id);
     if (!c) return;
@@ -130,7 +119,6 @@ function editContract(id) {
     render();
 }
 
-/* ===== DELETE (CHỦ) ===== */
 function deleteContract(id) {
     if (role !== "chutro") return;
     if (!confirm("Xóa hợp đồng?")) return;
@@ -143,10 +131,8 @@ function deleteContract(id) {
     render();
 }
 
-/* ===== SEARCH / FILTER EVENTS ===== */
 document.getElementById("key").addEventListener("input", render);
 document.getElementById("buildingFilter").addEventListener("change", render);
 
-/* ===== INIT ===== */
 initBuildings();
 render();

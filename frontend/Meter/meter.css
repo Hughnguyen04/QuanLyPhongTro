@@ -4,6 +4,7 @@ body {
     background: linear-gradient(180deg, #f4f6fa, #eef1ff);
 }
 
+/* ===== TOPBAR ===== */
 .topbar {
     background: #6c63ff;
     color: #fff;
@@ -33,6 +34,7 @@ body {
     cursor: pointer;
 }
 
+/* ===== USER ===== */
 .user-box {
     position: relative;
     display: flex;
@@ -73,10 +75,12 @@ body {
     background: #f0f1ff
 }
 
+/* ===== LAYOUT ===== */
 .wrapper {
     display: flex
 }
 
+/* ===== SIDEBAR ===== */
 .sidebar {
     width: 240px;
     background: #fff;
@@ -94,6 +98,7 @@ body {
     left: 0
 }
 
+/* ===== MAIN ===== */
 .main {
     flex: 1;
     padding: 25px 30px;
@@ -106,6 +111,7 @@ body {
     width: calc(100% - 240px);
 }
 
+/* ===== MENU ITEM (CHUẨN) ===== */
 .menu-item {
     display: flex;
     align-items: center;
@@ -139,6 +145,7 @@ body {
     flex: 1
 }
 
+/* ===== TOOLBAR ===== */
 .toolbar {
     display: flex;
     gap: 10px;
@@ -152,6 +159,22 @@ body {
     border-radius: 6px;
 }
 
+/* ===== BUTTON ===== */
+.add {
+    background: #6c63ff;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 14px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.add:hover {
+    background: #5a52e0
+}
+
+/* ===== CARDS ===== */
 .cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -178,6 +201,7 @@ body {
     font-weight: 600;
 }
 
+/* ===== TABLE ===== */
 .section {
     background: #fff;
     padding: 20px;
@@ -207,6 +231,7 @@ tr:hover {
     background: #f8f9ff
 }
 
+/* ===== MOBILE ===== */
 @media(max-width:768px) {
     .sidebar.show~.main {
         width: 100%

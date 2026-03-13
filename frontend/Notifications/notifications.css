@@ -4,6 +4,7 @@ body {
     background: #f4f6fa;
 }
 
+/* TOPBAR */
 .topbar {
     background: #6c63ff;
     color: #fff;
@@ -67,6 +68,7 @@ body {
     background: #f0f1ff
 }
 
+/* LAYOUT */
 .wrapper {
     display: flex
 }
@@ -92,6 +94,7 @@ body {
     padding: 25px;
 }
 
+/* HEADER */
 .noti-header {
     display: flex;
     justify-content: space-between;
@@ -114,13 +117,14 @@ body {
     color: #fff;
 }
 
+/* LIST */
 .noti-list {
     display: flex;
     flex-direction: column;
     gap: 12px;
 }
 
-
+/* ITEM */
 .noti {
     background: #fff;
     border-radius: 12px;

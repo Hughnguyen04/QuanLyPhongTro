@@ -32,6 +32,8 @@
         <div class="sidebar" id="sidebar"></div>
 
         <div class="main">
+
+            <!-- TOOLBAR -->
             <div class="toolbar">
                 <input id="key" placeholder="🔍 Tìm phòng..." oninput="render()">
 
@@ -42,7 +44,11 @@
                 <select id="monthFilter" onchange="render()">
                     <option value="">Tất cả tháng</option>
                 </select>
+
+                <button class="add">➕ Nhập chỉ số</button>
             </div>
+
+            <!-- CARDS -->
             <div class="cards">
                 <div class="card">
                     <h4>Tổng phòng</h4>
@@ -58,6 +64,7 @@
                 </div>
             </div>
 
+            <!-- TABLE -->
             <div class="section">
                 <table>
                     <thead>
@@ -71,7 +78,7 @@
                             <th>Nước cũ</th>
                             <th>Nước mới</th>
                             <th>Tiêu thụ</th>
-                            <th>Hoạt động</th>
+                            <th>Hành động</th>
                         </tr>
                     </thead>
                     <tbody id="tbody"></tbody>

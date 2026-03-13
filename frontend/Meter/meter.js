@@ -1,4 +1,4 @@
-
+/* ================== AUTH ================== */
 const role = localStorage.getItem("role");
 const username = localStorage.getItem("username");
 const userBuildings = JSON.parse(localStorage.getItem("buildings") || "[]");
@@ -8,8 +8,11 @@ if (!role) location.href = "../Login/login.html";
 document.getElementById("username").innerText = username || "";
 renderMenu(role);
 
+/* ================== DATA ================== */
 let listMeter = typeof meters !== "undefined" ? meters : [];
 if (!Array.isArray(listMeter)) listMeter = [];
+
+/* ================== LẤY PHÒNG ĐANG THUÊ (UNIQUE) ================== */
 function getActiveRooms() {
     let list = tenants.filter(t => t.status === "Đang thuê");
 
@@ -17,6 +20,7 @@ function getActiveRooms() {
         list = list.filter(t => userBuildings.includes(t.building));
     }
 
+    // unique theo phòng + tòa
     const map = {};
     list.forEach(t => {
         map[t.room + "_" + t.building] = {
@@ -28,12 +32,14 @@ function getActiveRooms() {
     return Object.values(map);
 }
 
+/* ================== LẤY CHỈ SỐ THÁNG TRƯỚC ================== */
 function getLastMeter(room, building, month) {
     return listMeter
         .filter(m => m.room === room && m.building === building && m.month < month)
         .sort((a, b) => b.month.localeCompare(a.month))[0];
 }
 
+/* ================== INIT MONTH ================== */
 function initMonth() {
     const mSelect = document.getElementById("monthFilter");
 
@@ -46,9 +52,10 @@ function initMonth() {
     mSelect.innerHTML = `<option value="">Chọn tháng</option>`;
     months.forEach(m => mSelect.innerHTML += `<option>${m}</option>`);
 
-    mSelect.value = "2025-02";
+    mSelect.value = "2025-02"; // auto chọn tháng
 }
 
+/* ================== UPDATE REALTIME ================== */
 function updateUse(room, eOld, wOld) {
     const eNew = +document.getElementById(`eNew_${room}`).value || 0;
     const wNew = +document.getElementById(`wNew_${room}`).value || 0;
@@ -60,6 +67,7 @@ function updateUse(room, eOld, wOld) {
     document.getElementById(`wUse_${room}`).innerText = wUse > 0 ? wUse : 0;
 }
 
+/* ================== RENDER ================== */
 function render() {
     const key = document.getElementById("key").value.toLowerCase();
     const month = document.getElementById("monthFilter").value;
@@ -118,7 +126,7 @@ function render() {
             <td id="wUse_${r.room}">${wUse}</td>
 
             <td>
-                <button onclick="saveMeter('${r.room}','${r.building}',${eOld},${wOld})"> Lưu</button>
+                <button onclick="saveMeter('${r.room}','${r.building}',${eOld},${wOld})">💾</button>
             </td>
         </tr>`;
         });
@@ -128,6 +136,7 @@ function render() {
     document.getElementById("sumWater").innerText = sumWater;
 }
 
+/* ================== SAVE ================== */
 function saveMeter(room, building, eOld, wOld) {
     const month = document.getElementById("monthFilter").value;
 
@@ -158,5 +167,6 @@ function saveMeter(room, building, eOld, wOld) {
     render();
 }
 
+/* ================== INIT ================== */
 initMonth();
 render();
