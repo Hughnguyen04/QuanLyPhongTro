@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="vi">
-
 <head>
     <meta charset="UTF-8">
     <title>Chỉ số điện nước</title>
@@ -9,88 +8,78 @@
 
 <body>
 
-    <div class="topbar">
-        <div class="left">
-            <button class="menu-btn" onclick="toggleMenu()">☰</button>
-            <h2>Chỉ số điện nước</h2>
-        </div>
-
-        <div class="user-box" onclick="toggleUserMenu()">
-            <div class="avatar-text">👤</div>
-            <span id="username"></span>
-
-            <div class="user-menu" id="userMenu">
-                <div onclick="openMyInfo()">👤 Thông tin của tôi</div>
-                <div onclick="openChangePass()">🔒 Đổi mật khẩu</div>
-                <div onclick="logout()">🚪 Đăng xuất</div>
-            </div>
-        </div>
+<div class="topbar">
+    <div class="left">
+        <button class="menu-btn" onclick="toggleMenu()">☰</button>
+        <h2>Chỉ số điện nước</h2>
     </div>
 
-    <div class="wrapper">
+    <div class="user-box" onclick="toggleUserMenu()">
+        <div class="avatar-text">👤</div>
+        <span id="username"></span>
 
-        <div class="sidebar" id="sidebar"></div>
-
-        <div class="main">
-
-            <!-- TOOLBAR -->
-            <div class="toolbar">
-                <input id="key" placeholder="🔍 Tìm phòng..." oninput="render()">
-
-                <select id="buildingFilter" onchange="render()">
-                    <option value="">Tất cả tòa</option>
-                </select>
-
-                <select id="monthFilter" onchange="render()">
-                    <option value="">Tất cả tháng</option>
-                </select>
-
-                <button class="add">➕ Nhập chỉ số</button>
-            </div>
-
-            <!-- CARDS -->
-            <div class="cards">
-                <div class="card">
-                    <h4>Tổng phòng</h4>
-                    <p id="total">0</p>
-                </div>
-                <div class="card">
-                    <h4>Tổng điện</h4>
-                    <p id="sumElectric">0</p>
-                </div>
-                <div class="card">
-                    <h4>Tổng nước</h4>
-                    <p id="sumWater">0</p>
-                </div>
-            </div>
-
-            <!-- TABLE -->
-            <div class="section">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Phòng</th>
-                            <th>Tòa</th>
-                            <th>Tháng</th>
-                            <th>Điện cũ</th>
-                            <th>Điện mới</th>
-                            <th>Tiêu thụ</th>
-                            <th>Nước cũ</th>
-                            <th>Nước mới</th>
-                            <th>Tiêu thụ</th>
-                            <th>Hành động</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tbody"></tbody>
-                </table>
-            </div>
-
+        <div class="user-menu" id="userMenu">
+            <div onclick="openMyInfo()">👤 Thông tin của tôi</div>
+            <div onclick="openChangePass()">🔒 Đổi mật khẩu</div>
+            <div onclick="logout()">🚪 Đăng xuất</div>
         </div>
     </div>
+</div>
 
-    <script src="../Common/menu.js"></script>
-    <script src="../Common/data.js"></script>
-    <script src="meter.js"></script>
+<div class="wrapper">
+
+    <div class="sidebar" id="sidebar"></div>
+
+    <div class="main">
+
+        <!-- TOOLBAR -->
+        <div class="toolbar">
+            <input id="key" placeholder="🔍 Tìm phòng..." oninput="render()">
+
+            <select id="buildingFilter" onchange="render()">
+                <option value="">Tất cả tòa</option>
+            </select>
+
+            <select id="monthFilter" onchange="render()">
+                <option value="">Tất cả tháng</option>
+            </select>
+
+            <button class="add">➕ Nhập chỉ số</button>
+        </div>
+
+        <!-- CARDS -->
+        <div class="cards">
+            <div class="card"><h4>Tổng phòng</h4><p id="total">0</p></div>
+            <div class="card"><h4>Tổng điện</h4><p id="sumElectric">0</p></div>
+            <div class="card"><h4>Tổng nước</h4><p id="sumWater">0</p></div>
+        </div>
+
+        <!-- TABLE -->
+        <div class="section">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Phòng</th>
+                        <th>Tòa</th>
+                        <th>Tháng</th>
+                        <th>Điện cũ</th>
+                        <th>Điện mới</th>
+                        <th>Tiêu thụ</th>
+                        <th>Nước cũ</th>
+                        <th>Nước mới</th>
+                        <th>Tiêu thụ</th>
+                        <th>Hành động</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody"></tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+<script src="../Common/menu.js"></script>
+<script src="../Common/data.js"></script>
+<script src="meter.js"></script>
 </body>
-
 </html>

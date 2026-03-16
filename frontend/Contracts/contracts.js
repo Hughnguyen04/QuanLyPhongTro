@@ -3,136 +3,160 @@ const username = localStorage.getItem("username");
 
 if (!role) location.href = "../Login/login.html";
 
-document.getElementById("username").innerText = username;
+document.getElementById("username").innerText = username || "";
+
 renderMenu(role);
 
-let listContracts = [...contracts];
+let editingId=null;
 
-if (role === "nhanvien") {
-    const acc = accounts.find(a => a.username === username);
-    if (acc && acc.buildings) {
-        listContracts = listContracts.filter(c => acc.buildings.includes(c.building));
-    }
+
+/* BUILDING FILTER */
+
+function initBuildings(){
+
+const select=document.getElementById("buildingFilter");
+
+const buildings=[...new Set(listContracts.map(c=>c.BuildingName))];
+
+select.innerHTML=`<option value="">Tất cả tòa</option>`;
+
+buildings.forEach(b=>{
+select.innerHTML+=`<option value="${b}">${b}</option>`;
+});
+
 }
 
-function initBuildings() {
-    const select = document.getElementById("buildingFilter");
 
-    const all = new Set(listContracts.map(c => c.building));
+/* STATUS */
 
-    select.innerHTML = `<option value="">Tất cả tòa</option>`;
-    [...all].forEach(b => {
-        select.innerHTML += `<option value="${b}">${b}</option>`;
-    });
+function getStatus(c){
+
+const today=new Date();
+const end=new Date(c.EndDate);
+
+return end>=today?"Đang hiệu lực":"Hết hạn";
+
 }
 
-function getStatus(c) {
-    const today = new Date();
-    const end = new Date(c.end);
-    return end >= today ? "Đang hiệu lực" : "Hết hạn";
+
+/* RENDER */
+
+function render(){
+
+const key=document.getElementById("key").value.toLowerCase();
+const building=document.getElementById("buildingFilter").value;
+
+const tbody=document.getElementById("tbody");
+
+tbody.innerHTML="";
+
+let total=0,active=0,expired=0;
+
+listContracts
+.filter(c=>
+c.TenantName.toLowerCase().includes(key) &&
+(building===""||c.BuildingName===building)
+)
+.forEach(c=>{
+
+const status=getStatus(c);
+
+total++;
+
+if(status==="Đang hiệu lực") active++;
+else expired++;
+
+tbody.innerHTML+=`
+<tr>
+<td>${c.ContractID}</td>
+<td>${c.TenantName}</td>
+<td>${c.RoomName}</td>
+<td>${c.BuildingName}</td>
+<td>${c.StartDate}</td>
+<td>${c.EndDate}</td>
+<td>${Number(c.Rent).toLocaleString()} đ</td>
+<td>${Number(c.Deposit).toLocaleString()} đ</td>
+<td>${status}</td>
+<td>
+<button onclick="openEdit('${c.ContractID}')">✏️</button>
+${role==="chutro"?`<button onclick="deleteContract('${c.ContractID}')">🗑</button>`:""}
+</td>
+</tr>
+`;
+});
+
+document.getElementById("total").innerText=total;
+document.getElementById("active").innerText=active;
+document.getElementById("expired").innerText=expired;
+
 }
 
-function render() {
-    const key = document.getElementById("key").value.toLowerCase();
-    const building = document.getElementById("buildingFilter").value;
-    const tbody = document.getElementById("tbody");
 
-    tbody.innerHTML = "";
-    let total = 0, active = 0, expired = 0;
+/* CARDS */
 
-    listContracts
-        .filter(c =>
-            c.tenantName.toLowerCase().includes(key) &&
-            (building === "" || c.building === building)
-        )
-        .forEach(c => {
-            total++;
+function renderCards(){
 
-            const status = getStatus(c);
-            if (status === "Đang hiệu lực") active++;
-            else expired++;
+let total=listContracts.length;
+let active=0;
+let expired=0;
 
-            tbody.innerHTML += `
-            <tr>
-                <td>${c.id}</td>
-                <td>${c.tenantName}</td>
-                <td>${c.room}</td>
-                <td>${c.building}</td>
-                <td>${c.start}</td>
-                <td>${c.end}</td>
-                <td>${c.deposit.toLocaleString("vi-VN")}đ</td>
-                <td>${status}</td>
-                <td>
-                    <button onclick="editContract('${c.id}')">✏️</button>
-                    ${role === "chutro" ? `<button onclick="deleteContract('${c.id}')">🗑</button>` : ""}
-                </td>
-            </tr>
-            `;
-        });
+listContracts.forEach(c=>{
 
-    document.getElementById("total").innerText = total;
-    document.getElementById("active").innerText = active;
-    document.getElementById("expired").innerText = expired;
+if(getStatus(c)==="Đang hiệu lực") active++;
+else expired++;
+
+});
+
+document.getElementById("total").innerText=total;
+document.getElementById("active").innerText=active;
+document.getElementById("expired").innerText=expired;
+
 }
 
-function addContract() {
-    const tenant = prompt("Tên người thuê:");
-    if (!tenant) return;
 
-    const room = prompt("Phòng:");
-    if (!room) return;
+/* MODAL */
 
-    const building = prompt("Tòa:");
-    if (!building) return;
+function openAdd(){
 
-    const start = prompt("Ngày bắt đầu (YYYY-MM-DD):", "2025-01-01");
-    const end = prompt("Ngày kết thúc (YYYY-MM-DD):", "2025-12-31");
-    const deposit = Number(prompt("Tiền cọc:", "2000000"));
+editingId=null;
 
-    const id = "C" + Math.floor(Math.random() * 10000);
+modalTitle.innerText="Thêm hợp đồng";
 
-    const c = {
-        id,
-        tenantId: "",
-        tenantName: tenant,
-        room,
-        building,
-        start,
-        end,
-        deposit
-    };
+mTenant.value="";
+mRoom.value="";
+mBuilding.value="";
+mStart.value="";
+mEnd.value="";
+mRent.value="";
+mDeposit.value="";
 
-    contracts.push(c);
-    listContracts.push(c);
+modal.style.display="flex";
 
-    initBuildings();
-    render();
 }
 
-function editContract(id) {
-    const c = contracts.find(x => x.id === id);
-    if (!c) return;
 
-    c.end = prompt("Ngày kết thúc:", c.end) || c.end;
-    c.deposit = Number(prompt("Tiền cọc:", c.deposit)) || c.deposit;
+function openEdit(id){
 
-    render();
+const c=listContracts.find(x=>x.ContractID===id);
+if(!c)return;
+
+editingId=id;
+
+modalTitle.innerText="Sửa hợp đồng";
+
+mTenant.value=c.TenantName;
+mRoom.value=c.RoomName;
+mBuilding.value=c.BuildingName;
+mStart.value=c.StartDate;
+mEnd.value=c.EndDate;
+mRent.value=c.Rent;
+mDeposit.value=c.Deposit;
+
+modal.style.display="flex";
+
 }
 
-function deleteContract(id) {
-    if (role !== "chutro") return;
-    if (!confirm("Xóa hợp đồng?")) return;
 
-    const idx = contracts.findIndex(c => c.id === id);
-    if (idx > -1) contracts.splice(idx, 1);
-
-    listContracts = listContracts.filter(c => c.id !== id);
-
-    render();
+function closeModal(){
+modal.style.display="none";
 }
-
-document.getElementById("key").addEventListener("input", render);
-document.getElementById("buildingFilter").addEventListener("change", render);
-
-initBuildings();
-render();

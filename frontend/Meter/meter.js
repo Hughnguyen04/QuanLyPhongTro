@@ -44,9 +44,9 @@ function initMonth() {
     const mSelect = document.getElementById("monthFilter");
 
     const months = [
-        "2025-01", "2025-02", "2025-03", "2025-04",
-        "2025-05", "2025-06", "2025-07", "2025-08",
-        "2025-09", "2025-10", "2025-11", "2025-12"
+        "2025-01","2025-02","2025-03","2025-04",
+        "2025-05","2025-06","2025-07","2025-08",
+        "2025-09","2025-10","2025-11","2025-12"
     ];
 
     mSelect.innerHTML = `<option value="">Chọn tháng</option>`;
@@ -80,30 +80,30 @@ function render() {
     let total = 0, sumElectric = 0, sumWater = 0;
 
     rooms
-        .filter(r => r.room.toLowerCase().includes(key))
-        .forEach(r => {
+    .filter(r => r.room.toLowerCase().includes(key))
+    .forEach(r => {
 
-            let m = listMeter.find(x =>
-                x.room === r.room &&
-                x.building === r.building &&
-                x.month === month
-            );
+        let m = listMeter.find(x =>
+            x.room === r.room &&
+            x.building === r.building &&
+            x.month === month
+        );
 
-            const last = getLastMeter(r.room, r.building, month);
+        const last = getLastMeter(r.room, r.building, month);
 
-            const eOld = m?.electricOld ?? last?.electricNew ?? 0;
-            const wOld = m?.waterOld ?? last?.waterNew ?? 0;
-            const eNew = m?.electricNew ?? "";
-            const wNew = m?.waterNew ?? "";
+        const eOld = m?.electricOld ?? last?.electricNew ?? 0;
+        const wOld = m?.waterOld ?? last?.waterNew ?? 0;
+        const eNew = m?.electricNew ?? "";
+        const wNew = m?.waterNew ?? "";
 
-            const eUse = eNew ? eNew - eOld : 0;
-            const wUse = wNew ? wNew - wOld : 0;
+        const eUse = eNew ? eNew - eOld : 0;
+        const wUse = wNew ? wNew - wOld : 0;
 
-            total++;
-            sumElectric += eUse;
-            sumWater += wUse;
+        total++;
+        sumElectric += eUse;
+        sumWater += wUse;
 
-            tbody.innerHTML += `
+        tbody.innerHTML += `
         <tr>
             <td>${r.room}</td>
             <td>${r.building}</td>
@@ -129,7 +129,7 @@ function render() {
                 <button onclick="saveMeter('${r.room}','${r.building}',${eOld},${wOld})">💾</button>
             </td>
         </tr>`;
-        });
+    });
 
     document.getElementById("total").innerText = total;
     document.getElementById("sumElectric").innerText = sumElectric;

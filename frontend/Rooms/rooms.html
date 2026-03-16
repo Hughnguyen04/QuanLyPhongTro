@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <title>Quản lý phòng</title>
@@ -8,75 +9,174 @@
 
 <body>
 
-<!-- TOPBAR -->
-<div class="topbar">
-    <div class="left">
-        <button class="menu-btn" onclick="toggleMenu()">☰</button>
-        <h2 id="title">Quản lý phòng</h2>
+    <div class="topbar">
+        <div class="left">
+            <button class="menu-btn" onclick="toggleMenu()">☰</button>
+            <h2>Quản lý phòng</h2>
+        </div>
+
+        <div class="user-box" onclick="toggleUserMenu()">
+            <div class="avatar-text">👤</div>
+            <span id="username"></span>
+
+            <div class="user-menu" id="userMenu">
+                <div onclick="openMyInfo()">👤 Thông tin của tôi</div>
+                <div onclick="openChangePass()">🔒 Đổi mật khẩu</div>
+                <div onclick="logout()">🚪 Đăng xuất</div>
+            </div>
+        </div>
     </div>
 
-    <div class="user-box" onclick="toggleUserMenu()">
-        <div class="avatar-text">👤</div>
-        <span id="username"></span>
+    <div class="wrapper">
 
-    <div class="user-menu" id="userMenu">
-        <div onclick="openMyInfo()">👤 Thông tin của tôi</div>
-        <div onclick="openChangePass()">🔒 Đổi mật khẩu</div>
-        <div onclick="logout()">🚪 Đăng xuất</div>
+        <div class="sidebar" id="sidebar"></div>
+
+        <div class="main">
+
+            <!-- TOOLBAR -->
+
+            <div class="toolbar">
+
+                <input id="key" placeholder="🔍 Tìm theo tên phòng..." oninput="render()">
+
+                <select id="buildingFilter" onchange="render()">
+                    <option value="">Tất cả tòa</option>
+                    <option value="B1">Tòa 1</option>
+                    <option value="B2">Tòa 2</option>
+                    <option value="B3">Tòa 3</option>
+                    <option value="B4">Tòa 4</option>
+                    <option value="B5">Tòa 5</option>
+                </select>
+
+                <select id="status" onchange="render()">
+                    <option value="">Tất cả trạng thái</option>
+                    <option>Trống</option>
+                    <option>Đang thuê</option>
+                    <option>Đang sửa</option>
+                </select>
+
+                <button class="add" onclick="openAddRoom()">➕ Thêm phòng</button>
+
+            </div>
+
+
+            <!-- CARDS -->
+
+            <div class="cards">
+
+                <div class="card">
+                    <h4>Tổng phòng</h4>
+                    <p id="total">0</p>
+                </div>
+                <div class="card">
+                    <h4>Đang thuê</h4>
+                    <p id="thue">0</p>
+                </div>
+                <div class="card">
+                    <h4>Phòng trống</h4>
+                    <p id="trong">0</p>
+                </div>
+                <div class="card">
+                    <h4>Đang sửa</h4>
+                    <p id="sua">0</p>
+                </div>
+
+            </div>
+
+
+            <!-- TABLE -->
+
+            <div class="section">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>Mã</th>
+                            <th>Tên phòng</th>
+                            <th>Tòa</th>
+                            <th>Giá</th>
+                            <th>Trạng thái</th>
+                            <th>Hành động</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="tbody"></tbody>
+
+                </table>
+
+            </div>
+
+        </div>
     </div>
-    </div>
-</div>
 
-<div class="wrapper">
 
-    <!-- SIDEBAR -->
-    <div class="sidebar" id="sidebar"></div>
+    <!-- MODAL -->
 
-    <!-- MAIN -->
-    <div class="main">
+    <div class="modal" id="modal">
 
-        <div class="toolbar">
-            <input id="key" placeholder="🔍 Tìm theo tên phòng..." oninput="render()">
+        <div class="box">
 
-            <select id="status" onchange="render()">
-                <option value="">Tất cả trạng thái</option>
-                <option>Trống</option>
-                <option>Đang thuê</option>
-                <option>Đang sửa</option>
+            <h3 id="modalTitle">Thêm phòng</h3>
+
+            <input id="mRoomName" placeholder="Tên phòng">
+
+            <select id="mBuilding">
+                <option value="B1">Tòa 1</option>
+                <option value="B2">Tòa 2</option>
+                <option value="B3">Tòa 3</option>
+                <option value="B4">Tòa 4</option>
+                <option value="B5">Tòa 5</option>
             </select>
 
-            <button class="add owner">➕ Thêm phòng</button>
-        </div>
+            <input id="mPrice" placeholder="Giá phòng">
 
-        <div class="cards">
-            <div class="card"><h4>Tổng phòng</h4><p id="total">0</p></div>
-            <div class="card"><h4>Đang thuê</h4><p id="thue">0</p></div>
-            <div class="card"><h4>Phòng trống</h4><p id="trong">0</p></div>
-            <div class="card"><h4>Đang sửa</h4><p id="sua">0</p></div>
-        </div>
+            <select id="mStatus">
+                <option value="TRONG">Trống</option>
+                <option value="DANG_THUE">Đang thuê</option>
+                <option value="DANG_SUA">Đang sửa</option>
+            </select>
 
-        <div class="section">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Mã</th>
-                        <th>Tên phòng</th>
-                        <th>Giá</th>
-                        <th>Trạng thái</th>
-                        <th>Hành động</th>
-                    </tr>
-                </thead>
-                <tbody id="tbody"></tbody>
-            </table>
+            <div class="modal-actions">
+                <button onclick="saveRoom()">💾 Lưu</button>
+                <button onclick="closeModal()">❌ Hủy</button>
+            </div>
+
         </div>
 
     </div>
-</div>
+    <!-- ROOM DETAIL MODAL -->
 
-<!-- 🔥 LOAD MENU TRƯỚC -->
-<script src="../Common/menu.js"></script>
-<script src="../Common/data.js"></script>
-<script src="rooms.js"></script>
+    <div class="modal" id="roomDetailModal">
+
+        <div class="box">
+
+            <h3>Thông tin phòng</h3>
+
+            <div id="roomImages" class="room-images"
+                style="width:100%;height:200px;object-fit:cover;border-radius:10px"></div>
+
+            <p><b>Tên phòng:</b> <span id="dName"></span></p>
+            <p><b>Tòa:</b> <span id="dBuilding"></span></p>
+            <p><b>Diện tích:</b> <span id="dArea"></span> m²</p>
+            <p><b>Giá:</b> <span id="dPrice"></span> đ</p>
+
+            <p><b>Tiện nghi:</b></p>
+            <ul id="dTienNghi"></ul>
+
+            <p><b>Trạng thái:</b> <span id="dStatus"></span></p>
+
+            <button onclick="closeRoomDetail()">Đóng</button>
+
+        </div>
+
+    </div>
+
+
+    <script src="../Common/menu.js"></script>
+    <script src="api.js"></script>
+    <script src="rooms.js"></script>
 
 </body>
+
 </html>

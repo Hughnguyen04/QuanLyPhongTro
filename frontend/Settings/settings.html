@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Cài đặt hệ thống</title>
+    <link rel="stylesheet" href="settings.css">
+</head>
+<body>
+
+<div class="topbar">
+    <div class="left">
+        <button class="menu-btn" onclick="toggleMenu()">☰</button>
+        <h2>⚙️ Cài đặt hệ thống</h2>
+    </div>
+
+    <div class="user-box" onclick="toggleUserMenu()">
+        <div class="avatar-text">👤</div>
+        <span id="username"></span>
+
+        <div class="user-menu" id="userMenu">
+            <div>👤 Thông tin của tôi</div>
+            <div>🔒 Đổi mật khẩu</div>
+            <div onclick="logout()">🚪 Đăng xuất</div>
+        </div>
+    </div>
+</div>
+
+<div class="wrapper">
+    <div class="sidebar" id="sidebar"></div>
+
+    <div class="main">
+
+        <!-- GIÁ DỊCH VỤ -->
+        <div class="section">
+            <h3>Giá dịch vụ mặc định</h3>
+            <div class="form-grid">
+                <div>
+                    <label>Giá điện (đ/kWh)</label>
+                    <input id="electric" type="number">
+                </div>
+                <div>
+                    <label>Giá nước (đ/m³)</label>
+                    <input id="water" type="number">
+                </div>
+                <div>
+                    <label>Phí dịch vụ / người</label>
+                    <input id="service" type="number">
+                </div>
+            </div>
+        </div>
+
+        <!-- HỢP ĐỒNG -->
+        <div class="section">
+            <h3>Cấu hình hợp đồng</h3>
+            <div class="form-grid">
+                <div>
+                    <label>Thời hạn mặc định (tháng)</label>
+                    <input id="contractMonths" type="number">
+                </div>
+                <div>
+                    <label>Tiền cọc (tháng)</label>
+                    <input id="depositMonths" type="number">
+                </div>
+                <div>
+                    <label>Ngày thu tiền hàng tháng</label>
+                    <input id="payDay" type="number">
+                </div>
+                <div>
+                    <label>Hạn thanh toán (ngày)</label>
+                    <input id="dueDays" type="number">
+                </div>
+                <div>
+                    <label>Phạt trễ (%/ngày)</label>
+                    <input id="lateFee" type="number">
+                </div>
+            </div>
+        </div>
+
+        <!-- HÓA ĐƠN -->
+        <div class="section">
+            <h3>Cấu hình hóa đơn</h3>
+            <div class="form-grid">
+                <div>
+                    <label>Ngày chốt điện nước</label>
+                    <input id="meterDay" type="number">
+                </div>
+                <div>
+                    <label>Ngày phát hành hóa đơn</label>
+                    <input id="billDay" type="number">
+                </div>
+                <div>
+                    <label>Nhắc nợ sau (ngày)</label>
+                    <input id="remindDays" type="number">
+                </div>
+            </div>
+        </div>
+
+        <!-- CHỦ TRỌ -->
+        <div class="section">
+            <h3>Thông tin chủ trọ</h3>
+            <div class="form-grid">
+                <div>
+                    <label>Tên chủ trọ</label>
+                    <input id="ownerName">
+                </div>
+                <div>
+                    <label>Số điện thoại</label>
+                    <input id="ownerPhone">
+                </div>
+                <div>
+                    <label>Email</label>
+                    <input id="ownerEmail">
+                </div>
+                <div>
+                    <label>Tên nhà trọ</label>
+                    <input id="boardingName">
+                </div>
+            </div>
+        </div>
+
+        <button class="save" onclick="saveSettings()">💾 Lưu toàn bộ cài đặt</button>
+        <span id="msg"></span>
+
+    </div>
+</div>
+
+<script src="../Common/menu.js"></script>
+<script src="../Common/data.js"></script>
+<script src="settings.js"></script>
+</body>
+</html>
