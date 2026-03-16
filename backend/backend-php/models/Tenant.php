@@ -1,5 +1,6 @@
 <?php
-class Tenant {
+class Tenant
+{
     private $conn;
     private $table = "tenants";
 
@@ -9,12 +10,14 @@ class Tenant {
     public $Phone;
     public $Address;
 
-    public function __construct($db) {
+    public function __construct($db)
+    {
         $this->conn = $db;
     }
 
     // Lấy danh sách người thuê
-    public function getAll() {
+    public function getAll()
+    {
         $sql = "SELECT * FROM {$this->table}";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
@@ -22,7 +25,8 @@ class Tenant {
     }
 
     // Thêm người thuê
-    public function create() {
+    public function create()
+    {
         $sql = "INSERT INTO {$this->table}
                 (FullName, CitizenID, Phone, Address)
                 VALUES (:name, :cccd, :phone, :address)";

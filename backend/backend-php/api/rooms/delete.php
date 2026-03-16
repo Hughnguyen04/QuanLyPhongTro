@@ -1,7 +1,7 @@
 <?php
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: POST");
+header("Access-Control-Allow-Methods: PUT");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
 require_once "../../config/Database.php";
@@ -17,18 +17,11 @@ $conn = $db->getConnection();
 $room = new Room($conn);
 
 $data = json_decode(file_get_contents("php://input"));
-$room->RoomName = $data->RoomName;
-$room->Floor = $data->Floor;
-$room->Area = $data->Area;
-$room->BasePrice = $data->BasePrice;
-$room->Status = $data->Status;
-$room->CurrentElectric = $data->CurrentElectric;
-$room->CurrentWater = $data->CurrentWater;
-$room->Note = $data->Note;
+$room->RoomID = $data->RoomID;
 
 
-if ($room->create()) {
-    echo json_encode(array('message', 'phong da duoc tao'));
+if ($room->delete()) {
+    echo json_encode(array('message', 'phong da duoc xoa'));
 } else {
-    echo json_encode(array('message', 'phong khong duoc tao'));
+    echo json_encode(array('message', 'phong khong duoc xoa'));
 }

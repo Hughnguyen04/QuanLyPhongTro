@@ -15,23 +15,15 @@ $conn = $db->getConnection();
 // $conn đã tồn tại sẵn
 
 $room = new Room($conn);
-$read = $room->read();
+$room->RoomID = isset($_GET['id']) ? $_GET['id'] : die();
+$room->show();
 
-$room_array = [];
-$room_array['data'] = [];
-
-while ($row = $read->fetch(PDO::FETCH_ASSOC)) {
-
-    $row_item = array(
-        'ID_phong'   => $row['RoomID'],
-        'Ten_Phong'  => $row['RoomName'],
-        'Gia_Phong'  => $row['BasePrice'],
-        'Trang_Thai' => $row['Status'],
-        'So_Dien'    => $row['CurrentElectric'],
-        'So_Nuoc'    => $row['CurrentWater']
-    );
-
-    $room_array['data'][] = $row_item;
-}
-
-echo json_encode($room_array);
+$row_item = array(
+    'ID_phong'   => $room->RoomID,
+    'Ten_Phong'  => $room->RoomName,
+    'Gia_Phong'  => $room->BasePrice,
+    'Trang_Thai' => $room->Status,
+    'So_Dien'    => $room->CurrentElectric,
+    'So_Nuoc'    => $room->CurrentWater
+);
+print_r(json_encode($row_item));
