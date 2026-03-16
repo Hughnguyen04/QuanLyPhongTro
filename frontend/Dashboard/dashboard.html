@@ -3,11 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Dashboard</title>
+<link rel="stylesheet" href="../Common/layout.css">
 <link rel="stylesheet" href="dashboard.css">
 </head>
 
 <body>
 
+<!-- TOPBAR -->
 <div class="topbar">
     <div class="left">
         <button class="menu-btn" onclick="toggleMenu()">☰</button>
@@ -28,12 +30,16 @@
 
 <div class="wrapper">
 
+<!-- SIDEBAR -->
 <div class="sidebar" id="sidebar"></div>
 
 <div class="main">
 
+<!-- ================= DASHBOARD CHỦ TRỌ + NHÂN VIÊN ================= -->
+<div id="dashboardManager">
+
     <div class="welcome">
-        <h2 id="welcomeName"> Chào</h2>
+        <h2 id="welcomeName"></h2>
         <div id="today"></div>
     </div>
 
@@ -50,7 +56,7 @@
         <ul id="todoList"></ul>
     </div>
 
-    <div class="panel" id="phongTrongPanel">
+    <div class="panel">
         <h3>🏠 Phòng trống</h3>
         <table class="table">
             <thead>
@@ -64,8 +70,8 @@
         </table>
     </div>
 
-    <div class="panel" id="noPanel">
-        <h3> Hóa đơn chưa thu</h3>
+    <div class="panel">
+        <h3>💰 Hóa đơn chưa thu</h3>
         <table class="table">
             <thead>
                 <tr>
@@ -78,10 +84,31 @@
         </table>
     </div>
 
-    <div class="panel">
-        <h3> Hoạt động gần đây</h3>
-        <ul id="activity"></ul>
+</div>
+
+
+<!-- ================= DASHBOARD NGƯỜI THUÊ ================= -->
+<div id="dashboardTenant" style="display:none">
+
+    <div class="welcome">
+        <h2 id="welcomeTenant"></h2>
+        <div id="todayTenant"></div>
     </div>
+
+    <div class="cards">
+        <div class="card"><h4>Phòng</h4><p id="myRoom"></p></div>
+        <div class="card"><h4>Tòa</h4><p id="myBuilding"></p></div>
+        <div class="card"><h4>Giá phòng</h4><p id="myPrice"></p></div>
+        <div class="card"><h4>Hóa đơn tháng</h4><p id="myBill"></p></div>
+        <div class="card"><h4>Trạng thái</h4><p id="myBillStatus"></p></div>
+    </div>
+
+    <div class="panel">
+        <h3>📋 Việc cần làm</h3>
+        <ul id="todoTenant"></ul>
+    </div>
+
+</div>
 
 </div>
 </div>

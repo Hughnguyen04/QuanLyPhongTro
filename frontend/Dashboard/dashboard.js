@@ -16,19 +16,38 @@ if (!window.DATA) {
 const { accounts, rooms, tenants, bills } = window.DATA;
 const acc = accounts.find(a => a.username === username);
 
-/* ===== TITLE + WELCOME ===== */
+document.getElementById("username").innerText = acc?.name || username;
+
+/* ===== TITLE ===== */
+
 setText("title",
     role === "chutro" ? "Dashboard Chủ trọ" :
     role === "nhanvien" ? "Dashboard Nhân viên" :
     "Dashboard Người thuê"
 );
 
-setText("welcomeName"," Chào mừng " + (acc?.name || username));
 
-renderDate();
+/* ===== DASHBOARD UI ===== */
+
+const managerUI = document.getElementById("dashboardManager");
+const tenantUI = document.getElementById("dashboardTenant");
+
+if (role === "nguoithue") {
+    managerUI.style.display = "none";
+    tenantUI.style.display = "block";
+} else {
+    managerUI.style.display = "block";
+    tenantUI.style.display = "none";
+}
+
 
 /* ================= CHỦ TRỌ ================= */
+
 if (role === "chutro") {
+
+    setText("welcomeName","Chào " + acc?.name);
+
+    renderDate();
 
     setText("tongPhong", rooms.length);
     setText("phongThue", rooms.filter(r=>r.status==="Đang thuê").length);
@@ -39,10 +58,11 @@ if (role === "chutro") {
     loadPhongTrong(rooms);
     loadNo(bills);
     loadTodoChuTro();
-    loadActivity(tenants,bills);
 }
 
+
 /* ================= NHÂN VIÊN ================= */
+
 if (role === "nhanvien") {
 
     const myBuildings = acc?.buildings || [];
@@ -50,6 +70,10 @@ if (role === "nhanvien") {
     const myRooms = rooms.filter(r=>myBuildings.includes(r.building));
     const myTenants = tenants.filter(t=>myBuildings.includes(t.building));
     const myBills = bills.filter(b=>myBuildings.includes(b.building));
+
+    setText("welcomeName","Chào " + acc?.name);
+
+    renderDate();
 
     setText("tongPhong", myRooms.length);
     setText("phongThue", myRooms.filter(r=>r.status==="Đang thuê").length);
@@ -60,109 +84,154 @@ if (role === "nhanvien") {
     loadPhongTrong(myRooms);
     loadNo(myBills);
     loadTodoNhanVien(myBills);
-    loadActivity(myTenants,myBills);
 }
 
+
 /* ================= NGƯỜI THUÊ ================= */
+
 if (role === "nguoithue") {
 
     const myRoom = rooms.find(r=>r.name===acc?.room);
     const myBill = bills.find(b=>b.room===acc?.room && b.status==="Chưa thanh toán");
 
-    setText("tongPhong", acc?.room);
-    setText("phongThue", acc?.building);
-    setText("phongTrong", myRoom?.price?.toLocaleString("vi-VN")+"đ");
-    setText("soNguoi", myBill?.total?.toLocaleString("vi-VN")+"đ");
-    setText("hoaDonNo", myBill ? "Chưa thanh toán":"Đã thanh toán");
+    setText("welcomeTenant","Chào " + acc?.name);
 
-    const phongTrongPanel = document.getElementById("phongTrongPanel");
-    const noPanel = document.getElementById("noPanel");
+    renderDateTenant();
 
-    if (phongTrongPanel) phongTrongPanel.style.display = "none";
-    if (noPanel) noPanel.style.display = "none";
+    setText("myRoom", acc?.room);
+    setText("myBuilding", acc?.building);
+    setText("myPrice", myRoom?.price?.toLocaleString("vi-VN")+"đ");
 
-    loadTodoNguoiThue(myBill);
-    loadActivity([],[]);
+    setText("myBill", myBill?.total?.toLocaleString("vi-VN")+"đ");
+    setText("myBillStatus", myBill ? "Chưa thanh toán" : "Đã thanh toán");
+
+    setHTML("todoTenant",
+        myBill
+        ? "<li>Thanh toán tiền phòng tháng này</li>"
+        : "<li>Không có việc cần làm</li>"
+    );
 }
 
 });
 
-/* ===== TABLE PHÒNG TRỐNG ===== */
+
+/* ===== PHÒNG TRỐNG ===== */
+
 function loadPhongTrong(list){
-const empty=list.filter(r=>r.status==="Trống");
+
+const empty = list.filter(r=>r.status==="Trống");
+
 setHTML("phongTrongTable",
+
 empty.length
+
 ? empty.map(r=>`
 <tr>
 <td>${r.name}</td>
 <td>${r.building}</td>
 <td>${r.price.toLocaleString("vi-VN")}đ</td>
-</tr>`).join("")
-:"<tr><td colspan='3'>Không có</td></tr>");
+</tr>
+`).join("")
+
+:"<tr><td colspan='3'>Không có</td></tr>"
+
+);
+
 }
 
-/* ===== TABLE NỢ ===== */
+
+/* ===== HÓA ĐƠN CHƯA THU ===== */
+
 function loadNo(list){
-const no=list.filter(b=>b.status==="Chưa thanh toán");
+
+const no = list.filter(b=>b.status==="Chưa thanh toán");
+
 setHTML("noTable",
+
 no.length
+
 ? no.map(b=>`
 <tr>
 <td>${b.room}</td>
 <td>${b.building}</td>
 <td>${b.total.toLocaleString("vi-VN")}đ</td>
-</tr>`).join("")
-:"<tr><td colspan='3'>Không có</td></tr>");
+</tr>
+`).join("")
+
+:"<tr><td colspan='3'>Không có</td></tr>"
+
+);
+
 }
 
+
 /* ===== TODO ===== */
+
 function loadTodoChuTro(){
+
 setHTML("todoList",`
 <li>Kiểm tra phòng trống</li>
 <li>Thu tiền thuê tháng</li>
-<li>Xem báo cáo doanh thu</li>`);
+<li>Xem báo cáo doanh thu</li>
+`);
+
 }
+
 
 function loadTodoNhanVien(bills){
-const no=bills.filter(b=>b.status==="Chưa thanh toán").length;
+
+const no = bills.filter(b=>b.status==="Chưa thanh toán").length;
+
 setHTML("todoList",`
 <li>Thu ${no} hóa đơn</li>
-<li>Kiểm tra phòng phụ trách</li>`);
+<li>Kiểm tra phòng phụ trách</li>
+`);
+
 }
 
-function loadTodoNguoiThue(bill){
-setHTML("todoList",
-bill
-? "<li>Thanh toán tiền phòng</li>"
-: "<li>Không có</li>");
-}
-
-/* ===== ACTIVITY ===== */
-function loadActivity(tList,bList){
-const act=[];
-tList.slice(-3).forEach(t=>act.push(`Người thuê ${t.name} vào ${t.room}`));
-bList.slice(-3).forEach(b=>act.push(`Tạo hóa đơn ${b.room}`));
-setHTML("activity",
-act.length
-? act.map(a=>`<li>${a}</li>`).join("")
-:"<li>Chưa có</li>");
-}
 
 /* ===== UTIL ===== */
-function setText(id,v){
+
+function setText(id,value){
 const el=document.getElementById(id);
-if(el) el.innerText=v??"";
+if(el) el.innerText=value??"";
 }
 
-function setHTML(id,v){
+function setHTML(id,value){
 const el=document.getElementById(id);
-if(el) el.innerHTML=v??"";
+if(el) el.innerHTML=value??"";
 }
+
+
+/* ===== DATE ===== */
 
 function renderDate(){
+
 const d=new Date();
+
 const days=["Chủ nhật","Thứ hai","Thứ ba","Thứ tư","Thứ năm","Thứ sáu","Thứ bảy"];
+
 setText("today",
-days[d.getDay()]+", "+d.getDate()+"/"+(d.getMonth()+1)+"/"+d.getFullYear()
+
+days[d.getDay()] + ", " +
+d.getDate()+"/"+(d.getMonth()+1)+"/"+d.getFullYear()
+
 );
+
+}
+
+
+function renderDateTenant(){
+
+const d=new Date();
+
+const days=["Chủ nhật","Thứ hai","Thứ ba","Thứ tư","Thứ năm","Thứ sáu","Thứ bảy"];
+
+setText("todayTenant",
+
+days[d.getDay()] + ", " +
+d.getDate()+"/"+(d.getMonth()+1)+"/"+d.getFullYear()
+
+);
+
 }
