@@ -4,14 +4,14 @@ class Room
     private $conn;
 
     public $RoomID;
-    public $BuildingID;
+    public $BuildingName;
+    public $BuildingAddress;
+    public $BuildingTotalFloors;
     public $RoomName;
-    public $Floor;
+    public $RoomFloor;
     public $Area;
     public $BasePrice;
     public $Status;
-    public $CurrentElectric;
-    public $CurrentWater;
     public $Note;
 
     public function __construct($db)
@@ -21,7 +21,8 @@ class Room
     // read data
     public function read()
     {
-        $query = "SELECT * FROM rooms ORDER BY RoomID";
+        $query = "SELECT * FROM rooms  
+        ORDER BY RoomID";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         return $stmt;
@@ -43,30 +44,32 @@ class Room
     //     $this->CurrentWater = $row['CurrentWater'];
     // }
 
-    //create data
+    // create data
     public function create()
     {
-        $query = "INSERT INTO rooms SET RoomName=:RoomName,Floor=:Floor,Area=:Area,BasePrice=:BasePrice,Status=:Status,CurrentElectric=:CurrentElectric,CurrentWater=:CurrentWater,Note=:Note";
+        $query = "INSERT INTO rooms SET  BuildingName=:BuildingName,BuildingAddress=:BuildingAddress,BuildingTotalFloors=:BuildingTotalFloors,RoomName=:RoomName,RoomFloor=:RoomFloor,Area=:Area,BasePrice=:BasePrice,Status=:Status,Note=:Note";
         $stmt = $this->conn->prepare($query);
 
-        //clean data
+        // ===== CLEAN DATA =====
+        $this->BuildingName = htmlspecialchars(strip_tags($this->BuildingName));
+        $this->BuildingAddress = htmlspecialchars(strip_tags($this->BuildingAddress));
+        $this->BuildingTotalFloors = htmlspecialchars(strip_tags($this->BuildingTotalFloors));
         $this->RoomName = htmlspecialchars(strip_tags($this->RoomName));
-        $this->Floor = htmlspecialchars(strip_tags($this->Floor));
-        $this->Area = htmlspecialchars(strip_tags($this->Area));
-        $this->BasePrice = htmlspecialchars(strip_tags($this->BasePrice));
+        $this->RoomFloor = (int)$this->RoomFloor;
+        $this->Area = (float)$this->Area;
+        $this->BasePrice = (float)$this->BasePrice;
         $this->Status = htmlspecialchars(strip_tags($this->Status));
-        $this->CurrentElectric = htmlspecialchars(strip_tags($this->CurrentElectric));
-        $this->CurrentWater = htmlspecialchars(strip_tags($this->CurrentWater));
         $this->Note = htmlspecialchars(strip_tags($this->Note));
 
-
+        // ===== BIND =====
+        $stmt->bindParam(':BuildingName', $this->BuildingName);
+        $stmt->bindParam(':BuildingAddress', $this->BuildingAddress);
+        $stmt->bindParam(':BuildingTotalFloors', $this->BuildingTotalFloors);
         $stmt->bindParam(':RoomName', $this->RoomName);
-        $stmt->bindParam(':Floor', $this->Floor);
+        $stmt->bindParam(':RoomFloor', $this->RoomFloor);
         $stmt->bindParam(':Area', $this->Area);
         $stmt->bindParam(':BasePrice', $this->BasePrice);
         $stmt->bindParam(':Status', $this->Status);
-        $stmt->bindParam(':CurrentElectric', $this->CurrentElectric);
-        $stmt->bindParam(':CurrentWater', $this->CurrentWater);
         $stmt->bindParam(':Note', $this->Note);
 
         if ($stmt->execute()) {
@@ -76,32 +79,60 @@ class Room
         return false;
     }
 
-    //update data
+    // update data
     public function update()
     {
-        $query = "UPDATE rooms SET RoomName=:RoomName,BasePrice=:BasePrice,Status=:Status,CurrentElectric=:CurrentElectric,CurrentWater=:CurrentWater WHERE RoomID=:RoomID";
+        // $query = "UPDATE rooms r
+        // JOIN buildings b ON r.BuildingID=b.BuildingID        
+        // SET  BuildingID=:BuildingID,RoomName=:RoomName,Floor=:Floor,Area=:Area,BasePrice=:BasePrice,Status=:Status,CurrentElectric=:CurrentElectric,CurrentWater=:CurrentWater,Note=:Note Where RoomID=:RoomID";
+
+        $query = "UPDATE rooms SET  
+                    BuildingName = :BuildingName,
+                    BuildingAddress = :BuildingAddress,
+                    BuildingTotalFloors = :BuildingTotalFloors,
+                    RoomName = :RoomName,
+                    RoomFloor = :RoomFloor,
+                    Area = :Area,
+                    BasePrice = :BasePrice,
+                    Status = :Status,
+                    Note = :Note
+                  WHERE RoomID = :RoomID";
         $stmt = $this->conn->prepare($query);
 
-        //clean data
-        $this->RoomID = htmlspecialchars(strip_tags($this->RoomID));
+        // ===== CLEAN DATA =====
+        $this->RoomID = (int)$this->RoomID;
+        $this->BuildingName = htmlspecialchars(strip_tags($this->BuildingName));
+        $this->BuildingAddress = htmlspecialchars(strip_tags($this->BuildingAddress));
+        $this->BuildingTotalFloors = htmlspecialchars(strip_tags($this->BuildingTotalFloors));
         $this->RoomName = htmlspecialchars(strip_tags($this->RoomName));
-        $this->BasePrice = htmlspecialchars(strip_tags($this->BasePrice));
+        $this->RoomFloor = (int)$this->RoomFloor;
+        $this->Area = (float)$this->Area;
+        $this->BasePrice = (float)$this->BasePrice;
         $this->Status = htmlspecialchars(strip_tags($this->Status));
-        $this->CurrentElectric = htmlspecialchars(strip_tags($this->CurrentElectric));
-        $this->CurrentWater = htmlspecialchars(strip_tags($this->CurrentWater));
+        $this->Note = htmlspecialchars(strip_tags($this->Note));
 
+
+
+        // ===== BIND =====
         $stmt->bindParam(':RoomID', $this->RoomID);
+        $stmt->bindParam(':BuildingName', $this->BuildingName);
+        $stmt->bindParam(':BuildingAddress', $this->BuildingAddress);
+        $stmt->bindParam(':BuildingTotalFloors', $this->BuildingTotalFloors);
         $stmt->bindParam(':RoomName', $this->RoomName);
+        $stmt->bindParam(':RoomFloor', $this->RoomFloor);
+        $stmt->bindParam(':Area', $this->Area);
         $stmt->bindParam(':BasePrice', $this->BasePrice);
         $stmt->bindParam(':Status', $this->Status);
-        $stmt->bindParam(':CurrentElectric', $this->CurrentElectric);
-        $stmt->bindParam(':CurrentWater', $this->CurrentWater);
+        $stmt->bindParam(':Note', $this->Note);
+
         if ($stmt->execute()) {
             return true;
         }
         printf('error %s.\n', $stmt->error);
         return false;
     }
+
+
 
     //delete data
     public function delete()

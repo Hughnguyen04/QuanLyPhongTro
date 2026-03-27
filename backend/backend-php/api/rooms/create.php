@@ -17,13 +17,27 @@ $conn = $db->getConnection();
 $room = new Room($conn);
 
 $data = json_decode(file_get_contents("php://input"));
+
+// ===== CHECK JSON =====
+if (!$data) {
+    echo json_encode(["message" => "Khong nhan duoc JSON"]);
+    exit;
+}
+
+// ===== CHECK BẮT BUỘC =====
+if (empty($data->BuildingName) || empty($data->RoomName)) {
+    echo json_encode(["message" => "Thieu du lieu bat buoc"]);
+    exit;
+}
+
+$room->BuildingName = $data->BuildingName;
+$room->BuildingAddress = $data->BuildingAddress;
+$room->BuildingTotalFloors = $data->BuildingTotalFloors;
 $room->RoomName = $data->RoomName;
-$room->Floor = $data->Floor;
+$room->RoomFloor = $data->RoomFloor;
 $room->Area = $data->Area;
 $room->BasePrice = $data->BasePrice;
 $room->Status = $data->Status;
-$room->CurrentElectric = $data->CurrentElectric;
-$room->CurrentWater = $data->CurrentWater;
 $room->Note = $data->Note;
 
 

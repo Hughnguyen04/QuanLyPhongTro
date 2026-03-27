@@ -1,7 +1,7 @@
 <?php
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: POST");
+header("Access-Control-Allow-Methods: PUT");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
 require_once "../../config/Database.php";
@@ -17,19 +17,12 @@ $conn = $db->getConnection();
 $Tenant = new Tenant($conn);
 
 $data = json_decode(file_get_contents("php://input"));
-
-// ===== CHECK JSON =====
 if (!$data) {
-    echo json_encode(["message" => "Khong nhan duoc JSON"]);
+    echo json_encode(["message" => "No input"]);
     exit;
 }
 
-// ===== CHECK BẮT BUỘC =====
-if (empty($data->Phone) || empty($data->FullName)) {
-    echo json_encode(["message" => "Thieu du lieu bat buoc"]);
-    exit;
-}
-
+$Tenant->TenantID = $data->TenantID;
 $Tenant->FullName = $data->FullName;
 $Tenant->Phone = $data->Phone;
 $Tenant->CCCD = $data->CCCD;
@@ -39,9 +32,8 @@ $Tenant->Address = $data->Address;
 $Tenant->Email = $data->Email;
 $Tenant->Note = $data->Note;
 
-
-if ($Tenant->create()) {
-    echo json_encode(array('message', 'phong da duoc tao'));
+if ($Tenant->update()) {
+    echo json_encode(array('message', 'phong da duoc cap nhat'));
 } else {
-    echo json_encode(array('message', 'phong khong duoc tao'));
+    echo json_encode(array('message', 'phong khong duoc cap nhat'));
 }

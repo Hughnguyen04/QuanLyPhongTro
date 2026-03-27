@@ -17,12 +17,22 @@ $conn = $db->getConnection();
 $room = new Room($conn);
 
 $data = json_decode(file_get_contents("php://input"));
+// if (!$data) {
+//     echo json_encode(["message" => "No input"]);
+//     exit;
+// }
+
 $room->RoomID = $data->RoomID;
+$room->BuildingName = $data->BuildingName;
+$room->BuildingAddress = $data->BuildingAddress;
+$room->BuildingTotalFloors = $data->BuildingTotalFloors;
+$room->BuildingName = $data->BuildingName;
 $room->RoomName = $data->RoomName;
+$room->RoomFloor = $data->RoomFloor;
+$room->Area = $data->Area;
 $room->BasePrice = $data->BasePrice;
 $room->Status = $data->Status;
-$room->CurrentElectric = $data->CurrentElectric;
-$room->CurrentWater = $data->CurrentWater;
+$room->Note = $data->Note;
 
 if ($room->update()) {
     echo json_encode(array('message', 'phong da duoc cap nhat'));

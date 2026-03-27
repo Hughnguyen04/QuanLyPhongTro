@@ -7,6 +7,7 @@ header("Access-Control-Allow-Headers: Content-Type, Authorization");
 require_once "../../config/Database.php";
 require_once "../../models/Room.php";
 
+
 // ===== Nếu Database.php dùng class =====
 $db = new db();
 $conn = $db->getConnection();
@@ -23,12 +24,16 @@ $room_array['data'] = [];
 while ($row = $read->fetch(PDO::FETCH_ASSOC)) {
 
     $row_item = array(
-        'ID_phong'   => $row['RoomID'],
-        'Ten_Phong'  => $row['RoomName'],
-        'Gia_Phong'  => $row['BasePrice'],
-        'Trang_Thai' => $row['Status'],
-        'So_Dien'    => $row['CurrentElectric'],
-        'So_Nuoc'    => $row['CurrentWater']
+        'RoomID'   => $row['RoomID'],
+        'BuildingName'   => $row['BuildingName'],
+        'BuildingAddress'   => $row['BuildingAddress'],
+        'BuildingTotalFloors'   => $row['BuildingTotalFloors'],
+        'RoomName'  => $row['RoomName'],
+        'RoomFloor' => $row['RoomFloor'],
+        'Area' => $row['Area'],
+        'BasePrice'  => $row['BasePrice'],
+        'Status' => $row['Status'],
+        'Note' => $row['Note']
     );
 
     $room_array['data'][] = $row_item;
