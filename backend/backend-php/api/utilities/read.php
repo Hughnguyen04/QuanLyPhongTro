@@ -10,38 +10,30 @@ $db = new db();
 $conn = $db->getConnection();
 
 $Utilities = new Utilities($conn);
-$stmt = $Utilities->read();
-$num = $stmt->rowCount();
+$read = $Utilities->read();
 
-if ($num > 0) {
+$Utilities_array = [];
+$Utilities_array['data'] = [];
 
-    $arr = [];
-    $arr["data"] = [];
+while ($row = $read->fetch(PDO::FETCH_ASSOC)) {
 
-    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+    $item = array(
+        "UtilityID"     => $row["UtilityID"],
+        "RoomName"      => $row["RoomName"],
 
-        $item = array(
-            "UtilityID"     => $row["UtilityID"],
-            "RoomName"      => $row["RoomName"],
-            "BuildingName"  => $row["BuildingName"],
+        "Month"         => $row["Month"],
+        "Year"          => $row["Year"],
 
-            "Month"         => $row["Month"],
-            "Year"          => $row["Year"],
+        "ElectricOld"   => $row["ElectricOld"],
+        "ElectricNew"   => $row["ElectricNew"],
+        "WaterOld"      => $row["WaterOld"],
+        "WaterNew"      => $row["WaterNew"],
 
-            "ElectricOld"   => $row["ElectricOld"],
-            "ElectricNew"   => $row["ElectricNew"],
-            "WaterOld"      => $row["WaterOld"],
-            "WaterNew"      => $row["WaterNew"],
+        "ElectricPrice" => $row["ElectricPrice"],
+        "WaterPrice"    => $row["WaterPrice"]
+    );
 
-            "ElectricPrice" => $row["ElectricPrice"],
-            "WaterPrice"    => $row["WaterPrice"]
-        );
-
-        $arr["data"][] = $item;
-    }
-
-    echo json_encode($arr);
-} else {
-    http_response_code(404);
-    echo json_encode(["message" => "Không có dữ liệu utilities"]);
+    $Utilities_array['data'][] = $item;
 }
+
+echo json_encode($Utilities_array);

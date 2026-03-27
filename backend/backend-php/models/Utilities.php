@@ -22,20 +22,68 @@ class Utilities
         $this->conn = $db;
     }
 
-    // ===== READ =====
+
+    // read data
     public function read()
     {
         $query = "SELECT 
-                    u.*,
-                    r.RoomName,
-                    r.BuildingName
-                  FROM " . $this->table . " u
-                  INNER JOIN rooms r ON u.RoomID = r.RoomID
-                  ORDER BY u.Year DESC, u.Month DESC";
-
+    u.*,
+    r.RoomName
+FROM utilities u
+INNER JOIN rooms r 
+    ON u.RoomID = r.RoomID
+ORDER BY u.UtilityID";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         return $stmt;
+    }
+
+    // ===== TÍNH & UPDATE BILL =====
+    private function updateBill()
+    {
+        // tính tiền
+        $electricCost = ($this->ElectricNew - $this->ElectricOld) * $this->ElectricPrice;
+        $waterCost = ($this->WaterNew - $this->WaterOld) * $this->WaterPrice;
+
+        // tìm bill cùng tháng
+        $sql = "
+    SELECT b.BillID, b.RoomPrice, b.LateFee
+    FROM bills b
+    INNER JOIN contracts c 
+        ON b.ContractID = c.ContractID
+    WHERE c.RoomID = :roomID
+    AND b.Month = :month
+    AND b.Year = :year
+    LIMIT 1
+";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([
+            ':roomID' => $this->RoomID,
+            ':month' => $this->Month,
+            ':year' => $this->Year
+        ]);
+
+        $bill = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($bill) {
+            $total = $bill['RoomPrice'] + $electricCost + $waterCost + (float)$bill['LateFee'];
+
+            $update = $this->conn->prepare("
+                UPDATE bills SET
+                    ElectricCost = :electric,
+                    WaterCost = :water,
+                    TotalAmount = :total
+                WHERE BillID = :id
+            ");
+
+            $update->execute([
+                ':electric' => $electricCost,
+                ':water' => $waterCost,
+                ':total' => $total,
+                ':id' => $bill['BillID']
+            ]);
+        }
     }
 
     // ===== CREATE =====
@@ -55,29 +103,22 @@ class Utilities
 
         $stmt = $this->conn->prepare($query);
 
-        // sanitize
-        $this->RoomID = htmlspecialchars(strip_tags($this->RoomID));
-        $this->Month = htmlspecialchars(strip_tags($this->Month));
-        $this->Year = htmlspecialchars(strip_tags($this->Year));
-        $this->ElectricOld = htmlspecialchars(strip_tags($this->ElectricOld));
-        $this->ElectricNew = htmlspecialchars(strip_tags($this->ElectricNew));
-        $this->WaterOld = htmlspecialchars(strip_tags($this->WaterOld));
-        $this->WaterNew = htmlspecialchars(strip_tags($this->WaterNew));
-        $this->ElectricPrice = htmlspecialchars(strip_tags($this->ElectricPrice));
-        $this->WaterPrice = htmlspecialchars(strip_tags($this->WaterPrice));
+        $stmt->execute([
+            ':RoomID' => $this->RoomID,
+            ':Month' => $this->Month,
+            ':Year' => $this->Year,
+            ':ElectricOld' => $this->ElectricOld,
+            ':ElectricNew' => $this->ElectricNew,
+            ':WaterOld' => $this->WaterOld,
+            ':WaterNew' => $this->WaterNew,
+            ':ElectricPrice' => $this->ElectricPrice,
+            ':WaterPrice' => $this->WaterPrice
+        ]);
 
-        // bind
-        $stmt->bindParam(":RoomID", $this->RoomID);
-        $stmt->bindParam(":Month", $this->Month);
-        $stmt->bindParam(":Year", $this->Year);
-        $stmt->bindParam(":ElectricOld", $this->ElectricOld);
-        $stmt->bindParam(":ElectricNew", $this->ElectricNew);
-        $stmt->bindParam(":WaterOld", $this->WaterOld);
-        $stmt->bindParam(":WaterNew", $this->WaterNew);
-        $stmt->bindParam(":ElectricPrice", $this->ElectricPrice);
-        $stmt->bindParam(":WaterPrice", $this->WaterPrice);
+        // 👉 update bill sau khi insert
+        $this->updateBill();
 
-        return $stmt->execute();
+        return true;
     }
 
     // ===== UPDATE =====
@@ -98,31 +139,23 @@ class Utilities
 
         $stmt = $this->conn->prepare($query);
 
-        // sanitize
-        $this->UtilityID = htmlspecialchars(strip_tags($this->UtilityID));
-        $this->RoomID = htmlspecialchars(strip_tags($this->RoomID));
-        $this->Month = htmlspecialchars(strip_tags($this->Month));
-        $this->Year = htmlspecialchars(strip_tags($this->Year));
-        $this->ElectricOld = htmlspecialchars(strip_tags($this->ElectricOld));
-        $this->ElectricNew = htmlspecialchars(strip_tags($this->ElectricNew));
-        $this->WaterOld = htmlspecialchars(strip_tags($this->WaterOld));
-        $this->WaterNew = htmlspecialchars(strip_tags($this->WaterNew));
-        $this->ElectricPrice = htmlspecialchars(strip_tags($this->ElectricPrice));
-        $this->WaterPrice = htmlspecialchars(strip_tags($this->WaterPrice));
+        $stmt->execute([
+            ':UtilityID' => $this->UtilityID,
+            ':RoomID' => $this->RoomID,
+            ':Month' => $this->Month,
+            ':Year' => $this->Year,
+            ':ElectricOld' => $this->ElectricOld,
+            ':ElectricNew' => $this->ElectricNew,
+            ':WaterOld' => $this->WaterOld,
+            ':WaterNew' => $this->WaterNew,
+            ':ElectricPrice' => $this->ElectricPrice,
+            ':WaterPrice' => $this->WaterPrice
+        ]);
 
-        // bind
-        $stmt->bindParam(":UtilityID", $this->UtilityID);
-        $stmt->bindParam(":RoomID", $this->RoomID);
-        $stmt->bindParam(":Month", $this->Month);
-        $stmt->bindParam(":Year", $this->Year);
-        $stmt->bindParam(":ElectricOld", $this->ElectricOld);
-        $stmt->bindParam(":ElectricNew", $this->ElectricNew);
-        $stmt->bindParam(":WaterOld", $this->WaterOld);
-        $stmt->bindParam(":WaterNew", $this->WaterNew);
-        $stmt->bindParam(":ElectricPrice", $this->ElectricPrice);
-        $stmt->bindParam(":WaterPrice", $this->WaterPrice);
+        // 👉 update bill sau khi update
+        $this->updateBill();
 
-        return $stmt->execute();
+        return true;
     }
 
     // ===== DELETE =====
@@ -131,8 +164,6 @@ class Utilities
         $query = "DELETE FROM " . $this->table . " WHERE UtilityID = :UtilityID";
 
         $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(":UtilityID", $this->UtilityID);
-
-        return $stmt->execute();
+        return $stmt->execute([':UtilityID' => $this->UtilityID]);
     }
 }
