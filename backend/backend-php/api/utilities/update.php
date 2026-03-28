@@ -6,6 +6,12 @@ header("Access-Control-Allow-Methods: PUT");
 require_once "../../config/Database.php";
 require_once "../../models/Utilities.php";
 
+
+if ($_SERVER['REQUEST_METHOD'] !== 'PUT') {
+    http_response_code(405); // Method Not Allowed
+    echo json_encode(["message" => "Chỉ cho phép PUT"]);
+    exit();
+}
 $db = new db();
 $conn = $db->getConnection();
 

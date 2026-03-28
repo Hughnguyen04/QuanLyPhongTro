@@ -6,6 +6,11 @@ header("Access-Control-Allow-Methods: GET");
 require_once "../../config/Database.php";
 require_once "../../models/Utilities.php";
 
+if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+    http_response_code(405); // Method Not Allowed
+    echo json_encode(["message" => "Chỉ cho phép GET"]);
+    exit();
+}
 $db = new db();
 $conn = $db->getConnection();
 

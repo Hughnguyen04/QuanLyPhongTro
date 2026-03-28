@@ -6,17 +6,17 @@ header("Access-Control-Allow-Methods: DELETE");
 require_once "../../config/Database.php";
 require_once "../../models/Utilities.php";
 
+if ($_SERVER['REQUEST_METHOD'] !== 'DELETE') {
+    http_response_code(405); // Method Not Allowed
+    echo json_encode(["message" => "Chỉ cho phép DELETE"]);
+    exit();
+}
 $db = new db();
 $conn = $db->getConnection();
 
 $utilities = new Utilities($conn);
 
-// check method
-if ($_SERVER['REQUEST_METHOD'] !== 'DELETE') {
-    http_response_code(405);
-    echo json_encode(["message" => "Method không hợp lệ"]);
-    exit;
-}
+
 
 // lấy data
 $data = json_decode(file_get_contents("php://input"));
