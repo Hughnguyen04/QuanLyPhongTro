@@ -12,24 +12,24 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     echo json_encode(["message" => "Chỉ cho phép POST"]);
     exit();
 }
-// ===== Nếu Database.php dùng class =====
+//    Nếu Database.php dùng class   
 $db = new db();
 $conn = $db->getConnection();
 
-// ===== Nếu Database.php không dùng class thì chỉ cần:
+//    Nếu Database.php không dùng class thì chỉ cần:
 // $conn đã tồn tại sẵn
 
 $Contract = new Contract($conn);
 
 $data = json_decode(file_get_contents("php://input"));
 
-// ===== CHECK JSON =====
+//    CHECK JSON   
 if (!$data) {
     echo json_encode(["message" => "Khong nhan duoc JSON"]);
     exit;
 }
 
-// ===== CHECK BẮT BUỘC =====
+//    CHECK BẮT BUỘC   
 if (empty($data->RoomID) || empty($data->RentPrice)) {
     echo json_encode(["message" => "Thieu du lieu bat buoc"]);
     exit;

@@ -11,11 +11,6 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
     echo json_encode(["message" => "Chỉ cho phép GET"]);
     exit();
 }
-// // Xử lý preflight request
-// if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-//     http_response_code(200);
-//     exit();
-// }
 
 include_once '../../config/database.php';
 include_once '../../models/Bill.php';

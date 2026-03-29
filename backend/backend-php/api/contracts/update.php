@@ -13,11 +13,11 @@ if ($_SERVER['REQUEST_METHOD'] !== 'PUT') {
     echo json_encode(["message" => "Chỉ cho phép PUT"]);
     exit();
 }
-// ===== Nếu Database.php dùng class =====
+//    Nếu Database.php dùng class   
 $db = new db();
 $conn = $db->getConnection();
 
-// ===== Nếu Database.php không dùng class thì chỉ cần:
+//    Nếu Database.php không dùng class thì chỉ cần:
 // $conn đã tồn tại sẵn
 
 $Contract = new Contract($conn);

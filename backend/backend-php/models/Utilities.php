@@ -38,7 +38,7 @@ ORDER BY u.UtilityID";
         return $stmt;
     }
 
-    // ===== TÍNH & UPDATE BILL =====
+    //    TÍNH & UPDATE BILL   
     private function updateBill()
     {
         // tính tiền
@@ -86,7 +86,7 @@ ORDER BY u.UtilityID";
         }
     }
 
-    // ===== CREATE =====
+    //    CREATE   
     public function create()
     {
         $query = "INSERT INTO " . $this->table . " 
@@ -121,7 +121,7 @@ ORDER BY u.UtilityID";
         return true;
     }
 
-    // ===== UPDATE =====
+    //    UPDATE   
     public function update()
     {
         $query = "UPDATE " . $this->table . " 
@@ -158,7 +158,7 @@ ORDER BY u.UtilityID";
         return true;
     }
 
-    // ===== DELETE =====
+    //    DELETE   
     public function delete()
     {
         $query = "DELETE FROM " . $this->table . " WHERE UtilityID = :UtilityID";

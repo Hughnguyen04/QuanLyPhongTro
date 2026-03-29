@@ -1,71 +1,101 @@
-create database if not exists QuanLyPhongTro;
+CREATE DATABASE IF NOT EXISTS QuanLyPhongTro2;
 
-use QuanLyPhongTro;
-
-CREATE TABLE USERS (
-    UserID INT AUTO_INCREMENT PRIMARY KEY,
-    Username VARCHAR(50) NOT NULL UNIQUE,
-    Password VARCHAR(255) NOT NULL, -- mật khẩu đã mã hóa
-    Role ENUM('ADMIN', 'STAFF', 'GUEST') NOT NULL,
-    IsActive BOOLEAN DEFAULT TRUE,
-    CreatedAt DATETIME DEFAULT CURRENT_TIMESTAMP
-);
+USE QuanLyPhongTro2;
 
 CREATE TABLE ROOMS (
     RoomID INT AUTO_INCREMENT PRIMARY KEY,
+    BuildingName VARCHAR(100) NOT NULL,
+    BuildingAddress TEXT NOT NULL,
+    BuildingTotalFloors INT,
     RoomName VARCHAR(50) NOT NULL,
-    BasePrice DECIMAL(12,2) NOT NULL,
-    Status ENUM('TRONG', 'DANG_THUE', 'BAO_TRI') DEFAULT 'TRONG',
-    CurrentElectric INT DEFAULT 0,
-    CurrentWater INT DEFAULT 0,
-    CreatedAt DATETIME DEFAULT CURRENT_TIMESTAMP
+    RoomFloor INT NOT NULL,
+    Area DECIMAL(6, 2),
+    BasePrice DECIMAL(12, 2) NOT NULL,
+    Status ENUM(
+        'TRONG',
+        'DANG_THUE',
+        'BAO_TRI'
+    ) DEFAULT 'TRONG',
+    Note TEXT,
+    Image VARCHAR(255),
+    CreatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+    UpdatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    CONSTRAINT uq_room UNIQUE (BuildingName, RoomName),
+    CONSTRAINT chk_price CHECK (BasePrice >= 0),
+    CONSTRAINT chk_floor CHECK (BuildingTotalFloors > 0)
 );
+
 CREATE TABLE TENANTS (
     TenantID INT AUTO_INCREMENT PRIMARY KEY,
     FullName VARCHAR(100) NOT NULL,
-    CitizenID VARCHAR(20) NOT NULL UNIQUE,
-    Phone VARCHAR(15) NOT NULL,
-    Address VARCHAR(255),
-    CreatedAt DATETIME DEFAULT CURRENT_TIMESTAMP
+    Phone VARCHAR(20) NOT NULL UNIQUE,
+    CCCD VARCHAR(20) NOT NULL UNIQUE,
+    Email VARCHAR(100) UNIQUE,
+    BirthDate DATE,
+    Gender ENUM('NAM', 'NU', 'KHAC'),
+    Address TEXT,
+    Note TEXT,
+    CreatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+    UpdatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
+
 CREATE TABLE CONTRACTS (
     ContractID INT AUTO_INCREMENT PRIMARY KEY,
     RoomID INT NOT NULL,
     TenantID INT NOT NULL,
     StartDate DATE NOT NULL,
     EndDate DATE NOT NULL,
-    RentPrice DECIMAL(12,2) NOT NULL,
-    DepositAmount DECIMAL(12,2) DEFAULT 0,
-    Status ENUM('DANG_HIEU_LUC', 'DA_KET_THUC', 'DA_HUY') NOT NULL,
-
-    CONSTRAINT fk_contract_room
-        FOREIGN KEY (RoomID)
-        REFERENCES ROOMS(RoomID),
-
-    CONSTRAINT fk_contract_tenant
-        FOREIGN KEY (TenantID)
-        REFERENCES TENANTS(TenantID)
+    ActualEndDate DATE,
+    RentPrice DECIMAL(12, 2) NOT NULL,
+    Deposit DECIMAL(12, 2) DEFAULT 0,
+    ReturnedDeposit DECIMAL(12, 2) DEFAULT 0,
+    Status ENUM('HIEU_LUC', 'HET_HAN', 'HUY') DEFAULT 'HIEU_LUC',
+    Note TEXT,
+    CreatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+    UpdatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    CONSTRAINT fk_contract_room FOREIGN KEY (RoomID) REFERENCES ROOMS (RoomID) ON DELETE CASCADE,
+    CONSTRAINT fk_contract_tenant FOREIGN KEY (TenantID) REFERENCES TENANTS (TenantID) ON DELETE CASCADE
 );
 
-CREATE TABLE INVOICES (
-    InvoiceID INT AUTO_INCREMENT PRIMARY KEY,
-    ContractID INT NOT NULL,
-    BillingMonth CHAR(7) NOT NULL, -- MM/YYYY
+CREATE TABLE UTILITIES (
+    UtilityID INT AUTO_INCREMENT PRIMARY KEY,
+    RoomID INT NOT NULL,
+    Month INT NOT NULL,
+    Year INT NOT NULL,
     ElectricOld INT NOT NULL,
     ElectricNew INT NOT NULL,
     WaterOld INT NOT NULL,
     WaterNew INT NOT NULL,
-    TotalAmount DECIMAL(12,2) NOT NULL,
-    PaymentStatus ENUM('CHUA_THU', 'DA_THU') DEFAULT 'CHUA_THU',
+    ElectricPrice DECIMAL(12, 2) NOT NULL,
+    WaterPrice DECIMAL(12, 2) NOT NULL,
+    CreatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+    UpdatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    CONSTRAINT fk_utility_room FOREIGN KEY (RoomID) REFERENCES ROOMS (RoomID) ON DELETE CASCADE,
+    CONSTRAINT uq_utility UNIQUE (RoomID, Month, Year),
+    CONSTRAINT chk_electric CHECK (ElectricNew >= ElectricOld),
+    CONSTRAINT chk_water CHECK (WaterNew >= WaterOld)
+);
+
+CREATE TABLE BILLS (
+    BillID INT AUTO_INCREMENT PRIMARY KEY,
+    ContractID INT NOT NULL,
+    Month INT NOT NULL,
+    Year INT NOT NULL,
+    RoomPrice DECIMAL(12, 2) DEFAULT 0,
+    ElectricCost DECIMAL(12, 2) DEFAULT 0,
+    WaterCost DECIMAL(12, 2) DEFAULT 0,
+    LateFee DECIMAL(12, 2) DEFAULT 0,
+    TotalAmount DECIMAL(12, 2) NOT NULL,
+    PaidAmount DECIMAL(12, 2) DEFAULT 0,
+    DueDate DATE NOT NULL,
     PaymentDate DATE,
-
-    CONSTRAINT fk_invoice_contract
-        FOREIGN KEY (ContractID)
-        REFERENCES CONTRACTS(ContractID),
-
-    CONSTRAINT chk_electric
-        CHECK (ElectricNew >= ElectricOld),
-
-    CONSTRAINT chk_water
-        CHECK (WaterNew >= WaterOld)
+    Status ENUM(
+        'CHUA_DEN_KY',
+        'CHUA_THANH_TOAN',
+        'DA_THANH_TOAN'
+    ) DEFAULT 'CHUA_DEN_KY',
+    CreatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+    UpdatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    CONSTRAINT fk_bill_contract FOREIGN KEY (ContractID) REFERENCES CONTRACTS (ContractID) ON DELETE CASCADE,
+    CONSTRAINT uq_bill UNIQUE (ContractID, Month, Year)
 );

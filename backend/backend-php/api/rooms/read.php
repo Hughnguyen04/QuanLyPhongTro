@@ -13,11 +13,11 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
     exit();
 }
 
-// ===== Nếu Database.php dùng class =====
+//    Nếu Database.php dùng class   
 $db = new db();
 $conn = $db->getConnection();
 
-// ===== Nếu Database.php không dùng class thì chỉ cần:
+//    Nếu Database.php không dùng class thì chỉ cần:
 // $conn đã tồn tại sẵn
 
 $room = new Room($conn);
@@ -38,7 +38,8 @@ while ($row = $read->fetch(PDO::FETCH_ASSOC)) {
         'Area' => $row['Area'],
         'BasePrice'  => $row['BasePrice'],
         'Status' => $row['Status'],
-        'Note' => $row['Note']
+        'Note' => $row['Note'],
+        'Image' => $row['Image']
     );
 
     $room_array['data'][] = $row_item;

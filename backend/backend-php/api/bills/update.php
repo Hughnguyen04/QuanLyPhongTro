@@ -7,25 +7,25 @@ header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
 
 if ($_SERVER['REQUEST_METHOD'] !== 'PUT') {
-    http_response_code(405); // Method Not Allowed
+    http_response_code(405);
     echo json_encode(["message" => "Chỉ cho phép PUT"]);
     exit();
 }
 
-// ===== INCLUDE =====
+//    INCLUDE   
 include_once "../../config/database.php";
 include_once "../../models/Bill2.php";
 
-// ===== DB =====
+//    DB   
 $database = new db();
 $db = $database->getConnection();
 
 $bill = new Bill2($db);
 
-// ===== GET DATA =====
+//    GET DATA   
 $data = json_decode(file_get_contents("php://input"));
 
-// ===== CHECK ID =====
+//    CHECK ID   
 if (!isset($data->BillID)) {
     echo json_encode(["message" => "Thiếu BillID"]);
     exit;
@@ -33,7 +33,7 @@ if (!isset($data->BillID)) {
 
 $bill->BillID = $data->BillID;
 
-// ===== GÁN DỮ LIỆU (AN TOÀN KHÔNG LỖI) =====
+//    GÁN DỮ LIỆU 
 $bill->RoomPrice    = $data->RoomPrice ?? null;
 $bill->ElectricCost = $data->ElectricCost ?? null;
 $bill->WaterCost    = $data->WaterCost ?? null;
@@ -42,7 +42,7 @@ $bill->PaidAmount   = $data->PaidAmount ?? null;
 $bill->PaymentDate  = $data->PaymentDate ?? null;
 $bill->DueDate      = $data->DueDate ?? null;
 
-// ===== UPDATE =====
+//    UPDATE   
 if ($bill->update()) {
     echo json_encode([
         "message" => "Cập nhật thành công",

@@ -20,9 +20,7 @@ $bill = new Bill($conn);
 
 $data = json_decode(file_get_contents("php://input"));
 
-/* =====================================================
-   GÁN DỮ LIỆU
-===================================================== */
+
 
 $bill->ContractID = $data->ContractID;
 $bill->Month      = $data->Month;
@@ -35,9 +33,8 @@ $bill->DueDate    = $data->DueDate;
 $bill->PaymentDate = $data->PaymentDate ?? NULL;
 
 
-/* =====================================================
-   TẠO BILL
-===================================================== */
+
+
 
 if ($bill->create()) {
 
@@ -47,6 +44,6 @@ if ($bill->create()) {
 } else {
 
     echo json_encode([
-        "message" => "Không thể tạo hóa đơn"
+        "message" => "Không thể tạo hóa đơn hoặc hết hiệu lực hợp đồng"
     ]);
 }

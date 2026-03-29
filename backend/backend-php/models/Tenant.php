@@ -50,7 +50,7 @@ ORDER BY TenantID";
         $query = "INSERT INTO tenants SET  FullName=:FullName,Phone=:Phone,CCCD=:CCCD,BirthDate=:BirthDate,Gender=:Gender,Address=:Address,Email=:Email,Note=:Note";
         $stmt = $this->conn->prepare($query);
 
-        // ===== CLEAN DATA =====
+        //    CLEAN DATA   
         $this->FullName = htmlspecialchars(strip_tags($this->FullName));
         $this->Phone = htmlspecialchars(strip_tags($this->Phone));
         $this->CCCD = htmlspecialchars(strip_tags($this->CCCD));
@@ -60,7 +60,7 @@ ORDER BY TenantID";
         $this->Email = htmlspecialchars(strip_tags($this->Email));
         $this->Note = htmlspecialchars(strip_tags($this->Note));
 
-        // ===== BIND =====
+        //    BIND   
         $stmt->bindParam(':FullName', $this->FullName);
         $stmt->bindParam(':Phone', $this->Phone);
         $stmt->bindParam(':CCCD', $this->CCCD);
@@ -96,7 +96,7 @@ ORDER BY TenantID";
               WHERE TenantID = :TenantID";
         $stmt = $this->conn->prepare($query);
 
-        // ===== CLEAN DATA =====
+        //    CLEAN DATA   
         $this->TenantID = (int)$this->TenantID;
         $this->FullName = htmlspecialchars(strip_tags($this->FullName));
         $this->Phone = htmlspecialchars(strip_tags($this->Phone));
@@ -107,7 +107,7 @@ ORDER BY TenantID";
         $this->Email = htmlspecialchars(strip_tags($this->Email));
         $this->Note = htmlspecialchars(strip_tags($this->Note));
 
-        // ===== BIND =====
+        //    BIND   
         $stmt->bindParam(':TenantID', $this->TenantID);
         $stmt->bindParam(':FullName', $this->FullName);
         $stmt->bindParam(':Phone', $this->Phone);

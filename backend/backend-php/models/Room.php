@@ -13,6 +13,7 @@ class Room
     public $BasePrice;
     public $Status;
     public $Note;
+    public $Image;
 
     public function __construct($db)
     {
@@ -28,29 +29,14 @@ class Room
         return $stmt;
     }
 
-    // show data
-    // public function show()
-    // {
-    //     $query = "SELECT * FROM rooms Where RoomID=? LIMIT 1";
-    //     $stmt = $this->conn->prepare($query);
-    //     $stmt->bindParam(1, $this->RoomID);
-    //     $stmt->execute();
-
-    //     $row = $stmt->fetch(PDO::FETCH_ASSOC);
-    //     $this->RoomName = $row['RoomName'];
-    //     $this->BasePrice = $row['BasePrice'];
-    //     $this->Status = $row['Status'];
-    //     $this->CurrentElectric = $row['CurrentElectric'];
-    //     $this->CurrentWater = $row['CurrentWater'];
-    // }
 
     // create data
     public function create()
     {
-        $query = "INSERT INTO rooms SET  BuildingName=:BuildingName,BuildingAddress=:BuildingAddress,BuildingTotalFloors=:BuildingTotalFloors,RoomName=:RoomName,RoomFloor=:RoomFloor,Area=:Area,BasePrice=:BasePrice,Status=:Status,Note=:Note";
+        $query = "INSERT INTO rooms SET  BuildingName=:BuildingName,BuildingAddress=:BuildingAddress,BuildingTotalFloors=:BuildingTotalFloors,RoomName=:RoomName,RoomFloor=:RoomFloor,Area=:Area,BasePrice=:BasePrice,Status=:Status,Note=:Note,Image=:Image";
         $stmt = $this->conn->prepare($query);
 
-        // ===== CLEAN DATA =====
+        //    CLEAN DATA   
         $this->BuildingName = htmlspecialchars(strip_tags($this->BuildingName));
         $this->BuildingAddress = htmlspecialchars(strip_tags($this->BuildingAddress));
         $this->BuildingTotalFloors = htmlspecialchars(strip_tags($this->BuildingTotalFloors));
@@ -60,8 +46,9 @@ class Room
         $this->BasePrice = (float)$this->BasePrice;
         $this->Status = htmlspecialchars(strip_tags($this->Status));
         $this->Note = htmlspecialchars(strip_tags($this->Note));
+        $this->Image = $this->Image ? htmlspecialchars(strip_tags($this->Image)) : null;
 
-        // ===== BIND =====
+        //    BIND   
         $stmt->bindParam(':BuildingName', $this->BuildingName);
         $stmt->bindParam(':BuildingAddress', $this->BuildingAddress);
         $stmt->bindParam(':BuildingTotalFloors', $this->BuildingTotalFloors);
@@ -71,6 +58,7 @@ class Room
         $stmt->bindParam(':BasePrice', $this->BasePrice);
         $stmt->bindParam(':Status', $this->Status);
         $stmt->bindParam(':Note', $this->Note);
+        $stmt->bindParam(':Image', $this->Image);
 
         if ($stmt->execute()) {
             return true;
@@ -95,11 +83,12 @@ class Room
                     Area = :Area,
                     BasePrice = :BasePrice,
                     Status = :Status,
-                    Note = :Note
+                    Note = :Note,
+                    Image = :Image
                   WHERE RoomID = :RoomID";
         $stmt = $this->conn->prepare($query);
 
-        // ===== CLEAN DATA =====
+        //    CLEAN DATA   
         $this->RoomID = (int)$this->RoomID;
         $this->BuildingName = htmlspecialchars(strip_tags($this->BuildingName));
         $this->BuildingAddress = htmlspecialchars(strip_tags($this->BuildingAddress));
@@ -110,10 +99,11 @@ class Room
         $this->BasePrice = (float)$this->BasePrice;
         $this->Status = htmlspecialchars(strip_tags($this->Status));
         $this->Note = htmlspecialchars(strip_tags($this->Note));
+        $this->Image = $this->Image ? htmlspecialchars(strip_tags($this->Image)) : null;
 
 
 
-        // ===== BIND =====
+        //    BIND   
         $stmt->bindParam(':RoomID', $this->RoomID);
         $stmt->bindParam(':BuildingName', $this->BuildingName);
         $stmt->bindParam(':BuildingAddress', $this->BuildingAddress);
@@ -124,6 +114,7 @@ class Room
         $stmt->bindParam(':BasePrice', $this->BasePrice);
         $stmt->bindParam(':Status', $this->Status);
         $stmt->bindParam(':Note', $this->Note);
+        $stmt->bindParam(':Image', $this->Image);
 
         if ($stmt->execute()) {
             return true;

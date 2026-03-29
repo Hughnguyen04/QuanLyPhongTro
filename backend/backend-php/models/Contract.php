@@ -38,9 +38,9 @@ ORDER BY c.ContractID";
     }
 
 
-    // =========================
-    // 🔥 UPDATE ROOM STATUS
-    // =========================
+    //   
+    //  UPDATE ROOM STATUS
+    //   
     private function updateRoomStatus($status)
     {
         $room = $this->conn->prepare("
@@ -63,7 +63,7 @@ ORDER BY c.ContractID";
         $query = "INSERT INTO contracts SET  RoomID=:RoomID,TenantID=:TenantID,StartDate=:StartDate,EndDate=:EndDate,ActualEndDate=:ActualEndDate,Deposit=:Deposit,ReturnedDeposit=:ReturnedDeposit,RentPrice=:RentPrice,Status=:Status,Note=:Note";
         $stmt = $this->conn->prepare($query);
 
-        // ===== CLEAN DATA =====
+        //    CLEAN DATA   
         $this->RoomID = (int)$this->RoomID;
         $this->TenantID = (int)$this->TenantID;
         $this->StartDate = htmlspecialchars(strip_tags($this->StartDate));
@@ -77,7 +77,7 @@ ORDER BY c.ContractID";
 
         $this->Status = 'HIEU_LUC'; // mặc định khi tạo mới sẽ là hiệu lực
 
-        // ===== BIND =====
+        //    BIND   
         $stmt->bindParam(':RoomID', $this->RoomID);
         $stmt->bindParam(':TenantID', $this->TenantID);
         $stmt->bindParam(':StartDate', $this->StartDate);

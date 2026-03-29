@@ -42,7 +42,7 @@ class Bill2
     // CREATE BILL
     public function create()
     {
-        // ===== CHECK CONTRACT =====
+        //  CHECK CONTRACT 
         $stmt = $this->conn->prepare("
             SELECT * FROM contracts 
             WHERE ContractID = :id AND Status = 'HIEU_LUC'
@@ -55,7 +55,7 @@ class Bill2
         $roomID = $contract['RoomID'];
         $this->RoomPrice = (float)$contract['RentPrice'];
 
-        // ===== LẤY UTILITIES =====
+        // LẤY UTILITIES 
         $stmt = $this->conn->prepare("
             SELECT * FROM utilities 
             WHERE RoomID = :roomID AND Month = :month AND Year = :year
@@ -79,7 +79,7 @@ class Bill2
                 ($util['WaterNew'] - $util['WaterOld']) * $util['WaterPrice'];
         }
 
-        // ===== TOTAL =====
+        // TOTAL 
         $this->LateFee = (float)($this->LateFee ?? 0);
         $this->PaidAmount = (float)($this->PaidAmount ?? 0);
 
@@ -89,7 +89,7 @@ class Bill2
             $this->WaterCost +
             $this->LateFee;
 
-        // ===== STATUS =====
+        //   STATUS  
         $today = date('Y-m-d');
 
         if ($this->PaidAmount >= $this->TotalAmount && $this->TotalAmount > 0) {
@@ -103,7 +103,7 @@ class Bill2
             $this->PaymentDate = null;
         }
 
-        // ===== INSERT =====
+        //   INSERT  
         $stmt = $this->conn->prepare("
             INSERT INTO bills SET
                 ContractID = :ContractID,
@@ -139,7 +139,7 @@ class Bill2
     // UPDATE (THANH TOÁN + PHẠT)
     public function update()
     {
-        // ===== LẤY BILL =====
+        //   LẤY BILL  
         $stmt = $this->conn->prepare("SELECT * FROM bills WHERE BillID = :id");
         $stmt->execute([':id' => $this->BillID]);
         $old = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -151,7 +151,7 @@ class Bill2
 
         $lateFeeNext = 0;
 
-        // ===== STATUS =====
+        //   STATUS  
         if (empty($this->PaymentDate)) {
 
             $this->Status = 'CHUA_DEN_KY';
@@ -180,7 +180,7 @@ class Bill2
             }
         }
 
-        // ===== UPDATE =====
+        //   UPDATE  
         $stmt = $this->conn->prepare("
             UPDATE bills SET
                 PaidAmount = :PaidAmount,
@@ -198,7 +198,7 @@ class Bill2
 
         if (!$ok) return false;
 
-        // ===== TẠO BILL THÁNG SAU (NẾU CÓ PHẠT) =====
+        //   TẠO BILL THÁNG SAU (NẾU CÓ PHẠT)  
         if ($lateFeeNext > 0) {
 
             // tháng sau
@@ -212,7 +212,7 @@ class Bill2
 
             $dueDate = date('Y-m-d', strtotime($old['DueDate'] . ' +1 month'));
 
-            // ===== LẤY ROOM =====
+            //   LẤY ROOM  
             $stmtRoom = $this->conn->prepare("
                 SELECT RoomID, RentPrice FROM contracts WHERE ContractID = :id
             ");
@@ -222,7 +222,7 @@ class Bill2
             $roomID = $room['RoomID'];
             $roomPrice = $room['RentPrice'];
 
-            // ===== LẤY UTILITIES THÁNG SAU =====
+            //   LẤY UTILITIES THÁNG SAU  
             $stmtUtil = $this->conn->prepare("
                 SELECT * FROM utilities 
                 WHERE RoomID = :roomID AND Month = :month AND Year = :year
@@ -246,10 +246,10 @@ class Bill2
                     ($util['WaterNew'] - $util['WaterOld']) * $util['WaterPrice'];
             }
 
-            // ===== TOTAL =====
+            //   TOTAL  
             $total = $roomPrice + $electricCost + $waterCost + $lateFeeNext;
 
-            // ===== INSERT =====
+            //   INSERT  
             $stmt2 = $this->conn->prepare("
                 INSERT INTO bills SET
                     ContractID = :ContractID,
