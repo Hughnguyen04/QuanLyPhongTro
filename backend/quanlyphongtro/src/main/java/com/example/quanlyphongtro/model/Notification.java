@@ -9,27 +9,43 @@ import java.time.LocalDateTime;
 public class Notification {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "NotificationID")
+    private Integer notificationId;
+
+    @Column(name = "Title", length = 50, nullable = false)
+    private String title;
+
+    @Column(name = "Message", length = 255, nullable = false)
     private String message;
 
+    @Column(name = "IsRead", nullable = false)
+    private Boolean isRead = false;
+
+    @Column(name = "CreatedAt", nullable = false)
+    private LocalDateTime createdAt = LocalDateTime.now();
+
     @ManyToOne
-    @JoinColumn(name = "sender_id")
+    @JoinColumn(name = "SenderID")
     private User sender;
 
     @ManyToOne
-    @JoinColumn(name = "receiver_id")
+    @JoinColumn(name = "ReceiverID")
     private User receiver;
 
-    private Boolean isRead = false;
-
-    private LocalDateTime createdAt = LocalDateTime.now();
-
-    public Long getId() {
-        return id;
+    public Integer getNotificationId() {
+        return notificationId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setNotificationId(Integer notificationId) {
+        this.notificationId = notificationId;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getMessage() {
@@ -62,5 +78,21 @@ public class Notification {
 
     public void setIsRead(Boolean read) {
         isRead = read;
+    }
+
+    public Boolean getRead() {
+        return isRead;
+    }
+
+    public void setRead(Boolean read) {
+        isRead = read;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 }

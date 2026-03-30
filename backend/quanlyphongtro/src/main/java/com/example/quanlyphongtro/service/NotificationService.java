@@ -1,5 +1,6 @@
 package com.example.quanlyphongtro.service;
 
+import com.example.quanlyphongtro.dto.response.NotificationResponse;
 import com.example.quanlyphongtro.model.Notification;
 import com.example.quanlyphongtro.model.User;
 import com.example.quanlyphongtro.repository.NotificationRepository;
@@ -17,13 +18,14 @@ public class NotificationService {
     @Autowired
     private UserRepository userRepository;
 
-    public Notification createNotification (String message, Integer senderId, Integer receiverId){
+    public Notification createNotification (String title, String message, Integer senderId, Integer receiverId){
         User sender = userRepository.findById(senderId)
                 .orElseThrow(() -> new RuntimeException("Sender not found!"));
         User receiver = userRepository.findById(receiverId)
                 .orElseThrow(() -> new RuntimeException("Receiver not found!"));
 
         Notification notification = new Notification();
+        notification.setTitle(title);
         notification.setMessage(message);
         notification.setSender(sender);
         notification.setReceiver(receiver);
@@ -31,11 +33,11 @@ public class NotificationService {
         return notificationRepository.save(notification);
     }
 
-    public List<Notification> getNotifications(User user) {
+    public List<NotificationResponse> getNotifications(User user) {
         if(user.getRole() == User.Role.ADMIN) {
-            return notificationRepository.findAll();
+            return notificationRepository.getAllNotifications();
         } else {
-            return notificationRepository.findByReceiver(user);
+            return notificationRepository.findByReceiverUsername(user.getUsername());
         }
     }
 

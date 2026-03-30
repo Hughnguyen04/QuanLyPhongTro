@@ -1,9 +1,14 @@
 package com.example.quanlyphongtro.controller;
 
+import com.example.quanlyphongtro.dto.request.NotificationRequest;
+import com.example.quanlyphongtro.dto.response.NotificationResponse;
 import com.example.quanlyphongtro.model.Notification;
 import com.example.quanlyphongtro.model.User;
+import com.example.quanlyphongtro.repository.UserRepository;
 import com.example.quanlyphongtro.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,23 +18,53 @@ import java.util.List;
 public class NotificationController {
 
     @Autowired
+    UserRepository userRepository;
+
+    @Autowired
     private NotificationService notificationService;
 
+    //Tạo thông báo
     @PostMapping("/create")
-    public Notification createNotification(@RequestParam String message, @RequestParam Integer senderId, @RequestParam Integer receiverId) {
-        return notificationService.createNotification(message, senderId, receiverId);
+    public ResponseEntity<NotificationResponse> createNotification(@RequestBody NotificationRequest request,
+                                                           Authentication authentication) {
+        User sender = userRepository.findByUsername(authentication.getName())
+                .orElseThrow(() -> new RuntimeException("Sender not found!"));
+
+        Notification notification = notificationService.createNotification(
+                request.getTitle(),
+                request.getMessage(),
+                sender.getUserId(),
+                request.getReceiverId()
+        );
+
+        NotificationResponse response = new NotificationResponse(
+                notification.getNotificationId(),
+                notification.getTitle(),
+                notification.getMessage(),
+                notification.getIsRead(),
+                notification.getCreatedAt(),
+                notification.getSender().getUserId(),
+                notification.getSender().getUsername(),
+                notification.getReceiver().getUserId(),
+                notification.getReceiver().getUsername()
+        );
+
+        return ResponseEntity.ok(response);
     }
 
+    // Lấy thông báo theo userId
     @GetMapping
-    public List<Notification> getNotification(@RequestParam Integer userId) {
-        User user = notificationService.getUserById(userId);
-        return notificationService.getNotifications(user);
+    public ResponseEntity<List<NotificationResponse>> getNotifications(Authentication authentication) {
+        User user = userRepository.findByUsername(authentication.getName())
+                .orElseThrow(() -> new RuntimeException("User not found!"));
+        return ResponseEntity.ok(notificationService.getNotifications(user));
     }
 
+    // Đánh dấu đã đọc
     @PutMapping("/{id}/read")
-    public String markAsRead(@PathVariable Long id) {
+    public ResponseEntity<String> markAsRead(@PathVariable Long id) {
         notificationService.markAsRead(id);
-        return "Notification marked as read";
+        return ResponseEntity.ok("Notification marked as read");
     }
 
 }
