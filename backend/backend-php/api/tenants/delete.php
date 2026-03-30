@@ -1,23 +1,25 @@
 <?php
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: DELETE");
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
 require_once "../../config/Database.php";
 require_once "../../models/Tenant.php";
 
-if ($_SERVER['REQUEST_METHOD'] !== 'DELETE') {
-    http_response_code(405); // Method Not Allowed
-    echo json_encode(["message" => "Chỉ cho phép DELETE"]);
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
     exit();
 }
-//    Nếu Database.php dùng class   
+
+// if ($_SERVER['REQUEST_METHOD'] !== 'DELETE') {
+//     http_response_code(405); // Method Not Allowed
+//     echo json_encode(["message" => "Chỉ cho phép DELETE"]);
+//     exit();
+// }
+
 $db = new db();
 $conn = $db->getConnection();
-
-//    Nếu Database.php không dùng class thì chỉ cần:
-// $conn đã tồn tại sẵn
 
 $Tenant = new Tenant($conn);
 
