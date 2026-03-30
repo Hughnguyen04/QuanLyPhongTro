@@ -32,7 +32,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())//tắt csrf khi test api
                 .authorizeHttpRequests(auth -> auth
                     // Cho phép đăng nhập không cần xác thực
-                    .requestMatchers("/api/auth/login", "/api/auth/register").permitAll()
+                    .requestMatchers("/api/auth/login").permitAll()
                     // ADMIN và STAFF mới được tạo tài khoản
 //                    .requestMatchers("/api/auth/register").hasAnyRole("ADMIN", "STAFF")
                     // Chỉ ADMIN mới được quản lý tài khoản
@@ -40,9 +40,9 @@ public class SecurityConfig {
                     // Chỉ ADMIN mới được gửi thông báo
                     .requestMatchers("/api/notifications/create").hasRole("ADMIN")
                     // Nhân viên và khách sẽ đọc thông báo
-                    .requestMatchers("/api/notifications").hasAnyRole("STAFF", "GUEST")
+                    .requestMatchers("/api/notifications/**").hasAnyRole("ADMIN", "STAFF", "GUEST")
                     //Đánh dấu đã đọc
-                    .requestMatchers("/api/notifications/*/read").hasAnyRole("STAFF", "GUEST")
+//                    .requestMatchers("/api/notifications/*/read").hasAnyRole("STAFF", "GUEST")
                     // ADMIN và STAFF có thể quản lý phòng
                     //.requestMatchers("/api/rooms/**").hasAnyRole("ADMIN", "STAFF")
                     //ADMIN và STAFF có thể quản lý người thuê
