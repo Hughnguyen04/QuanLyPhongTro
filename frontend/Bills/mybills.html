@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Hóa đơn của tôi</title>
+<link rel="stylesheet" href="mybills.css">
+</head>
+
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+    <div class="left">
+        <button class="menu-btn" onclick="toggleMenu()">☰</button>
+        <h2>Hóa đơn của tôi</h2>
+    </div>
+
+    <div class="user-box" onclick="toggleUserMenu()">
+        <div class="avatar-text">👤</div>
+        <span id="username"></span>
+
+        <div class="user-menu" id="userMenu">
+            <div onclick="location.href='../Infor/infor.html'">👤 Thông tin</div>
+            <div onclick="location.href='../ChangePass/changepass.html'">🔒 Đổi mật khẩu</div>
+            <div onclick="logout()">🚪 Đăng xuất</div>
+        </div>
+    </div>
+</div>
+
+<div class="wrapper">
+    <div class="sidebar" id="sidebar"></div>
+
+    <div class="main">
+
+        <div class="bill-header">
+            <h3>Danh sách hóa đơn</h3>
+        </div>
+
+        <div class="bill-list" id="billList"></div>
+
+    </div>
+</div>
+
+<script src="../Common/menu.js"></script>
+<script src="mybills.js"></script>
+</body>
+</html>
