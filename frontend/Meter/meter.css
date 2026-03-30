@@ -10,22 +10,7 @@
 .toolbar select{
     padding:10px;
     border:1px solid #ddd;
-    border-radius:6px;
-    font-size:14px;
-}
-
-/* ===== BUTTON ===== */
-.add{
-    background:#6c63ff;
-    color:#fff;
-    border:none;
     border-radius:8px;
-    padding:10px 14px;
-    cursor:pointer;
-    font-weight:600;
-}
-.add:hover{
-    background:#5a52e0;
 }
 
 /* ===== CARDS ===== */
@@ -46,12 +31,11 @@
 .card h4{
     margin:0;
     color:#666;
-    font-weight:500;
 }
 
 .card p{
     font-size:26px;
-    margin:12px 0 0;
+    margin-top:10px;
     font-weight:600;
 }
 
@@ -68,19 +52,39 @@ table{
     border-collapse:collapse;
 }
 
-th{
-    text-align:left;
-    font-weight:500;
-    color:#666;
+th,td{
+    padding:10px;
     border-bottom:1px solid #eee;
-    padding:10px;
-}
-
-td{
-    padding:10px;
-    border-bottom:1px solid #f0f0f0;
 }
 
 tr:hover{
     background:#f8f9ff;
+}
+
+/* ===== INPUT ===== */
+input[type="number"]{
+    width:80px;
+    padding:6px;
+    border:1px solid #ccc;
+    border-radius:6px;
+    text-align:center;
+}
+
+input[type="number"]:focus{
+    border-color:#6c63ff;
+    outline:none;
+}
+
+/* ===== BUTTON ===== */
+button{
+    border:none;
+    background:#6c63ff;
+    color:#fff;
+    padding:6px 10px;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#5a52e0;
 }

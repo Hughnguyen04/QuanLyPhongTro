@@ -1,32 +1,45 @@
 <?php
 header("Content-Type: application/json; charset=UTF-8");
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
 require_once "../../config/Database.php";
 require_once "../../models/Tenant.php";
+if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+    http_response_code(405); // Method Not Allowed
+    echo json_encode(["message" => "Chỉ cho phép GET"]);
+    exit();
+}
 
-$db = new Database();
+//    Nếu Database.php dùng class   
+$db = new db();
 $conn = $db->getConnection();
-$tenant = new Tenant($conn);
 
-// GET /tenants?id=1
-if (isset($_GET['id'])) {
-    $stmt = $tenant->getById($_GET['id']);
-    $data = $stmt->fetch(PDO::FETCH_ASSOC);
+//    Nếu Database.php không dùng class thì chỉ cần:
+// $conn đã tồn tại sẵn
 
-    if ($data) {
-        echo json_encode($data);
-    } else {
-        echo json_encode(["message" => "Không tìm thấy người thuê"]);
-    }
+$Tenant = new Tenant($conn);
+$read = $Tenant->read();
+
+$Tenant_array = [];
+$Tenant_array['data'] = [];
+
+while ($row = $read->fetch(PDO::FETCH_ASSOC)) {
+
+    $row_item = array(
+        'TenantID'   => $row['TenantID'],
+        'FullName'  => $row['FullName'],
+        'Phone' => $row['Phone'],
+        'CCCD' => $row['CCCD'],
+        'BirthDate'  => $row['BirthDate'],
+        'Gender' => $row['Gender'],
+        'Address'    => $row['Address'],
+        'Email'    => $row['Email'],
+        'Note' => $row['Note']
+    );
+
+    $Tenant_array['data'][] = $row_item;
 }
-// GET /tenants
-else {
-    $stmt = $tenant->getAll();
-    $tenants = [];
 
-    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        $tenants[] = $row;
-    }
-
-    echo json_encode($tenants);
-}
+echo json_encode($Tenant_array);

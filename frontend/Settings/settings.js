@@ -5,8 +5,43 @@ if (!role) location.href = "../Login/login.html";
 if (role !== "chutro") location.href = "../Dashboard/dashboard.html";
 
 document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => {
 
-    document.getElementById("username").innerText = username || "Chủ trọ";
+    /* ===== LẤY DANH SÁCH ACCOUNTS ===== */
+
+    let accList = [];
+
+    if (window.DATA && window.DATA.accounts) {
+        accList = window.DATA.accounts;
+    } else if (typeof accounts !== "undefined") {
+        accList = accounts;
+    }
+
+    /* ===== TÌM TÊN HIỂN THỊ ===== */
+
+    let displayName = "Chủ trọ";
+
+    if (username && accList.length) {
+        const acc = accList.find(a => a.username === username);
+
+        if (acc && acc.name) {
+            displayName = acc.name;   // 👉 Đỗ Duy Tiến
+        } else {
+            displayName = username;
+        }
+    }
+
+    /* ===== GÁN LÊN UI ===== */
+
+    document.getElementById("username").innerText = displayName;
+
+    // Avatar chữ cái
+    const avatar = document.querySelector(".avatar-text");
+    if (avatar) {
+        avatar.textContent = displayName.charAt(0).toUpperCase();
+    }
+
+});
     renderMenu(role);
 
     if (!window.DATA.settings) {

@@ -1,12 +1,14 @@
 <?php
-class Database {
+class db
+{
     private $host = "localhost";
-    private $db_name = "quanlyphongtro";
+    private $db_name = "quanlyphongtro2";
     private $username = "root";
     private $password = "";
     private $conn;
 
-    public function getConnection() {
+    public function getConnection()
+    {
         try {
             $this->conn = new PDO(
                 "mysql:host=$this->host;dbname=$this->db_name;charset=utf8",

@@ -1,40 +1,48 @@
 <?php
 header("Content-Type: application/json; charset=UTF-8");
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
 require_once "../../config/Database.php";
 require_once "../../models/Contract.php";
 
-$db = new Database();
+if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+    http_response_code(405); // Method Not Allowed
+    echo json_encode(["message" => "Chỉ cho phép GET"]);
+    exit();
+}
+//    Nếu Database.php dùng class   
+$db = new db();
 $conn = $db->getConnection();
 
-$contract = new Contract($conn);
+//    Nếu Database.php không dùng class thì chỉ cần:
+// $conn đã tồn tại sẵn
 
-// GET /contracts?id=1
-if (isset($_GET['id'])) {
+$Contract = new Contract($conn);
+// $Contract->handleContractStatus();
+$read = $Contract->read();
 
-    $stmt = $contract->getById($_GET['id']);
-    $data = $stmt->fetch(PDO::FETCH_ASSOC);
+$Contract_array = [];
+$Contract_array['data'] = [];
 
-    if ($data) {
-        echo json_encode($data);
-    } else {
-        echo json_encode([
-            "message" => "Không tìm thấy hợp đồng"
-        ]);
-    }
+while ($row = $read->fetch(PDO::FETCH_ASSOC)) {
+    $row_item = array(
+        'ContractID'   => $row['ContractID'],
+        'RoomName'   => $row['RoomName'],
+        'FullName'  => $row['FullName'],
+        'BuildingName'   => $row['BuildingName'],
+        'StartDate' => $row['StartDate'],
+        'EndDate' => $row['EndDate'],
+        'ActualEndDate'  => $row['ActualEndDate'],
+        'Deposit' => $row['Deposit'],
+        'ReturnedDeposit'    => $row['ReturnedDeposit'],
+        'RentPrice'    => $row['RentPrice'],
+        'Status'    => $row['Status'],
+        'Note' => $row['Note']
+    );
 
+    $Contract_array['data'][] = $row_item;
 }
-// GET /contracts
-else {
 
-    $stmt = $contract->getAll();
-    $contracts = [];
-
-    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        $contracts[] = $row;
-    }
-
-    echo json_encode($contracts);
-
-}
-?>
+echo json_encode($Contract_array);

@@ -14,15 +14,20 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit();
 }
 
-// Kết nối DB
 $db = new db();
 $conn = $db->getConnection();
-
 $room = new Room($conn);
 
 /* =====================================================
    📥 NHẬN DỮ LIỆU
 ===================================================== */
+
+$room->RoomID = $_POST['RoomID'] ?? null;
+
+if (empty($room->RoomID)) {
+    echo json_encode(["message" => "Thiếu RoomID"]);
+    exit();
+}
 
 $room->BuildingName = $_POST['BuildingName'] ?? null;
 $room->BuildingAddress = $_POST['BuildingAddress'] ?? null;
@@ -35,60 +40,58 @@ $room->Status = $_POST['Status'] ?? null;
 $room->Note = $_POST['Note'] ?? null;
 
 /* =====================================================
-   ✅ VALIDATE
+   📸 LẤY ẢNH CŨ
 ===================================================== */
 
-if (empty($room->BuildingName) || empty($room->RoomName)) {
-    echo json_encode([
-        "status" => false,
-        "message" => "Thiếu dữ liệu bắt buộc"
-    ]);
-    exit();
+$oldImage = null;
+
+$query = "SELECT Image FROM rooms WHERE RoomID = :RoomID";
+$stmt = $conn->prepare($query);
+$stmt->bindParam(":RoomID", $room->RoomID);
+$stmt->execute();
+
+if ($stmt->rowCount() > 0) {
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    $oldImage = $row['Image'];
 }
 
 /* =====================================================
-   📸 UPLOAD ẢNH
+   📸 UPLOAD ẢNH MỚI (NẾU CÓ)
 ===================================================== */
 
-$imagePath = null;
+$imagePath = $oldImage;
 
 if (isset($_FILES['image']) && $_FILES['image']['error'] === 0) {
 
     $targetDir = "../../image/";
 
-    // tạo folder nếu chưa có
     if (!is_dir($targetDir)) {
         mkdir($targetDir, 0777, true);
     }
 
     $file = $_FILES['image'];
 
-    // validate loại file
     $ext = strtolower(pathinfo($file["name"], PATHINFO_EXTENSION));
     $allowed = ['jpg', 'jpeg', 'png', 'gif'];
 
     if (!in_array($ext, $allowed)) {
-        echo json_encode([
-            "status" => false,
-            "message" => "File ảnh không hợp lệ"
-        ]);
+        echo json_encode(["message" => "File ảnh không hợp lệ"]);
         exit();
     }
 
-    // rename file
     $fileName = uniqid() . "." . $ext;
     $targetFile = $targetDir . $fileName;
 
-    // upload
     if (move_uploaded_file($file["tmp_name"], $targetFile)) {
 
-        // 👉 FIX QUAN TRỌNG: đúng path
         $imagePath = "image/" . $fileName;
+
+        // 👉 XÓA ẢNH CŨ
+        if ($oldImage && file_exists("../../" . $oldImage)) {
+            unlink("../../" . $oldImage);
+        }
     } else {
-        echo json_encode([
-            "status" => false,
-            "message" => "Upload ảnh thất bại"
-        ]);
+        echo json_encode(["message" => "Upload ảnh thất bại"]);
         exit();
     }
 }
@@ -100,18 +103,18 @@ if (isset($_FILES['image']) && $_FILES['image']['error'] === 0) {
 $room->Image = $imagePath;
 
 /* =====================================================
-   🏗️ CREATE
+   🏗️ UPDATE
 ===================================================== */
 
-if ($room->create()) {
+if ($room->update()) {
     echo json_encode([
         "status" => true,
-        "message" => "Phòng đã được tạo",
+        "message" => "Phòng đã được cập nhật",
         "image" => $imagePath
     ]);
 } else {
     echo json_encode([
         "status" => false,
-        "message" => "Không thể tạo phòng"
+        "message" => "Không thể cập nhật phòng"
     ]);
 }

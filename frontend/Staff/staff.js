@@ -1,4 +1,4 @@
-/* ================= AUTH ================= */
+/* AUTH */
 const role = localStorage.getItem("role");
 const username = localStorage.getItem("username");
 
@@ -7,10 +7,20 @@ if (!role || role !== "chutro") location.href="../Login/login.html";
 document.getElementById("username").innerText = username;
 renderMenu(role);
 
-/* ================= DATA ================= */
+/* MODAL VAR */
+const modal = document.getElementById("modal");
+const modalTitle = document.getElementById("modalTitle");
+
+const mName = document.getElementById("mName");
+const mUsername = document.getElementById("mUsername");
+const mBuildings = document.getElementById("mBuildings");
+
+let editingId = null;
+
+/* DATA */
 let listStaff = accounts.filter(a => a.role === "nhanvien");
 
-/* ================= INIT FILTER ================= */
+/* INIT BUILDING */
 function initBuildings(){
     const select = document.getElementById("buildingFilter");
 
@@ -25,7 +35,7 @@ function initBuildings(){
     });
 }
 
-/* ================= RENDER ================= */
+/* RENDER */
 function render(){
     const key = document.getElementById("key").value.toLowerCase();
     const building = document.getElementById("buildingFilter").value;
@@ -63,57 +73,80 @@ function render(){
     document.getElementById("buildCount").innerText=buildCount;
 }
 
-/* ================= ACTION ================= */
+/* ADD */
 function addStaff(){
-    const name = prompt("Tên nhân viên:");
-    if(!name) return;
+    editingId=null;
 
-    const username = prompt("Tài khoản:");
-    if(!username) return;
+    modalTitle.innerText="Thêm nhân viên";
 
-    const buildings = prompt("Tòa quản lý (phẩy):","Tòa 1,Tòa 2");
-    const arr = buildings.split(",").map(s=>s.trim());
+    mName.value="";
+    mUsername.value="";
+    mBuildings.value="";
 
-    const id="A"+Math.floor(Math.random()*1000);
+    modal.style.display="flex";
+}
 
-    const nv={
-        id,
-        username,
+/* EDIT */
+function editStaff(id){
+    const nv = listStaff.find(s=>s.id===id);
+
+    editingId=id;
+
+    modalTitle.innerText="Sửa nhân viên";
+
+    mName.value=nv.name;
+    mUsername.value=nv.username;
+    mBuildings.value=(nv.buildings||[]).join(",");
+
+    modal.style.display="flex";
+}
+
+/* CLOSE */
+function closeModal(){
+    modal.style.display="none";
+}
+
+/* SAVE */
+function saveStaff(){
+
+    if(!mName.value || !mUsername.value){
+        alert("Nhập đủ thông tin");
+        return;
+    }
+
+    const data={
+        id: editingId || "A"+Date.now(),
+        name: mName.value,
+        username: mUsername.value,
         password:"123",
         role:"nhanvien",
-        name,
-        buildings:arr
+        buildings: mBuildings.value.split(",").map(s=>s.trim()).filter(Boolean)
     };
 
-    listStaff.push(nv);
-    accounts.push(nv);
+    if(editingId){
+        accounts = accounts.map(a => a.id===editingId ? {...a,...data} : a);
+    }else{
+        accounts.push(data);
+    }
+
+    listStaff = accounts.filter(a=>a.role==="nhanvien");
+
+    initBuildings();
+    render();
+    closeModal();
+}
+
+/* DELETE */
+function deleteStaff(id){
+    if(!confirm("Xóa nhân viên?")) return;
+
+    accounts = accounts.filter(a=>a.id!==id);
+    listStaff = accounts.filter(a=>a.role==="nhanvien");
 
     initBuildings();
     render();
 }
 
-function editStaff(id){
-    const nv = listStaff.find(s=>s.id===id);
-    if(!nv) return;
-
-    const name = prompt("Tên:",nv.name);
-    if(!name) return;
-
-    const buildings = prompt("Tòa:",nv.buildings.join(","));
-    nv.name=name;
-    nv.buildings=buildings.split(",").map(s=>s.trim());
-
-    render();
-}
-
-function deleteStaff(id){
-    if(!confirm("Xóa nhân viên?")) return;
-
-    listStaff = listStaff.filter(s=>s.id!==id);
-    accounts = accounts.filter(a=>a.id!==id);
-
-    render();
-}
-
+/* INIT */
 initBuildings();
 render();

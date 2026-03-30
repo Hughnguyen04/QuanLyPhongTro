@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <title>Chỉ số điện nước</title>
-    <link rel="stylesheet" href="../Common/layout.css">
-    <link rel="stylesheet" href="meter.css">
+<meta charset="UTF-8">
+<title>Chỉ số điện nước</title>
+
+<link rel="stylesheet" href="../Common/layout.css">
+<link rel="stylesheet" href="meter.css">
+
 </head>
 
 <body>
@@ -20,7 +22,7 @@
         <span id="username"></span>
 
         <div class="user-menu" id="userMenu">
-            <div onclick="openMyInfo()">👤 Thông tin của tôi</div>
+            <div onclick="openMyInfo()">👤 Thông tin</div>
             <div onclick="openChangePass()">🔒 Đổi mật khẩu</div>
             <div onclick="logout()">🚪 Đăng xuất</div>
         </div>
@@ -28,7 +30,6 @@
 </div>
 
 <div class="wrapper">
-
     <div class="sidebar" id="sidebar"></div>
 
     <div class="main">
@@ -42,10 +43,8 @@
             </select>
 
             <select id="monthFilter" onchange="render()">
-                <option value="">Tất cả tháng</option>
+                <option value="">Chọn tháng</option>
             </select>
-
-            <button class="add">➕ Nhập chỉ số</button>
         </div>
 
         <!-- CARDS -->
@@ -69,7 +68,7 @@
                         <th>Nước cũ</th>
                         <th>Nước mới</th>
                         <th>Tiêu thụ</th>
-                        <th>Hành động</th>
+                        <th>Lưu</th>
                     </tr>
                 </thead>
                 <tbody id="tbody"></tbody>
@@ -82,5 +81,6 @@
 <script src="../Common/menu.js"></script>
 <script src="../Common/data.js"></script>
 <script src="meter.js"></script>
+
 </body>
 </html>

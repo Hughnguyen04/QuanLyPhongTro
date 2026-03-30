@@ -1,111 +1,56 @@
-const ROOMS_GET_API =
-"http://172.20.10.3/chuyên%20đề/QuanLyPhongTro/backend/backend-php/api/rooms/read.php";
+const API_BASE = "http://localhost/ChuyenDe/QuanLyPhongTro/backend/backend-php/api/rooms";
 
-const ROOMS_CREATE_API =
-"http://172.20.10.3/chuyên%20đề/QuanLyPhongTro/backend/backend-php/api/rooms/create.php";
+class API {
 
-const ROOMS_UPDATE_API =
-"http://192.168.1.53/chuyên%20đề/QuanLyPhongTro/backend/backend-php/api/rooms/update.php";
+    static async getRooms() {
+        const res = await fetch(`${API_BASE}/read.php`);
+        return await res.json();
+    }
 
-const ROOMS_DELETE_API =
-"http://192.168.1.53/chuyên%20đề/QuanLyPhongTro/backend/backend-php/api/rooms/delete.php";
+    static async createRoom(data) {
+        const formData = new FormData();
 
-let listRooms=[];
+        Object.keys(data).forEach(key => {
+            if (data[key] !== null && data[key] !== undefined) {
+                formData.append(key, data[key]);
+            }
+        });
 
+        const res = await fetch(`${API_BASE}/create.php`, {
+            method: "POST",
+            body: formData
+        });
 
-/* LOAD */
+        return await res.json();
+    }
 
-async function loadRooms(){
+    static async updateRoom(data) {
+        const formData = new FormData();
 
-try{
+        Object.keys(data).forEach(key => {
+            if (data[key] !== null && data[key] !== undefined) {
+                formData.append(key, data[key]);
+            }
+        });
 
-const res=await fetch(ROOMS_GET_API);
-const data=await res.json();
+        const res = await fetch(`${API_BASE}/update.php`, {
+            method: "POST",
+            body: formData
+        });
 
-listRooms=data;
+        return await res.json();
+    }
 
-render();
-renderCards();
+    // ✅ FIX DELETE
+    static async deleteRoom(id) {
+        const res = await fetch(`${API_BASE}/delete.php`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ RoomID: id })
+        });
 
-}catch(err){
-
-console.error("Lỗi load phòng:",err);
-alert("Không tải được phòng");
-
+        return await res.json();
+    }
 }
-
-}
-
-
-/* SAVE */
-
-async function saveRoom(){
-
-const data={
-RoomName:mRoomName.value,
-BasePrice:mPrice.value,
-Status:mStatus.value
-};
-
-try{
-
-if(editingId){
-
-data.RoomID=editingId;
-
-await fetch(ROOMS_UPDATE_API,{
-method:"POST",
-headers:{ "Content-Type":"application/json"},
-body:JSON.stringify(data)
-});
-
-}else{
-
-await fetch(ROOMS_CREATE_API,{
-method:"POST",
-headers:{ "Content-Type":"application/json"},
-body:JSON.stringify(data)
-});
-
-}
-
-closeModal();
-loadRooms();
-
-}catch(err){
-
-console.error(err);
-alert("Lỗi lưu phòng");
-
-}
-
-}
-
-
-/* DELETE */
-
-async function deleteRoom(id){
-
-if(!confirm("Xóa phòng "+id+"?")) return;
-
-try{
-
-await fetch(ROOMS_DELETE_API,{
-method:"POST",
-headers:{ "Content-Type":"application/json"},
-body:JSON.stringify({RoomID:id})
-});
-
-loadRooms();
-
-}catch(err){
-
-console.error(err);
-alert("Không xóa được");
-
-}
-
-}
-
-
-document.addEventListener("DOMContentLoaded",loadRooms);
