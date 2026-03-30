@@ -4,6 +4,7 @@ public class RegisterRequest {
     private String username;
     private String password;
     private String role;
+    private boolean isActive = true;
 
     public String getUsername() {
         return username;
@@ -27,5 +28,13 @@ public class RegisterRequest {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
     }
 }

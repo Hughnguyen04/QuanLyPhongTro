@@ -1,6 +1,7 @@
 package com.example.quanlyphongtro.controller;
 
 import com.example.quanlyphongtro.dto.UserDTO;
+import com.example.quanlyphongtro.dto.request.RegisterRequest;
 import com.example.quanlyphongtro.model.User;
 import com.example.quanlyphongtro.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +26,8 @@ public class UserController {
     }
 
     @PostMapping
-    public UserDTO createUser(@RequestBody User user){
-        return userService.createUser(user);
+    public UserDTO createUser(@RequestBody RegisterRequest request){
+        return userService.createUser(request);
     }
 
     @PutMapping("/{id}")

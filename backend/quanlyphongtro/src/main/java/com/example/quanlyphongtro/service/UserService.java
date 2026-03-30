@@ -19,6 +19,9 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     public List<UserDTO> getAllUsers(){
         return userRepository.findAll().stream()
                 .map(u -> new UserDTO(u.getUserId(), u.getUsername(), u.getRole(), u.getIsActive()))
@@ -30,8 +33,15 @@ public class UserService {
         return new UserDTO(user.getUserId(), user.getUsername(), user.getRole(), user.getIsActive());
     }
 
-    public UserDTO createUser(User user){
-        User saved = userRepository.save(user);
+    public UserDTO createUser(RegisterRequest request){
+        User saved = new User();
+
+        saved.setUsername(request.getUsername());
+        saved.setPassword(passwordEncoder.encode(request.getPassword()));
+        saved.setRole(User.Role.valueOf(request.getRole()));
+        saved.setIsActive(request.isActive());
+        userRepository.save(saved);
+
         return new UserDTO(saved.getUserId(), saved.getUsername(), saved.getRole(), saved.getIsActive());
     }
 
@@ -39,7 +49,7 @@ public class UserService {
         User user = userRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found!"));
 
         user.setUsername(userUpdate.getUsername());
-        user.setPassword(userUpdate.getPassword());
+        user.setPassword(passwordEncoder.encode(userUpdate.getPassword()));
         user.setRole(userUpdate.getRole());
         user.setIsActive(user.getIsActive());
 

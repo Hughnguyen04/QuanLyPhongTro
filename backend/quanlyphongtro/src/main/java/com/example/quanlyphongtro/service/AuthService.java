@@ -30,26 +30,26 @@ public class AuthService {
     @Autowired
     CustomUserDetailsService customUserDetailsService;
 
-    public Integer register(RegisterRequest request){
-        User user = new User();
-
-        if(userRepository.findByUsername(request.getUsername()).isPresent()){
-            return 0; // Đã có username này
-        } else {
-            user.setUsername(request.getUsername());
-            //Mã hóa mật khẩu trước khi lưu
-            user.setPassword(passwordEncoder.encode(request.getPassword()));
-            user.setRole(User.Role.valueOf(request.getRole()));
-            user.setIsActive(true);
-
-            userRepository.save(user);
-
-            if(userRepository.findByUsername(request.getUsername()).isPresent()){
-                return 1; // Tạo tài khoản thành công
-            }
-            return -1; // Tạo tài khoản lỗi
-        }
-    }
+//    public Integer register(RegisterRequest request){
+//        User user = new User();
+//
+//        if(userRepository.findByUsername(request.getUsername()).isPresent()){
+//            return 0; // Đã có username này
+//        } else {
+//            user.setUsername(request.getUsername());
+//            //Mã hóa mật khẩu trước khi lưu
+//            user.setPassword(passwordEncoder.encode(request.getPassword()));
+//            user.setRole(User.Role.valueOf(request.getRole()));
+//            user.setIsActive(true);
+//
+//            userRepository.save(user);
+//
+//            if(userRepository.findByUsername(request.getUsername()).isPresent()){
+//                return 1; // Tạo tài khoản thành công
+//            }
+//            return -1; // Tạo tài khoản lỗi
+//        }
+//    }
 
 //    public Integer login(LoginRequest request){
 //        Optional<User> userOpt = userRepository.findByUsername(request.getUsername());

@@ -37,18 +37,18 @@ public class AuthController {
     @Autowired
     private JwtUtil jwtUtil;
 
-    @PostMapping("/register")
-    public RegisterResponse register(@RequestBody RegisterRequest request){
-        Integer registerStatus = authService.register(request);
-        if(registerStatus == 1) {
-            return new RegisterResponse("Đăng ký thành công!");
-        }
-        if (registerStatus == 0) {
-            return new RegisterResponse("Tên đăng nhập đã tồn tại!");
-        }
-        return new RegisterResponse("Đăng ký thất bại! Hãy kiểm tra lại thông tin!");
-
-    }
+//    @PostMapping("/register")
+//    public RegisterResponse register(@RequestBody RegisterRequest request){
+//        Integer registerStatus = authService.register(request);
+//        if(registerStatus == 1) {
+//            return new RegisterResponse("Đăng ký thành công!");
+//        }
+//        if (registerStatus == 0) {
+//            return new RegisterResponse("Tên đăng nhập đã tồn tại!");
+//        }
+//        return new RegisterResponse("Đăng ký thất bại! Hãy kiểm tra lại thông tin!");
+//
+//    }
 
 //    @PostMapping("/login")
 //    public ResponseEntity<?> login(@RequestBody LoginRequest request){
