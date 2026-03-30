@@ -1767,18 +1767,6 @@ Dưới đây là phân tích chi tiết các liên kết khóa ngoại (Foreign
 | **Luồng chính**      | 1. Chọn kỳ hóa đơn<br />2. Xem chi tiết |
 | **Hạn chế**          | Không thanh toán online                     |
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-# Buổi 4 : vẽ biểu đồ tuần tự và hoạt động (19/01/2026)
-
-## 1.Biểu đồ tuần tự
-
-### 1.1 Ghi chỉ số điện nước
-
-=======
-
->>>>>>> 7bc20ae37c0be7d3eb6677f4a8a594250571aa09
 # Buổi 4 + 5 (19/01/2026 + 23/01/2026)
 
 ## 1. Biểu đồ tuần tự
@@ -1826,174 +1814,58 @@ Dưới đây là phân tích chi tiết các liên kết khóa ngoại (Foreign
 </p>
 
 ### Biểu đồ tuần tự Ghi chỉ số điện nước
-<<<<<<< HEAD
 
-=======
->>>>>>> 6d1e9b684cb9733ee7b54cb3edd1a594acf40dad
->>>>>>> 7bc20ae37c0be7d3eb6677f4a8a594250571aa09
 <p align="center">
   <img src="pttk_img/ghi chỉ số điện nước SQ.jpg" alt="UC Tổng quát" width="700">
 </p>
 
-<<<<<<< HEAD
-### 1.2 Tạo hóa đơn
-
-=======
 ### Biểu đồ tuần tự Tạo hóa đơn
-<<<<<<< HEAD
 
-=======
->>>>>>> 6d1e9b684cb9733ee7b54cb3edd1a594acf40dad
->>>>>>> 7bc20ae37c0be7d3eb6677f4a8a594250571aa09
 <p align="center">
   <img src="pttk_img/tạo hóa đơn SQ.jpg" alt="UC Tổng quát" width="700">
 </p>
 
-<<<<<<< HEAD
-### 1.3 Xem thông lịch sử hóa đơn
-
-=======
 ### Biểu đồ tuần tự Xem thông lịch sử hóa đơn
-<<<<<<< HEAD
 
-=======
->>>>>>> 6d1e9b684cb9733ee7b54cb3edd1a594acf40dad
->>>>>>> 7bc20ae37c0be7d3eb6677f4a8a594250571aa09
 <p align="center">
   <img src="pttk_img/23.1 huy/xem lịch sử hóa đơn SQ.jpg" alt="UC Tổng quát" width="700">
 </p>
 
-<<<<<<< HEAD
-### 1.4 Cập nhật trạng thái thanh toán
-
-=======
 ### Biểu đồ tuần tự Cập nhật trạng thái thanh toán
-<<<<<<< HEAD
 
-=======
->>>>>>> 6d1e9b684cb9733ee7b54cb3edd1a594acf40dad
->>>>>>> 7bc20ae37c0be7d3eb6677f4a8a594250571aa09
 <p align="center">
   <img src="pttk_img/23.1 huy/cập nhật trạng thái thanh toán SQ.jpg" alt="UC Tổng quát" width="700">
 </p>
 
-<<<<<<< HEAD
-### 1.5 Xem thông tin cá nhân
-
-=======
 ### Biểu đồ tuần tự Xem thông tin cá nhân
-<<<<<<< HEAD
 
-=======
->>>>>>> 6d1e9b684cb9733ee7b54cb3edd1a594acf40dad
->>>>>>> 7bc20ae37c0be7d3eb6677f4a8a594250571aa09
 <p align="center">
   <img src="pttk_img/23.1 huy/xem thông tin cá nhân SQ.jpg" alt="UC Tổng quát" width="700">
 </p>
 
-<<<<<<< HEAD
-### 1.6 Xem thông tin phòng đang thuê
-
-=======
 ### Biểu đồ tuần tự Xem thông tin phòng đang thuê
-<<<<<<< HEAD
 
-=======
->>>>>>> 6d1e9b684cb9733ee7b54cb3edd1a594acf40dad
->>>>>>> 7bc20ae37c0be7d3eb6677f4a8a594250571aa09
 <p align="center">
   <img src="pttk_img/23.1 huy/xem thông tin phòng đang thuê SQ.jpg" alt="UC Tổng quát" width="700">
 </p>
 
-<<<<<<< HEAD
-### 1.7 Xem hợp đồng thuê
-
-=======
 ### Biểu đồ tuần tự Xem hợp đồng thuê
-<<<<<<< HEAD
 
-=======
->>>>>>> 6d1e9b684cb9733ee7b54cb3edd1a594acf40dad
->>>>>>> 7bc20ae37c0be7d3eb6677f4a8a594250571aa09
 <p align="center">
   <img src="pttk_img/23.1 huy/xem hợp đồng thuê SQ.jpg" alt="UC Tổng quát" width="700">
 </p>
 
-<<<<<<< HEAD
-### 1.8 Xem hóa đơn & trạng thái thanh toán
-
-=======
 ### Biểu đồ tuần tự Xem hóa đơn & trạng thái thanh toán
-<<<<<<< HEAD
 
-=======
->>>>>>> 6d1e9b684cb9733ee7b54cb3edd1a594acf40dad
->>>>>>> 7bc20ae37c0be7d3eb6677f4a8a594250571aa09
 <p align="center">
   <img src="pttk_img/23.1 huy/xem hóa đơn & trạng thái thanh toán SQ.jpg" alt="UC Tổng quát" width="700">
 </p>
 
-<<<<<<< HEAD
-### 2.1 Ghi chỉ số điện nước
-
-<p align="center">
-  <img src="pttk_img/ghi chỉ số điện nước ACT.jpg" alt="UC Tổng quát" width="700">
-</p>
-
-### 2.2 Tạo hóa đơn
-
-<p align="center">
-  <img src="pttk_img/tạo hóa đơn ACT.jpg" alt="UC Tổng quát" width="700">
-</p>
-
-### 2.3 Xem lịch sử hóa đơn
-
-<p align="center">
-  <img src="pttk_img/23.1 huy/xem lịch sử hóa đơn ACT.jpg" alt="UC Tổng quát" width="700">
-</p>
-
-### 2.4 cập nhật trạng thái thanh toán
-
-<p align="center">
-  <img src="pttk_img/23.1 huy/cập nhật trạng thái thanh toán ACT.jpg" alt="UC Tổng quát" width="700">
-</p>
-
-### 2.5 xem thông tin cá nhân
-
-<p align="center">
-  <img src="pttk_img/23.1 huy/xem thông tin người thuê ACT.jpg" alt="UC Tổng quát" width="700">
-</p>
-
-### 2.6 xem thông tin phòng đang thuê
-
-<p align="center">
-  <img src="pttk_img/23.1 huy/xem thông tin phòng đang thuê ACT.jpg" alt="UC Tổng quát" width="700">
-</p>
-
-### 2.7 xem hợp đồng thuê
-
-<p align="center">
-  <img src="pttk_img/23.1 huy/xem hợp đồng thuê ACT.jpg" alt="UC Tổng quát" width="700">
-</p>
-
-### 2.8 xem hóa đơn & trạng thái thanh toán
-
-<p align="center">
-  <img src="pttk_img/23.1 huy/Xem hóa đơn & trạng thái thanh toán ACT .jpg" alt="UC Tổng quát" width="700">
-</p>
-
-# Buổi 6 Tổng hợp báo cáo và thiết kế giao diện (26/1/2026)
-
-## giao diện HomePage
-=======
 ### Biểu đồ tuần tự Thêm người thuê
->>>>>>> 6d1e9b684cb9733ee7b54cb3edd1a594acf40dad
 
 <p align="center">
-  <img src="pttk_img/23.1 huy/HomePage.jpg" alt="UC Tổng quát" width="700">
+  <img src="pttk_img/Thêm người thuê.jpg" alt="UC Tổng quát" width="700">
 </p>
-<<<<<<< HEAD
-=======
 
 ### Biểu đồ tuần tự Cập nhật thông tin người thuê
 
@@ -2265,4 +2137,3 @@ Dưới đây là phân tích chi tiết các liên kết khóa ngoại (Foreign
 <p align="center">
   <img src="pttk_img/A_Cập nhật thôn tin phòng.jpg" alt="Activity" width="700">
 </p>
->>>>>>> 6d1e9b684cb9733ee7b54cb3edd1a594acf40dad
