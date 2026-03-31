@@ -10,7 +10,8 @@ require_once __DIR__ . "/../../vendor/autoload.php";
 require_once __DIR__ . "/../../middleware/auth.php";
 
 // Chỉ cho phép admin và staff truy cập
-checkAuth(["ROLE_ADMIN"]);
+$decoded = checkAuth(["ROLE_ADMIN", "ROLE_STAFF"]);
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);

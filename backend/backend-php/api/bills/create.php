@@ -17,6 +17,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 // }
 require_once "../../config/Database.php";
 require_once "../../models/Bill.php";
+require_once __DIR__ . "/../../vendor/autoload.php";
+require_once __DIR__ . "/../../middleware/auth.php";
+
+// Chỉ cho phép admin và staff truy cập
+checkAuth(["ROLE_ADMIN", "ROLE_STAFF"]);
 
 $db = new db();
 $conn = $db->getConnection();
