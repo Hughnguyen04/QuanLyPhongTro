@@ -1,6 +1,15 @@
-CREATE DATABASE IF NOT EXISTS QuanLyPhongTro2;
+create database if not exists quanlyphongtro2;
 
-USE QuanLyPhongTro2;
+use QuanLyPhongTro2;
+
+CREATE TABLE USERS (
+    UserID INT AUTO_INCREMENT PRIMARY KEY,
+    Username VARCHAR(50) NOT NULL UNIQUE,
+    Password VARCHAR(255) NOT NULL, -- mật khẩu đã mã hóa
+    Role ENUM('ADMIN', 'STAFF', 'GUEST') NOT NULL,
+    IsActive BOOLEAN DEFAULT TRUE,
+    CreatedAt DATETIME DEFAULT CURRENT_TIMESTAMP
+);
 
 CREATE TABLE ROOMS (
     RoomID INT AUTO_INCREMENT PRIMARY KEY,
@@ -98,4 +107,22 @@ CREATE TABLE BILLS (
     UpdatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     CONSTRAINT fk_bill_contract FOREIGN KEY (ContractID) REFERENCES CONTRACTS (ContractID) ON DELETE CASCADE,
     CONSTRAINT uq_bill UNIQUE (ContractID, Month, Year)
+);
+
+CREATE TABLE NOTIFICATIONS (
+	NotificationID INT AUTO_INCREMENT PRIMARY KEY,
+    SenderID INT NOT NULL, -- Nguoi gui (Chu tro / Nhan vien)
+    ReceiverID INT NOT NULL, -- Nguoi nhan (Nhan vien / Nguoi thue)
+    Title VARCHAR(50) NOT NULL,
+    Message VARCHAR(255) NOT NULL,
+    IsRead BOOLEAN DEFAULT FALSE,
+    CreatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+    
+    CONSTRAINT fk_notification_sender
+		FOREIGN KEY (SenderID)
+        REFERENCES USERS(UserID),
+    
+    CONSTRAINT fk_notification_receiver
+		FOREIGN KEY (ReceiverID)
+        REFERENCES USERS(UserID)         
 );
