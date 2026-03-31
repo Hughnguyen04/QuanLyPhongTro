@@ -9,6 +9,7 @@ import com.example.quanlyphongtro.utils.JwtUtil;
 import io.jsonwebtoken.Jwt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 //import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -66,12 +67,16 @@ public class AuthService {
 //    }
 
     //Đăng nhập có xác thực với jwt
-    public String login(String userName, String rawPassword){
-        UserDetails userDetails = customUserDetailsService.loadUserByUsername(userName);
+    public LoginResponse login(String userName, String rawPassword) {
+        try{
+            UserDetails userDetails = customUserDetailsService.loadUserByUsername(userName);
 
-        if(passwordEncoder.matches(rawPassword, userDetails.getPassword())) {
-            return jwtUtil.generateToken(userDetails);
+            if (passwordEncoder.matches(rawPassword, userDetails.getPassword())) {
+                return new LoginResponse("Đăng nhập thành công!", jwtUtil.generateToken(userDetails));
+            }
+            return new LoginResponse("Đăng nhập thất bại", "");
+        } catch (UsernameNotFoundException e){
+            return new LoginResponse("Không tìm thấy tài khoản", "");
         }
-        return "Sai mật khẩu!";
     }
 }

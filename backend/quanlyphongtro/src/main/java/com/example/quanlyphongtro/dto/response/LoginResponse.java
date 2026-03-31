@@ -1,21 +1,21 @@
 package com.example.quanlyphongtro.dto.response;
 
 public class LoginResponse {
-//    private String message;
+    private String message;
     private String token;
 
-    public LoginResponse(String token) {
-//        this.message = message;
+    public LoginResponse(String message, String token) {
+        this.message = message;
         this.token = token;
     }
 
-//    public String getMessage() {
-//        return message;
-//    }
-//
-//    public void setMessage(String message) {
-//        this.message = message;
-//    }
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
 
     public String getToken() {
         return token;

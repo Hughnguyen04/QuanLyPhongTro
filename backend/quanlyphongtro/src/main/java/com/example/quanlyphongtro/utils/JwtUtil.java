@@ -13,7 +13,7 @@ import java.util.Date;
 
 @Component
 public class JwtUtil {
-    private final String SECRET_KEY = "SECRET_KEYS_SUPER_SECRET_KEY_FOR_JWT_TOKEN_GENERATION_1234567890"; //set động trong config sau
+    private final String SECRET_KEY = "NGOC_ANH_KEL_SUPER_SECRET_KEY_FOR_JWT_TOKEN_GENERATION_123456789"; //set động trong config sau
     private final long EXPIRATION_TIME = 36000000;
 
     // SecretKeySpec -> biến byte[] (getBytes()) thành object  Key

@@ -68,4 +68,9 @@ public class JwtFilter extends OncePerRequestFilter {
         // Cho request đi tiếp
         filterChain.doFilter(request, response);
     }
+
+    @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) {
+        return request.getServletPath().equals("/api/auth/login");
+    }
 }
