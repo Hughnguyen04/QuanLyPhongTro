@@ -1,116 +1,83 @@
-const TENANTS_GET_API =
-"http://172.20.10.3/chuyên%20đề/QuanLyPhongTro/backend/backend-php/api/tenants/read.php";
+const API_BASE = "http://localhost/ChuyenDe/QuanLyPhongTro/backend/backend-php/api/rooms";
+const TENANT_API = "http://localhost/ChuyenDe/QuanLyPhongTro/backend/backend-php/api/tenants";
 
-const TENANTS_CREATE_API =
-"http://172.20.10.3/chuyên%20đề/QuanLyPhongTro/backend/backend-php/api/tenants/create.php";
+class API {
 
-const TENANTS_UPDATE_API =
-"http://192.168.1.53/chuyên%20đề/QuanLyPhongTro/backend/backend-php/api/tenants/update.php";
+    /* ===== ROOMS ===== */
+    static async getRooms() {
+        const res = await fetch(`${API_BASE}/read.php`);
+        return res.json();
+    }
 
-const TENANTS_DELETE_API =
-"http://192.168.1.53/chuyên%20đề/QuanLyPhongTro/backend/backend-php/api/tenants/delete.php";
+    static async createRoom(data) {
+        const res = await fetch(`${API_BASE}/create.php`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        });
+        return res.json();
+    }
 
+    static async updateRoom(data) {
+        const res = await fetch(`${API_BASE}/update.php`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        });
+        return res.json();
+    }
 
-let listTenants = [];
+    static async deleteRoom(id) {
+        const res = await fetch(`${API_BASE}/delete.php`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ RoomID: id })
+        });
+        return res.json();
+    }
 
+    /* ===== TENANTS ===== */
+    static async getTenants() {
+        const res = await fetch(`${TENANT_API}/read.php`);
+        return res.json();
+    }
+static async createTenant(data) {
+    const res = await fetch(`${TENANT_API}/create.php`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    });
 
-/* LOAD */
-
-async function loadTenants(){
-
-try{
-
-const res = await fetch(TENANTS_GET_API);
-const data = await res.json();
-
-listTenants = data;
-
-render();
-
-}catch(err){
-
-console.error("Lỗi load tenants:",err);
-alert("Không tải được danh sách người thuê");
-
+    return res.json();
 }
 
+    static async updateTenant(data) {
+        const res = await fetch(`${TENANT_API}/update.php`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        });
+        return res.json();
+    }
+
+    static async deleteTenant(id) {
+        const res = await fetch(`${TENANT_API}/delete.php`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ TenantID: id })
+        });
+        return res.json();
+    }
 }
-
-
-/* SAVE */
-
-async function saveTenant(){
-
-const data = {
-
-FullName: mName.value,
-CCCD: mCCCD.value,
-Phone: mPhone.value,
-Address: mAddress.value,
-RoomID: mRoom.value,
-Status: mStatus.value
-
-};
-
-try{
-
-if(editingId){
-
-data.TenantID = editingId;
-
-await fetch(TENANTS_UPDATE_API,{
-method:"POST",
-headers:{ "Content-Type":"application/json"},
-body:JSON.stringify(data)
-});
-
-}else{
-
-await fetch(TENANTS_CREATE_API,{
-method:"POST",
-headers:{ "Content-Type":"application/json"},
-body:JSON.stringify(data)
-});
-
-}
-
-closeModal();
-loadTenants();
-
-}catch(err){
-
-console.error(err);
-alert("Không lưu được");
-
-}
-
-}
-
-
-/* DELETE */
-
-async function deleteTenant(id){
-
-if(!confirm("Xóa người thuê "+id+"?")) return;
-
-try{
-
-await fetch(TENANTS_DELETE_API,{
-method:"POST",
-headers:{ "Content-Type":"application/json"},
-body:JSON.stringify({TenantID:id})
-});
-
-loadTenants();
-
-}catch(err){
-
-console.error(err);
-alert("Không xóa được");
-
-}
-
-}
-
-
-document.addEventListener("DOMContentLoaded",loadTenants);

@@ -9,7 +9,6 @@ renderMenu(role);
 let listContracts = [];
 let listRooms = [];
 let listTenants = [];
-let listBuildings = [];
 let editingId = null;
 let currentDetail = null;
 
@@ -21,65 +20,136 @@ const mRoomId = document.getElementById("mRoomId");
 const mStartDate = document.getElementById("mStartDate");
 const mEndDate = document.getElementById("mEndDate");
 const mDeposit = document.getElementById("mDeposit");
+const mRentPrice = document.getElementById("mRentPrice");
+const mNote = document.getElementById("mNote");
+const mHasActualEnd = document.getElementById("mHasActualEnd");
+const mActualEndDate = document.getElementById("mActualEndDate");
 
 const detailModal = document.getElementById("detailModal");
 const contractBody = document.getElementById("contractBody");
 const contractCode = document.getElementById("contractCode");
 
-// Load dữ liệu từ API
+/* ===== TOAST NOTIFICATION ===== */
+function showToast(message, type = "success") {
+    const existingToasts = document.querySelectorAll('.toast');
+    existingToasts.forEach(toast => toast.remove());
+    
+    const toast = document.createElement("div");
+    toast.className = `toast ${type}`;
+    const icon = type === "success" ? "✓" : "✗";
+    toast.innerHTML = `<span>${icon}</span> ${message}`;
+    toast.style.cssText = `
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: ${type === 'success' ? '#4caf50' : '#f44336'};
+        color: white;
+        padding: 12px 24px;
+        border-radius: 10px;
+        z-index: 9999;
+        animation: slideIn 0.3s ease;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        font-size: 14px;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    `;
+    document.body.appendChild(toast);
+    
+    setTimeout(() => {
+        toast.remove();
+    }, 3000);
+}
+
+// Xử lý checkbox hiển thị input ngày kết thúc thực
+if (mHasActualEnd) {
+    mHasActualEnd.addEventListener("change", function() {
+        if (this.checked) {
+            mActualEndDate.style.display = "block";
+            if (!mActualEndDate.value) {
+                mActualEndDate.value = new Date().toISOString().split('T')[0];
+            }
+        } else {
+            mActualEndDate.style.display = "none";
+            mActualEndDate.value = "";
+        }
+    });
+}
+
+// Xử lý khi chọn phòng để cập nhật giá thuê
+if (mRoomId) {
+    mRoomId.addEventListener("change", function() {
+        const selectedOption = this.options[this.selectedIndex];
+        const price = selectedOption.getAttribute("data-price") || 0;
+        if (mRentPrice) {
+            mRentPrice.value = price;
+        }
+    });
+}
+
 async function loadData() {
     try {
         console.log("🚀 Đang tải dữ liệu...");
         
-        // Load contracts trực tiếp
         const contractsResult = await API.getContracts();
-        console.log("📋 Contracts response:", contractsResult);
-        
-        if (contractsResult.success && contractsResult.data && contractsResult.data.length > 0) {
-            listContracts = contractsResult.data;
-            console.log(`✅ Đã tải ${listContracts.length} hợp đồng`);
-            console.log("📄 Mẫu hợp đồng:", listContracts[0]);
+        if (contractsResult.success && contractsResult.data) {
+            // 🔥 FIX: Xóa ActualEndDate nếu không hợp lệ
+            listContracts = contractsResult.data.map(contract => {
+                // Nếu ActualEndDate là null, rỗng, hoặc '0000-00-00' thì xóa
+                if (!contract.ActualEndDate || 
+                    contract.ActualEndDate === '0000-00-00' || 
+                    contract.ActualEndDate === 'null' ||
+                    contract.ActualEndDate === '') {
+                    contract.ActualEndDate = null;
+                }
+                
+                // Nếu không có ActualEndDate nhưng status là HET_HAN và EndDate >= hôm nay
+                if (!contract.ActualEndDate && contract.Status === 'HET_HAN') {
+                    const today = new Date();
+                    today.setHours(0,0,0,0);
+                    const endDate = new Date(contract.EndDate);
+                    endDate.setHours(0,0,0,0);
+                    
+                    if (endDate >= today) {
+                        contract.Status = 'HIEU_LUC';
+                        console.log(`✅ Đã sửa contract ${contract.ContractID}: HET_HAN -> HIEU_LUC`);
+                    }
+                }
+                
+                return contract;
+            });
+            
+            console.log(`✅ Đã tải và fix ${listContracts.length} hợp đồng`);
         } else {
-            console.warn("⚠️ Không có dữ liệu hợp đồng!");
             listContracts = [];
         }
-        
-        // Load rooms
         const roomsResult = await API.getRooms();
-        console.log("📋 Rooms response:", roomsResult);
-        if (roomsResult.success && roomsResult.data) {
+        if (roomsResult && roomsResult.data) {
             listRooms = roomsResult.data;
-            console.log(`✅ Đã tải ${listRooms.length} phòng`);
+        } else if (Array.isArray(roomsResult)) {
+            listRooms = roomsResult;
+        } else {
+            listRooms = [];
         }
+        console.log(`✅ Đã tải ${listRooms.length} phòng`);
         
-        // Load tenants
         const tenantsResult = await API.getTenants();
-        console.log("📋 Tenants response:", tenantsResult);
         if (tenantsResult.success && tenantsResult.data) {
             listTenants = tenantsResult.data;
             console.log(`✅ Đã tải ${listTenants.length} người thuê`);
             loadTenantsToSelect();
+        } else {
+            listTenants = [];
         }
         
-        // Load buildings
-        const buildingsResult = await API.getBuildings();
-        console.log("📋 Buildings response:", buildingsResult);
-        if (buildingsResult.success && buildingsResult.data) {
-            listBuildings = buildingsResult.data;
-            console.log(`✅ Đã tải ${listBuildings.length} tòa nhà`);
-            loadRoomsToSelect();
-        }
-        
+        loadRoomsToSelect();
         initFilters();
         render();
         
     } catch (error) {
         console.error('💥 Lỗi load data:', error);
-        document.getElementById("tbody").innerHTML = ` 
-            <tr><td colspan="11" style="text-align:center; color:red; padding:40px;">
-            ❌ Lỗi: ${error.message}
-            </td></tr>
-        `;
+        showToast("Lỗi tải dữ liệu: " + error.message, "error");
     }
 }
 
@@ -87,7 +157,7 @@ function loadTenantsToSelect() {
     if (!mTenantId) return;
     mTenantId.innerHTML = '<option value="">Chọn người thuê</option>';
     listTenants.forEach(tenant => {
-        mTenantId.innerHTML += `<option value="${tenant.TenantID}">${tenant.FullName || "N/A"} - ${tenant.CCCD || "N/A"}</option>`;
+        mTenantId.innerHTML += `<option value="${tenant.TenantID}">${tenant.FullName || "N/A"} - ${tenant.Phone || "N/A"}</option>`;
     });
 }
 
@@ -95,51 +165,35 @@ function loadRoomsToSelect() {
     if (!mRoomId) return;
     mRoomId.innerHTML = '<option value="">Chọn phòng</option>';
     listRooms.forEach(room => {
-        const building = listBuildings.find(b => b.BuildingID == room.BuildingID);
-        mRoomId.innerHTML += `<option value="${room.RoomID}">${room.RoomName || "N/A"} - ${building?.BuildingName || "N/A"} (${Number(room.Price || 0).toLocaleString()}đ)</option>`;
+        mRoomId.innerHTML += `<option value="${room.RoomID}" data-price="${room.BasePrice || 0}">${room.RoomName || "N/A"} - ${room.BuildingName || "N/A"} (${Number(room.BasePrice || 0).toLocaleString()}đ)</option>`;
     });
 }
 
-function getRoomInfo(roomId) {
-    const room = listRooms.find(r => r.RoomID == roomId);
-    if (!room) return { roomName: "N/A", buildingName: "N/A", price: 0 };
-    const building = listBuildings.find(b => b.BuildingID == room.BuildingID);
-    return {
-        roomName: room.RoomName || "N/A",
-        buildingName: building?.BuildingName || "N/A",
-        price: room.Price || 0
-    };
-}
-
-function getTenantInfo(tenantId) {
-    const tenant = listTenants.find(t => t.TenantID == tenantId);
-    return tenant || { FullName: "N/A", CCCD: "N/A", Address: "N/A", Phone: "N/A" };
-}
-
 function getStatus(contract) {
+    if (!contract) return "N/A";
+    
+    // Ưu tiên kiểm tra ActualEndDate trước
     if (contract.ActualEndDate && contract.ActualEndDate !== null && contract.ActualEndDate !== "") {
         return "Đã kết thúc";
     }
+    
+    // Nếu không có ActualEndDate, kiểm tra EndDate so với ngày hiện tại
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     const endDate = new Date(contract.EndDate);
     endDate.setHours(0, 0, 0, 0);
-    return endDate >= today ? "Đang hiệu lực" : "Hết hạn";
+    
+    if (endDate < today) {
+        return "Hết hạn";
+    }
+    return "Đang hiệu lực";
 }
 
 function initFilters() {
     const select = document.getElementById("buildingFilter");
     if (!select) return;
     
-    if (listContracts.length === 0) {
-        select.innerHTML = '<option value="">Tất cả tòa</option>';
-        return;
-    }
-    
-    const buildings = [...new Set(listContracts.map(c => {
-        const roomInfo = getRoomInfo(c.RoomID);
-        return roomInfo.buildingName;
-    }).filter(b => b && b !== "N/A"))];
+    const buildings = [...new Set(listContracts.map(c => c.BuildingName).filter(b => b && b !== "N/A" && b !== null && b !== ""))];
     
     select.innerHTML = '<option value="">Tất cả tòa</option>';
     buildings.forEach(b => {
@@ -152,15 +206,11 @@ function render() {
     const building = document.getElementById("buildingFilter").value;
     const tbody = document.getElementById("tbody");
     
-    console.log("🎨 Đang render, số hợp đồng:", listContracts.length);
+    if (!tbody) return;
     
     if (listContracts.length === 0) {
         tbody.innerHTML = ` 
-            <tr>
-                <td colspan="11" style="text-align:center; padding:40px;">
-                    📭 Không có dữ liệu hợp đồng
-                </td>
-            </tr>
+            <tr><td colspan="11" style="text-align:center; padding:40px;">📭 Không có dữ liệu hợp đồng</td></tr>
         `;
         document.getElementById("total").innerText = "0";
         document.getElementById("active").innerText = "0";
@@ -169,20 +219,16 @@ function render() {
     }
     
     let filtered = listContracts.filter(contract => {
-        const tenant = getTenantInfo(contract.TenantID);
-        const tenantName = (tenant.FullName || "").toLowerCase();
-        const roomInfo = getRoomInfo(contract.RoomID);
-        const buildingName = roomInfo.buildingName;
-        return tenantName.includes(key) && (building === "" || buildingName === building);
+        const tenantName = (contract.FullName || "").toLowerCase();
+        const buildingName = contract.BuildingName || "";
+        const matchKey = tenantName.includes(key);
+        const matchBuilding = building === "" || buildingName === building;
+        return matchKey && matchBuilding;
     });
     
     if (filtered.length === 0) {
         tbody.innerHTML = ` 
-            <tr>
-                <td colspan="11" style="text-align:center; padding:40px;">
-                    🔍 Không tìm thấy hợp đồng nào
-                </td>
-            </tr>
+            <tr><td colspan="11" style="text-align:center; padding:40px;">🔍 Không tìm thấy hợp đồng nào</td></tr>
         `;
         document.getElementById("total").innerText = "0";
         document.getElementById("active").innerText = "0";
@@ -193,10 +239,7 @@ function render() {
     let total = 0, active = 0, expired = 0;
     
     tbody.innerHTML = filtered.map(contract => {
-        const tenant = getTenantInfo(contract.TenantID);
-        const roomInfo = getRoomInfo(contract.RoomID);
         const status = getStatus(contract);
-        
         total++;
         if (status === "Đang hiệu lực") active++;
         else expired++;
@@ -219,21 +262,21 @@ function render() {
         const actualEndDate = contract.ActualEndDate ? new Date(contract.ActualEndDate).toLocaleDateString('vi-VN') : "Chưa kết thúc";
         
         return `
-            <tr onclick="showDetail(${contract.ContractID})">
+            <tr onclick="showDetail(${contract.ContractID})" style="cursor:pointer;">
                 <td>${contract.ContractID}</td>
-                <td>${tenant.FullName}</td>
-                <td>${roomInfo.roomName}</td>
-                <td>${roomInfo.buildingName}</td>
+                <td><strong>${contract.FullName || "N/A"}</strong></td>
+                <td>${contract.RoomName || "N/A"}</td>
+                <td>${contract.BuildingName || "N/A"}</td>
                 <td>${startDate}</td>
                 <td>${endDate}</td>
                 <td>${actualEndDate}</td>
-                <td>${Number(roomInfo.price).toLocaleString()} đ</td>
+                <td>${Number(contract.RentPrice || 0).toLocaleString()} đ</td>
                 <td>${Number(contract.Deposit || 0).toLocaleString()} đ</td>
                 <td style="color:${statusColor}; font-weight:500;">${statusIcon} ${status}</td>
-                <td onclick="event.stopPropagation()">
-                    <button onclick="openEdit(${contract.ContractID})">✏️</button>
-                    ${role === 'chutro' ? `<button onclick="deleteContract(${contract.ContractID})">🗑</button>` : ""}
-                    ${status === "Đang hiệu lực" ? `<button onclick="endContract(${contract.ContractID})">🏁</button>` : ""}
+                <td class="action-buttons" onclick="event.stopPropagation()">
+                    <button class="btn-edit" onclick="openEdit(${contract.ContractID})">✏️ Sửa</button>
+                    ${role === 'chutro' ? `<button class="btn-delete" onclick="deleteContract(${contract.ContractID})">🗑 Xóa</button>` : ""}
+                    ${status === "Đang hiệu lực" ? `<button class="btn-end" onclick="endContract(${contract.ContractID})">🏁 Kết thúc</button>` : ""}
                 </td>
             </tr>
         `;
@@ -250,36 +293,98 @@ document.getElementById("buildingFilter").addEventListener("change", render);
 function openAdd() {
     editingId = null;
     modalTitle.innerText = "Thêm hợp đồng";
+    
     mTenantId.value = "";
     mRoomId.value = "";
     mStartDate.value = "";
     mEndDate.value = "";
     mDeposit.value = "";
+    if (mRentPrice) mRentPrice.value = "";
+    if (mNote) mNote.value = "";
+    
+    if (mHasActualEnd) mHasActualEnd.checked = false;
+    if (mActualEndDate) {
+        mActualEndDate.style.display = "none";
+        mActualEndDate.value = "";
+    }
+    
     modal.style.display = "flex";
 }
 
 function openEdit(id) {
-    const contract = listContracts.find(c => c.ContractID === id);
-    if (!contract) return;
+    const contract = listContracts.find(c => c.ContractID == id);
+    if (!contract) {
+        showToast("Không tìm thấy hợp đồng!", "error");
+        return;
+    }
+    
+    console.log("Editing contract:", contract);
+    
     editingId = id;
     modalTitle.innerText = "Sửa hợp đồng";
+    
     mTenantId.value = contract.TenantID;
     mRoomId.value = contract.RoomID;
     mStartDate.value = contract.StartDate;
     mEndDate.value = contract.EndDate;
     mDeposit.value = contract.Deposit;
+    mRentPrice.value = contract.RentPrice || 0;
+    if (mNote) mNote.value = contract.Note || "";
+    
+    const selectedOption = mRoomId.querySelector(`option[value="${contract.RoomID}"]`);
+    if (selectedOption && (!mRentPrice.value || mRentPrice.value == 0)) {
+        const price = selectedOption.getAttribute("data-price") || 0;
+        mRentPrice.value = price;
+    }
+    
+    if (contract.ActualEndDate && contract.ActualEndDate !== "" && contract.ActualEndDate !== null) {
+        if (mHasActualEnd) mHasActualEnd.checked = true;
+        if (mActualEndDate) {
+            mActualEndDate.style.display = "block";
+            mActualEndDate.value = contract.ActualEndDate;
+        }
+    } else {
+        if (mHasActualEnd) mHasActualEnd.checked = false;
+        if (mActualEndDate) {
+            mActualEndDate.style.display = "none";
+            mActualEndDate.value = "";
+        }
+    }
+    
     modal.style.display = "flex";
 }
 
 async function endContract(id) {
     if (!confirm("Xác nhận kết thúc hợp đồng này?")) return;
     const today = new Date().toISOString().split('T')[0];
-    const result = await API.updateContract({ ContractID: id, ActualEndDate: today });
-    if (result.success) {
-        alert("Đã kết thúc hợp đồng!");
+    const contract = listContracts.find(c => c.ContractID == id);
+    
+    const contractData = { 
+        ContractID: id, 
+        ActualEndDate: today,
+        RoomID: contract.RoomID,
+        TenantID: contract.TenantID,
+        StartDate: contract.StartDate,
+        EndDate: contract.EndDate,
+        Deposit: contract.Deposit,
+        RentPrice: contract.RentPrice,
+        Note: contract.Note
+    };
+    
+    const result = await API.updateContract(contractData);
+    
+    let isSuccess = false;
+    if (Array.isArray(result) && result[1] && (result[1].includes("da duoc cap nhat") || result[1].includes("thành công"))) {
+        isSuccess = true;
+    } else if (result.success === true) {
+        isSuccess = true;
+    }
+    
+    if (isSuccess) {
+        showToast("Đã kết thúc hợp đồng!", "success");
         await loadData();
     } else {
-        alert("Lỗi: " + (result.message || "Không thể kết thúc hợp đồng"));
+        showToast("Lỗi: " + (result.message || (result[1] || "Không thể kết thúc hợp đồng")), "error");
     }
 }
 
@@ -288,52 +393,191 @@ async function saveContract() {
     const roomId = mRoomId.value;
     const startDate = mStartDate.value;
     const endDate = mEndDate.value;
-    const deposit = parseFloat(mDeposit.value);
+    const deposit = parseFloat(mDeposit.value) || 0;
+    const rentPrice = parseFloat(mRentPrice.value) || 0;
+    const note = mNote ? mNote.value : "";
+
+    // VALIDATE
+    if (!tenantId) return showToast("Vui lòng chọn người thuê!", "error");
+    if (!roomId) return showToast("Vui lòng chọn phòng!", "error");
+    if (!startDate) return showToast("Vui lòng chọn ngày bắt đầu!", "error");
+    if (!endDate) return showToast("Vui lòng chọn ngày kết thúc!", "error");
+    if (rentPrice <= 0) return showToast("Giá thuê không hợp lệ!", "error");
+    if (deposit < 0) return showToast("Tiền cọc không hợp lệ!", "error");
     
-    if (!tenantId) { alert("Vui lòng chọn người thuê!"); return; }
-    if (!roomId) { alert("Vui lòng chọn phòng!"); return; }
-    if (!startDate) { alert("Vui lòng chọn ngày bắt đầu!"); return; }
-    if (!endDate) { alert("Vui lòng chọn ngày kết thúc!"); return; }
-    if (isNaN(deposit) || deposit < 0) { alert("Vui lòng nhập tiền cọc hợp lệ!"); return; }
+    const startDateObj = new Date(startDate);
+    const endDateObj = new Date(endDate);
+    if (endDateObj <= startDateObj) {
+        return showToast("Ngày kết thúc phải sau ngày bắt đầu!", "error");
+    }
+
+    let status = "HIEU_LUC";
     
-    const contractData = { TenantID: tenantId, RoomID: roomId, StartDate: startDate, EndDate: endDate, Deposit: deposit };
-    let result;
-    if (editingId) {
-        contractData.ContractID = editingId;
-        result = await API.updateContract(contractData);
+    // 🔥 QUAN TRỌNG: LUÔN GỬI ActualEndDate (gửi chuỗi rỗng nếu không có)
+    let actualEndDate = "";  // Gửi chuỗi rỗng thay vì không gửi
+    
+    if (mHasActualEnd && mHasActualEnd.checked) {
+        if (!mActualEndDate.value) {
+            showToast("Vui lòng chọn ngày kết thúc thực!", "error");
+            return;
+        }
+        actualEndDate = mActualEndDate.value;
+        status = "HET_HAN";
     } else {
-        result = await API.createContract(contractData);
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        if (endDateObj < today) {
+            status = "HET_HAN";
+        }
+    }
+
+    const contractData = {
+        TenantID: parseInt(tenantId),
+        RoomID: parseInt(roomId),
+        StartDate: startDate,
+        EndDate: endDate,
+        ActualEndDate: actualEndDate,  // 🔥 LUÔN GỬI FIELD NÀY
+        Deposit: deposit,
+        RentPrice: rentPrice,
+        Status: status,
+        Note: note,
+        ReturnedDeposit: 0
+    };
+    
+    console.log("========== DEBUG ==========");
+    console.log("Data gửi lên:", JSON.stringify(contractData, null, 2));
+    console.log("===========================");
+    
+    let result;
+    try {
+        if (editingId) {
+            contractData.ContractID = parseInt(editingId);
+            result = await API.updateContract(contractData);
+        } else {
+            result = await API.createContract(contractData);
+        }
+    } catch (error) {
+        console.error("API ERROR:", error);
+        showToast("Lỗi kết nối server!", "error");
+        return;
     }
     
-    if (result.success) {
-        alert(editingId ? "Cập nhật thành công!" : "Thêm mới thành công!");
+    console.log("Response:", result);
+    
+    // KIỂM TRA THÀNH CÔNG
+    let isSuccess = false;
+    const responseString = JSON.stringify(result).toLowerCase();
+    
+    if (responseString.includes("da duoc tao") || 
+        responseString.includes("thành công") ||
+        responseString.includes("success")) {
+        isSuccess = true;
+    }
+    
+    if (isSuccess) {
+        showToast(editingId ? "Cập nhật thành công!" : "Thêm mới thành công!", "success");
         await loadData();
         closeModal();
     } else {
-        alert("Lỗi: " + (result.message || "Không thể lưu hợp đồng"));
+        showToast("Lỗi: " + (result?.message || result?.[1] || "Không thể lưu"), "error");
     }
 }
-
-async function deleteContract(id) {
-    if (role !== "chutro") return;
-    if (confirm("Xóa hợp đồng này?")) {
+window.deleteContract = async function(id) {
+    if (role !== "chutro" && role !== "admin") {
+        return showToast("Bạn không có quyền xóa!", "error");
+    }
+    
+    if (!confirm("⚠️ Bạn có chắc chắn muốn xóa hợp đồng này? Hành động này không thể hoàn tác!")) return;
+    
+    try {
+        showToast("🔄 Đang xóa...");
+        
         const result = await API.deleteContract(id);
-        if (result.success) {
-            alert("Xóa thành công!");
+        console.log("Delete result:", result);
+        
+        let isSuccess = false;
+        
+        if (result) {
+            const text = JSON.stringify(result).toLowerCase();
+            
+            if (
+                result.status === true ||
+                result.success === true ||
+                text.includes("thành công") ||
+                text.includes("success") ||
+                text.includes("deleted")
+            ) {
+                isSuccess = true;
+            }
+            
+            if (Array.isArray(result) && result[1]) {
+                if (result[1].includes("da duoc xoa") || result[1].includes("thành công")) {
+                    isSuccess = true;
+                }
+            }
+        }
+        
+        if (isSuccess) {
+            showToast("✅ Xóa hợp đồng thành công!", "success");
             await loadData();
         } else {
-            alert("Lỗi: " + result.message);
+            showToast("❌ " + (result?.message || result?.[1] || "Xóa thất bại!"), "error");
         }
+        
+    } catch (error) {
+        console.error("Delete error:", error);
+        showToast("❌ Lỗi: " + error.message, "error");
     }
-}
+};
 
-function showDetail(id) {
-    const contract = listContracts.find(c => c.ContractID === id);
+async function showDetail(id) {
+    const contract = listContracts.find(c => c.ContractID == id);
     if (!contract) return;
     currentDetail = contract;
     
-    const tenant = getTenantInfo(contract.TenantID);
-    const roomInfo = getRoomInfo(contract.RoomID);
+    let tenant = null;
+    let room = null;
+    
+    try {
+        const tenantsRes = await API.getTenants();
+        let tenantsList = [];
+        if (tenantsRes.success && tenantsRes.data) {
+            tenantsList = tenantsRes.data;
+        } else if (Array.isArray(tenantsRes)) {
+            tenantsList = tenantsRes;
+        }
+        
+        if (contract.FullName) {
+            tenant = tenantsList.find(t => t.FullName === contract.FullName);
+        }
+        if (!tenant && contract.TenantID) {
+            tenant = tenantsList.find(t => t.TenantID == contract.TenantID);
+        }
+        
+    } catch (e) {
+        console.error("Lỗi lấy tenant:", e);
+    }
+    
+    try {
+        const roomsRes = await API.getRooms();
+        let roomsList = [];
+        if (roomsRes && roomsRes.data) {
+            roomsList = roomsRes.data;
+        } else if (Array.isArray(roomsRes)) {
+            roomsList = roomsRes;
+        }
+        
+        if (contract.RoomName) {
+            room = roomsList.find(r => r.RoomName === contract.RoomName);
+        }
+        if (!room && contract.RoomID) {
+            room = roomsList.find(r => r.RoomID == contract.RoomID);
+        }
+        
+    } catch (e) {
+        console.error("Lỗi lấy room:", e);
+    }
+    
     const status = getStatus(contract);
     
     let statusClass = 'status-expired';
@@ -343,23 +587,43 @@ function showDetail(id) {
     
     contractCode.innerHTML = `Số: ${contract.ContractID} | Ngày tạo: ${new Date().toLocaleDateString('vi-VN')}`;
     
+    const fullName = contract.FullName || "N/A";
+    const cccd = tenant?.CCCD || "N/A";
+    const birthDate = tenant?.BirthDate ? new Date(tenant.BirthDate).toLocaleDateString('vi-VN') : "N/A";
+    const gender = tenant?.Gender === "NAM" ? "Nam" : (tenant?.Gender === "NU" ? "Nữ" : "N/A");
+    const phone = tenant?.Phone || "N/A";
+    const email = tenant?.Email || "N/A";
+    const address = tenant?.Address || "N/A";
+    
+    const roomName = contract.RoomName || "N/A";
+    const buildingName = contract.BuildingName || "N/A";
+    const roomAddress = room?.BuildingAddress || "N/A";
+    const area = room?.Area ? room.Area + " m²" : "N/A";
+    const rentPrice = Number(contract.RentPrice || 0);
+    const deposit = Number(contract.Deposit || 0);
+    
     contractBody.innerHTML = `
         <div class="info-section">
-            <div class="section-title">🏢 THÔNG TIN BÊN THUÊ</div>
+            <div class="section-title">👤 THÔNG TIN NGƯỜI THUÊ</div>
             <div class="info-grid">
-                <div class="info-item"><span class="info-label">Họ và tên:</span><span class="info-value"><strong>${tenant.FullName}</strong></span></div>
-                <div class="info-item"><span class="info-label">CCCD/CMND:</span><span class="info-value">${tenant.CCCD}</span></div>
-                <div class="info-item"><span class="info-label">Địa chỉ:</span><span class="info-value">${tenant.Address}</span></div>
-                <div class="info-item"><span class="info-label">Số điện thoại:</span><span class="info-value">${tenant.Phone}</span></div>
+                <div class="info-item"><span class="info-label">Họ và tên:</span><span class="info-value"><strong>${fullName}</strong></span></div>
+                <div class="info-item"><span class="info-label">CCCD/CMND:</span><span class="info-value">${cccd}</span></div>
+                <div class="info-item"><span class="info-label">Ngày sinh:</span><span class="info-value">${birthDate}</span></div>
+                <div class="info-item"><span class="info-label">Giới tính:</span><span class="info-value">${gender}</span></div>
+                <div class="info-item"><span class="info-label">Số điện thoại:</span><span class="info-value">${phone}</span></div>
+                <div class="info-item"><span class="info-label">Email:</span><span class="info-value">${email}</span></div>
+                <div class="info-item"><span class="info-label">Địa chỉ:</span><span class="info-value">${address}</span></div>
             </div>
         </div>
         <div class="info-section">
             <div class="section-title">🏠 THÔNG TIN PHÒNG THUÊ</div>
             <div class="info-grid">
-                <div class="info-item"><span class="info-label">Phòng số:</span><span class="info-value"><strong>${roomInfo.roomName}</strong></span></div>
-                <div class="info-item"><span class="info-label">Tòa nhà:</span><span class="info-value">${roomInfo.buildingName}</span></div>
-                <div class="info-item"><span class="info-label">Giá thuê:</span><span class="info-value"><span class="amount-highlight">${Number(roomInfo.price).toLocaleString()} đ</span>/tháng</span></div>
-                <div class="info-item"><span class="info-label">Tiền cọc:</span><span class="info-value"><span class="amount-highlight">${Number(contract.Deposit || 0).toLocaleString()} đ</span></span></div>
+                <div class="info-item"><span class="info-label">Phòng số:</span><span class="info-value"><strong>${roomName}</strong></span></div>
+                <div class="info-item"><span class="info-label">Tòa nhà:</span><span class="info-value">${buildingName}</span></div>
+                <div class="info-item"><span class="info-label">Địa chỉ:</span><span class="info-value">${roomAddress}</span></div>
+                <div class="info-item"><span class="info-label">Diện tích:</span><span class="info-value">${area}</span></div>
+                <div class="info-item"><span class="info-label">Giá thuê:</span><span class="info-value"><span class="amount-highlight">${rentPrice.toLocaleString()} đ</span>/tháng</span></div>
+                <div class="info-item"><span class="info-label">Tiền cọc:</span><span class="info-value"><span class="amount-highlight">${deposit.toLocaleString()} đ</span></span></div>
             </div>
         </div>
         <div class="info-section">
@@ -368,9 +632,17 @@ function showDetail(id) {
                 <div class="info-item"><span class="info-label">Ngày bắt đầu:</span><span class="info-value">${contract.StartDate ? new Date(contract.StartDate).toLocaleDateString('vi-VN') : "N/A"}</span></div>
                 <div class="info-item"><span class="info-label">Ngày kết thúc:</span><span class="info-value">${contract.EndDate ? new Date(contract.EndDate).toLocaleDateString('vi-VN') : "N/A"}</span></div>
                 <div class="info-item"><span class="info-label">Ngày kết thúc thực:</span><span class="info-value">${contract.ActualEndDate ? new Date(contract.ActualEndDate).toLocaleDateString('vi-VN') : "Chưa kết thúc"}</span></div>
-                <div class="info-item"><span class="info-label">Trạng thái:</span><span class="info-value"><span class="status-badge-contract ${statusClass}">${status}</span></span></div>
+                <div class="info-item"><span class="info-label">Trạng thái:</span><span class="info-value"><span class="status-badge ${statusClass}">${status}</span></span></div>
             </div>
         </div>
+        ${contract.Note ? `
+        <div class="info-section">
+            <div class="section-title">📝 GHI CHÚ</div>
+            <div class="terms-box">
+                <p>${contract.Note}</p>
+            </div>
+        </div>
+        ` : ''}
         <div class="info-section">
             <div class="section-title">📜 ĐIỀU KHOẢN HỢP ĐỒNG</div>
             <div class="terms-box">
@@ -422,39 +694,104 @@ function numberToWords(num) {
 function exportContract() {
     if (!currentDetail) return;
     const contract = currentDetail;
-    const tenant = getTenantInfo(contract.TenantID);
-    const roomInfo = getRoomInfo(contract.RoomID);
-    const rentPrice = Number(roomInfo.price || 0);
+    
+    let tenant = null;
+    let room = null;
+    
+    if (contract.FullName) {
+        tenant = listTenants.find(t => t.FullName === contract.FullName);
+    }
+    if (!tenant && contract.TenantID) {
+        tenant = listTenants.find(t => t.TenantID == contract.TenantID);
+    }
+    
+    if (contract.RoomName) {
+        room = listRooms.find(r => r.RoomName === contract.RoomName);
+    }
+    if (!room && contract.RoomID) {
+        room = listRooms.find(r => r.RoomID == contract.RoomID);
+    }
+    
+    const rentPrice = Number(contract.RentPrice || 0);
     const deposit = Number(contract.Deposit || 0);
+    
+    let representative = "";
+    const buildingName = contract.BuildingName || "";
+    
+    if (buildingName.includes("Tòa A")) {
+        representative = "Nguyễn Như Thành Danh";
+    } else if (buildingName.includes("Tòa B")) {
+        representative = "Nguyễn Quang Huy";
+    } else if (buildingName.includes("Tòa C")) {
+        representative = "Trịnh Đắc Vụ";
+    } else {
+        representative = "Nguyễn Văn A";
+    }
     
     document.getElementById("contractNumberPDF").innerText = contract.ContractID;
     document.getElementById("signDate").innerText = new Date().toLocaleDateString('vi-VN');
-    document.getElementById("tenantNamePDF").innerText = tenant.FullName;
-    document.getElementById("cccdPDF").innerText = tenant.CCCD;
-    document.getElementById("addressPDF").innerText = tenant.Address;
-    document.getElementById("phonePDF").innerText = tenant.Phone;
-    document.getElementById("roomNamePDF").innerText = roomInfo.roomName;
-    document.getElementById("buildingNamePDF").innerText = roomInfo.buildingName;
+    document.getElementById("tenantNamePDF").innerText = contract.FullName || "N/A";
+    document.getElementById("cccdPDF").innerText = tenant?.CCCD || "N/A";
+    document.getElementById("issuePlacePDF").innerText = "Công an cấp";
+    document.getElementById("issueDatePDF").innerText = tenant?.BirthDate ? new Date(tenant.BirthDate).toLocaleDateString('vi-VN') : "N/A";
+    document.getElementById("addressPDF").innerText = tenant?.Address || "N/A";
+    document.getElementById("phonePDF").innerText = tenant?.Phone || "N/A";
+    document.getElementById("roomNamePDF").innerText = contract.RoomName || "N/A";
+    document.getElementById("buildingNamePDF").innerText = contract.BuildingName || "N/A";
     document.getElementById("startDatePDF").innerText = contract.StartDate ? new Date(contract.StartDate).toLocaleDateString('vi-VN') : "N/A";
     document.getElementById("endDatePDF").innerText = contract.EndDate ? new Date(contract.EndDate).toLocaleDateString('vi-VN') : "N/A";
     document.getElementById("rentPricePDF").innerText = rentPrice.toLocaleString();
     document.getElementById("rentPriceTextPDF").innerText = numberToWords(rentPrice) + " đồng";
     document.getElementById("depositPDF").innerText = deposit.toLocaleString();
     document.getElementById("depositTextPDF").innerText = numberToWords(deposit) + " đồng";
-    document.getElementById("tenantSignPDF").innerText = tenant.FullName;
+    document.getElementById("tenantSignPDF").innerText = contract.FullName || "N/A";
+    document.getElementById("representativePDF").innerText = representative;
+    document.getElementById("representativePDF2").innerText = representative;
+    document.getElementById("representativePDF3").innerText = representative;
     
-    html2canvas(document.getElementById("contractTemplate"), { scale: 2 }).then(canvas => {
+    const template = document.getElementById("contractTemplate");
+    if (!template) {
+        showToast("Không tìm thấy template hợp đồng", "error");
+        return;
+    }
+    
+    html2canvas(template, { scale: 2, backgroundColor: '#ffffff' }).then(canvas => {
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF("p", "mm", "a4");
         const imgData = canvas.toDataURL("image/png");
-        doc.addImage(imgData, "PNG", 0, 0, 210, canvas.height * 210 / canvas.width);
+        const imgWidth = 210;
+        const pageHeight = 297;
+        const imgHeight = (canvas.height * imgWidth) / canvas.width;
+        let heightLeft = imgHeight;
+        let position = 0;
+        
+        doc.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
+        
+        while (heightLeft > 0) {
+            position = heightLeft - imgHeight;
+            doc.addPage();
+            doc.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+            heightLeft -= pageHeight;
+        }
+        
         doc.save(`HopDong_${contract.ContractID}.pdf`);
+    }).catch(error => {
+        console.error("PDF export error:", error);
+        showToast("Lỗi xuất PDF: " + error.message, "error");
     });
 }
 
-function closeModal() { modal.style.display = "none"; }
+function closeModal() { 
+    modal.style.display = "none"; 
+}
 
-modal.addEventListener("click", e => { if (e.target === modal) closeModal(); });
-detailModal.addEventListener("click", e => { if (e.target === detailModal) closeDetail(); });
+modal.addEventListener("click", e => { 
+    if (e.target === modal) closeModal(); 
+});
+
+detailModal.addEventListener("click", e => { 
+    if (e.target === detailModal) closeDetail(); 
+});
 
 loadData();

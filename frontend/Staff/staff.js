@@ -2,7 +2,7 @@
 const role = localStorage.getItem("role");
 const username = localStorage.getItem("username");
 
-if (!role || role !== "chutro") location.href="../Login/login.html";
+if (!role || (role !== "chutro" && role !== "admin")) location.href="../Login/login.html";
 
 document.getElementById("username").innerText = username;
 renderMenu(role);

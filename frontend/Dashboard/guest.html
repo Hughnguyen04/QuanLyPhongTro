@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard Người thuê</title>
+    <link rel="stylesheet" href="../Common/layout.css">
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+
+<div class="topbar">
+    <div class="left">
+        <button class="menu-btn" onclick="toggleMenu()">☰</button>
+        <h2>🏠 Dashboard Người thuê</h2>
+    </div>
+    <div class="user-box" onclick="toggleUserMenu()">
+        <div class="avatar-text">👤</div>
+        <span id="username"></span>
+        <div class="user-menu" id="userMenu">
+            <div onclick="location.href='../Infor/infor.html'">👤 Thông tin</div>
+            <div onclick="location.href='../ChangePass/changepass.html'">🔒 Đổi mật khẩu</div>
+            <div onclick="logout()">🚪 Đăng xuất</div>
+        </div>
+    </div>
+</div>
+
+<div class="wrapper">
+    <!-- SIDEBAR -->
+    <div class="sidebar" id="sidebar"></div>
+
+    <div class="main">
+        <div class="welcome">
+            <h2 id="welcomeName"></h2>
+            <div id="today"></div>
+        </div>
+
+        <div class="cards">
+            <div class="card"><h4>🏠 Phòng</h4><p id="myRoom"></p></div>
+            <div class="card"><h4>🏢 Tòa</h4><p id="myBuilding"></p></div>
+            <div class="card"><h4>💰 Giá phòng</h4><p id="myPrice"></p></div>
+            <div class="card"><h4>📄 Hóa đơn tháng</h4><p id="myBill"></p></div>
+            <div class="card"><h4>📌 Trạng thái</h4><p id="myBillStatus"></p></div>
+        </div>
+
+        <div class="panel">
+            <h3>📋 Việc cần làm</h3>
+            <ul id="todoList"></ul>
+        </div>
+
+        <div class="panel">
+            <h3>📋 Thông tin hợp đồng</h3>
+            <div id="contractInfo"></div>
+        </div>
+
+        <div class="panel">
+            <h3>💰 Chi tiết hóa đơn</h3>
+            <div id="billDetail"></div>
+        </div>
+    </div>
+</div>
+
+<script src="../Common/menu.js"></script>
+<script src="api.js"></script>
+<script src="guest.js"></script>
+</body>
+</html>

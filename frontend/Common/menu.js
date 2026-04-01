@@ -47,14 +47,25 @@ const menus = {
 /* ================== RENDER MENU ================== */
 function renderMenu(role){
 
+    const roleMap = {
+        admin: "chutro",
+        staff: "nhanvien",
+        guest: "nguoithue",
+        chutro: "chutro",
+        nhanvien: "nhanvien",
+        nguoithue: "nguoithue"
+    };
+
+    const menuRole = roleMap[role] || "nguoithue";
+
     const sidebar = document.getElementById("sidebar");
-    if (!sidebar || !menus[role]) return;
+    if (!sidebar || !menus[menuRole]) return;
 
     sidebar.innerHTML = "";
 
     const currentPage = location.pathname.split("/").pop().toLowerCase();
 
-    menus[role].forEach(m => {
+    menus[menuRole].forEach(m => {
 
         const item = document.createElement("div");
         item.className = "menu-item";

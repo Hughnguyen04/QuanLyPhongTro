@@ -1,33 +1,29 @@
 <?php
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: PUT");
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
+
+// Xử lý preflight request (CORS)
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit();
+}
 
 require_once "../../config/Database.php";
 require_once "../../models/Tenant.php";
 
-
-if ($_SERVER['REQUEST_METHOD'] !== 'PUT') {
-    http_response_code(405); // Method Not Allowed
-    echo json_encode(["message" => "Chỉ cho phép PUT"]);
-    exit();
-}
-//    Nếu Database.php dùng class   
+// Kết nối DB
 $db = new db();
 $conn = $db->getConnection();
 
-//    Nếu Database.php không dùng class thì chỉ cần:
-// $conn đã tồn tại sẵn
-
 $Tenant = new Tenant($conn);
 
+// Lấy JSON từ request
 $data = json_decode(file_get_contents("php://input"));
-if (!$data) {
-    echo json_encode(["message" => "No input"]);
-    exit;
-}
 
+
+// Gán dữ liệu
 $Tenant->TenantID = $data->TenantID;
 $Tenant->FullName = $data->FullName;
 $Tenant->Phone = $data->Phone;
@@ -38,8 +34,13 @@ $Tenant->Address = $data->Address;
 $Tenant->Email = $data->Email;
 $Tenant->Note = $data->Note;
 
+// Update
 if ($Tenant->update()) {
-    echo json_encode(array('message', 'phong da duoc cap nhat'));
+    echo json_encode([
+        "message" => "Cập nhật thành công"
+    ]);
 } else {
-    echo json_encode(array('message', 'phong khong duoc cap nhat'));
+    echo json_encode([
+        "message" => "Cập nhật thất bại"
+    ]);
 }

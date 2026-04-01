@@ -2,7 +2,7 @@ const role = localStorage.getItem("role");
 const username = localStorage.getItem("username");
 
 if (!role) location.href = "../Login/login.html";
-if (role !== "chutro") location.href = "../Dashboard/dashboard.html";
+if (role !== "chutro" && role !== "admin") location.href = "../Dashboard/dashboard.html";
 
 document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", () => {
@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
             depositMonths: 1,
             payDay: 1,
             dueDays: 5,
-            lateFee: 1,
+            lateFee: 100,
 
             meterDay: 30,
             billDay: 1,

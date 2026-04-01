@@ -1,15 +1,15 @@
 <?php
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: DELETE");
+header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
 require_once "../../config/Database.php";
 require_once "../../models/Room.php";
 
-if ($_SERVER['REQUEST_METHOD'] !== 'DELETE') {
-    http_response_code(405); // Method Not Allowed
-    echo json_encode(["message" => "Chỉ cho phép DELETE"]);
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    http_response_code(405);
+    echo json_encode(["status" => false, "message" => "Chỉ cho phép POST"]);
     exit();
 }
 //    Nếu Database.php dùng class   
@@ -21,12 +21,16 @@ $conn = $db->getConnection();
 
 $room = new Room($conn);
 
-$data = json_decode(file_get_contents("php://input"));
-$room->RoomID = $data->RoomID;
+// ✅ Lấy từ FormData
+if (!isset($_POST['RoomID'])) {
+    echo json_encode(["status" => false, "message" => "Thiếu RoomID"]);
+    exit();
+}
+$room->RoomID = $_POST['RoomID'];
 
 
 if ($room->delete()) {
-    echo json_encode(array('message', 'phong da duoc xoa'));
+    echo json_encode(["status" => true, "message" => "Phòng đã được xóa"]);
 } else {
-    echo json_encode(array('message', 'phong khong duoc xoa'));
+    echo json_encode(["status" => false, "message" => "Phòng không được xóa"]);
 }
