@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Quản lý người thuê</title>
+    <link rel="stylesheet" href="../Common/layout.css">
     <link rel="stylesheet" href="tenants.css">
 </head>
 
@@ -14,46 +15,43 @@
         <h2>Quản lý người thuê</h2>
     </div>
 
-    <div class="user-box" onclick="toggleUserMenu()">
+        <div class="user-box" onclick="toggleUserMenu()">
         <div class="avatar-text">👤</div>
         <span id="username"></span>
 
-    <div class="user-menu" id="userMenu">
-        <div onclick="openMyInfo()">👤 Thông tin của tôi</div>
-        <div onclick="openChangePass()">🔒 Đổi mật khẩu</div>
-        <div onclick="logout()">🚪 Đăng xuất</div>
-    </div>
+        <div class="user-menu" id="userMenu">
+            <div onclick="openMyInfo()">👤 Thông tin của tôi</div>
+            <div onclick="openChangePass()">🔒 Đổi mật khẩu</div>
+            <div onclick="logout()">🚪 Đăng xuất</div>
+        </div>
     </div>
 </div>
 
 <div class="wrapper">
-
     <div class="sidebar" id="sidebar"></div>
 
     <div class="main">
 
-        <!-- TOOLBAR -->
-        <div class="toolbar">
-            <input id="key" placeholder="🔍 Tìm theo tên người thuê..." oninput="render()">
-
-            <select id="roomFilter" onchange="render()">
-                <option value="">Tất cả phòng</option>
-            </select>
-
-            <select id="statusFilter" onchange="render()">
-                <option value="">Tất cả trạng thái</option>
-                <option value="Đang thuê">Đang thuê</option>
-                <option value="Đã rời">Đã rời</option>
-            </select>
-
-            <button class="add">➕ Thêm người thuê</button>
+        <!-- STATS -->
+        <div class="cards">
+            <div class="card">
+                <h4>Tổng người thuê</h4>
+                <p id="totalTenants">0</p>
+            </div>
+            <div class="card">
+                <h4>Nam</h4>
+                <p id="maleCount">0</p>
+            </div>
+            <div class="card">
+                <h4>Nữ</h4>
+                <p id="femaleCount">0</p>
+            </div>
         </div>
 
-        <!-- CARDS -->
-        <div class="cards">
-            <div class="card"><h4>Tổng người thuê</h4><p id="total">0</p></div>
-            <div class="card"><h4>Đang ở</h4><p id="dang">0</p></div>
-            <div class="card"><h4>Đã rời</h4><p id="roi">0</p></div>
+        <!-- TOOLBAR -->
+        <div class="toolbar">
+            <input id="key" placeholder="🔍 Tìm theo tên, CCCD, SĐT..." oninput="render()">
+            <button class="add" onclick="openAddTenant()">➕ Thêm người thuê</button>
         </div>
 
         <!-- TABLE -->
@@ -62,11 +60,11 @@
                 <thead>
                     <tr>
                         <th>Mã</th>
-                        <th>Tên</th>
-                        <th>Phòng</th>
-                        <th>Tòa</th>
-                        <th>Điện thoại</th>
-                        <th>Trạng thái</th>
+                        <th>Họ tên</th>
+                        <th>CCCD</th>
+                        <th>SĐT</th>
+                        <th>Email</th>
+                        <th>Giới tính</th>
                         <th>Hành động</th>
                     </tr>
                 </thead>
@@ -77,8 +75,52 @@
     </div>
 </div>
 
+<!-- MODAL -->
+<div class="modal" id="modal">
+    <div class="box">
+        <h3 id="modalTitle">Thêm người thuê</h3>
+
+        <input id="mName" placeholder="Họ tên *">
+        <input id="mCCCD" placeholder="CCCD">
+        <input id="mPhone" placeholder="SĐT *">
+        <input id="mEmail" placeholder="Email">
+        <input id="mAddress" placeholder="Địa chỉ">
+        <input id="mBirth" type="date" placeholder="Ngày sinh">
+        
+        <select id="mGender">
+            <option value="NAM">Nam</option>
+            <option value="NU">Nữ</option>
+        </select>
+
+        <input id="mNote" placeholder="Ghi chú (không bắt buộc)">
+
+        <div class="modal-actions">
+            <button onclick="saveTenant()">💾 Lưu</button>
+            <button onclick="closeModal()">❌ Hủy</button>
+        </div>
+    </div>
+</div>
+
+<!-- DETAIL -->
+<div class="modal" id="detailModal">
+    <div class="box">
+        <h3>📋 Thông tin chi tiết</h3>
+
+        <p><strong>👤 Họ tên:</strong> <span id="dName"></span></p>
+        <p><strong>🆔 CCCD:</strong> <span id="dCCCD"></span></p>
+        <p><strong>📞 SĐT:</strong> <span id="dPhone"></span></p>
+        <p><strong>📧 Email:</strong> <span id="dEmail"></span></p>
+        <p><strong>🎂 Ngày sinh:</strong> <span id="dBirth"></span></p>
+        <p><strong>⚥ Giới tính:</strong> <span id="dGender"></span></p>
+        <p><strong>📍 Địa chỉ:</strong> <span id="dAddress"></span></p>
+        <p><strong>📝 Ghi chú:</strong> <span id="dNote"></span></p>
+
+        <button onclick="closeDetail()" style="width: 100%; margin-top: 20px; padding: 10px; background: #6c63ff; color: white; border: none; border-radius: 10px; cursor: pointer; font-weight: 600;">Đóng</button>
+    </div>
+</div>
+
 <script src="../Common/menu.js"></script>
-<script src="../Common/data.js"></script>
+<script src="api.js"></script>
 <script src="tenants.js"></script>
 
 </body>

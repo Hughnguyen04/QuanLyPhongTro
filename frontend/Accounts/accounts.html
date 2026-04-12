@@ -1,98 +1,139 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
-<meta charset="UTF-8">
-<title>Quản lý tài khoản</title>
-<link rel="stylesheet" href="accounts.css">
+    <meta charset="UTF-8">
+    <title>Quản lý tài khoản</title>
+    <link rel="stylesheet" href="accounts.css">
 </head>
 
 <body>
 
-<!-- TOPBAR -->
-<div class="topbar">
-    <div class="left">
-        <button class="menu-btn" onclick="toggleMenu()">☰</button>
-        <h2>Quản lý tài khoản</h2>
-    </div>
-
-    <div class="user-box" onclick="toggleUserMenu()">
-        <div class="avatar-text">👤</div>
-        <span id="username"></span>
-
-        <div class="user-menu" id="userMenu">
-            <div onclick="openMyInfo()">👤 Thông tin của tôi</div>
-            <div onclick="openChangePass()">🔒 Đổi mật khẩu</div>
-            <div onclick="logout()">🚪 Đăng xuất</div>
+    <!-- TOPBAR -->
+    <div class="topbar">
+        <div class="left">
+            <button class="menu-btn" onclick="toggleMenu()">☰</button>
+            <h2>Quản lý tài khoản</h2>
         </div>
-    </div>
-</div>
 
-<div class="wrapper">
-    <div class="sidebar" id="sidebar"></div>
+        <div class="user-box" onclick="toggleUserMenu()">
+            <div class="avatar-text">👤</div>
+            <span id="username"></span>
 
-    <div class="main">
-
-        <!-- PAGE HEADER -->
-        <div class="page-head">
-            <div>
-                <h2>Tài khoản hệ thống</h2>
-                <p>Quản lý nhân viên và người thuê trong hệ thống</p>
+            <div class="user-menu" id="userMenu">
+                <div onclick="openMyInfo()">👤 Thông tin của tôi</div>
+                <div onclick="openChangePass()">🔒 Đổi mật khẩu</div>
+                <div onclick="logout()">🚪 Đăng xuất</div>
             </div>
-            <button class="add">➕ Thêm tài khoản</button>
         </div>
+    </div>
 
-        <!-- FILTER -->
-        <div class="filter-bar">
-            <input id="key" placeholder="🔍 Tìm theo tên..." oninput="render()">
+    <div class="wrapper">
+        <div class="sidebar" id="sidebar"></div>
 
-            <select id="roleFilter" onchange="render()">
-                <option value="">Tất cả loại</option>
+        <div class="main">
+
+            <!-- FILTER -->
+            <div class="filter-bar">
+                <input id="key" placeholder="🔍 Tìm theo tên..." oninput="render()">
+
+                <select id="roleFilter" onchange="render()">
+                    <option value="">Tất cả loại</option>
+                    <option value="nhanvien">Nhân viên</option>
+                    <option value="nguoithue">Người thuê</option>
+                </select>
+
+                <select id="buildingFilter" onchange="render()"></select>
+
+                <button class="add" id="addBtn" onclick="openAdd()">➕ Thêm tài khoản</button>
+            </div>
+
+            <!-- CARDS -->
+            <div class="cards">
+                <div class="card">
+                    <h4>Tổng tài khoản</h4>
+                    <p id="total">0</p>
+                </div>
+                <div class="card">
+                    <h4>Nhân viên</h4>
+                    <p id="staff">0</p>
+                </div>
+                <div class="card">
+                    <h4>Người thuê</h4>
+                    <p id="tenant">0</p>
+                </div>
+            </div>
+
+            <!-- TABLE -->
+            <div class="section">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Mã</th>
+                            <th>Tên</th>
+                            <th>Loại</th>
+                            <th>Tòa</th>
+                            <th>Phòng</th>
+                            <th>Điện thoại</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody"></tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ===== MODAL CHI TIẾT ===== -->
+    <div class="modal" id="detailModal">
+        <div class="box">
+            <img id="dAvatar" class="avatar-lg">
+            <h3 id="dName"></h3>
+
+            <p><b>Chức vụ:</b> <span id="dRole"></span></p>
+            <p><b>Tòa:</b> <span id="dBuilding"></span></p>
+            <p><b>Phòng:</b> <span id="dRoom"></span></p>
+            <p><b>CCCD:</b> <span id="dCCCD"></span></p>
+            <p><b>SĐT:</b> <span id="dPhone"></span></p>
+
+            <p id="timeLabel"></p>
+
+            <button onclick="closeDetail()">Đóng</button>
+        </div>
+    </div>
+
+    <!-- ===== MODAL FORM ===== -->
+    <div class="modal" id="formModal">
+        <div class="box form-box">
+
+            <h3 id="formTitle">Thêm tài khoản</h3>
+
+            <input id="fName" placeholder="Tên">
+
+            <select id="fRole">
                 <option value="nhanvien">Nhân viên</option>
                 <option value="nguoithue">Người thuê</option>
             </select>
 
-            <select id="buildingFilter" onchange="render()"></select>
-        </div>
+            <input id="fBuilding" placeholder="Tòa">
+            <input id="fRoom" placeholder="Phòng">
+            <input id="fPhone" placeholder="SĐT">
+            <input id="fStart" placeholder="Ngày bắt đầu">
+            <input id="fEnd" placeholder="Ngày kết thúc">
 
-        <!-- STATS -->
-        <div class="cards">
-            <div class="card">
-                <h4>Tổng tài khoản</h4>
-                <p id="total">0</p>
+            <div class="form-actions">
+                <button class="btn-save" onclick="saveAcc()">💾 Lưu</button>
+                <button class="btn-cancel" onclick="closeForm()">❌ Hủy</button>
             </div>
-            <div class="card">
-                <h4>Nhân viên</h4>
-                <p id="staff">0</p>
-            </div>
-            <div class="card">
-                <h4>Người thuê</h4>
-                <p id="tenant">0</p>
-            </div>
-        </div>
 
-        <!-- TABLE -->
-        <div class="section">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Mã</th>
-                        <th>Tên</th>
-                        <th>Loại</th>
-                        <th>Tòa</th>
-                        <th>Phòng</th>
-                        <th>Điện thoại</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody id="tbody"></tbody>
-            </table>
         </div>
-
     </div>
-</div>
 
-<script src="../Common/menu.js"></script>
-<script src="../Common/data.js"></script>
-<script src="accounts.js"></script>
+
+    <script src="../Common/menu.js"></script>
+    <script src="accounts.js"></script>
+
 </body>
+
 </html>

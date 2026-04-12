@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Thống kê</title>
+
+<link rel="stylesheet" href="../Common/layout.css">
+<link rel="stylesheet" href="stats.css">
+
+</head>
+
+<body>
+
+<div class="topbar">
+
+<div class="left">
+<button class="menu-btn" onclick="toggleMenu()">☰</button>
+<h2>Thống kê</h2>
+</div>
+
+<div class="user-box" onclick="toggleUserMenu()">
+
+<div class="avatar-text">👤</div>
+<span id="username"></span>
+
+<div class="user-menu" id="userMenu">
+<div onclick="openMyInfo()">👤 Thông tin của tôi</div>
+<div onclick="openChangePass()">🔒 Đổi mật khẩu</div>
+<div onclick="logout()">🚪 Đăng xuất</div>
+</div>
+
+</div>
+</div>
+
+
+<div class="wrapper">
+
+<div class="sidebar" id="sidebar"></div>
+
+<div class="main">
+
+<div class="toolbar">
+
+<select id="monthFilter"></select>
+
+<select id="buildingFilter">
+<option value="all">Tất cả tòa</option>
+</select>
+
+</div>
+
+
+<div class="cards">
+
+<div class="card">
+<h4>🏠 Phòng đang thuê</h4>
+<p id="sumRooms">0</p>
+</div>
+
+<div class="card">
+<h4>📄 Tổng hóa đơn</h4>
+<p id="sumBills">0</p>
+</div>
+
+<div class="card">
+<h4>💰 Tổng doanh thu</h4>
+<p id="sumRevenue">0</p>
+</div>
+
+<div class="card">
+<h4>🏠 Tiền phòng</h4>
+<p id="sumRent">0</p>
+</div>
+
+<div class="card">
+<h4>⚡ Tiền điện</h4>
+<p id="sumElectric">0</p>
+</div>
+
+<div class="card">
+<h4>💧 Tiền nước</h4>
+<p id="sumWater">0</p>
+</div>
+
+<div class="card">
+<h4>🛎️ Dịch vụ</h4>
+<p id="sumService">0</p>
+</div>
+
+</div>
+
+
+<div class="section">
+
+<h3 id="chartTitle">📊 Doanh thu</h3>
+
+<canvas id="roomChart"></canvas>
+
+</div>
+
+
+<div class="section">
+
+<h3>🥧 Cơ cấu doanh thu</h3>
+
+<canvas id="structureChart"></canvas>
+
+</div>
+
+</div>
+</div>
+
+
+<script src="../Common/menu.js"></script>
+<script src="api.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="stats.js"></script>
+
+</body>
+</html>

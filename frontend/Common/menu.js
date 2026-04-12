@@ -5,41 +5,41 @@ const ROOT = "";
 
 const menus = {
     chutro: [
-        { icon:"🏠", text:"Dashboard", link:"../Dashboard/dashboard.html" },
+        { icon:"", text:"Dashboard", link:"../Dashboard/dashboard.html" },
 
-        { icon:"🏘️", text:"Quản lý phòng", link:"../Rooms/rooms.html" },
-        { icon:"👥", text:"Quản lý người thuê", link:"../Tenants/tenants.html" },
-        { icon:"🧑‍💼", text:"Quản lý nhân viên", link:"../Staff/staff.html" },
+        { icon:"", text:"Quản lý phòng", link:"../Rooms/rooms.html" },
+        { icon:"", text:"Quản lý người thuê", link:"../Tenants/tenants.html" },
+        { icon:"", text:"Quản lý nhân viên", link:"../Staff/staff.html" },
 
-        { icon:"📄", text:"Hợp đồng", link:"../Contracts/contracts.html" },
-        { icon:"🔑", text:"Tài khoản", link:"../Accounts/accounts.html" },
+        { icon:"", text:"Hợp đồng", link:"../Contracts/contracts.html" },
+        { icon:"", text:"Tài khoản", link:"../Accounts/accounts.html" },
 
-        { icon:"💵", text:"Hóa đơn", link:"../Bills/bills.html" },
-        { icon:"⚡", text:"Điện nước", link:"../Meter/meter.html" },
-        { icon:"📊", text:"Thống kê", link:"../Stats/stats.html" },
+        { icon:"", text:"Hóa đơn", link:"../Bills/bills.html" },
+        { icon:"", text:"Điện nước", link:"../Meter/meter.html" },
+        { icon:"", text:"Thống kê", link:"../Stats/stats.html" },
 
-        { icon:"⚙️", text:"Cài đặt hệ thống", link:"../Settings/settings.html" }
+        { icon:"", text:"Cài đặt hệ thống", link:"../Settings/settings.html" }
     ],
 
     nhanvien: [
-        { icon:"🏠", text:"Dashboard", link:"../Dashboard/dashboard.html" },
-        { icon:"🏘️", text:"Quản lý phòng", link:"../Rooms/rooms.html" },
-        { icon:"👥", text:"Quản lý người thuê", link:"../Tenants/tenants.html" },
+        { icon:"", text:"Dashboard", link:"../Dashboard/dashboard.html" },
+        { icon:"", text:"Quản lý phòng", link:"../Rooms/rooms.html" },
+        { icon:"", text:"Quản lý người thuê", link:"../Tenants/tenants.html" },
 
-        { icon:"📄", text:"Hợp đồng", link:"../Contracts/contracts.html" },
-        { icon:"🔑", text:"Tài khoản", link:"../Accounts/accounts.html" },
+        { icon:"", text:"Hợp đồng", link:"../Contracts/contracts.html" },
+        { icon:"", text:"Tài khoản", link:"../Accounts/accounts.html" },
 
-        { icon:"💵", text:"Hóa đơn", link:"../Bills/bills.html" },
-        { icon:"⚡", text:"Điện nước", link:"../Meter/meter.html" },
-        { icon:"📊", text:"Thống kê", link:"../Stats/stats.html" },
+        { icon:"", text:"Hóa đơn", link:"../Bills/bills.html" },
+        { icon:"", text:"Điện nước", link:"../Meter/meter.html" },
+        { icon:"", text:"Thống kê", link:"../Stats/stats.html" },
 
-        { icon:"🔔", text:"Thông báo", link:"../Notifications/notifications.html" }
+        { icon:"", text:"Thông báo", link:"../Notifications/notifications.html" }
     ],
 
     nguoithue: [
-        { icon:"🏠", text:"Dashboard", link:"../Dashboard/dashboard.html" },
-        { icon:"💵", text:"Hóa đơn của tôi", link:"../Bills/mybills.html" },
-        { icon:"🔔", text:"Thông báo", link:"../Notifications/notifications.html" }
+        { icon:"", text:"Dashboard", link:"../Dashboard/dashboard.html" },
+        { icon:"", text:"Hóa đơn của tôi", link:"../Bills/mybills.html" },
+        { icon:"", text:"Thông báo", link:"../Notifications/notifications.html" }
     ]
 };
 
@@ -47,14 +47,25 @@ const menus = {
 /* ================== RENDER MENU ================== */
 function renderMenu(role){
 
+    const roleMap = {
+        admin: "chutro",
+        staff: "nhanvien",
+        guest: "nguoithue",
+        chutro: "chutro",
+        nhanvien: "nhanvien",
+        nguoithue: "nguoithue"
+    };
+
+    const menuRole = roleMap[role] || "nguoithue";
+
     const sidebar = document.getElementById("sidebar");
-    if (!sidebar || !menus[role]) return;
+    if (!sidebar || !menus[menuRole]) return;
 
     sidebar.innerHTML = "";
 
     const currentPage = location.pathname.split("/").pop().toLowerCase();
 
-    menus[role].forEach(m => {
+    menus[menuRole].forEach(m => {
 
         const item = document.createElement("div");
         item.className = "menu-item";
@@ -76,11 +87,11 @@ function renderMenu(role){
 
 /* ================== USER NAV ================== */
 function openMyInfo() {
-    location.href = ROOT + "/Infor/infor.html";
+    location.href = ROOT + "../Infor/infor.html";
 }
 
 function openChangePass() {
-    location.href = ROOT + "/ChangePass/changepass.html";
+    location.href = ROOT + "../ChangePass/changepass.html";
 }
 
 
@@ -113,7 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const role = localStorage.getItem("role");
 
     if (!role) {
-        location.href = ROOT + "/Login/login.html";
+        location.href = ROOT + "../Login/login.html";
         return;
     }
 
@@ -151,5 +162,5 @@ document.addEventListener("click", e => {
 /* ================== LOGOUT ================== */
 function logout() {
     localStorage.clear();
-    location.href = ROOT + "/Login/login.html";
+    location.href = ROOT + "../Login/login.html";
 }

@@ -1,66 +1,77 @@
+<!-- rooms.html -->
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
     <title>Quản lý phòng</title>
+    <link rel="stylesheet" href="../Common/layout.css">
     <link rel="stylesheet" href="rooms.css">
 </head>
 
 <body>
 
-<!-- TOPBAR -->
 <div class="topbar">
     <div class="left">
         <button class="menu-btn" onclick="toggleMenu()">☰</button>
-        <h2 id="title">Quản lý phòng</h2>
+        <h2>Quản lý phòng</h2>
     </div>
 
-    <div class="user-box" onclick="toggleUserMenu()">
+        <div class="user-box" onclick="toggleUserMenu()">
         <div class="avatar-text">👤</div>
         <span id="username"></span>
 
-    <div class="user-menu" id="userMenu">
-        <div onclick="openMyInfo()">👤 Thông tin của tôi</div>
-        <div onclick="openChangePass()">🔒 Đổi mật khẩu</div>
-        <div onclick="logout()">🚪 Đăng xuất</div>
-    </div>
+        <div class="user-menu" id="userMenu">
+            <div onclick="openMyInfo()">👤 Thông tin của tôi</div>
+            <div onclick="openChangePass()">🔒 Đổi mật khẩu</div>
+            <div onclick="logout()">🚪 Đăng xuất</div>
+        </div>
     </div>
 </div>
 
 <div class="wrapper">
-
-    <!-- SIDEBAR -->
     <div class="sidebar" id="sidebar"></div>
 
-    <!-- MAIN -->
     <div class="main">
 
-        <div class="toolbar">
-            <input id="key" placeholder="🔍 Tìm theo tên phòng..." oninput="render()">
+        <!-- STATS -->
+        <div class="cards">
+            <div class="card"><h4>Tổng phòng</h4><p id="totalRooms">0</p></div>
+            <div class="card"><h4>Phòng trống</h4><p id="emptyRooms">0</p></div>
+            <div class="card"><h4>Đang thuê</h4><p id="rentedRooms">0</p></div>
+            <div class="card"><h4>Đang sửa</h4><p id="repairRooms">0</p></div>
+        </div>
 
-            <select id="status" onchange="render()">
-                <option value="">Tất cả trạng thái</option>
-                <option>Trống</option>
-                <option>Đang thuê</option>
-                <option>Đang sửa</option>
+        <!-- TOOLBAR -->
+        <div class="toolbar">
+            <input id="key" placeholder="🔍 Tìm..." oninput="render()">
+
+            <select id="buildingFilter" onchange="render()">
+                <option value="">Tất cả tòa</option>
+                <option value="Tòa A">Tòa A</option>
+                <option value="Tòa B">Tòa B</option>
+                <option value="Tòa C">Tòa C</option>
             </select>
 
-            <button class="add owner">➕ Thêm phòng</button>
+            <select id="status" onchange="render()">
+                <option value="">Tất cả phòng</option>
+                <option value="Trống">Trống</option>
+                <option value="Đang thuê">Đang thuê</option>
+                <option value="Đang sửa">Đang sửa</option>
+            </select>
+
+            <button class="add" onclick="openAddRoom()">➕ Thêm</button>
         </div>
 
-        <div class="cards">
-            <div class="card"><h4>Tổng phòng</h4><p id="total">0</p></div>
-            <div class="card"><h4>Đang thuê</h4><p id="thue">0</p></div>
-            <div class="card"><h4>Phòng trống</h4><p id="trong">0</p></div>
-            <div class="card"><h4>Đang sửa</h4><p id="sua">0</p></div>
-        </div>
-
+        <!-- TABLE -->
         <div class="section">
             <table>
                 <thead>
                     <tr>
                         <th>Mã</th>
-                        <th>Tên phòng</th>
+                        <th>Tên</th>
+                        <th>Tòa</th>
+                        <th>Địa chỉ</th>
+                        <th>Diện tích</th>
                         <th>Giá</th>
                         <th>Trạng thái</th>
                         <th>Hành động</th>
@@ -73,9 +84,75 @@
     </div>
 </div>
 
-<!-- 🔥 LOAD MENU TRƯỚC -->
+<!-- MODAL -->
+<div class="modal" id="modal">
+    <div class="box">
+
+        <h3>Phòng</h3>
+
+        <input id="mRoomName" placeholder="Tên phòng">
+        <input id="mAddress" placeholder="Địa chỉ">
+        <input id="mFloors" placeholder="Tổng tầng">
+        <input id="mRoomFloor" placeholder="Tầng phòng">
+        <input id="mArea" placeholder="Diện tích">
+        <input id="mPrice" placeholder="Giá">
+
+        <select id="mBuilding">
+            <option value="Tòa A">Tòa A</option>
+            <option value="Tòa B">Tòa B</option>
+            <option value="Tòa C">Tòa C</option>
+        </select>
+
+        <select id="mStatus">
+            <option value="TRONG">Trống</option>
+            <option value="DANG_THUE">Đang thuê</option>
+            <option value="DANG_SUA">Đang sửa</option>
+        </select>
+
+        <input id="mNote" placeholder="Ghi chú">
+
+        <label class="upload-box">
+            📁 Chọn ảnh
+            <input type="file" id="mImages" multiple accept="image/*">
+        </label>
+
+        <div id="previewImages" class="preview"></div>
+
+        <div class="modal-actions">
+            <button onclick="saveRoom()">💾 Lưu</button>
+            <button onclick="closeModal()">❌ Hủy</button>
+        </div>
+
+    </div>
+</div>
+
+<!-- DETAIL -->
+<div class="modal" id="roomDetailModal">
+    <div class="box">
+        <h3>Thông tin phòng</h3>
+
+        <div class="room-slider">
+            <button onclick="prevImage()">❮</button>
+            <img id="mainImage" alt="Room image">
+            <button onclick="nextImage()">❯</button>
+        </div>
+
+        <p><b>Tên:</b> <span id="dName"></span></p>
+        <p><b>Tòa:</b> <span id="dBuilding"></span></p>
+        <p><b>Địa chỉ:</b> <span id="dAddress"></span></p>
+        <p><b>Tầng:</b> <span id="dRoomFloor"></span></p>
+        <p><b>Tổng tầng:</b> <span id="dFloors"></span></p>
+        <p><b>Diện tích:</b> <span id="dArea"></span></p>
+        <p><b>Giá:</b> <span id="dPrice"></span></p>
+        <p><b>Ghi chú:</b> <span id="dNote"></span></p>
+        <p><b>Trạng thái:</b> <span id="dStatus"></span></p>
+
+        <button onclick="closeRoomDetail()">Đóng</button>
+    </div>
+</div>
+
 <script src="../Common/menu.js"></script>
-<script src="../Common/data.js"></script>
+<script src="api.js"></script>
 <script src="rooms.js"></script>
 
 </body>

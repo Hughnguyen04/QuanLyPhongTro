@@ -1,22 +1,69 @@
-/* ================= AUTH ================= */
+/* AUTH */
 const role = localStorage.getItem("role");
 const username = localStorage.getItem("username");
 
-if (!role || role !== "chutro") location.href="../Login/login.html";
+if (!role || (role !== "chutro" && role !== "admin")) location.href="../Login/login.html";
 
 document.getElementById("username").innerText = username;
 renderMenu(role);
 
-/* ================= DATA ================= */
-let listStaff = accounts.filter(a => a.role === "nhanvien");
+/* MODAL VAR */
+const modal = document.getElementById("modal");
+const modalTitle = document.getElementById("modalTitle");
 
-/* ================= INIT FILTER ================= */
+const mName = document.getElementById("mName");
+const mUsername = document.getElementById("mUsername");
+const mBuildings = document.getElementById("mBuildings");
+
+let editingId = null;
+
+/* DATA */
+let listStaff = [];
+
+/* FETCH STAFF DATA */
+async function fetchStaff() {
+    try {
+        const token = localStorage.getItem("token");
+        const response = await fetch("http://localhost:8080/quanlyphongtro/api/users/staff", {
+            headers: {
+                "Authorization": token ? `Bearer ${token}` : "",
+                "Content-Type": "application/json"
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        console.log("Staff API response:", data);
+
+        // API trả về array hoặc object đơn lẻ
+        if (Array.isArray(data)) {
+            listStaff = data;
+        } else if (data) {
+            listStaff = [data];
+        } else {
+            listStaff = [];
+        }
+
+        console.log("Loaded staff:", listStaff.length);
+        return listStaff;
+    } catch (error) {
+        console.error("Error fetching staff:", error);
+        alert("Lỗi tải dữ liệu nhân viên: " + error.message);
+        listStaff = [];
+        return [];
+    }
+}
+
+/* INIT BUILDING */
 function initBuildings(){
     const select = document.getElementById("buildingFilter");
 
     const all = new Set();
     listStaff.forEach(s=>{
-        (s.buildings||[]).forEach(b=>all.add(b));
+        if (s.manageBuilding) all.add(s.manageBuilding);
     });
 
     select.innerHTML=`<option value="">Tất cả tòa</option>`;
@@ -25,7 +72,7 @@ function initBuildings(){
     });
 }
 
-/* ================= RENDER ================= */
+/* RENDER */
 function render(){
     const key = document.getElementById("key").value.toLowerCase();
     const building = document.getElementById("buildingFilter").value;
@@ -37,23 +84,23 @@ function render(){
 
     listStaff
     .filter(s =>
-        s.name.toLowerCase().includes(key) &&
-        (building==="" || (s.buildings||[]).includes(building))
+        (s.fullName || "").toLowerCase().includes(key) &&
+        (building==="" || s.manageBuilding === building)
     )
     .forEach(s=>{
         total++;
-        buildCount += (s.buildings||[]).length;
+        if (s.manageBuilding) buildCount++;
 
         tbody.innerHTML += `
         <tr>
-            <td>${s.id}</td>
-            <td>${s.name}</td>
+            <td>${s.userId}</td>
+            <td>${s.fullName || ""}</td>
             <td>${s.username}</td>
-            <td>${(s.buildings||[]).join(", ")}</td>
-            <td>${(s.buildings||[]).length}</td>
+            <td>${s.manageBuilding || ""}</td>
+            <td>${s.active ? "Hoạt động" : "Không hoạt động"}</td>
             <td>
-                <button onclick="editStaff('${s.id}')">✏️</button>
-                <button onclick="deleteStaff('${s.id}')">🗑</button>
+                <button onclick="editStaff('${s.userId}')">✏️</button>
+                <button onclick="deleteStaff('${s.userId}')">🗑</button>
             </td>
         </tr>
         `;
@@ -63,57 +110,36 @@ function render(){
     document.getElementById("buildCount").innerText=buildCount;
 }
 
-/* ================= ACTION ================= */
+/* ADD */
 function addStaff(){
-    const name = prompt("Tên nhân viên:");
-    if(!name) return;
+    alert("Chức năng thêm nhân viên chưa được hỗ trợ qua API");
+}
 
-    const username = prompt("Tài khoản:");
-    if(!username) return;
+/* EDIT */
+function editStaff(userId){
+    alert("Chức năng sửa nhân viên chưa được hỗ trợ qua API");
+}
 
-    const buildings = prompt("Tòa quản lý (phẩy):","Tòa 1,Tòa 2");
-    const arr = buildings.split(",").map(s=>s.trim());
+/* CLOSE */
+function closeModal(){
+    modal.style.display="none";
+}
 
-    const id="A"+Math.floor(Math.random()*1000);
+/* SAVE */
+function saveStaff(){
+    alert("Chức năng lưu nhân viên chưa được hỗ trợ qua API");
+}
 
-    const nv={
-        id,
-        username,
-        password:"123",
-        role:"nhanvien",
-        name,
-        buildings:arr
-    };
+/* DELETE */
+function deleteStaff(userId){
+    alert("Chức năng xóa nhân viên chưa được hỗ trợ qua API");
+}
 
-    listStaff.push(nv);
-    accounts.push(nv);
-
+/* INIT */
+async function init() {
+    await fetchStaff();
     initBuildings();
     render();
 }
 
-function editStaff(id){
-    const nv = listStaff.find(s=>s.id===id);
-    if(!nv) return;
-
-    const name = prompt("Tên:",nv.name);
-    if(!name) return;
-
-    const buildings = prompt("Tòa:",nv.buildings.join(","));
-    nv.name=name;
-    nv.buildings=buildings.split(",").map(s=>s.trim());
-
-    render();
-}
-
-function deleteStaff(id){
-    if(!confirm("Xóa nhân viên?")) return;
-
-    listStaff = listStaff.filter(s=>s.id!==id);
-    accounts = accounts.filter(a=>a.id!==id);
-
-    render();
-}
-
-initBuildings();
-render();
+document.addEventListener("DOMContentLoaded", init);

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard Nhân viên</title>
+    <link rel="stylesheet" href="../Common/layout.css">
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+
+<div class="topbar">
+    <div class="left">
+        <button class="menu-btn" onclick="toggleMenu()">☰</button>
+        <h2>👔 Dashboard Nhân viên</h2>
+    </div>
+    <div class="user-box" onclick="toggleUserMenu()">
+        <div class="avatar-text">👤</div>
+        <span id="username"></span>
+        <div class="user-menu" id="userMenu">
+            <div onclick="location.href='../Infor/infor.html'">👤 Thông tin</div>
+            <div onclick="location.href='../ChangePass/changepass.html'">🔒 Đổi mật khẩu</div>
+            <div onclick="logout()">🚪 Đăng xuất</div>
+        </div>
+    </div>
+</div>
+
+<div class="wrapper">
+    <div class="sidebar" id="sidebar"></div>
+    <div class="main">
+        <div class="welcome">
+            <h2 id="welcomeName"></h2>
+            <div id="today"></div>
+        </div>
+
+        <div class="cards">
+            <div class="card"><h4>🏠 Tổng phòng</h4><p id="tongPhong">0</p></div>
+            <div class="card"><h4>🔑 Đang thuê</h4><p id="phongThue">0</p></div>
+            <div class="card"><h4>🏠 Phòng trống</h4><p id="phongTrong">0</p></div>
+            <div class="card"><h4>👥 Người thuê</h4><p id="soNguoi">0</p></div>
+            <div class="card"><h4>💰 Hóa đơn chưa thu</h4><p id="hoaDonNo">0</p></div>
+        </div>
+
+        <div class="panel">
+            <h3>📋 Việc cần làm</h3>
+            <ul id="todoList"></ul>
+        </div>
+
+        <div class="panel">
+            <h3>🏠 Phòng trống</h3>
+            <table class="table">
+                <thead><tr><th>Phòng</th><th>Giá</th></tr></thead>
+                <tbody id="phongTrongTable"></tbody>
+            </table>
+        </div>
+
+        <div class="panel">
+            <h3>💰 Hóa đơn chưa thu</h3>
+            <table class="table">
+                <thead><tr><th>Phòng</th><th>Người thuê</th><th>Số tiền</th></tr></thead>
+                <tbody id="noTable"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="../Common/menu.js"></script>
+<script src="api.js"></script>
+<script src="staff.js"></script>
+</body>
+</html>

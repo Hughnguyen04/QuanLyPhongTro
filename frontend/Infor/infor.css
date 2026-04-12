@@ -1,169 +1,21 @@
-/* ===== RESET ===== */
-body{
-    margin:0;
-    font-family:"Segoe UI",sans-serif;
-    background:linear-gradient(180deg,#f4f6fa,#eef1ff);
-    color:#333;
-}
-
-/* ===== TOPBAR ===== */
-.topbar{
-    background:#6c63ff;
-    color:#fff;
-    padding:0 25px;
-    height:60px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    position:fixed;
-    top:0;left:0;right:0;
-    z-index:200;
-}
-
-.left{
-    display:flex;
-    align-items:center;
-    gap:12px;
-}
-
-.menu-btn{
-    font-size:22px;
-    background:none;
-    border:none;
-    color:#fff;
-    cursor:pointer;
-}
-
-/* ===== USER BOX ===== */
-.user-box{
-    position:relative;
-    display:flex;
-    align-items:center;
-    gap:10px;
-    cursor:pointer;
-}
-
-.avatar-text{
-    width:36px;
-    height:36px;
-    background:rgba(255,255,255,.25);
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
-
-.user-menu{
-    position:absolute;
-    top:52px;
-    right:0;
-    background:#fff;
-    width:190px;
-    border-radius:10px;
-    box-shadow:0 10px 30px rgba(0,0,0,.15);
-    display:none;
-    overflow:hidden;
-    color:#333;
-}
-
-.user-menu div{
-    padding:12px;
-    cursor:pointer;
-}
-.user-menu div:hover{
-    background:#f0f1ff;
-}
-
-/* ===== LAYOUT ===== */
-.wrapper{
-    display:flex;
-}
-
-/* ===== SIDEBAR (CHUẨN DASHBOARD) ===== */
-.sidebar{
-    width:240px;
-    background:#fff;
-    height:calc(100vh - 60px);
-    padding:15px;
-    position:fixed;
-    left:-260px;
-    top:60px;
-    transition:.25s;
-    box-shadow:2px 0 10px rgba(0,0,0,.08);
-    z-index:150;
-    overflow-y:auto;
-}
-
-.sidebar.show{
-    left:0;
-}
-
-/* scrollbar giống dashboard */
-.sidebar::-webkit-scrollbar{width:6px}
-.sidebar::-webkit-scrollbar-thumb{
-    background:#d0d3ff;
-    border-radius:10px;
-}
-
-/* ===== MAIN ===== */
-.main{
-    flex:1;
-    padding:25px 30px;
-    margin-top:60px;
-    width:100%;
-    transition:margin-left .25s;
-}
-
-.sidebar.show ~ .main{
-    margin-left:240px;
-}
-
-/* ===== MENU ITEM (CHUẨN DASHBOARD) ===== */
-.menu-item{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    padding:12px 14px;
-    margin:10px 0;
-    border-radius:12px;
-    cursor:pointer;
-    font-size:15px;
-    color:#444;
-    background:#f3f4ff;
-    transition:.15s;
-}
-
-.menu-item:hover{
-    background:#e7e9ff;
-}
-
-.menu-item.active{
-    background:#6c63ff;
-    color:#fff;
-}
-
-.menu-item .icon{
-    width:22px;
-    text-align:center;
-    font-size:18px;
-}
-
-.menu-item .text{
-    flex:1;
-}
 /* ===== WELCOME ===== */
+
 .welcome{
     margin-bottom:20px;
 }
+
 .welcome h2{
     margin:0;
 }
+
 .welcome div{
     color:#666;
     font-size:14px;
 }
 
+
 /* ===== PROFILE ===== */
+
 .profile{
     display:flex;
     gap:16px;
@@ -193,7 +45,9 @@ body{
     margin-top:4px;
 }
 
+
 /* ===== INFO GRID ===== */
+
 .info-grid{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
@@ -214,6 +68,9 @@ body{
     font-size:16px;
 }
 
+
+/* ===== INFO ROW ===== */
+
 .info-row{
     display:flex;
     justify-content:space-between;
@@ -227,11 +84,4 @@ body{
 
 .label{
     color:#666;
-}
-
-/* ===== RESPONSIVE ===== */
-@media(max-width:768px){
-    .sidebar.show ~ .main{
-        margin-left:0;
-    }
 }
