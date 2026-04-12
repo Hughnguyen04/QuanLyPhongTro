@@ -49,5 +49,4 @@ public interface NotificationRepository extends JpaRepository<Notification, Long
             """)
     List<NotificationResponse> findByReceiverUsername(String username);
 
-
 }

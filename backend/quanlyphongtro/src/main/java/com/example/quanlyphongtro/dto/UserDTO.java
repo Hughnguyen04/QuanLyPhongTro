@@ -4,12 +4,14 @@ import com.example.quanlyphongtro.model.User;
 
 public class UserDTO {
     private Integer userId;
+    private String fullName;
     private String username;
     private User.Role role;
     private Boolean isActive;
 
-    public UserDTO(Integer userId, String username, User.Role role, Boolean isActive){
+    public UserDTO(Integer userId, String fullName, String username, User.Role role, Boolean isActive){
         this.userId = userId;
+        this.fullName = fullName;
         this.username = username;
         this.role = role;
         this.isActive = isActive;
@@ -21,6 +23,14 @@ public class UserDTO {
     }
     public void setUserId(Integer userId){
         this.userId = userId;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getUsername() {

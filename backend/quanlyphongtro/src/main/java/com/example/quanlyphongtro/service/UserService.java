@@ -1,5 +1,6 @@
 package com.example.quanlyphongtro.service;
 
+import com.example.quanlyphongtro.dto.StaffDTO;
 import com.example.quanlyphongtro.dto.UserDTO;
 import com.example.quanlyphongtro.dto.request.RegisterRequest;
 import com.example.quanlyphongtro.model.User;
@@ -24,25 +25,26 @@ public class UserService {
 
     public List<UserDTO> getAllUsers(){
         return userRepository.findAll().stream()
-                .map(u -> new UserDTO(u.getUserId(), u.getUsername(), u.getRole(), u.getIsActive()))
+                .map(u -> new UserDTO(u.getUserId(), u.getFullName(),u.getUsername(), u.getRole(), u.getIsActive()))
                 .collect(Collectors.toList());
     }
 
     public UserDTO getUserById(Integer id) {
         User user = userRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"User not found!"));
-        return new UserDTO(user.getUserId(), user.getUsername(), user.getRole(), user.getIsActive());
+        return new UserDTO(user.getUserId(), user.getFullName(), user.getUsername(), user.getRole(), user.getIsActive());
     }
 
     public UserDTO createUser(RegisterRequest request){
         User saved = new User();
 
+        saved.setFullName(request.getFullName());
         saved.setUsername(request.getUsername());
         saved.setPassword(passwordEncoder.encode(request.getPassword()));
         saved.setRole(User.Role.valueOf(request.getRole()));
         saved.setIsActive(request.isActive());
         userRepository.save(saved);
 
-        return new UserDTO(saved.getUserId(), saved.getUsername(), saved.getRole(), saved.getIsActive());
+        return new UserDTO(saved.getUserId(),saved.getFullName(), saved.getUsername(), saved.getRole(), saved.getIsActive());
     }
 
     public UserDTO updateUser(Integer id, User userUpdate) {
@@ -54,12 +56,20 @@ public class UserService {
         user.setIsActive(user.getIsActive());
 
         User updated = userRepository.save(user);
-        return new UserDTO(updated.getUserId(), updated.getUsername(), updated.getRole(),updated.getIsActive());
+        return new UserDTO(updated.getUserId(), updated.getFullName(),updated.getUsername(), updated.getRole(),updated.getIsActive());
     }
 
     public UserDTO deleteUser(Integer id){
         User user = userRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found!"));
         userRepository.deleteById(id);
-        return new UserDTO(user.getUserId(), user.getUsername(), user.getRole(), user.getIsActive());
+        return new UserDTO(user.getUserId(), user.getFullName(), user.getUsername(), user.getRole(), user.getIsActive());
     }
+
+    public List<StaffDTO> getStaff() {
+        return userRepository.findByRole(User.Role.STAFF).stream()
+                .map(u -> new StaffDTO(u.getUserId(), u.getFullName(),u.getUsername(), u.getRole(), u.getManageBuilding(),u.getIsActive(), u.getCreatedAt()))
+                .collect(Collectors.toList());
+    }
+
+
 }

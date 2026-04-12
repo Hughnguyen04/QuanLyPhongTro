@@ -13,10 +13,13 @@ public class User {
     @Column(name = "UserID")
     private Integer userId;
 
+    @Column(name = "FullName", nullable = false, length = 255)
+    private String fullName;
+
     @Column(name = "Username", nullable = false, unique = true, length = 50)
     private String username;
 
-    @Column(name = "Password", nullable = false, length = 50)
+    @Column(name = "Password", nullable = false, length = 255)
     private String password;
 
     @Enumerated(EnumType.STRING)
@@ -29,10 +32,21 @@ public class User {
     @Column(name = "CreatedAt", nullable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 
+    @Column(name = "ManageBuilding", nullable = true, length = 255)
+    private String manageBuilding;
+
     public enum Role{
         ADMIN,
         STAFF,
         GUEST
+    }
+
+    public String getManageBuilding() {
+        return manageBuilding;
+    }
+
+    public void setManageBuilding(String manageBuilding) {
+        this.manageBuilding = manageBuilding;
     }
 
     public Integer getUserId() {
@@ -82,4 +96,13 @@ public class User {
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
 }

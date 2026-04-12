@@ -1,10 +1,19 @@
 package com.example.quanlyphongtro.dto.request;
 
 public class RegisterRequest {
+    private String fullName;
     private String username;
     private String password;
     private String role;
     private boolean isActive = true;
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
 
     public String getUsername() {
         return username;

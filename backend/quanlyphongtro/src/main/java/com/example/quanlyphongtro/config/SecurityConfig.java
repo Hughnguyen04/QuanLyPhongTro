@@ -31,6 +31,8 @@ public class SecurityConfig {
         http.cors(Customizer.withDefaults()) //bật cors
                 .csrf(csrf -> csrf.disable())//tắt csrf khi test api
                 .authorizeHttpRequests(auth -> auth
+                    //Cho phép tạo tài khoản admin
+                    .requestMatchers("/api/admin/create").permitAll()
                     // Cho phép đăng nhập không cần xác thực
                     .requestMatchers("/api/auth/login").permitAll()
                     // ADMIN và STAFF mới được tạo tài khoản

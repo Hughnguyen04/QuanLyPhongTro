@@ -1,5 +1,6 @@
 package com.example.quanlyphongtro.controller;
 
+import com.example.quanlyphongtro.dto.StaffDTO;
 import com.example.quanlyphongtro.dto.UserDTO;
 import com.example.quanlyphongtro.dto.request.RegisterRequest;
 import com.example.quanlyphongtro.model.User;
@@ -39,5 +40,10 @@ public class UserController {
     public String deleteUser(@PathVariable Integer id){
         String deletedUsername = userService.deleteUser(id).getUsername();
         return "User " + "\"" + deletedUsername + "\"" + " deleted successfully!\n" ;
+    }
+
+    @GetMapping("/staff")
+    public List<StaffDTO> getStaff() {
+        return userService.getStaff();
     }
 }
